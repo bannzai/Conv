@@ -9,9 +9,9 @@
 import Foundation
 
 public protocol Section {
-    var items: [ItemType] { get set }
+    var items: [Item] { get set }
 }
 
 public struct SectionImpl: Section {
-    public var items: [ItemType]
+    public var items: [Item]
 }

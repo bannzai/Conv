@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ItemType {
+public protocol Item {
     var reusableIdentifier: String { get set }
 }
 
@@ -17,15 +17,15 @@ public protocol ItemDelegatable {
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize
 }
 
-public struct Item<T: UICollectionViewCell>: ItemType {
-    public typealias ItemInfomation = (item: Item<T>, collectionView: UICollectionView, indexPath: IndexPath)
+public struct ItemImpl<T: UICollectionViewCell>: Item {
+    public typealias ItemInfomation = (item: ItemImpl<T>, collectionView: UICollectionView, indexPath: IndexPath)
     public var reusableIdentifier: String
     
     public var configureCell: ((T, ItemInfomation) -> Void)?
     public var sizeFor: ((ItemInfomation) -> CGSize)?
 }
 
-extension Item: ItemDelegatable {
+extension ItemImpl: ItemDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! T, (self, collectionView, indexPath))
     }

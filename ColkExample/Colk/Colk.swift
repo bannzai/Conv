@@ -12,7 +12,7 @@ public class Colk: NSObject {
     public weak var collectionView: UICollectionView?
     public var sections: [Section] = []
     
-    func itemFor(indexPath: IndexPath) -> ItemType {
+    func itemFor(indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
     }
 }
