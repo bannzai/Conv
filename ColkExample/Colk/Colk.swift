@@ -277,12 +277,12 @@ extension Colk: UICollectionViewDelegateFlowLayout {
 }
 
 fileprivate extension Colk {
-    func sectionDelegate(section: Int) -> SectionImplDelegatable? {
+    func sectionDelegate(section: Int) -> SectionDelegatable? {
         return sectionDelegate(section: sections[section])
     }
     
-    func sectionDelegate(section: Section) -> SectionImplDelegatable? {
-        return section as? SectionImplDelegatable
+    func sectionDelegate(section: Section) -> SectionDelegatable? {
+        return section as? SectionDelegatable
     }
     
     func itemDelegate(indexPath: IndexPath) -> CollectionViewItemDelegatable? {

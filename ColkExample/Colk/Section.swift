@@ -18,7 +18,7 @@ public protocol Section {
     mutating func insert(_ item: CollectionViewItemType, to index: Int)
 }
 
-public protocol SectionImplDelegatable {
+public protocol SectionDelegatable {
     func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets?
     func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
@@ -45,7 +45,7 @@ public struct SectionImpl: Section {
 }
 
 
-extension SectionImpl: SectionImplDelegatable {
+extension SectionImpl: SectionDelegatable {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
         return inset?((self, collectionView, collectionViewLayout, section))
     }
