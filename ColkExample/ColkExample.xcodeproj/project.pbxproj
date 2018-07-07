@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA01DAFC20F0DF3500AAD0B4 /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01DAFB20F0DF3500AAD0B4 /* SectionHeaderFooter.swift */; };
 		BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */; };
 		BA7A7FC02090AD5E00F4A24C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FBF2090AD5E00F4A24C /* ViewController.swift */; };
 		BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC12090AD5E00F4A24C /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BA01DAFB20F0DF3500AAD0B4 /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
 		BA7A7FBA2090AD5E00F4A24C /* ColkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7A7FBF2090AD5E00F4A24C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				BA7A7FE02090B16600F4A24C /* UICollectionViewExtension.swift */,
 				BA7A7FD22090AE5000F4A24C /* Section.swift */,
 				BA7A7FD42090AEA900F4A24C /* Item.swift */,
+				BA01DAFB20F0DF3500AAD0B4 /* SectionHeaderFooter.swift */,
 			);
 			path = Colk;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			files = (
 				BA7A7FD52090AEA900F4A24C /* Item.swift in Sources */,
 				BA7A7FD12090AD8A00F4A24C /* Colk.swift in Sources */,
+				BA01DAFC20F0DF3500AAD0B4 /* SectionHeaderFooter.swift in Sources */,
 				BA7A7FD32090AE5000F4A24C /* Section.swift in Sources */,
 				BA7A7FC02090AD5E00F4A24C /* ViewController.swift in Sources */,
 				BA7A7FE12090B16600F4A24C /* UICollectionViewExtension.swift in Sources */,
