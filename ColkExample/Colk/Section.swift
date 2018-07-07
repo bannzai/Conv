@@ -8,11 +8,10 @@
 
 import Foundation
 
-public protocol SectionType {
+public protocol Section {
     var items: [ItemType] { get set }
 }
 
-public struct Section: SectionType {
+public struct SectionImpl: Section {
     public var items: [ItemType]
 }
-
