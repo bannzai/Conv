@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CollectionViewItemType {
+public protocol Item {
     var reusableIdentifier: String { get set }
     var size: CGSize? { get set }
 }
@@ -36,7 +36,7 @@ public protocol CollectionViewItemDelegatable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
 }
 
-public struct CollectionViewItem<Cell: UICollectionViewCell>: CollectionViewItemType {
+public struct CollectionViewItem<Cell: UICollectionViewCell>: Item {
     public typealias ItemArgument = (item: CollectionViewItem<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
     public typealias PerformActionArgument = (item: CollectionViewItem<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     

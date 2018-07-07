@@ -16,7 +16,7 @@ public class Colk: NSObject {
     public var indexTitles: ((UICollectionView) -> [String])?
     public var indexTitle: ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)?
     
-    func itemFor(indexPath: IndexPath) -> CollectionViewItemType {
+    func itemFor(indexPath: IndexPath) -> Item {
         return sections[indexPath.section].items[indexPath.item]
     }
 }
@@ -289,7 +289,7 @@ fileprivate extension Colk {
         return itemDelegate(item: sections[indexPath.section].items[indexPath.item])
     }
     
-    func itemDelegate(item: CollectionViewItemType) -> CollectionViewItemDelegatable? {
+    func itemDelegate(item: Item) -> CollectionViewItemDelegatable? {
         return item as? CollectionViewItemDelegatable
     }
     

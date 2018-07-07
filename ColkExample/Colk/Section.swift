@@ -9,13 +9,13 @@
 import UIKit
 
 public protocol Section {
-    var items: [CollectionViewItemType] { get set }
+    var items: [Item] { get set }
     
     var header: SectionImplHeaderFooterViewable? { get }
     var footer: SectionImplHeaderFooterViewable? { get }
     
-    mutating func remove(for item: Int) -> CollectionViewItemType
-    mutating func insert(_ item: CollectionViewItemType, to index: Int)
+    mutating func remove(for item: Int) -> Item
+    mutating func insert(_ item: Item, to index: Int)
 }
 
 public protocol SectionDelegatable {
@@ -26,7 +26,7 @@ public protocol SectionDelegatable {
 
 public struct SectionImpl: Section {
     public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
-    public var items: [CollectionViewItemType]
+    public var items: [Item]
     
     public var header: SectionImplHeaderFooterViewable?
     public var footer: SectionImplHeaderFooterViewable?
@@ -35,11 +35,11 @@ public struct SectionImpl: Section {
     public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     public var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    public mutating func remove(for item: Int) -> CollectionViewItemType {
+    public mutating func remove(for item: Int) -> Item {
         return items.remove(at: item)
     }
     
-    public mutating func insert(_ item: CollectionViewItemType, to index: Int) {
+    public mutating func insert(_ item: Item, to index: Int) {
         items.insert(item, at: index)
     }
 }
