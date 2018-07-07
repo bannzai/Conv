@@ -13,7 +13,7 @@ public protocol Item {
     var size: CGSize? { get set }
 }
 
-public protocol CollectionViewItemDelegatable {
+public protocol ItemImplDelegatable {
     func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize?
     
@@ -36,9 +36,9 @@ public protocol CollectionViewItemDelegatable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
 }
 
-public struct CollectionViewItem<Cell: UICollectionViewCell>: Item {
-    public typealias ItemArgument = (item: CollectionViewItem<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
-    public typealias PerformActionArgument = (item: CollectionViewItem<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
+public struct ItemImpl<Cell: UICollectionViewCell>: Item {
+    public typealias ItemArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
+    public typealias PerformActionArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
     public var reusableIdentifier: String
     public var size: CGSize?
@@ -65,7 +65,7 @@ public struct CollectionViewItem<Cell: UICollectionViewCell>: Item {
     public var performAction: ((PerformActionArgument) -> Void)?
 }
 
-extension CollectionViewItem: CollectionViewItemDelegatable {
+extension ItemImpl: ItemImplDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))
     }
