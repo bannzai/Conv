@@ -9,7 +9,7 @@
 import UIKit
 
 
-public class CollectionViewComponent: NSObject {
+public class Colk: NSObject {
     public weak var collectionView: UICollectionView?
     public var sections: [CollectionViewSectionType] = []
     public var didMoveItem: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
@@ -21,7 +21,7 @@ public class CollectionViewComponent: NSObject {
     }
 }
 
-extension CollectionViewComponent: UICollectionViewDataSource {
+extension Colk: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sections[section].items.count
     }
@@ -80,7 +80,7 @@ extension CollectionViewComponent: UICollectionViewDataSource {
     }
 }
 
-extension CollectionViewComponent: UICollectionViewDelegate {
+extension Colk: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let shouldHighlight = itemDelegate(indexPath: indexPath)?
             .shouldHighlight(collectionView: collectionView, indexPath: indexPath)
@@ -202,7 +202,7 @@ extension CollectionViewComponent: UICollectionViewDelegate {
     }
 }
 
-extension CollectionViewComponent: UICollectionViewDelegateFlowLayout {
+extension Colk: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let size = itemDelegate(indexPath: indexPath)?
             .sizeFor(collectionView: collectionView, indexPath: indexPath) {
@@ -276,7 +276,7 @@ extension CollectionViewComponent: UICollectionViewDelegateFlowLayout {
     }
 }
 
-fileprivate extension CollectionViewComponent {
+fileprivate extension Colk {
     func sectionDelegate(section: Int) -> CollectionViewSectionDelegatable? {
         return sectionDelegate(section: sections[section])
     }
