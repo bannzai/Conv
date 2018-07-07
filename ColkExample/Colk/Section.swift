@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol CollectionViewSectionType {
+public protocol Section {
     var items: [CollectionViewItemType] { get set }
     
     var header: CollectionViewSectionHeaderFooterViewable? { get }
@@ -24,7 +24,7 @@ public protocol CollectionViewSectionDelegatable {
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
 }
 
-public struct CollectionViewSection: CollectionViewSectionType {
+public struct CollectionViewSection: Section {
     public typealias SectionArgument = (Section: CollectionViewSection, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [CollectionViewItemType]
     
