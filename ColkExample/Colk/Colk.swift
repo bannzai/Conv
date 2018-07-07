@@ -29,7 +29,7 @@ extension Colk: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = itemFor(indexPath: indexPath)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reusableIdentifier, for: indexPath)
-        (item as? ItemImplDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
+        (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
         return cell
     }
     
@@ -285,12 +285,12 @@ fileprivate extension Colk {
         return section as? SectionDelegatable
     }
     
-    func itemDelegate(indexPath: IndexPath) -> ItemImplDelegatable? {
+    func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
         return itemDelegate(item: sections[indexPath.section].items[indexPath.item])
     }
     
-    func itemDelegate(item: Item) -> ItemImplDelegatable? {
-        return item as? ItemImplDelegatable
+    func itemDelegate(item: Item) -> ItemDelegatable? {
+        return item as? ItemDelegatable
     }
     
     func headerFooterDelegate(headerFooter: SectionImplHeaderFooterViewable) -> SectionImplHeaderFooterDelegateType? {

@@ -13,7 +13,7 @@ public protocol Item {
     var size: CGSize? { get set }
 }
 
-public protocol ItemImplDelegatable {
+public protocol ItemDelegatable {
     func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize?
     
@@ -65,7 +65,7 @@ public struct ItemImpl<Cell: UICollectionViewCell>: Item {
     public var performAction: ((PerformActionArgument) -> Void)?
 }
 
-extension ItemImpl: ItemImplDelegatable {
+extension ItemImpl: ItemDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))
     }
