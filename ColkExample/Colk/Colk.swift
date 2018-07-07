@@ -38,7 +38,7 @@ extension Colk: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let type = CollectionViewSectionHeaderFooterKind(kind: kind) else {
+        guard let type = SectionImplHeaderFooterKind(kind: kind) else {
             fatalError("Unknown kind: \(kind)")
         }
         switch type {
@@ -277,12 +277,12 @@ extension Colk: UICollectionViewDelegateFlowLayout {
 }
 
 fileprivate extension Colk {
-    func sectionDelegate(section: Int) -> CollectionViewSectionDelegatable? {
+    func sectionDelegate(section: Int) -> SectionImplDelegatable? {
         return sectionDelegate(section: sections[section])
     }
     
-    func sectionDelegate(section: Section) -> CollectionViewSectionDelegatable? {
-        return section as? CollectionViewSectionDelegatable
+    func sectionDelegate(section: Section) -> SectionImplDelegatable? {
+        return section as? SectionImplDelegatable
     }
     
     func itemDelegate(indexPath: IndexPath) -> CollectionViewItemDelegatable? {
@@ -293,11 +293,11 @@ fileprivate extension Colk {
         return item as? CollectionViewItemDelegatable
     }
     
-    func headerFooterDelegate(headerFooter: CollectionViewSectionHeaderFooterViewable) -> CollectionViewSectionHeaderFooterDelegateType? {
-        return headerFooter as? CollectionViewSectionHeaderFooterDelegateType
+    func headerFooterDelegate(headerFooter: SectionImplHeaderFooterViewable) -> SectionImplHeaderFooterDelegateType? {
+        return headerFooter as? SectionImplHeaderFooterDelegateType
     }
     
-    func headerOrFooter(for kind: CollectionViewSectionHeaderFooterKind, section: Int) -> CollectionViewSectionHeaderFooterViewable? {
+    func headerOrFooter(for kind: SectionImplHeaderFooterKind, section: Int) -> SectionImplHeaderFooterViewable? {
         switch kind {
         case .header:
             return sections[section].header
@@ -306,14 +306,14 @@ fileprivate extension Colk {
         }
     }
     
-    func headerOrFooterOrNil(for kind: String, section: Int) -> CollectionViewSectionHeaderFooterViewable? {
-        guard let type = CollectionViewSectionHeaderFooterKind(kind: kind) else {
+    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionImplHeaderFooterViewable? {
+        guard let type = SectionImplHeaderFooterKind(kind: kind) else {
             return nil
         }
         return headerOrFooter(for: type, section: section)
     }
     
-    func headerFooterViewFor(headerFooter: CollectionViewSectionHeaderFooterViewable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+    func headerFooterViewFor(headerFooter: SectionImplHeaderFooterViewable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
         if let identifier = headerFooter.reuseIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
@@ -326,7 +326,7 @@ fileprivate extension Colk {
         return nil
     }
     
-    func sectionHeaderFooterSizeFor(headerFooter: CollectionViewSectionHeaderFooterViewable, collectionView: UICollectionView, section: Int) -> CGSize? {
+    func sectionHeaderFooterSizeFor(headerFooter: SectionImplHeaderFooterViewable, collectionView: UICollectionView, section: Int) -> CGSize? {
         if let delegate = headerFooterDelegate(headerFooter: headerFooter),
             let size = delegate.sizeFor(collectionView, section: section) {
             return size

@@ -11,25 +11,25 @@ import UIKit
 public protocol Section {
     var items: [CollectionViewItemType] { get set }
     
-    var header: CollectionViewSectionHeaderFooterViewable? { get }
-    var footer: CollectionViewSectionHeaderFooterViewable? { get }
+    var header: SectionImplHeaderFooterViewable? { get }
+    var footer: SectionImplHeaderFooterViewable? { get }
     
     mutating func remove(for item: Int) -> CollectionViewItemType
     mutating func insert(_ item: CollectionViewItemType, to index: Int)
 }
 
-public protocol CollectionViewSectionDelegatable {
+public protocol SectionImplDelegatable {
     func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets?
     func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
 }
 
-public struct CollectionViewSection: Section {
-    public typealias SectionArgument = (Section: CollectionViewSection, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
+public struct SectionImpl: Section {
+    public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [CollectionViewItemType]
     
-    public var header: CollectionViewSectionHeaderFooterViewable?
-    public var footer: CollectionViewSectionHeaderFooterViewable?
+    public var header: SectionImplHeaderFooterViewable?
+    public var footer: SectionImplHeaderFooterViewable?
     
     public var inset: ((SectionArgument) -> UIEdgeInsets)?
     public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
@@ -45,7 +45,7 @@ public struct CollectionViewSection: Section {
 }
 
 
-extension CollectionViewSection: CollectionViewSectionDelegatable {
+extension SectionImpl: SectionImplDelegatable {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
         return inset?((self, collectionView, collectionViewLayout, section))
     }
