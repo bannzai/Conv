@@ -109,15 +109,5 @@ extension SectionImplHeaderFooter: SectionImplHeaderFooterDelegateType {
         }
         didEndDisplay?(view, (self, collectionView, indexPath))
     }
-    
-    //    func referenceSizeForHeader(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize? {
-    //        return referenceSizeForHeader?((self, collectionView, collectionViewLayout, section)) ?? size
-    //    }
-    //    func referenceSizeForFooter(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize? {
-    //        return referenceSizeForHeader?((self, collectionView, collectionViewLayout, section)) ?? size
-    //    }
-    //    func reusableViewFor(collectionView: UICollectionView, supplementaryOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    //
-    //    }
 }
 
