@@ -4,4 +4,7 @@
    <FileRef
       location = "group:../Colk.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:ColkExample.xcodeproj">
+   </FileRef>
 </Workspace>
