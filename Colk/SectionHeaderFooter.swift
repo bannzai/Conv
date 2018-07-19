@@ -82,8 +82,6 @@ open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplH
     open var sizeFor: ((SectionImplHeaderFooterInformation) -> CGSize?)?
     open var willDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
     open var didEndDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
-    //    open var referenceSizeForHeader: ((SectionImplHeaderFooterLayoutInformation) -> CGSize?)?
-    //    open var referenceSizeForFooter: ((SectionImplHeaderFooterLayoutInformation) -> CGSize?)?
 }
 
 extension SectionImplHeaderFooter: SectionImplHeaderFooterDelegateType {
