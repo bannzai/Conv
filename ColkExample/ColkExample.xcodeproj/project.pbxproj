@@ -12,7 +12,23 @@
 		BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC12090AD5E00F4A24C /* Main.storyboard */; };
 		BA7A7FC52090AD6000F4A24C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC42090AD6000F4A24C /* Assets.xcassets */; };
 		BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC62090AD6000F4A24C /* LaunchScreen.storyboard */; };
+		BA7C1F9C2100EF48005CDE74 /* Colk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; };
+		BA7C1F9D2100EF48005CDE74 /* Colk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BA7C1F9E2100EF48005CDE74 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BA7C1F9D2100EF48005CDE74 /* Colk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		BA7A7FBA2090AD5E00F4A24C /* ColkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		BA7A7FC42090AD6000F4A24C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA7A7FC72090AD6000F4A24C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA7A7FC92090AD6000F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA7C1F9B2100EF48005CDE74 /* Colk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Colk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7C1F9C2100EF48005CDE74 /* Colk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 		BA7A7FB12090AD5E00F4A24C = {
 			isa = PBXGroup;
 			children = (
+				BA7C1F9B2100EF48005CDE74 /* Colk.framework */,
 				BA7A7FBC2090AD5E00F4A24C /* ColkExample */,
 				BA7A7FBB2090AD5E00F4A24C /* Products */,
 			);
@@ -74,6 +93,7 @@
 				BA7A7FB62090AD5E00F4A24C /* Sources */,
 				BA7A7FB72090AD5E00F4A24C /* Frameworks */,
 				BA7A7FB82090AD5E00F4A24C /* Resources */,
+				BA7C1F9E2100EF48005CDE74 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
