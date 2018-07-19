@@ -14,7 +14,7 @@ public extension UICollectionView {
         dataSource = colk
         delegate = colk
         colk.collectionView = self
-        return Colk()
+        return colk
     }
 }
 
