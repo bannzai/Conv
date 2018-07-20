@@ -26,7 +26,7 @@ public protocol SectionDelegatable {
 
 public struct SectionImpl: Section {
     public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
-    public var items: [Item]
+    public var items: [Item] = []
     
     public var header: SectionHeaderFooterView?
     public var footer: SectionHeaderFooterView?
@@ -34,6 +34,10 @@ public struct SectionImpl: Section {
     public var inset: ((SectionArgument) -> UIEdgeInsets)?
     public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     public var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
+    
+    public init(closure: (inout SectionImpl) -> Void) {
+        closure(&self)
+    }
     
     public mutating func remove(for item: Int) -> Item {
         return items.remove(at: item)
