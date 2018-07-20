@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum SectionImplHeaderFooterKind: String {
+public enum SectionHeaderFooterKind: String {
     case header
     case footer
     
@@ -33,28 +33,28 @@ public enum SectionImplHeaderFooterKind: String {
     }
 }
 
-public protocol SectionImplHeaderFooterViewable: Reusable {
+public protocol SectionHeaderFooterViewable: Reusable {
     var size: CGSize? { get set }
-    var kind: SectionImplHeaderFooterKind { get }
+    var kind: SectionHeaderFooterKind { get }
 }
 
-protocol SectionImplHeaderFooterDelegateType {
+protocol SectionHeaderFooterDelegateType {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int)
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
     func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
 }
 
-open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplHeaderFooterViewable {
-    public typealias SectionImplHeaderFooterInformation = (headerFooter: SectionImplHeaderFooter<View>, collectionView: UICollectionView, section: Int)
-    public typealias SectionImplHeaderFooterLayoutInformation = (headerFooter: SectionImplHeaderFooter<View>, collectionView: UICollectionView, layout: UICollectionViewLayout, section: Int)
-    public typealias SectionImplHeaderFooterSupplymentaryView = (headerFooter: SectionImplHeaderFooter<View>, collectionView: UICollectionView,  indexPath: IndexPath)
+open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFooterViewable {
+    public typealias SectionHeaderFooterInformation = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView, section: Int)
+    public typealias SectionHeaderFooterLayoutInformation = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView, layout: UICollectionViewLayout, section: Int)
+    public typealias SectionHeaderFooterSupplymentaryView = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView,  indexPath: IndexPath)
     
-    public init(kind: SectionImplHeaderFooterKind) {
+    public init(kind: SectionHeaderFooterKind) {
         self.kind = kind
     }
     
-    public init(kind: SectionImplHeaderFooterKind, closure: ((SectionImplHeaderFooter<View>) -> Void)) {
+    public init(kind: SectionHeaderFooterKind, closure: ((SectionHeaderFooter<View>) -> Void)) {
         self.kind = kind
         closure(self)
     }
@@ -73,21 +73,21 @@ open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplH
     }
     
     open var size: CGSize?
-    open let kind: SectionImplHeaderFooterKind
+    open let kind: SectionHeaderFooterKind
     
-    open var configureView: ((View, SectionImplHeaderFooterInformation) -> Void)?
-    open var sizeFor: ((SectionImplHeaderFooterInformation) -> CGSize?)?
-    open var willDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
-    open var didEndDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
+    open var configureView: ((View, SectionHeaderFooterInformation) -> Void)?
+    open var sizeFor: ((SectionHeaderFooterInformation) -> CGSize?)?
+    open var willDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
+    open var didEndDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
 }
 
-extension SectionImplHeaderFooter: Reusable {
+extension SectionHeaderFooter: Reusable {
     public func register(to collectionView: UICollectionView) {
         // TODO Impl
     }
 }
 
-extension SectionImplHeaderFooter: SectionImplHeaderFooterDelegateType {
+extension SectionHeaderFooter: SectionHeaderFooterDelegateType {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
             fatalError()

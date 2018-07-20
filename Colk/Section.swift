@@ -11,8 +11,8 @@ import UIKit
 public protocol Section {
     var items: [Item] { get set }
     
-    var header: SectionImplHeaderFooterViewable? { get }
-    var footer: SectionImplHeaderFooterViewable? { get }
+    var header: SectionHeaderFooterViewable? { get }
+    var footer: SectionHeaderFooterViewable? { get }
     
     mutating func remove(for item: Int) -> Item
     mutating func insert(_ item: Item, to index: Int)
@@ -28,8 +28,8 @@ public struct SectionImpl: Section {
     public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [Item]
     
-    public var header: SectionImplHeaderFooterViewable?
-    public var footer: SectionImplHeaderFooterViewable?
+    public var header: SectionHeaderFooterViewable?
+    public var footer: SectionHeaderFooterViewable?
     
     public var inset: ((SectionArgument) -> UIEdgeInsets)?
     public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
