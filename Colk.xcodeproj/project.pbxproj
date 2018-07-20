@@ -94,9 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				BA7C1F942100EF10005CDE74 /* Colk.swift */,
+				BA6A03FB21017BF000040691 /* Colk+Helper.swift */,
 				BA6A03F521017B8A00040691 /* Colk+UICollectionViewDataSource.swift */,
 				BA6A03F921017BD900040691 /* Colk+UICollectionViewDelegate.swift */,
-				BA6A03FB21017BF000040691 /* Colk+Helper.swift */,
 				BA6A03F721017BAE00040691 /* Colk+UICollectionViewDelegateFlowLayout.swift */,
 				BA7C1F952100EF10005CDE74 /* Item.swift */,
 				BA7C1F922100EF10005CDE74 /* Section.swift */,
