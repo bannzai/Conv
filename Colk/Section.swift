@@ -48,6 +48,32 @@ public struct SectionImpl: Section {
     }
 }
 
+extension SectionImpl {
+    public mutating func add(item: Item) -> SectionImpl {
+        items.append(item)
+        return self
+    }
+    public mutating func add(items: [Item]) -> SectionImpl {
+        self.items.append(contentsOf: items)
+        return self
+    }
+    
+    public mutating func create(item closure: (Item) -> Void) -> SectionImpl {
+        return add(item: ItemImpl() { closure($0) } )
+    }
+    public mutating func create<E>(for elements: [E], items closure: (E, Item) -> Void) -> SectionImpl {
+        let items = elements.map { element in
+            ItemImpl() { item in
+                closure(element, item)
+            }
+        }
+        
+        return add(items: items)
+    }
+    public mutating func createSections(for count: UInt, items closure: ((UInt, Item) -> Void)) -> SectionImpl {
+        return create(for: [UInt](0..<count), items: closure)
+    }
+}
 
 extension SectionImpl: SectionDelegatable {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
