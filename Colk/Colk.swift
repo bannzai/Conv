@@ -42,7 +42,7 @@ extension Colk {
         
         return add(sections: sections)
     }
-    public func createSections(for count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
+    public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
         return create(for: [UInt](0..<count), sections: closure)
     }
 }
