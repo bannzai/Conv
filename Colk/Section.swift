@@ -14,8 +14,8 @@ public protocol Section {
     var header: SectionHeaderFooterView? { get }
     var footer: SectionHeaderFooterView? { get }
     
-    mutating func remove(for item: Int) -> Item
-    mutating func insert(_ item: Item, to index: Int)
+     func remove(for item: Int) -> Item
+     func insert(_ item: Item, to index: Int)
 }
 
 public protocol SectionDelegatable {
@@ -24,7 +24,7 @@ public protocol SectionDelegatable {
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
 }
 
-public struct SectionImpl: Section {
+public class SectionImpl: Section {
     public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [Item] = []
     
@@ -35,33 +35,33 @@ public struct SectionImpl: Section {
     public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     public var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    public init(closure: (inout SectionImpl) -> Void) {
-        closure(&self)
+    public init(closure: (SectionImpl) -> Void) {
+        closure(self)
     }
     
-    public mutating func remove(for item: Int) -> Item {
+    public func remove(for item: Int) -> Item {
         return items.remove(at: item)
     }
     
-    public mutating func insert(_ item: Item, to index: Int) {
+    public func insert(_ item: Item, to index: Int) {
         items.insert(item, at: index)
     }
 }
 
 extension SectionImpl {
-    public mutating func add(item: Item) -> SectionImpl {
+    public func add(item: Item) -> SectionImpl {
         items.append(item)
         return self
     }
-    public mutating func add(items: [Item]) -> SectionImpl {
+    public func add(items: [Item]) -> SectionImpl {
         self.items.append(contentsOf: items)
         return self
     }
     
-    public mutating func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
+    public func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
         return add(item: ItemImpl<T>() { closure($0) } )
     }
-    public mutating func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
+    public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
         let items = elements.map { element in
             ItemImpl<T>() { item in
                 closure(element, item)
@@ -70,7 +70,7 @@ extension SectionImpl {
         
         return add(items: items)
     }
-    public mutating func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
+    public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
         return create(for: [UInt](0..<count), items: closure)
     }
 }
