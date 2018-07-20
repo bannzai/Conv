@@ -35,7 +35,7 @@ public protocol ItemDelegatable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
 }
 
-public struct ItemImpl<Cell: UICollectionViewCell>: Item {
+public class ItemImpl<Cell: UICollectionViewCell>: Item {
     public typealias ItemArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
     public typealias PerformActionArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
@@ -76,8 +76,8 @@ public struct ItemImpl<Cell: UICollectionViewCell>: Item {
     public var canPerformAction: ((PerformActionArgument) -> Bool)?
     public var performAction: ((PerformActionArgument) -> Void)?
     
-    public init(closure: (inout ItemImpl) -> Void) {
-        closure(&self)
+    public init(closure: (ItemImpl) -> Void) {
+        closure(self)
     }
 }
 
