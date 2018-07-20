@@ -293,11 +293,11 @@ fileprivate extension Colk {
         return item as? ItemDelegatable
     }
     
-    func headerFooterDelegate(headerFooter: SectionHeaderFooterViewable) -> SectionHeaderFooterDelegateType? {
+    func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegateType? {
         return headerFooter as? SectionHeaderFooterDelegateType
     }
     
-    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterViewable? {
+    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterView? {
         switch kind {
         case .header:
             return sections[section].header
@@ -306,14 +306,14 @@ fileprivate extension Colk {
         }
     }
     
-    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterViewable? {
+    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterView? {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             return nil
         }
         return headerOrFooter(for: type, section: section)
     }
     
-    func headerFooterViewFor(headerFooter: SectionHeaderFooterViewable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+    func headerFooterViewFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
         let identifier = headerFooter.reusableIdentifier
         let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
@@ -323,7 +323,7 @@ fileprivate extension Colk {
         return view
     }
     
-    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterViewable, collectionView: UICollectionView, section: Int) -> CGSize? {
+    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, section: Int) -> CGSize? {
         if let delegate = headerFooterDelegate(headerFooter: headerFooter),
             let size = delegate.sizeFor(collectionView, section: section) {
             return size
