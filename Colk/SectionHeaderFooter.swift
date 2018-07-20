@@ -33,8 +33,7 @@ public enum SectionImplHeaderFooterKind: String {
     }
 }
 
-public protocol SectionImplHeaderFooterViewable {
-    var reuseIdentifier: String? { get }
+public protocol SectionImplHeaderFooterViewable: Reusable {
     var size: CGSize? { get set }
     var kind: SectionImplHeaderFooterKind { get }
 }
@@ -60,16 +59,16 @@ open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplH
         closure(self)
     }
     
-    fileprivate var _reuseIdentifier: String?
-    open var reuseIdentifier: String? {
-        set {
-            _reuseIdentifier = newValue
-        }
+    private var _reuseIdentifier: String?
+    open var reuseIdentifier: String {
         get {
             if let identifier = _reuseIdentifier {
                 return identifier
             }
-            return nil
+            return View.className
+        }
+        set {
+            _reuseIdentifier = newValue
         }
     }
     
@@ -80,6 +79,12 @@ open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplH
     open var sizeFor: ((SectionImplHeaderFooterInformation) -> CGSize?)?
     open var willDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
     open var didEndDisplay: ((View, SectionImplHeaderFooterSupplymentaryView) -> Void)?
+}
+
+extension SectionImplHeaderFooter: Reusable {
+    public func register(to collectionView: UICollectionView) {
+        // TODO Impl
+    }
 }
 
 extension SectionImplHeaderFooter: SectionImplHeaderFooterDelegateType {

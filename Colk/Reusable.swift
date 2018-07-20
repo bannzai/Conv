@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Reusable {
-    var reusableIdentifier: String { get }
+    var reusableIdentifier: String { get set }
     
     func register(to collectionView: UICollectionView)
 }
