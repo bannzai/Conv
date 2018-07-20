@@ -49,19 +49,19 @@ public class SectionImpl: Section {
 }
 
 extension SectionImpl {
-    public func add(item: Item) -> SectionImpl {
+    @discardableResult public func add(item: Item) -> SectionImpl {
         items.append(item)
         return self
     }
-    public func add(items: [Item]) -> SectionImpl {
+    @discardableResult public func add(items: [Item]) -> SectionImpl {
         self.items.append(contentsOf: items)
         return self
     }
     
-    public func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
+    @discardableResult public func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
         return add(item: ItemImpl<T>() { closure($0) } )
     }
-    public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
+    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
         let items = elements.map { element in
             ItemImpl<T>() { item in
                 closure(element, item)
@@ -70,7 +70,7 @@ extension SectionImpl {
         
         return add(items: items)
     }
-    public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
+    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
         return create(for: [UInt](0..<count), items: closure)
     }
 }

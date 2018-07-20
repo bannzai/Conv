@@ -21,19 +21,19 @@ public final class Colk: NSObject {
 }
 
 extension Colk {
-    public func add(section: Section) -> Self {
+    @discardableResult public func add(section: Section) -> Self {
         sections.append(section)
         return self
     }
-    public func add(sections: [Section]) -> Self {
+    @discardableResult public func add(sections: [Section]) -> Self {
         self.sections.append(contentsOf: sections)
         return self
     }
     
-    public func create(section closure: (SectionImpl) -> Void) -> Self {
+    @discardableResult public func create(section closure: (SectionImpl) -> Void) -> Self {
         return add(section: SectionImpl() { closure($0) } )
     }
-    public func create<E>(for elements: [E], sections closure: (E, SectionImpl) -> Void) -> Self {
+    @discardableResult public func create<E>(for elements: [E], sections closure: (E, SectionImpl) -> Void) -> Self {
         let sections = elements.map { (element) in
             SectionImpl() { section in
                 closure(element, section)
@@ -42,7 +42,7 @@ extension Colk {
         
         return add(sections: sections)
     }
-    public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
+    @discardableResult public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
         return create(for: [UInt](0..<count), sections: closure)
     }
 }
