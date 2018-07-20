@@ -58,19 +58,19 @@ extension SectionImpl {
         return self
     }
     
-    public mutating func create(item closure: (Item) -> Void) -> SectionImpl {
-        return add(item: ItemImpl() { closure($0) } )
+    public mutating func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
+        return add(item: ItemImpl<T>() { closure($0) } )
     }
-    public mutating func create<E>(for elements: [E], items closure: (E, Item) -> Void) -> SectionImpl {
+    public mutating func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
         let items = elements.map { element in
-            ItemImpl() { item in
+            ItemImpl<T>() { item in
                 closure(element, item)
             }
         }
         
         return add(items: items)
     }
-    public mutating func createSections(for count: UInt, items closure: ((UInt, Item) -> Void)) -> SectionImpl {
+    public mutating func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
         return create(for: [UInt](0..<count), items: closure)
     }
 }
