@@ -315,15 +315,12 @@ fileprivate extension Colk {
     
     func headerFooterViewFor(headerFooter: SectionHeaderFooterViewable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
-        if let identifier = headerFooter.reuseIdentifier {
-            let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
-            if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
-                delegate.configureView(collectionView, view: view, section: indexPath.section)
-            }
-            return view
+        let identifier = headerFooter.reusableIdentifier
+        let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
+        if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
+            delegate.configureView(collectionView, view: view, section: indexPath.section)
         }
-        
-        return nil
+        return view
     }
     
     func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterViewable, collectionView: UICollectionView, section: Int) -> CGSize? {

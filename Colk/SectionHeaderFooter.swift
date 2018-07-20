@@ -59,16 +59,16 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFoo
         closure(self)
     }
     
-    private var _reuseIdentifier: String?
-    open var reuseIdentifier: String {
+    private var _reusableIdentifier: String?
+    open var reusableIdentifier: String {
         get {
-            if let identifier = _reuseIdentifier {
+            if let identifier = _reusableIdentifier {
                 return identifier
             }
             return View.className
         }
         set {
-            _reuseIdentifier = newValue
+            _reusableIdentifier = newValue
         }
     }
     
