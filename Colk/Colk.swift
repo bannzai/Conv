@@ -30,10 +30,10 @@ extension Colk {
         return self
     }
     
-    public func create(section closure: (Section) -> Void) -> Self {
+    public func create(section closure: (SectionImpl) -> Void) -> Self {
         return add(section: SectionImpl() { closure($0) } )
     }
-    public func create<E>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    public func create<E>(for elements: [E], sections closure: (E, SectionImpl) -> Void) -> Self {
         let sections = elements.map { (element) in
             SectionImpl() { section in
                 closure(element, section)

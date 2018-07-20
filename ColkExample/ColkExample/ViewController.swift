@@ -9,6 +9,16 @@
 import UIKit
 import Colk
 
+fileprivate enum SectionType {
+    case mountain
+    case see
+    case forest
+    
+    static var elements: [SectionType] {
+        return [.mountain, .see, .forest]
+    }
+}
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,7 +26,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        collectionView.colk().create(for: SectionType.elements) { (sectionType, section) in
+        }
     }
 }
 
