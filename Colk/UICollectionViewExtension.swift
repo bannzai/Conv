@@ -19,6 +19,9 @@ public extension UICollectionView {
         dataSource = colk
         delegate = colk
         colk.collectionView = self
+        
+        _colk = colk
+        
         return colk
     }
 }
@@ -31,8 +34,6 @@ fileprivate extension UICollectionView {
     var _colk: Colk? {
         set {
             objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            dataSource = newValue
-            delegate = newValue
         }
         get {
             return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.key) as? Colk
