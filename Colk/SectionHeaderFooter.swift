@@ -38,7 +38,7 @@ public protocol SectionHeaderFooterView: Reusable {
     var kind: SectionHeaderFooterKind { get }
 }
 
-protocol SectionHeaderFooterDelegateType {
+protocol SectionHeaderFooterDelegatable {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int)
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
@@ -81,7 +81,7 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFoo
     open var didEndDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
 }
 
-extension SectionHeaderFooter: SectionHeaderFooterDelegateType {
+extension SectionHeaderFooter: SectionHeaderFooterDelegatable {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
             fatalError()

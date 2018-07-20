@@ -293,8 +293,8 @@ fileprivate extension Colk {
         return item as? ItemDelegatable
     }
     
-    func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegateType? {
-        return headerFooter as? SectionHeaderFooterDelegateType
+    func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegatable? {
+        return headerFooter as? SectionHeaderFooterDelegatable
     }
     
     func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterView? {
