@@ -77,12 +77,6 @@ public struct ItemImpl<Cell: UICollectionViewCell>: Item {
     public var performAction: ((PerformActionArgument) -> Void)?
 }
 
-extension ItemImpl: Reusable {
-    public func register(to collectionView: UICollectionView) {
-        // TODO: Impl
-    }
-}
-
 extension ItemImpl: ItemDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))

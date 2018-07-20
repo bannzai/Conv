@@ -81,12 +81,6 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFoo
     open var didEndDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
 }
 
-extension SectionHeaderFooter: Reusable {
-    public func register(to collectionView: UICollectionView) {
-        // TODO Impl
-    }
-}
-
 extension SectionHeaderFooter: SectionHeaderFooterDelegateType {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
