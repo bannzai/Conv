@@ -44,8 +44,6 @@ protocol SectionImplHeaderFooterDelegateType {
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
     func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
-    //    func referenceSizeForHeader(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize?
-    //    func referenceSizeForFooter(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize?
 }
 
 open class SectionImplHeaderFooter<View: UICollectionReusableView>: SectionImplHeaderFooterViewable {
