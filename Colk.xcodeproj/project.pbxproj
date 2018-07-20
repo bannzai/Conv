@@ -15,6 +15,7 @@
 		BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */; };
 		BA7C1F992100EF10005CDE74 /* Colk.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F942100EF10005CDE74 /* Colk.swift */; };
 		BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F952100EF10005CDE74 /* Item.swift */; };
+		BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F9F21017741005CDE74 /* Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		BA7C1F942100EF10005CDE74 /* Colk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colk.swift; sourceTree = "<group>"; };
 		BA7C1F952100EF10005CDE74 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		BA7C1F9F21017741005CDE74 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				BA7C1F952100EF10005CDE74 /* Item.swift */,
 				BA7C1F922100EF10005CDE74 /* Section.swift */,
 				BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */,
+				BA7C1F9F21017741005CDE74 /* Reusable.swift */,
 				BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */,
 				BA7A7F9A2090AC3800F4A24C /* Colk.h */,
 				BA7A7F9B2090AC3800F4A24C /* Info.plist */,
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */,
 				BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */,
 				BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */,
 				BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */,
