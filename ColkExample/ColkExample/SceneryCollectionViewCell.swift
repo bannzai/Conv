@@ -8,11 +8,22 @@
 
 import UIKit
 
+struct ItemViewModel {
+    let title: String
+    let image: UIImage
+}
+
 class SceneryCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var sceneImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
+    func setup(with viewModel: ItemViewModel) {
+        nameLabel.text = viewModel.title
+        sceneImageView.image = viewModel.image
+    }
 }

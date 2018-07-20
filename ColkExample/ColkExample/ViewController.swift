@@ -19,11 +19,6 @@ enum SectionType {
     }
 }
 
-struct ItemViewModel {
-    let title: String
-    let image: UIImage
-}
-
 class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,14 +32,7 @@ class ViewController: UIViewController {
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
                     item.configureCell = { cell, info in
-                        switch sectionType {
-                        case .mountain:
-                            cell.backgroundColor = .red
-                        case .river:
-                            cell.backgroundColor = .blue
-                        case .forest:
-                            cell.backgroundColor = .green
-                        }
+                        cell.setup(with: viewModel)
                     }
                     item.size = CGSize(width: 100, height: 100)
                 })
