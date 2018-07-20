@@ -75,6 +75,10 @@ public struct ItemImpl<Cell: UICollectionViewCell>: Item {
     public var shouldShowMenu: ((ItemArgument) -> Bool)?
     public var canPerformAction: ((PerformActionArgument) -> Bool)?
     public var performAction: ((PerformActionArgument) -> Void)?
+    
+    public init(closure: (inout ItemImpl) -> Void) {
+        closure(&self)
+    }
 }
 
 extension ItemImpl: ItemDelegatable {
