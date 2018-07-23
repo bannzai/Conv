@@ -15,9 +15,13 @@ extension Colk: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = itemFor(indexPath: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reusableIdentifier, for: indexPath)
-        (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
-        return cell
+        if let reuseIdentifier = item.reusableIdentifier {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+            (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
+            return cell
+        }
+        
+        fatalError("Not yet register cell")
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {

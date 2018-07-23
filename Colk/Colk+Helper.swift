@@ -47,12 +47,15 @@ internal extension Colk {
     
     func headerFooterViewFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
-        let identifier = headerFooter.reusableIdentifier
-        let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
-        if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
-            delegate.configureView(collectionView, view: view, section: indexPath.section)
+        if let identifier = headerFooter.reusableIdentifier {
+            let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
+            if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
+                delegate.configureView(collectionView, view: view, section: indexPath.section)
+            }
+            return view
         }
-        return view
+        
+        return nil
     }
     
     func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, section: Int) -> CGSize? {
