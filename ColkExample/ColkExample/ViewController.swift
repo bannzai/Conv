@@ -31,6 +31,7 @@ class ViewController: UIViewController {
             .colk()
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
+                    item.reusableIdentifier = "SceneryCollectionViewCell"
                     item.configureCell = { cell, info in
                         cell.setup(with: viewModel)
                     }
