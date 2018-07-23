@@ -32,6 +32,7 @@ extension Colk: UICollectionViewDataSource {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             fatalError("Unknown kind: \(kind)")
         }
+        
         switch type {
         case .header:
             if let header = sections[indexPath.section].header,
