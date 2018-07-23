@@ -75,6 +75,25 @@ extension SectionImpl {
     }
 }
 
+extension SectionImpl {
+    @discardableResult public func create<HeaderOrFooter>(
+        _ kind: SectionHeaderFooterKind,
+        header closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
+        ) -> Self {
+        
+        let headerFooter = SectionHeaderFooter<HeaderOrFooter>(kind: kind)
+        closure(headerFooter)
+        
+        switch kind {
+        case .header:
+            header = headerFooter
+        case .footer:
+            footer = headerFooter
+        }
+        return self
+    }
+}
+
 extension SectionImpl: SectionDelegatable {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
         return inset?((self, collectionView, collectionViewLayout, section))
