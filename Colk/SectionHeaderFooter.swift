@@ -59,19 +59,8 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFoo
         closure(self)
     }
     
-    private var _reusableIdentifier: String?
-    open var reusableIdentifier: String {
-        get {
-            if let identifier = _reusableIdentifier {
-                return identifier
-            }
-            return View.className
-        }
-        set {
-            _reusableIdentifier = newValue
-        }
-    }
-    
+    open var reusableIdentifier: String?
+
     open var size: CGSize?
     open let kind: SectionHeaderFooterKind
     

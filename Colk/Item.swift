@@ -39,20 +39,8 @@ public class ItemImpl<Cell: UICollectionViewCell>: Item {
     public typealias ItemArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
     public typealias PerformActionArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
-    private var _reusableIdentifier: String?
-    public var reusableIdentifier: String {
-        get {
-            if let identifier = _reusableIdentifier {
-                return identifier
-            }
-            
-            return Cell.className
-        }
-        set {
-           _reusableIdentifier = newValue
-        }
-    }
-    
+    public var reusableIdentifier: String?
+
     public var size: CGSize?
     
     public var configureCell: ((Cell, ItemArgument) -> Void)?
