@@ -76,7 +76,7 @@ extension SectionImpl {
 }
 
 extension SectionImpl {
-    @discardableResult public func create<HeaderOrFooter>(
+    @discardableResult public func create<HeaderOrFooter: UICollectionReusableView>(
         _ kind: SectionHeaderFooterKind,
         headerOrFooter closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
         ) -> Self {
