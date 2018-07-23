@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.register(UINib(nibName: "SceneryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SceneryCollectionViewCell")
+        collectionView.register(UINib(nibName: "CategoryCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CategoryCollectionReusableView")
         
         collectionView
             .colk()
@@ -36,6 +37,13 @@ class ViewController: UIViewController {
                         cell.setup(with: viewModel)
                     }
                     item.size = CGSize(width: 100, height: 100)
+                })
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<CategoryCollectionReusableView>) in
+                    header.reusableIdentifier = "CategoryCollectionReusableView"
+                    header.configureView = { view, _ in
+                        view.backgroundColor = .red
+                    }
+                    header.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
                 })
         }
     }
