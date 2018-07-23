@@ -78,7 +78,7 @@ extension SectionImpl {
 extension SectionImpl {
     @discardableResult public func create<HeaderOrFooter>(
         _ kind: SectionHeaderFooterKind,
-        header closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
+        headerOrFooter closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
         ) -> Self {
         
         let headerFooter = SectionHeaderFooter<HeaderOrFooter>(kind: kind)
