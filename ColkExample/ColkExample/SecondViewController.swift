@@ -8,6 +8,6 @@
 
 import UIKit
 
-public class SecondViewController {
+public class SecondViewController: UIViewController {
     
 }
