@@ -13,7 +13,16 @@ class DetailImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        guard let contentImageSize = contentImageView.image?.size else {
+            return .zero
+        }
+        
+        let ratio = contentImageSize.width / UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height * ratio
+        return CGSize(width: contentImageSize.width , height: height)
+    }
 }
