@@ -19,6 +19,10 @@
 		BA7C1F9C2100EF48005CDE74 /* Colk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; };
 		BA7C1F9D2100EF48005CDE74 /* Colk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BAFB48E721070FD800140EF4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB48E621070FD800140EF4 /* DetailViewController.swift */; };
+		BAFB48EC2107325F00140EF4 /* DetailImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB48EA2107325F00140EF4 /* DetailImageCollectionViewCell.swift */; };
+		BAFB48ED2107325F00140EF4 /* DetailImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFB48EB2107325F00140EF4 /* DetailImageCollectionViewCell.xib */; };
+		BAFB48F02107326F00140EF4 /* DetailDescriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB48EE2107326F00140EF4 /* DetailDescriptionCollectionViewCell.swift */; };
+		BAFB48F12107326F00140EF4 /* DetailDescriptionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BAFB48EF2107326F00140EF4 /* DetailDescriptionCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,6 +53,10 @@
 		BA7A7FC92090AD6000F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA7C1F9B2100EF48005CDE74 /* Colk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Colk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAFB48E621070FD800140EF4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		BAFB48EA2107325F00140EF4 /* DetailImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		BAFB48EB2107325F00140EF4 /* DetailImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		BAFB48EE2107326F00140EF4 /* DetailDescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
+		BAFB48EF2107326F00140EF4 /* DetailDescriptionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailDescriptionCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +91,9 @@
 		BA7A7FBC2090AD5E00F4A24C /* ColkExample */ = {
 			isa = PBXGroup;
 			children = (
+				BAFB48E92107324300140EF4 /* Detail */,
 				BAFB48E82107319C00140EF4 /* List */,
 				BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */,
-				BAFB48E621070FD800140EF4 /* DetailViewController.swift */,
 				BA7A7FC12090AD5E00F4A24C /* Main.storyboard */,
 				BA7A7FC42090AD6000F4A24C /* Assets.xcassets */,
 				BA7A7FC62090AD6000F4A24C /* LaunchScreen.storyboard */,
@@ -104,6 +112,18 @@
 				BA7A7FBF2090AD5E00F4A24C /* ListViewController.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		BAFB48E92107324300140EF4 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				BAFB48E621070FD800140EF4 /* DetailViewController.swift */,
+				BAFB48EA2107325F00140EF4 /* DetailImageCollectionViewCell.swift */,
+				BAFB48EB2107325F00140EF4 /* DetailImageCollectionViewCell.xib */,
+				BAFB48EE2107326F00140EF4 /* DetailDescriptionCollectionViewCell.swift */,
+				BAFB48EF2107326F00140EF4 /* DetailDescriptionCollectionViewCell.xib */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +188,10 @@
 				BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */,
 				BA7A7FC52090AD6000F4A24C /* Assets.xcassets in Resources */,
 				BA6A040621018F7B00040691 /* ListCollectionReusableView.xib in Resources */,
+				BAFB48ED2107325F00140EF4 /* DetailImageCollectionViewCell.xib in Resources */,
 				BA6A040221018F5500040691 /* ListCollectionViewCell.xib in Resources */,
 				BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */,
+				BAFB48F12107326F00140EF4 /* DetailDescriptionCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,7 +205,9 @@
 				BA6A040121018F5500040691 /* ListCollectionViewCell.swift in Sources */,
 				BA7A7FC02090AD5E00F4A24C /* ListViewController.swift in Sources */,
 				BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */,
+				BAFB48EC2107325F00140EF4 /* DetailImageCollectionViewCell.swift in Sources */,
 				BAFB48E721070FD800140EF4 /* DetailViewController.swift in Sources */,
+				BAFB48F02107326F00140EF4 /* DetailDescriptionCollectionViewCell.swift in Sources */,
 				BA6A040521018F7B00040691 /* ListCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
