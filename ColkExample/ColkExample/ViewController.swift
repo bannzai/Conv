@@ -80,7 +80,7 @@ class ViewController: UIViewController {
                     }
                     
                     item.didSelect { (item) in
-                        
+                        print("item: \(item)")
                     }
                     
                     let gridCount: CGFloat = 3
