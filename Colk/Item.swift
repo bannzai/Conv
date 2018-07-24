@@ -69,6 +69,12 @@ public class ItemImpl<Cell: UICollectionViewCell>: Item {
     }
 }
 
+extension ItemImpl {
+    public func configureCell(_ closure: @escaping ((Cell, ItemArgument) -> Void)) {
+        self.configureCell = closure
+    }
+}
+
 extension ItemImpl: ItemDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))

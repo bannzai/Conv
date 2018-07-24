@@ -20,7 +20,7 @@ enum SectionType {
 }
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
                     item.reusableIdentifier = "SceneryCollectionViewCell"
-                    item.configureCell = { cell, info in
+                    item.configureCell { (cell, info) in
                         cell.setup(with: viewModel)
                     }
                     item.size = CGSize(width: 100, height: 100)
