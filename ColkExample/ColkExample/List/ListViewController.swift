@@ -79,8 +79,9 @@ class ListViewController: UIViewController {
                         cell.setup(with: viewModel)
                     }
                     
-                    item.didSelect { (item) in
-                        print("item: \(item)")
+                    item.didSelect { [weak self] (item) in
+                        let viewController = DetailViewController(imageName: viewModel.imageName)
+                        self?.navigationController?.pushViewController(viewController, animated: true)
                     }
                     
                     let gridCount: CGFloat = 3
