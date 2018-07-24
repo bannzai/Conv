@@ -40,7 +40,7 @@ class ViewController: UIViewController {
                 })
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<CategoryCollectionReusableView>) in
                     header.reusableIdentifier = "CategoryCollectionReusableView"
-                    header.configureView = { view, _ in
+                    header.configureView { view, _ in
                         view.backgroundColor = .red
                     }
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
