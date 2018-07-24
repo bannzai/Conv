@@ -31,9 +31,9 @@ public class SectionImpl: Section {
     public var header: SectionHeaderFooterView?
     public var footer: SectionHeaderFooterView?
     
-    public var inset: ((SectionArgument) -> UIEdgeInsets)?
-    public var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
-    public var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
+    internal var inset: ((SectionArgument) -> UIEdgeInsets)?
+    internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
+    internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
     public init(closure: (SectionImpl) -> Void) {
         closure(self)
@@ -45,6 +45,18 @@ public class SectionImpl: Section {
     
     public func insert(_ item: Item, to index: Int) {
         items.insert(item, at: index)
+    }
+}
+
+extension SectionImpl {
+    public func inset(_ closure: @escaping ((SectionArgument) -> UIEdgeInsets)) {
+        self.inset = closure
+    }
+    public func minimumLineSpacing(_ closure: @escaping ((SectionArgument) -> CGFloat)) {
+        self.minimumLineSpacing = closure
+    }
+    public func minimumInteritemSpacing(_ closure: @escaping ((SectionArgument) -> CGFloat)) {
+        self.minimumInteritemSpacing = closure
     }
 }
 
