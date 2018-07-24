@@ -18,7 +18,7 @@
 		BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC62090AD6000F4A24C /* LaunchScreen.storyboard */; };
 		BA7C1F9C2100EF48005CDE74 /* Colk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; };
 		BA7C1F9D2100EF48005CDE74 /* Colk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA7C1F9B2100EF48005CDE74 /* Colk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BAFB48E721070FD800140EF4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB48E621070FD800140EF4 /* SecondViewController.swift */; };
+		BAFB48E721070FD800140EF4 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFB48E621070FD800140EF4 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,7 +48,7 @@
 		BA7A7FC72090AD6000F4A24C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA7A7FC92090AD6000F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA7C1F9B2100EF48005CDE74 /* Colk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Colk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BAFB48E621070FD800140EF4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		BAFB48E621070FD800140EF4 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 			children = (
 				BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */,
 				BA7A7FBF2090AD5E00F4A24C /* ViewController.swift */,
-				BAFB48E621070FD800140EF4 /* SecondViewController.swift */,
+				BAFB48E621070FD800140EF4 /* DetailViewController.swift */,
 				BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */,
 				BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */,
 				BA6A03FF21018F5400040691 /* ImageCollectionViewCell.swift */,
@@ -175,7 +175,7 @@
 				BA6A040121018F5500040691 /* ImageCollectionViewCell.swift in Sources */,
 				BA7A7FC02090AD5E00F4A24C /* ViewController.swift in Sources */,
 				BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */,
-				BAFB48E721070FD800140EF4 /* SecondViewController.swift in Sources */,
+				BAFB48E721070FD800140EF4 /* DetailViewController.swift in Sources */,
 				BA6A040521018F7B00040691 /* CategoryCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

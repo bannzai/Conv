@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  DetailViewController.swift
 //  ColkExample
 //
 //  Created by Yudai.Hirose on 2018/07/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SecondViewController: UIViewController {
+public class DetailViewController: UIViewController {
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     public override func loadView() {
