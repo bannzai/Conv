@@ -26,7 +26,7 @@ public class DetailViewController: UIViewController {
         view.addSubview(collectionView)
         
         setupCollectionView: do {
-            collectionView.backgroundColor = .white
+            collectionView.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
             collectionView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([

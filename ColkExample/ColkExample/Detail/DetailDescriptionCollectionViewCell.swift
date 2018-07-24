@@ -19,6 +19,7 @@ class DetailDescriptionCollectionViewCell: UICollectionViewCell {
         addSubview(descriptionLabel)
         
         descriptionLabel.numberOfLines = 0
+        descriptionLabel.textColor = .white
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([

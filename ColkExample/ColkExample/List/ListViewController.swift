@@ -19,14 +19,7 @@ enum SectionType {
     }
     
     var backgroundColor: UIColor {
-        switch self {
-        case .one:
-            return UIColor.black.withAlphaComponent(0.8)
-        case .two:
-            return UIColor.black.withAlphaComponent(0.6)
-        case .three:
-            return UIColor.black.withAlphaComponent(0.45)
-        }
+        return UIColor.black.withAlphaComponent(0.3)
     }
 }
 
@@ -95,6 +88,10 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.reloadData()
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = .black
     }
 }
 
