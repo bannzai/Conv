@@ -14,26 +14,22 @@ public final class Colk: NSObject {
     public var didMoveItem: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
     public var indexTitles: ((UICollectionView) -> [String])?
     public var indexTitle: ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)?
-    
-    func itemFor(indexPath: IndexPath) -> Item {
-        return sections[indexPath.section].items[indexPath.item]
-    }
 }
 
 extension Colk {
-    public func add(section: Section) -> Self {
+    @discardableResult public func add(section: Section) -> Self {
         sections.append(section)
         return self
     }
-    public func add(sections: [Section]) -> Self {
+    @discardableResult public func add(sections: [Section]) -> Self {
         self.sections.append(contentsOf: sections)
         return self
     }
     
-    public func create(section closure: (Section) -> Void) -> Self {
+    @discardableResult public func create(section closure: (SectionImpl) -> Void) -> Self {
         return add(section: SectionImpl() { closure($0) } )
     }
-    public func create<E>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    @discardableResult public func create<E>(for elements: [E], sections closure: (E, SectionImpl) -> Void) -> Self {
         let sections = elements.map { (element) in
             SectionImpl() { section in
                 closure(element, section)
@@ -42,7 +38,7 @@ extension Colk {
         
         return add(sections: sections)
     }
-    public func createSections(for count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
+    @discardableResult public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
         return create(for: [UInt](0..<count), sections: closure)
     }
 }

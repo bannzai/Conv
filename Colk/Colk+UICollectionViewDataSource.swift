@@ -14,10 +14,14 @@ extension Colk: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = itemFor(indexPath: indexPath)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reusableIdentifier, for: indexPath)
-        (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
-        return cell
+        let item = sections[indexPath.section].items[indexPath.item]
+        if let reuseIdentifier = item.reusableIdentifier {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+            (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
+            return cell
+        }
+        
+        fatalError("Not yet register cell")
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -28,6 +32,7 @@ extension Colk: UICollectionViewDataSource {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             fatalError("Unknown kind: \(kind)")
         }
+        
         switch type {
         case .header:
             if let header = sections[indexPath.section].header,
