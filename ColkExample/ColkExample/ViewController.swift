@@ -30,7 +30,7 @@ enum SectionType {
     }
 }
 
-class ViewController: UIViewController {
+class ListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension ListViewController {
     func viewModels(section: SectionType) -> [ItemViewModel] {
         func stub(count: UInt) -> [ItemViewModel] {
             return imageNames
