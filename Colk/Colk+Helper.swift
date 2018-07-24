@@ -18,11 +18,7 @@ internal extension Colk {
     }
     
     func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
-        return itemDelegate(item: sections[indexPath.section].items[indexPath.item])
-    }
-    
-    func itemDelegate(item: Item) -> ItemDelegatable? {
-        return item as? ItemDelegatable
+        return sections[indexPath.section].items[indexPath.item]
     }
     
     func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegatable? {

@@ -9,13 +9,13 @@
 import UIKit
 
 public protocol Section {
-    var items: [Item] { get set }
+    var items: [ItemDelegatable] { get set }
     
     var header: SectionHeaderFooterView? { get }
     var footer: SectionHeaderFooterView? { get }
     
-    func remove(for item: Int) -> Item
-    func insert(_ item: Item, to index: Int)
+    func remove(for item: Int) -> ItemDelegatable
+    func insert(_ item: ItemDelegatable, to index: Int)
 }
 
 public protocol SectionDelegatable {
@@ -26,7 +26,7 @@ public protocol SectionDelegatable {
 
 public class SectionImpl: Section {
     public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
-    public var items: [Item] = []
+    public var items: [ItemDelegatable] = []
     
     public var header: SectionHeaderFooterView?
     public var footer: SectionHeaderFooterView?
@@ -39,11 +39,11 @@ public class SectionImpl: Section {
         closure(self)
     }
     
-    public func remove(for item: Int) -> Item {
+    public func remove(for item: Int) -> ItemDelegatable {
         return items.remove(at: item)
     }
     
-    public func insert(_ item: Item, to index: Int) {
+    public func insert(_ item: ItemDelegatable, to index: Int) {
         items.insert(item, at: index)
     }
 }
@@ -61,11 +61,11 @@ extension SectionImpl {
 }
 
 extension SectionImpl {
-    @discardableResult public func add(item: Item) -> SectionImpl {
+    @discardableResult public func add(item: ItemDelegatable) -> SectionImpl {
         items.append(item)
         return self
     }
-    @discardableResult public func add(items: [Item]) -> SectionImpl {
+    @discardableResult public func add(items: [ItemDelegatable]) -> SectionImpl {
         self.items.append(contentsOf: items)
         return self
     }

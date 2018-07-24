@@ -17,7 +17,7 @@ extension Colk: UICollectionViewDataSource {
         let item = sections[indexPath.section].items[indexPath.item]
         if let reuseIdentifier = item.reusableIdentifier {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-            (item as? ItemDelegatable)?.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
+            item.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
             return cell
         }
         
