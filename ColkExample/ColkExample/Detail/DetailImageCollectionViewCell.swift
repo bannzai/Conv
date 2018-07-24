@@ -10,19 +10,24 @@ import UIKit
 
 class DetailImageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var contentImageView: UIImageView!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
+    let contentImageView = UIImageView(frame: .zero)
     
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        guard let contentImageSize = contentImageView.image?.size else {
-            return .zero
-        }
+    public required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
         
-        let ratio = contentImageSize.width / UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height * ratio
-        return CGSize(width: contentImageSize.width , height: height)
+        addSubview(contentImageView)
+        
+        contentImageView.contentMode = .scaleAspectFill
+        contentImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            contentImageView.topAnchor.constraint(equalTo: topAnchor),
+            contentImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            contentImageView.leftAnchor.constraint(equalTo: leftAnchor),
+            contentImageView.rightAnchor.constraint(equalTo: rightAnchor),
+            ]
+        )
     }
 }
+
