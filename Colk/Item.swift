@@ -8,10 +8,6 @@
 
 import UIKit
 
-public protocol Item: Reusable {
-    var size: CGSize? { get set }
-}
-
 public protocol ItemDelegatable {
     func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize?
@@ -35,9 +31,9 @@ public protocol ItemDelegatable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
 }
 
-public class ItemImpl<Cell: UICollectionViewCell>: Item {
-    public typealias ItemArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
-    public typealias PerformActionArgument = (item: ItemImpl<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
+public class Item<Cell: UICollectionViewCell>: Reusable {
+    public typealias ItemArgument = (item: Item<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
+    public typealias PerformActionArgument = (item: Item<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
     public var reusableIdentifier: String?
 
@@ -64,12 +60,12 @@ public class ItemImpl<Cell: UICollectionViewCell>: Item {
     internal var canPerformAction: ((PerformActionArgument) -> Bool)?
     internal var performAction: ((PerformActionArgument) -> Void)?
     
-    public init(closure: (ItemImpl) -> Void) {
+    public init(closure: (Item) -> Void) {
         closure(self)
     }
 }
 
-extension ItemImpl {
+extension Item {
     public func configureCell(_ closure: @escaping ((Cell, ItemArgument) -> Void)) {
         self.configureCell = closure
     }
@@ -122,7 +118,7 @@ extension ItemImpl {
     }
 }
 
-extension ItemImpl: ItemDelegatable {
+extension Item: ItemDelegatable {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))
     }

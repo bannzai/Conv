@@ -70,19 +70,19 @@ extension SectionImpl {
         return self
     }
     
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (ItemImpl<T>) -> Void) -> SectionImpl {
-        return add(item: ItemImpl<T>() { closure($0) } )
+    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> SectionImpl {
+        return add(item: Item<T>() { closure($0) } )
     }
-    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, ItemImpl<T>) -> Void) -> SectionImpl {
+    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> SectionImpl {
         let items = elements.map { element in
-            ItemImpl<T>() { item in
+            Item<T>() { item in
                 closure(element, item)
             }
         }
         
         return add(items: items)
     }
-    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, ItemImpl<T>) -> Void)) -> SectionImpl {
+    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, Item<T>) -> Void)) -> SectionImpl {
         return create(for: [UInt](0..<count), items: closure)
     }
 }
