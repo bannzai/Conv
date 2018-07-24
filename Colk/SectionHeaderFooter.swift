@@ -33,7 +33,11 @@ public enum SectionHeaderFooterKind: String {
     }
 }
 
-protocol SectionHeaderFooterDelegatable: Reusable {
+public protocol SectionHeaderFooterKindable {
+    var kind: SectionHeaderFooterKind { get }
+}
+
+public protocol SectionHeaderFooterDelegatable: Reusable, SectionHeaderFooterKindable {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int)
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
@@ -85,25 +89,25 @@ extension SectionHeaderFooter {
 }
 
 extension SectionHeaderFooter: SectionHeaderFooterDelegatable {
-    func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
+    public func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
             fatalError()
         }
         configureView?(view, (self, collectionView, section))
     }
     
-    func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize? {
+    public func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize? {
         return sizeFor?((self, collectionView, section)) ?? size
     }
     
-    func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
+    public func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
         guard let view = view as? View else {
             fatalError()
         }
         willDisplay?(view, (self, collectionView, indexPath))
     }
     
-    func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
+    public func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
         guard let view = view as? View else {
             fatalError()
         }
