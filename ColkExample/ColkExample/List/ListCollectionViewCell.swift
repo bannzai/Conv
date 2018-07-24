@@ -9,7 +9,7 @@
 import UIKit
 
 struct ItemViewModel {
-    let title: String
+    let imageName: String
     let image: UIImage
 }
 
@@ -23,7 +23,7 @@ class ListCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(with viewModel: ItemViewModel) {
-        nameLabel.text = viewModel.title
+        nameLabel.text = viewModel.imageName
         sceneImageView.image = viewModel.image
     }
 }

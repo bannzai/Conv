@@ -101,7 +101,7 @@ extension ListViewController {
     func viewModels(section: SectionType) -> [ItemViewModel] {
         func stub(count: UInt) -> [ItemViewModel] {
             return imageNames
-                .map { ItemViewModel(title: $0, image: UIImage(named: $0)!) }
+                .map { ItemViewModel(imageName: $0, image: UIImage(named: $0)!) }
         }
         switch section {
         case .one:
