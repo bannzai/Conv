@@ -79,6 +79,10 @@ class ViewController: UIViewController {
                         cell.setup(with: viewModel)
                     }
                     
+                    item.didSelect { (item) in
+                        
+                    }
+                    
                     let gridCount: CGFloat = 3
                     let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
                     item.size = CGSize(width: edge, height: edge)
