@@ -33,19 +33,18 @@ public enum SectionHeaderFooterKind: String {
     }
 }
 
-public protocol SectionHeaderFooterView: Reusable {
-    var size: CGSize? { get set }
+public protocol SectionHeaderFooterKindable {
     var kind: SectionHeaderFooterKind { get }
 }
 
-protocol SectionHeaderFooterDelegatable {
+public protocol SectionHeaderFooterDelegatable: Reusable, SectionHeaderFooterKindable {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int)
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
     func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)
 }
 
-open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFooterView {
+open class SectionHeaderFooter<View: UICollectionReusableView>: Reusable {
     public typealias SectionHeaderFooterInformation = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView, section: Int)
     public typealias SectionHeaderFooterLayoutInformation = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView, layout: UICollectionViewLayout, section: Int)
     public typealias SectionHeaderFooterSupplymentaryView = (headerFooter: SectionHeaderFooter<View>, collectionView: UICollectionView,  indexPath: IndexPath)
@@ -90,25 +89,25 @@ extension SectionHeaderFooter {
 }
 
 extension SectionHeaderFooter: SectionHeaderFooterDelegatable {
-    func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
+    public func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
             fatalError()
         }
         configureView?(view, (self, collectionView, section))
     }
     
-    func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize? {
+    public func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize? {
         return sizeFor?((self, collectionView, section)) ?? size
     }
     
-    func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
+    public func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
         guard let view = view as? View else {
             fatalError()
         }
         willDisplay?(view, (self, collectionView, indexPath))
     }
     
-    func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
+    public func didEndDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath) {
         guard let view = view as? View else {
             fatalError()
         }

@@ -9,27 +9,11 @@
 import UIKit
 
 internal extension Colk {
-    func sectionDelegate(section: Int) -> SectionDelegatable? {
-        return sectionDelegate(section: sections[section])
-    }
-    
-    func sectionDelegate(section: Section) -> SectionDelegatable? {
-        return section as? SectionDelegatable
-    }
-    
     func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
-        return itemDelegate(item: sections[indexPath.section].items[indexPath.item])
+        return sections[indexPath.section].items[indexPath.item]
     }
     
-    func itemDelegate(item: Item) -> ItemDelegatable? {
-        return item as? ItemDelegatable
-    }
-    
-    func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegatable? {
-        return headerFooter as? SectionHeaderFooterDelegatable
-    }
-    
-    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterView? {
+    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterDelegatable? {
         switch kind {
         case .header:
             return sections[section].header
@@ -38,33 +22,27 @@ internal extension Colk {
         }
     }
     
-    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterView? {
+    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterDelegatable? {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             return nil
         }
         return headerOrFooter(for: type, section: section)
     }
     
-    func headerFooterViewFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+    func headerFooterViewFor(headerFooter: SectionHeaderFooterDelegatable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
         if let identifier = headerFooter.reusableIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
-            if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
-                delegate.configureView(collectionView, view: view, section: indexPath.section)
-            }
+            headerFooter.configureView(collectionView, view: view, section: indexPath.section)
             return view
         }
         
         return nil
     }
     
-    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, section: Int) -> CGSize? {
-        if let delegate = headerFooterDelegate(headerFooter: headerFooter),
-            let size = delegate.sizeFor(collectionView, section: section) {
-            return size
-        }
-        
-        return headerFooter.size
+    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterDelegatable, collectionView: UICollectionView, section: Int) -> CGSize? {
+        let size = headerFooter.sizeFor(collectionView, section: section)
+        return size
     }
     
     func dequeueReusableSupplementaryView(collectionView: UICollectionView, kind: String, identifier: String, indexPath: IndexPath) -> UICollectionReusableView {

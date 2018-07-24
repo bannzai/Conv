@@ -21,7 +21,7 @@ extension Colk: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        if let inset = sectionDelegate(section: section)?
+        if let inset = sections[section]
             .inset(collectionView: collectionView, collectionViewLayout: collectionViewLayout, section: section) {
             return inset
         }
@@ -34,7 +34,7 @@ extension Colk: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if let spacing = sectionDelegate(section: section)?
+        if let spacing = sections[section]
             .minimumLineSpacing(collectionView: collectionView, collectionViewLayout: collectionViewLayout, section: section) {
             return spacing
         }
@@ -47,7 +47,7 @@ extension Colk: UICollectionViewDelegateFlowLayout {
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if let spacing = sectionDelegate(section: section)?
+        if let spacing = sections[section]
             .minimumInteritemSpacing(collectionView: collectionView, collectionViewLayout: collectionViewLayout, section: section) {
             return spacing
         }

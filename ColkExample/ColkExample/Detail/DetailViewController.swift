@@ -47,7 +47,7 @@ public class DetailViewController: UIViewController {
                 .colk()
                 .create { (section) in
                     section
-                        .create(item: { (item: ItemImpl<DetailImageCollectionViewCell>) in
+                        .create(item: { (item: Item<DetailImageCollectionViewCell>) in
                             let image = UIImage(named: imageName)!
                             item.reusableIdentifier = "DetailImageCollectionViewCell"
                             item.configureCell { (cell, info) in
@@ -61,7 +61,7 @@ public class DetailViewController: UIViewController {
                         })
                 }
                 .create { (section) in
-                    section.create { (item: ItemImpl<DetailDescriptionCollectionViewCell>) in
+                    section.create { (item: Item<DetailDescriptionCollectionViewCell>) in
                         item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
                         item.configureCell { (cell, info) in
                             cell.descriptionLabel.text = """

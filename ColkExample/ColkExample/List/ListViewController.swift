@@ -67,7 +67,7 @@ class ListViewController: UIViewController {
                     }
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                 })
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<ListCollectionViewCell>) in
+                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: Item<ListCollectionViewCell>) in
                     item.reusableIdentifier = "ListCollectionViewCell"
                     item.configureCell { (cell, info) in
                         cell.setup(with: viewModel)

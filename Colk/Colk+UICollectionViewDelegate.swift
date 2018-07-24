@@ -54,12 +54,11 @@ extension Colk: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         guard
-            let headerFooter = headerOrFooterOrNil(for: elementKind, section: indexPath.section),
-            let delegate = headerFooterDelegate(headerFooter: headerFooter)
+            let headerFooter = headerOrFooterOrNil(for: elementKind, section: indexPath.section)
             else {
                 return
         }
-        delegate.willDisplay(collectionView, view: view, indexPath: indexPath)
+        headerFooter.willDisplay(collectionView, view: view, indexPath: indexPath)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -69,12 +68,12 @@ extension Colk: UICollectionViewDelegate {
     
     public func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
         guard
-            let headerFooter = headerOrFooterOrNil(for: elementKind, section: indexPath.section),
-            let delegate = headerFooterDelegate(headerFooter: headerFooter)
+            let headerFooter = headerOrFooterOrNil(for: elementKind, section: indexPath.section)
             else {
                 return
         }
-        delegate.didEndDisplay(collectionView, view: view, indexPath: indexPath)
+        
+        headerFooter.didEndDisplay(collectionView, view: view, indexPath: indexPath)
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
