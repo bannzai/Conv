@@ -12,7 +12,7 @@ extension Colk: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let shouldHighlight = itemDelegate(indexPath: indexPath)?
             .shouldHighlight(collectionView: collectionView, indexPath: indexPath)
-        return shouldHighlight ?? false
+        return shouldHighlight ?? true
     }
     
     public func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -28,13 +28,13 @@ extension Colk: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let shouldSelect = itemDelegate(indexPath: indexPath)?
             .shouldSelect(collectionView: collectionView, indexPath: indexPath)
-        return shouldSelect ?? false
+        return shouldSelect ?? true
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
         let shouldSelect = itemDelegate(indexPath: indexPath)?
             .shouldDeselect(collectionView: collectionView, indexPath: indexPath)
-        return shouldSelect ?? false
+        return shouldSelect ?? true
     }
     
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
