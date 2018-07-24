@@ -48,7 +48,6 @@ class ListViewController: UIViewController {
         "snow",
         "volcano",
         "water_fall",
-        "xbox",
     ]
     
     override func viewDidLoad() {
@@ -58,7 +57,7 @@ class ListViewController: UIViewController {
         
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
         collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
-        
+
         flowLayout?.sectionInset = .zero
         flowLayout?.minimumLineSpacing = 0
         flowLayout?.minimumInteritemSpacing = 0

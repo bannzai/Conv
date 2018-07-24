@@ -26,21 +26,22 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMd-bW-N4j">
-                        <rect key="frame" x="70" y="191" width="42" height="21"/>
+                        <rect key="frame" x="16" y="191" width="31" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="aTX-dc-NUH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="0.0" alpha="0.70282240316901412" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="aMd-bW-N4j" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="H0H-fM-KLa"/>
                 <constraint firstAttribute="bottom" secondItem="aMd-bW-N4j" secondAttribute="bottom" constant="8" id="fy8-3d-Uuw"/>
                 <constraint firstItem="a9J-N0-7zR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="kUK-VU-LgM"/>
                 <constraint firstItem="a9J-N0-7zR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qEg-XY-j9j"/>
+                <constraint firstItem="aMd-bW-N4j" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="sOk-Na-H9B"/>
                 <constraint firstAttribute="trailing" secondItem="a9J-N0-7zR" secondAttribute="trailing" id="uMM-RI-xVV"/>
                 <constraint firstItem="aMd-bW-N4j" firstAttribute="top" secondItem="a9J-N0-7zR" secondAttribute="bottom" constant="8" id="wJa-nt-CO7"/>
             </constraints>

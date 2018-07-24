@@ -19,6 +19,7 @@ class DetailImageCollectionViewCell: UICollectionViewCell {
         addSubview(contentImageView)
         
         contentImageView.contentMode = .scaleAspectFill
+        contentImageView.clipsToBounds = true
         contentImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
