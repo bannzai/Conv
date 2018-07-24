@@ -14,7 +14,7 @@ public protocol SectionDelegatable {
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
 }
 
-public class Section: Section {
+public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegatable] = []
     
