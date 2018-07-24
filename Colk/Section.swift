@@ -18,8 +18,8 @@ public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegatable] = []
     
-    public var header: SectionHeaderFooterView?
-    public var footer: SectionHeaderFooterView?
+    public var header: SectionHeaderFooter?
+    public var footer: SectionHeaderFooter?
     
     internal var inset: ((SectionArgument) -> UIEdgeInsets)?
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?

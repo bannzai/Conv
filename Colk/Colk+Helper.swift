@@ -21,11 +21,11 @@ internal extension Colk {
         return sections[indexPath.section].items[indexPath.item]
     }
     
-    func headerFooterDelegate(headerFooter: SectionHeaderFooterView) -> SectionHeaderFooterDelegatable? {
+    func headerFooterDelegate(headerFooter: SectionHeaderFooter) -> SectionHeaderFooterDelegatable? {
         return headerFooter as? SectionHeaderFooterDelegatable
     }
     
-    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterView? {
+    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooter? {
         switch kind {
         case .header:
             return sections[section].header
@@ -34,14 +34,14 @@ internal extension Colk {
         }
     }
     
-    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterView? {
+    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooter? {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             return nil
         }
         return headerOrFooter(for: type, section: section)
     }
     
-    func headerFooterViewFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+    func headerFooterViewFor(headerFooter: SectionHeaderFooter, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
         if let identifier = headerFooter.reusableIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
@@ -54,7 +54,7 @@ internal extension Colk {
         return nil
     }
     
-    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterView, collectionView: UICollectionView, section: Int) -> CGSize? {
+    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooter, collectionView: UICollectionView, section: Int) -> CGSize? {
         if let delegate = headerFooterDelegate(headerFooter: headerFooter),
             let size = delegate.sizeFor(collectionView, section: section) {
             return size
