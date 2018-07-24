@@ -15,7 +15,22 @@
         <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="CategoryCollectionReusableView" customModule="ColkExample" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6p-DJ-8UR">
+                    <rect key="frame" x="16" y="15" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="h6p-DJ-8UR" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="KVU-j3-l5V"/>
+                <constraint firstItem="h6p-DJ-8UR" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="16" id="eG5-Cr-hUQ"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="nameLabel" destination="h6p-DJ-8UR" id="t9P-Gj-qvF"/>
+            </connections>
         </collectionReusableView>
     </objects>
 </document>
