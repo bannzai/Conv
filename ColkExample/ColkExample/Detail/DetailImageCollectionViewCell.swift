@@ -10,6 +10,7 @@ import UIKit
 
 class DetailImageCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var contentImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
