@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		BA6A040121018F5500040691 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */; };
 		BA6A040221018F5500040691 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040021018F5500040691 /* ListCollectionViewCell.xib */; };
-		BA6A040521018F7B00040691 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */; };
-		BA6A040621018F7B00040691 /* CategoryCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */; };
+		BA6A040521018F7B00040691 /* ListCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A040321018F7B00040691 /* ListCollectionReusableView.swift */; };
+		BA6A040621018F7B00040691 /* ListCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040421018F7B00040691 /* ListCollectionReusableView.xib */; };
 		BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */; };
 		BA7A7FC02090AD5E00F4A24C /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FBF2090AD5E00F4A24C /* ListViewController.swift */; };
 		BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA7A7FC12090AD5E00F4A24C /* Main.storyboard */; };
@@ -38,8 +38,8 @@
 /* Begin PBXFileReference section */
 		BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA6A040021018F5500040691 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
-		BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionReusableView.swift; sourceTree = "<group>"; };
-		BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionReusableView.xib; sourceTree = "<group>"; };
+		BA6A040321018F7B00040691 /* ListCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionReusableView.swift; sourceTree = "<group>"; };
+		BA6A040421018F7B00040691 /* ListCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionReusableView.xib; sourceTree = "<group>"; };
 		BA7A7FBA2090AD5E00F4A24C /* ColkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA7A7FBF2090AD5E00F4A24C /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 		BAFB48E82107319C00140EF4 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */,
-				BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */,
+				BA6A040321018F7B00040691 /* ListCollectionReusableView.swift */,
+				BA6A040421018F7B00040691 /* ListCollectionReusableView.xib */,
 				BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */,
 				BA6A040021018F5500040691 /* ListCollectionViewCell.xib */,
 				BA7A7FBF2090AD5E00F4A24C /* ListViewController.swift */,
@@ -167,7 +167,7 @@
 			files = (
 				BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */,
 				BA7A7FC52090AD6000F4A24C /* Assets.xcassets in Resources */,
-				BA6A040621018F7B00040691 /* CategoryCollectionReusableView.xib in Resources */,
+				BA6A040621018F7B00040691 /* ListCollectionReusableView.xib in Resources */,
 				BA6A040221018F5500040691 /* ListCollectionViewCell.xib in Resources */,
 				BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */,
 			);
@@ -184,7 +184,7 @@
 				BA7A7FC02090AD5E00F4A24C /* ListViewController.swift in Sources */,
 				BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */,
 				BAFB48E721070FD800140EF4 /* DetailViewController.swift in Sources */,
-				BA6A040521018F7B00040691 /* CategoryCollectionReusableView.swift in Sources */,
+				BA6A040521018F7B00040691 /* ListCollectionReusableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

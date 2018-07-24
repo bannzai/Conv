@@ -1,5 +1,5 @@
 //
-//  CategoryCollectionReusableView.swift
+//  ListCollectionReusableView.swift
 //  ColkExample
 //
 //  Created by Yudai.Hirose on 2018/07/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CategoryCollectionReusableView: UICollectionReusableView {
+class ListCollectionReusableView: UICollectionReusableView {
 
     @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {

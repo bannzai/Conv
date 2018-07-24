@@ -55,7 +55,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
-        collectionView.register(UINib(nibName: "CategoryCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CategoryCollectionReusableView")
+        collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
         
         flowLayout?.sectionInset = .zero
         flowLayout?.minimumLineSpacing = 0
@@ -64,8 +64,8 @@ class ListViewController: UIViewController {
         collectionView
             .colk()
             .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<CategoryCollectionReusableView>) in
-                    header.reusableIdentifier = "CategoryCollectionReusableView"
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
+                    header.reusableIdentifier = "ListCollectionReusableView"
                     header.configureView { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
