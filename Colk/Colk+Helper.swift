@@ -9,20 +9,8 @@
 import UIKit
 
 internal extension Colk {
-    func sectionDelegate(section: Int) -> SectionDelegatable? {
-        return sectionDelegate(section: sections[section])
-    }
-    
-    func sectionDelegate(section: Section) -> SectionDelegatable? {
-        return section as? SectionDelegatable
-    }
-    
     func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
         return sections[indexPath.section].items[indexPath.item]
-    }
-    
-    func headerFooterDelegate(headerFooter: SectionHeaderFooterDelegatable) -> SectionHeaderFooterDelegatable? {
-        return headerFooter as? SectionHeaderFooterDelegatable
     }
     
     func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterDelegatable? {
@@ -45,9 +33,7 @@ internal extension Colk {
         // Dequeue
         if let identifier = headerFooter.reusableIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
-            if let delegate = headerFooterDelegate(headerFooter: headerFooter) {
-                delegate.configureView(collectionView, view: view, section: indexPath.section)
-            }
+            headerFooter.configureView(collectionView, view: view, section: indexPath.section)
             return view
         }
         
@@ -55,12 +41,8 @@ internal extension Colk {
     }
     
     func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterDelegatable, collectionView: UICollectionView, section: Int) -> CGSize? {
-        if let delegate = headerFooterDelegate(headerFooter: headerFooter),
-            let size = delegate.sizeFor(collectionView, section: section) {
-            return size
-        }
-        
-        return nil
+        let size = headerFooter.sizeFor(collectionView, section: section)
+        return size
     }
     
     func dequeueReusableSupplementaryView(collectionView: UICollectionView, kind: String, identifier: String, indexPath: IndexPath) -> UICollectionReusableView {
