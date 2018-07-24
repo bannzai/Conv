@@ -54,7 +54,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
+        collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CategoryCollectionReusableView")
         
         flowLayout?.sectionInset = .zero
@@ -73,8 +73,8 @@ class ListViewController: UIViewController {
                     }
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                 })
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<ImageCollectionViewCell>) in
-                    item.reusableIdentifier = "ImageCollectionViewCell"
+                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<ListCollectionViewCell>) in
+                    item.reusableIdentifier = "ListCollectionViewCell"
                     item.configureCell { (cell, info) in
                         cell.setup(with: viewModel)
                     }
