@@ -31,19 +31,19 @@ class ViewController: UIViewController {
         collectionView
             .colk()
             .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
-                    item.reusableIdentifier = "SceneryCollectionViewCell"
-                    item.configureCell { (cell, info) in
-                        cell.setup(with: viewModel)
-                    }
-                    item.size = CGSize(width: 100, height: 100)
-                })
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<CategoryCollectionReusableView>) in
                     header.reusableIdentifier = "CategoryCollectionReusableView"
                     header.configureView { view, _ in
                         view.backgroundColor = .red
                     }
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
+                })
+                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
+                    item.reusableIdentifier = "SceneryCollectionViewCell"
+                    item.configureCell { (cell, info) in
+                        cell.setup(with: viewModel)
+                    }
+                    item.size = CGSize(width: 100, height: 100)
                 })
         }
     }
