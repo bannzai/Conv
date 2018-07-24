@@ -14,8 +14,8 @@ public protocol Section {
     var header: SectionHeaderFooterView? { get }
     var footer: SectionHeaderFooterView? { get }
     
-     func remove(for item: Int) -> Item
-     func insert(_ item: Item, to index: Int)
+    func remove(for item: Int) -> Item
+    func insert(_ item: Item, to index: Int)
 }
 
 public protocol SectionDelegatable {
