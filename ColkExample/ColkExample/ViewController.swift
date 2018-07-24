@@ -10,24 +10,46 @@ import UIKit
 import Colk
 
 enum SectionType {
-    case mountain
-    case river
-    case forest
+    case one
+    case two
+    case three
     
     static var elements: [SectionType] {
-        return [.mountain, .river, .forest]
+        return [.one, .two, .three]
     }
 }
 
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var flowLayout: UICollectionViewFlowLayout? {
+        return collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    
+    var imageNames: [String] = [
+        "forest",
+        "moon",
+        "mountain",
+        "pond",
+        "river",
+        "road",
+        "snow",
+        "volcano",
+        "water_fall",
+        "xbox",
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.register(UINib(nibName: "SceneryCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "SceneryCollectionViewCell")
+        collectionView.register(UINib(nibName: "ImageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ImageCollectionViewCell")
         collectionView.register(UINib(nibName: "CategoryCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "CategoryCollectionReusableView")
         
+        flowLayout?.sectionInset = .zero
+        flowLayout?.minimumLineSpacing = 0
+        flowLayout?.minimumInteritemSpacing = 0
+
         collectionView
             .colk()
             .create(for: SectionType.elements) { (sectionType, section) in
@@ -38,12 +60,14 @@ class ViewController: UIViewController {
                     }
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
                 })
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<SceneryCollectionViewCell>) in
-                    item.reusableIdentifier = "SceneryCollectionViewCell"
+                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<ImageCollectionViewCell>) in
+                    item.reusableIdentifier = "ImageCollectionViewCell"
                     item.configureCell { (cell, info) in
                         cell.setup(with: viewModel)
                     }
-                    item.size = CGSize(width: 100, height: 100)
+                    
+                    let gridCount: CGFloat = 3
+                    item.size = CGSize(width: floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount), height: 200)
                 })
         }
     }
@@ -57,15 +81,15 @@ class ViewController: UIViewController {
 extension ViewController {
     func viewModels(section: SectionType) -> [ItemViewModel] {
         func stub(count: UInt) -> [ItemViewModel] {
-            return [UInt](0..<count)
-                .map { _ in ItemViewModel(title: "Stub", image: #imageLiteral(resourceName: "river")) }
+            return imageNames
+                .map { ItemViewModel(title: $0, image: UIImage(named: $0)!) }
         }
         switch section {
-        case .mountain:
+        case .one:
             return stub(count: 10)
-        case .river:
+        case .two:
             return stub(count: 10)
-        case .forest:
+        case .three:
             return stub(count: 10)
         }
     }

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA6A040121018F5500040691 /* SceneryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FF21018F5400040691 /* SceneryCollectionViewCell.swift */; };
-		BA6A040221018F5500040691 /* SceneryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040021018F5500040691 /* SceneryCollectionViewCell.xib */; };
+		BA6A040121018F5500040691 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FF21018F5400040691 /* ImageCollectionViewCell.swift */; };
+		BA6A040221018F5500040691 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040021018F5500040691 /* ImageCollectionViewCell.xib */; };
 		BA6A040521018F7B00040691 /* CategoryCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */; };
 		BA6A040621018F7B00040691 /* CategoryCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */; };
 		BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FBD2090AD5E00F4A24C /* AppDelegate.swift */; };
@@ -35,8 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BA6A03FF21018F5400040691 /* SceneryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneryCollectionViewCell.swift; sourceTree = "<group>"; };
-		BA6A040021018F5500040691 /* SceneryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SceneryCollectionViewCell.xib; sourceTree = "<group>"; };
+		BA6A03FF21018F5400040691 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA6A040021018F5500040691 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionReusableView.swift; sourceTree = "<group>"; };
 		BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryCollectionReusableView.xib; sourceTree = "<group>"; };
 		BA7A7FBA2090AD5E00F4A24C /* ColkExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColkExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,8 +85,8 @@
 				BA7A7FBF2090AD5E00F4A24C /* ViewController.swift */,
 				BA6A040321018F7B00040691 /* CategoryCollectionReusableView.swift */,
 				BA6A040421018F7B00040691 /* CategoryCollectionReusableView.xib */,
-				BA6A03FF21018F5400040691 /* SceneryCollectionViewCell.swift */,
-				BA6A040021018F5500040691 /* SceneryCollectionViewCell.xib */,
+				BA6A03FF21018F5400040691 /* ImageCollectionViewCell.swift */,
+				BA6A040021018F5500040691 /* ImageCollectionViewCell.xib */,
 				BA7A7FC12090AD5E00F4A24C /* Main.storyboard */,
 				BA7A7FC42090AD6000F4A24C /* Assets.xcassets */,
 				BA7A7FC62090AD6000F4A24C /* LaunchScreen.storyboard */,
@@ -157,7 +157,7 @@
 				BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */,
 				BA7A7FC52090AD6000F4A24C /* Assets.xcassets in Resources */,
 				BA6A040621018F7B00040691 /* CategoryCollectionReusableView.xib in Resources */,
-				BA6A040221018F5500040691 /* SceneryCollectionViewCell.xib in Resources */,
+				BA6A040221018F5500040691 /* ImageCollectionViewCell.xib in Resources */,
 				BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA6A040121018F5500040691 /* SceneryCollectionViewCell.swift in Sources */,
+				BA6A040121018F5500040691 /* ImageCollectionViewCell.swift in Sources */,
 				BA7A7FC02090AD5E00F4A24C /* ViewController.swift in Sources */,
 				BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */,
 				BA6A040521018F7B00040691 /* CategoryCollectionReusableView.swift in Sources */,

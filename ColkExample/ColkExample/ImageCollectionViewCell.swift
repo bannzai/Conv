@@ -1,5 +1,5 @@
 //
-//  SceneryCollectionViewCell.swift
+//  ImageCollectionViewCell.swift
 //  ColkExample
 //
 //  Created by Yudai.Hirose on 2018/07/20.
@@ -13,7 +13,7 @@ struct ItemViewModel {
     let image: UIImage
 }
 
-class SceneryCollectionViewCell: UICollectionViewCell {
+class ImageCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var sceneImageView: UIImageView!
