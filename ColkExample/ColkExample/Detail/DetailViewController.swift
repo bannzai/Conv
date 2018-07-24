@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import Colk
 
 public class DetailViewController: UIViewController {
+    private let imageName: String
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+
+    public required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    public init(imageName: String) {
+        self.imageName = imageName
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+
     
     public override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
@@ -26,10 +36,29 @@ public class DetailViewController: UIViewController {
             ]
         )
         
+        let imageName = self.imageName
         collectionView
             .colk()
             .create { (section) in
-                
+                section
+                    .create(item: { (item: ItemImpl<DetailImageCollectionViewCell>) in
+                        item.configureCell { (cell, info) in
+                            cell.contentImageView.image = UIImage(named: imageName)
+                        }
+                    })
+            }
+            .create { (section) in
+                section.create { (item: ItemImpl<DetailDescriptionCollectionViewCell>) in
+                    item.configureCell { (cell, info) in
+                        cell.descriptionLabel.text = """
+                        Your should send star request for this repository.
+                        ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+                        So, I'm glad. I'm happy.
+                        My name bannzai.
+                        Nice to meet you
+                        """
+                    }
+                }
         }
     }
     
