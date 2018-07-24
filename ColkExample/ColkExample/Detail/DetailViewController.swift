@@ -20,46 +20,65 @@ public class DetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    
     public override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         
         view.addSubview(collectionView)
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            ]
-        )
-        
-        let imageName = self.imageName
-        collectionView
-            .colk()
-            .create { (section) in
-                section
-                    .create(item: { (item: ItemImpl<DetailImageCollectionViewCell>) in
-                        item.configureCell { (cell, info) in
-                            cell.contentImageView.image = UIImage(named: imageName)
-                        }
-                    })
-            }
-            .create { (section) in
-                section.create { (item: ItemImpl<DetailDescriptionCollectionViewCell>) in
-                    item.configureCell { (cell, info) in
-                        cell.descriptionLabel.text = """
-                        Your should send star request for this repository.
-                        ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
-                        So, I'm glad. I'm happy.
-                        My name bannzai.
-                        Nice to meet you
-                        """
-                    }
-                }
+        setupCollectionView: do {
+            collectionView.backgroundColor = .white
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            
+            NSLayoutConstraint.activate([
+                collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+                collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+                ]
+            )
+            
+            collectionView.register(DetailImageCollectionViewCell.self, forCellWithReuseIdentifier: "DetailImageCollectionViewCell")
+            collectionView.register(DetailDescriptionCollectionViewCell.self, forCellWithReuseIdentifier: "DetailDescriptionCollectionViewCell")
         }
+        
+        createColk: do {
+            let imageName = self.imageName
+            collectionView
+                .colk()
+                .create { (section) in
+                    section
+                        .create(item: { (item: ItemImpl<DetailImageCollectionViewCell>) in
+                            let image = UIImage(named: imageName)!
+                            item.reusableIdentifier = "DetailImageCollectionViewCell"
+                            item.configureCell { (cell, info) in
+                                cell.contentImageView.image = image
+                            }
+                            item.sizeFor { (info) -> CGSize in
+                                let ratio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
+                                let height = image.size.width / ratio
+                                return CGSize(width: UIScreen.main.bounds.width, height: height)
+                            }
+                        })
+                }
+                .create { (section) in
+                    section.create { (item: ItemImpl<DetailDescriptionCollectionViewCell>) in
+                        item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
+                        item.configureCell { (cell, info) in
+                            cell.descriptionLabel.text = """
+                            Hi, My name bannzai.
+                            bannzai means \\(^o^)/.
+                            Nice to meet you.
+                            If you love this library, you should send start request to this repository.
+                            ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+                            So, I'm glad. I'm happy!!
+                            """
+                        }
+                        item.size = CGSize(width: UIScreen.main.bounds.width, height: 200)
+                    }
+            }
+        }
+        
+        title = imageName
     }
     
     public override func viewWillAppear(_ animated: Bool) {
