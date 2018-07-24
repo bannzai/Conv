@@ -8,24 +8,14 @@
 
 import UIKit
 
-public protocol Section {
-    var items: [ItemDelegatable] { get set }
-    
-    var header: SectionHeaderFooterView? { get }
-    var footer: SectionHeaderFooterView? { get }
-    
-    func remove(for item: Int) -> ItemDelegatable
-    func insert(_ item: ItemDelegatable, to index: Int)
-}
-
 public protocol SectionDelegatable {
     func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets?
     func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
     func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
 }
 
-public class SectionImpl: Section {
-    public typealias SectionArgument = (Section: SectionImpl, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
+public class Section: Section {
+    public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegatable] = []
     
     public var header: SectionHeaderFooterView?
@@ -35,7 +25,7 @@ public class SectionImpl: Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    public init(closure: (SectionImpl) -> Void) {
+    public init(closure: (Section) -> Void) {
         closure(self)
     }
     
@@ -48,7 +38,7 @@ public class SectionImpl: Section {
     }
 }
 
-extension SectionImpl {
+extension Section {
     public func inset(_ closure: @escaping ((SectionArgument) -> UIEdgeInsets)) {
         self.inset = closure
     }
@@ -60,20 +50,20 @@ extension SectionImpl {
     }
 }
 
-extension SectionImpl {
-    @discardableResult public func add(item: ItemDelegatable) -> SectionImpl {
+extension Section {
+    @discardableResult public func add(item: ItemDelegatable) -> Section {
         items.append(item)
         return self
     }
-    @discardableResult public func add(items: [ItemDelegatable]) -> SectionImpl {
+    @discardableResult public func add(items: [ItemDelegatable]) -> Section {
         self.items.append(contentsOf: items)
         return self
     }
     
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> SectionImpl {
+    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
         return add(item: Item<T>() { closure($0) } )
     }
-    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> SectionImpl {
+    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
         let items = elements.map { element in
             Item<T>() { item in
                 closure(element, item)
@@ -82,12 +72,12 @@ extension SectionImpl {
         
         return add(items: items)
     }
-    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, Item<T>) -> Void)) -> SectionImpl {
+    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, Item<T>) -> Void)) -> Section {
         return create(for: [UInt](0..<count), items: closure)
     }
 }
 
-extension SectionImpl {
+extension Section {
     @discardableResult public func create<HeaderOrFooter: UICollectionReusableView>(
         _ kind: SectionHeaderFooterKind,
         headerOrFooter closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
@@ -106,7 +96,7 @@ extension SectionImpl {
     }
 }
 
-extension SectionImpl: SectionDelegatable {
+extension Section: SectionDelegatable {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
         return inset?((self, collectionView, collectionViewLayout, section))
     }

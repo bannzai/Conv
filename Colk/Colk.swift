@@ -26,12 +26,12 @@ extension Colk {
         return self
     }
     
-    @discardableResult public func create(section closure: (SectionImpl) -> Void) -> Self {
-        return add(section: SectionImpl() { closure($0) } )
+    @discardableResult public func create(section closure: (Section) -> Void) -> Self {
+        return add(section: Section() { closure($0) } )
     }
-    @discardableResult public func create<E>(for elements: [E], sections closure: (E, SectionImpl) -> Void) -> Self {
+    @discardableResult public func create<E>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
-            SectionImpl() { section in
+            Section() { section in
                 closure(element, section)
             }
         }
