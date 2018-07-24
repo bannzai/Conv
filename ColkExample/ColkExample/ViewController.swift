@@ -17,6 +17,17 @@ enum SectionType {
     static var elements: [SectionType] {
         return [.one, .two, .three]
     }
+    
+    var backgroundColor: UIColor {
+        switch self {
+        case .one:
+            return UIColor.black.withAlphaComponent(0.8)
+        case .two:
+            return UIColor.black.withAlphaComponent(0.6)
+        case .three:
+            return UIColor.black.withAlphaComponent(0.45)
+        }
+    }
 }
 
 class ViewController: UIViewController {
@@ -56,9 +67,11 @@ class ViewController: UIViewController {
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<CategoryCollectionReusableView>) in
                     header.reusableIdentifier = "CategoryCollectionReusableView"
                     header.configureView { view, _ in
-                        view.backgroundColor = .red
+                        view.nameLabel.text = "\(sectionType)".uppercased()
+                        view.nameLabel.textColor = .white
+                        view.backgroundColor = sectionType.backgroundColor
                     }
-                    header.size = CGSize(width: UIScreen.main.bounds.width, height: 100)
+                    header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                 })
                 section.create(for: viewModels(section: sectionType), items: { (viewModel, item: ItemImpl<ImageCollectionViewCell>) in
                     item.reusableIdentifier = "ImageCollectionViewCell"
@@ -67,7 +80,8 @@ class ViewController: UIViewController {
                     }
                     
                     let gridCount: CGFloat = 3
-                    item.size = CGSize(width: floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount), height: 200)
+                    let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
+                    item.size = CGSize(width: edge, height: edge)
                 })
         }
     }
