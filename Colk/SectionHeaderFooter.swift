@@ -64,10 +64,29 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: SectionHeaderFoo
     open var size: CGSize?
     open let kind: SectionHeaderFooterKind
     
-    open var configureView: ((View, SectionHeaderFooterInformation) -> Void)?
-    open var sizeFor: ((SectionHeaderFooterInformation) -> CGSize?)?
-    open var willDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
-    open var didEndDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
+    internal var configureView: ((View, SectionHeaderFooterInformation) -> Void)?
+    internal var createView: ((View, SectionHeaderFooterInformation) -> Void)?
+    internal var sizeFor: ((SectionHeaderFooterInformation) -> CGSize?)?
+    internal var willDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
+    internal var didEndDisplay: ((View, SectionHeaderFooterSupplymentaryView) -> Void)?
+}
+
+extension SectionHeaderFooter {
+    public func configureView(_ closure: @escaping ((View, SectionHeaderFooterInformation) -> Void)) {
+        self.configureView = closure
+    }
+    public func createView(_ closure: @escaping ((View, SectionHeaderFooterInformation) -> Void)) {
+        self.createView = closure
+    }
+    public func sizeFor(_ closure: @escaping ((SectionHeaderFooterInformation) -> CGSize)) {
+        self.sizeFor = closure
+    }
+    public func willDisplay(_ closure: @escaping ((View, SectionHeaderFooterSupplymentaryView) -> Void)) {
+        self.willDisplay = closure
+    }
+    public func didEndDisplay(_ closure: @escaping ((View, SectionHeaderFooterSupplymentaryView) -> Void)) {
+        self.didEndDisplay = closure
+    }
 }
 
 extension SectionHeaderFooter: SectionHeaderFooterDelegatable {
