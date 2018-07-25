@@ -12,7 +12,7 @@
 		BA6A03FA21017BD900040691 /* Conv+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */; };
 		BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FB21017BF000040691 /* Conv+Helper.swift */; };
 		BA7A7FA12090AC3800F4A24C /* Conv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7A7F972090AC3800F4A24C /* Conv.framework */; };
-		BA7A7FA62090AC3800F4A24C /* ColkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FA52090AC3800F4A24C /* ColkTests.swift */; };
+		BA7A7FA62090AC3800F4A24C /* ConvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FA52090AC3800F4A24C /* ConvTests.swift */; };
 		BA7A7FA82090AC3800F4A24C /* Conv.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7A7F9A2090AC3800F4A24C /* Conv.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */; };
 		BA7C1F972100EF10005CDE74 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F922100EF10005CDE74 /* Section.swift */; };
@@ -41,7 +41,7 @@
 		BA7A7F9A2090AC3800F4A24C /* Conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Conv.h; sourceTree = "<group>"; };
 		BA7A7F9B2090AC3800F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA7A7FA02090AC3800F4A24C /* ConvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA7A7FA52090AC3800F4A24C /* ColkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColkTests.swift; sourceTree = "<group>"; };
+		BA7A7FA52090AC3800F4A24C /* ConvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvTests.swift; sourceTree = "<group>"; };
 		BA7A7FA72090AC3800F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooter.swift; sourceTree = "<group>"; };
 		BA7C1F922100EF10005CDE74 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7A7F992090AC3800F4A24C /* Conv */,
-				BA7A7FA42090AC3800F4A24C /* ColkTests */,
+				BA7A7FA42090AC3800F4A24C /* ConvTests */,
 				BA7A7F982090AC3800F4A24C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,13 +107,13 @@
 			path = Conv;
 			sourceTree = "<group>";
 		};
-		BA7A7FA42090AC3800F4A24C /* ColkTests */ = {
+		BA7A7FA42090AC3800F4A24C /* ConvTests */ = {
 			isa = PBXGroup;
 			children = (
-				BA7A7FA52090AC3800F4A24C /* ColkTests.swift */,
+				BA7A7FA52090AC3800F4A24C /* ConvTests.swift */,
 				BA7A7FA72090AC3800F4A24C /* Info.plist */,
 			);
-			path = ColkTests;
+			path = ConvTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA7A7FA62090AC3800F4A24C /* ColkTests.swift in Sources */,
+				BA7A7FA62090AC3800F4A24C /* ConvTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
