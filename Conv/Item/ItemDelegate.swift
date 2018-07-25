@@ -32,8 +32,6 @@ public protocol ItemDelegate: Reusable {
     
     func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
     
-    func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool?
-    
     func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath?
 }
 
