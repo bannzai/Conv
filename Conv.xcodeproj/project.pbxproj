@@ -13,7 +13,7 @@
 		BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FB21017BF000040691 /* Conv+Helper.swift */; };
 		BA7A7FA12090AC3800F4A24C /* Conv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA7A7F972090AC3800F4A24C /* Conv.framework */; };
 		BA7A7FA62090AC3800F4A24C /* ColkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7A7FA52090AC3800F4A24C /* ColkTests.swift */; };
-		BA7A7FA82090AC3800F4A24C /* Colk.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7A7F9A2090AC3800F4A24C /* Colk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BA7A7FA82090AC3800F4A24C /* Conv.h in Headers */ = {isa = PBXBuildFile; fileRef = BA7A7F9A2090AC3800F4A24C /* Conv.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */; };
 		BA7C1F972100EF10005CDE74 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F922100EF10005CDE74 /* Section.swift */; };
 		BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */; };
@@ -39,7 +39,7 @@
 		BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
 		BA6A03FB21017BF000040691 /* Conv+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+Helper.swift"; sourceTree = "<group>"; };
 		BA7A7F972090AC3800F4A24C /* Conv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Conv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA7A7F9A2090AC3800F4A24C /* Colk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colk.h; sourceTree = "<group>"; };
+		BA7A7F9A2090AC3800F4A24C /* Conv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Conv.h; sourceTree = "<group>"; };
 		BA7A7F9B2090AC3800F4A24C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA7A7FA02090AC3800F4A24C /* ConvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ConvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA7A7FA52090AC3800F4A24C /* ColkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColkTests.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 				BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */,
 				BA7C1F9F21017741005CDE74 /* Reusable.swift */,
 				BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */,
-				BA7A7F9A2090AC3800F4A24C /* Colk.h */,
+				BA7A7F9A2090AC3800F4A24C /* Conv.h */,
 				BA7A7F9B2090AC3800F4A24C /* Info.plist */,
 				BA870866210179490014A6E2 /* NSObjectExtension.swift */,
 			);
@@ -126,7 +126,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA7A7FA82090AC3800F4A24C /* Colk.h in Headers */,
+				BA7A7FA82090AC3800F4A24C /* Conv.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
