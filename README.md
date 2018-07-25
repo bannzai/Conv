@@ -5,6 +5,7 @@ And easy definition for UICollectionView DataSource and Delegate methods.
 Conv means Seaweed in Japan.
 This library inspired [Shoyu](https://github.com/yukiasai/shoyu). Thanks.
 
+<img width="320px" src="https://user-images.githubusercontent.com/10897361/43182946-57c57d9a-901e-11e8-99ad-3d19664f5f6a.png"/>
 
 # Usage
 First, create instance for UICollectionView(or subclass).
@@ -14,6 +15,7 @@ let collectionView: UICollectionView = UICollectionView(frame: .zero, collection
 ```
 
 Second, register to use cell and reusable view for `collectionView`.
+
 ```
 collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
 collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
