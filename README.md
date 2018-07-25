@@ -81,6 +81,17 @@ collectionView.reloadData()
 
 You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
 
+# Install
+## CocoaPods
+Conv is available through Cocoapods.  
+You can write it into target and exec `pod install`.
+
+```
+pod 'Conv'
+```
+
+
+
 # Why Conv?
 UIKit.UICollectionView has some problems.
 
