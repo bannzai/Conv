@@ -33,7 +33,10 @@ public protocol ItemDelegatable: Reusable {
     func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
     
     func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool?
+    
+    func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath?
 }
+
 
 public class Item<Cell: UICollectionViewCell>: Reusable {
     public typealias ItemArgument = (item: Item<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
@@ -67,7 +70,8 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var canFocusItem: ((Item<Cell>, UICollectionView, IndexPath) -> Bool)?
     
     internal var shouldSpringLoadItem: ((Item<Cell>, UICollectionView, IndexPath, UISpringLoadedInteractionContext) -> Bool)?
-
+    
+    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)?
 
     public init(closure: (Item) -> Void) {
         closure(self)
@@ -128,6 +132,10 @@ extension Item {
     
     public func canFocusItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath) -> Bool)) {
         self.canFocusItem = closure
+    }
+    
+    public func targetIndexPathForMoveFromItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)) {
+        self.targetIndexPathForMoveFromItem = closure
     }
 }
 
@@ -198,5 +206,9 @@ extension Item: ItemDelegatable {
     
     public func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool? {
         return shouldSpringLoadItem?(self, collectionView, indexPath, context)
+    }
+    
+    public func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath? {
+        return targetIndexPathForMoveFromItem?(self, collectionView, originalIndexPath, proposedIndexPath)
     }
 }

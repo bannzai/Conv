@@ -115,12 +115,11 @@ extension Colk: UICollectionViewDelegate {
         return indexPathForPreferredFocusedView?(collectionView)
     }
     
-    
     public func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: originalIndexPath)?
+            .targetIndexPathForMoveFromItem(collectionView: collectionView, originalIndexPath: originalIndexPath, proposedIndexPath: proposedIndexPath) ?? originalIndexPath
     }
-    
-    
+
     public func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
         fatalError("Not yet implement")
     }
