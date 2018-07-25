@@ -121,7 +121,7 @@ extension Colk: UICollectionViewDelegate {
     }
 
     public func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        fatalError("Not yet implement")
+        return targetContentOffset?(collectionView, proposedContentOffset) ?? proposedContentOffset
     }
     
     

@@ -19,6 +19,7 @@ public final class Colk: NSObject {
     public var shouldUpdateFocus: ((UICollectionView, UICollectionViewFocusUpdateContext) -> Bool)?
     public var didUpdateFocus: ((UICollectionView, UICollectionViewFocusUpdateContext, UIFocusAnimationCoordinator) -> Void)?
     public var indexPathForPreferredFocusedView: ((UICollectionView) -> IndexPath?)?
+    public var targetContentOffset: ((UICollectionView, CGPoint) -> CGPoint)?
 }
 
 extension Colk {
