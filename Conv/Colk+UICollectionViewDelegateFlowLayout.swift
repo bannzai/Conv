@@ -1,6 +1,6 @@
 //
-//  Colk+UICollectionViewDelegateFlowLayout.swift
-//  Colk
+//  Conv+UICollectionViewDelegateFlowLayout.swift
+//  Conv
 //
 //  Created by Yudai.Hirose on 2018/07/20.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Colk: UICollectionViewDelegateFlowLayout {
+extension Conv: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let size = itemDelegate(indexPath: indexPath)?
             .sizeFor(collectionView: collectionView, indexPath: indexPath) {

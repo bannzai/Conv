@@ -1,6 +1,6 @@
 //
-//  Colk+UICollectionViewDelegate.swift
-//  Colk
+//  Conv+UICollectionViewDelegate.swift
+//  Conv
 //
 //  Created by Yudai.Hirose on 2018/07/20.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Colk: UICollectionViewDelegate {
+extension Conv: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         let shouldHighlight = itemDelegate(indexPath: indexPath)?
             .shouldHighlight(collectionView: collectionView, indexPath: indexPath)

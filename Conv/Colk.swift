@@ -1,6 +1,6 @@
 //
-//  Colk.swift
-//  ColkExample
+//  Conv.swift
+//  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/04/25.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class Colk: NSObject {
+public final class Conv: NSObject {
     public weak var collectionView: UICollectionView?
     
     public var sections: [Section] = []
@@ -23,7 +23,7 @@ public final class Colk: NSObject {
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
 }
 
-extension Colk {
+extension Conv {
     public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) {
         self.didMoveItem = closure
     }
@@ -50,7 +50,7 @@ extension Colk {
     }
 }
 
-extension Colk {
+extension Conv {
     @discardableResult public func add(section: Section) -> Self {
         sections.append(section)
         return self

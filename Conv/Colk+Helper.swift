@@ -1,6 +1,6 @@
 //
-//  Colk+Helper.swift
-//  Colk
+//  Conv+Helper.swift
+//  Conv
 //
 //  Created by Yudai.Hirose on 2018/07/20.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal extension Colk {
+internal extension Conv {
     func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
         return sections[indexPath.section].items[indexPath.item]
     }

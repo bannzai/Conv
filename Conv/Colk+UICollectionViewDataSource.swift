@@ -1,6 +1,6 @@
 //
-//  Colk+UICollectionView.swift
-//  Colk
+//  Conv+UICollectionView.swift
+//  Conv
 //
 //  Created by Yudai.Hirose on 2018/07/20.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Colk: UICollectionViewDataSource {
+extension Conv: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sections[section].items.count
     }
