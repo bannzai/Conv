@@ -24,6 +24,13 @@ public final class Conv: NSObject {
 }
 
 extension Conv {
+    public func reset() -> Conv {
+        sections.removeAll()
+        return self
+    }
+}
+
+extension Conv {
     public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) {
         self.didMoveItem = closure
     }
