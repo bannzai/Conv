@@ -81,3 +81,9 @@ collectionView.reloadData()
 
 You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
 
+# Why Conv?
+UIKit.UICollectionView has some problems.
+
+1. UICollectionView.dequeueXXX method not type safe. So, should convert to want class each cells. 
+2. UICollectionViewDataSource and UICollectionViewDelegate(or DelegateFlowLayout) far away each configured functions. So, reading configuration flow for each indexPath very difficalt.
+
