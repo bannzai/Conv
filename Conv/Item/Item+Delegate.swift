@@ -73,10 +73,6 @@ extension Item: ItemDelegate {
         return canFocusItem?(self, collectionView, indexPath)
     }
     
-    public func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool? {
-        return shouldSpringLoadItem?(self, collectionView, indexPath, context)
-    }
-    
     public func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath? {
         return targetIndexPathForMoveFromItem?(self, collectionView, originalIndexPath, proposedIndexPath)
     }

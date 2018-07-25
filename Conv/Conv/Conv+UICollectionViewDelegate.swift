@@ -124,9 +124,4 @@ extension Conv: UICollectionViewDelegate {
         return targetContentOffset?(collectionView, proposedContentOffset) ?? proposedContentOffset
     }
     
-    
-    public func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
-        return itemDelegate(indexPath: indexPath)?
-            .shouldSpringLoadItem(collectionView: collectionView, indexPath: indexPath, context: context) ?? true
-    }
 }
