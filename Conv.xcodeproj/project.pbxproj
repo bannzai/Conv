@@ -75,7 +75,7 @@
 		BA7A7F8D2090AC3800F4A24C = {
 			isa = PBXGroup;
 			children = (
-				BA7A7F992090AC3800F4A24C /* Colk */,
+				BA7A7F992090AC3800F4A24C /* Conv */,
 				BA7A7FA42090AC3800F4A24C /* ColkTests */,
 				BA7A7F982090AC3800F4A24C /* Products */,
 			);
@@ -90,7 +90,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA7A7F992090AC3800F4A24C /* Colk */ = {
+		BA7A7F992090AC3800F4A24C /* Conv */ = {
 			isa = PBXGroup;
 			children = (
 				BA7C1F942100EF10005CDE74 /* Colk.swift */,
@@ -107,7 +107,7 @@
 				BA7A7F9B2090AC3800F4A24C /* Info.plist */,
 				BA870866210179490014A6E2 /* NSObjectExtension.swift */,
 			);
-			path = Colk;
+			path = Conv;
 			sourceTree = "<group>";
 		};
 		BA7A7FA42090AC3800F4A24C /* ColkTests */ = {
