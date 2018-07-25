@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA30EBD7210838830054BFE8 /* ItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBD6210838830054BFE8 /* ItemDelegate.swift */; };
+		BA30EBD92108389E0054BFE8 /* Item+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */; };
+		BA30EBDB210838C60054BFE8 /* SectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */; };
+		BA30EBDD210838DB0054BFE8 /* Section+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBDC210838DB0054BFE8 /* Section+Delegate.swift */; };
+		BA30EBDF210838FE0054BFE8 /* SectionHeaderFooterKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBDE210838FE0054BFE8 /* SectionHeaderFooterKind.swift */; };
+		BA30EBE1210839250054BFE8 /* SectionHeaderFooterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBE0210839250054BFE8 /* SectionHeaderFooterDelegate.swift */; };
+		BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBE22108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift */; };
 		BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03F521017B8A00040691 /* Conv+UICollectionViewDataSource.swift */; };
 		BA6A03F821017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03F721017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift */; };
 		BA6A03FA21017BD900040691 /* Conv+UICollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */; };
@@ -33,6 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA30EBD6210838830054BFE8 /* ItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDelegate.swift; sourceTree = "<group>"; };
+		BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Delegate.swift"; sourceTree = "<group>"; };
+		BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDelegate.swift; sourceTree = "<group>"; };
+		BA30EBDC210838DB0054BFE8 /* Section+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Section+Delegate.swift"; sourceTree = "<group>"; };
+		BA30EBDE210838FE0054BFE8 /* SectionHeaderFooterKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooterKind.swift; sourceTree = "<group>"; };
+		BA30EBE0210839250054BFE8 /* SectionHeaderFooterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderFooterDelegate.swift; sourceTree = "<group>"; };
+		BA30EBE22108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SectionHeaderFooter+Delegate.swift"; sourceTree = "<group>"; };
 		BA6A03F521017B8A00040691 /* Conv+UICollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UICollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		BA6A03F721017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
 		BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UICollectionViewDelegate.swift"; sourceTree = "<group>"; };
@@ -70,6 +84,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA30EBD1210838240054BFE8 /* Conv */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */,
+				BA7C1F942100EF10005CDE74 /* Conv.swift */,
+				BA6A03FB21017BF000040691 /* Conv+Helper.swift */,
+				BA6A03F521017B8A00040691 /* Conv+UICollectionViewDataSource.swift */,
+				BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */,
+				BA6A03F721017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift */,
+			);
+			path = Conv;
+			sourceTree = "<group>";
+		};
+		BA30EBD2210838310054BFE8 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C1F952100EF10005CDE74 /* Item.swift */,
+				BA30EBD6210838830054BFE8 /* ItemDelegate.swift */,
+				BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		BA30EBD3210838390054BFE8 /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C1F922100EF10005CDE74 /* Section.swift */,
+				BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */,
+				BA30EBDC210838DB0054BFE8 /* Section+Delegate.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
+		BA30EBD4210838420054BFE8 /* SectionHeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */,
+				BA30EBE0210839250054BFE8 /* SectionHeaderFooterDelegate.swift */,
+				BA30EBE22108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift */,
+				BA30EBDE210838FE0054BFE8 /* SectionHeaderFooterKind.swift */,
+			);
+			path = SectionHeaderFooter;
+			sourceTree = "<group>";
+		};
+		BA30EBD52108384C0054BFE8 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				BA7C1F9F21017741005CDE74 /* Reusable.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
 		BA7A7F8D2090AC3800F4A24C = {
 			isa = PBXGroup;
 			children = (
@@ -91,16 +157,11 @@
 		BA7A7F992090AC3800F4A24C /* Conv */ = {
 			isa = PBXGroup;
 			children = (
-				BA7C1F942100EF10005CDE74 /* Conv.swift */,
-				BA6A03FB21017BF000040691 /* Conv+Helper.swift */,
-				BA6A03F521017B8A00040691 /* Conv+UICollectionViewDataSource.swift */,
-				BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */,
-				BA6A03F721017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift */,
-				BA7C1F952100EF10005CDE74 /* Item.swift */,
-				BA7C1F922100EF10005CDE74 /* Section.swift */,
-				BA7C1F912100EF10005CDE74 /* SectionHeaderFooter.swift */,
-				BA7C1F9F21017741005CDE74 /* Reusable.swift */,
-				BA7C1F932100EF10005CDE74 /* UICollectionViewExtension.swift */,
+				BA30EBD1210838240054BFE8 /* Conv */,
+				BA30EBD3210838390054BFE8 /* Section */,
+				BA30EBD4210838420054BFE8 /* SectionHeaderFooter */,
+				BA30EBD2210838310054BFE8 /* Item */,
+				BA30EBD52108384C0054BFE8 /* Reusable */,
 				BA7A7F9A2090AC3800F4A24C /* Conv.h */,
 				BA7A7F9B2090AC3800F4A24C /* Info.plist */,
 			);
@@ -226,15 +287,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */,
+				BA30EBD7210838830054BFE8 /* ItemDelegate.swift in Sources */,
+				BA30EBD92108389E0054BFE8 /* Item+Delegate.swift in Sources */,
+				BA30EBDF210838FE0054BFE8 /* SectionHeaderFooterKind.swift in Sources */,
+				BA30EBDB210838C60054BFE8 /* SectionDelegate.swift in Sources */,
+				BA30EBDD210838DB0054BFE8 /* Section+Delegate.swift in Sources */,
 				BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */,
 				BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */,
 				BA6A03FA21017BD900040691 /* Conv+UICollectionViewDelegate.swift in Sources */,
 				BA6A03F821017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */,
 				BA7C1F992100EF10005CDE74 /* Conv.swift in Sources */,
+				BA30EBE1210839250054BFE8 /* SectionHeaderFooterDelegate.swift in Sources */,
 				BA7C1F972100EF10005CDE74 /* Section.swift in Sources */,
 				BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */,
 				BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */,
+				BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

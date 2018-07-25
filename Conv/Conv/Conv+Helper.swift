@@ -9,11 +9,11 @@
 import UIKit
 
 internal extension Conv {
-    func itemDelegate(indexPath: IndexPath) -> ItemDelegatable? {
+    func itemDelegate(indexPath: IndexPath) -> ItemDelegate? {
         return sections[indexPath.section].items[indexPath.item]
     }
     
-    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterDelegatable? {
+    func headerOrFooter(for kind: SectionHeaderFooterKind, section: Int) -> SectionHeaderFooterDelegate? {
         switch kind {
         case .header:
             return sections[section].header
@@ -22,14 +22,14 @@ internal extension Conv {
         }
     }
     
-    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterDelegatable? {
+    func headerOrFooterOrNil(for kind: String, section: Int) -> SectionHeaderFooterDelegate? {
         guard let type = SectionHeaderFooterKind(kind: kind) else {
             return nil
         }
         return headerOrFooter(for: type, section: section)
     }
     
-    func headerFooterViewFor(headerFooter: SectionHeaderFooterDelegatable, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
+    func headerFooterViewFor(headerFooter: SectionHeaderFooterDelegate, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
         if let identifier = headerFooter.reusableIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
@@ -40,7 +40,7 @@ internal extension Conv {
         return nil
     }
     
-    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterDelegatable, collectionView: UICollectionView, section: Int) -> CGSize? {
+    func sectionHeaderFooterSizeFor(headerFooter: SectionHeaderFooterDelegate, collectionView: UICollectionView, section: Int) -> CGSize? {
         let size = headerFooter.sizeFor(collectionView, section: section)
         return size
     }

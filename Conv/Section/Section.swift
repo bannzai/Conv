@@ -8,18 +8,12 @@
 
 import UIKit
 
-public protocol SectionDelegatable {
-    func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets?
-    func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
-    func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
-}
-
 public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
-    public var items: [ItemDelegatable] = []
+    public var items: [ItemDelegate] = []
     
-    public var header: SectionHeaderFooterDelegatable?
-    public var footer: SectionHeaderFooterDelegatable?
+    public var header: SectionHeaderFooterDelegate?
+    public var footer: SectionHeaderFooterDelegate?
     
     internal var inset: ((SectionArgument) -> UIEdgeInsets)?
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
@@ -29,11 +23,11 @@ public class Section {
         closure(self)
     }
     
-    public func remove(for item: Int) -> ItemDelegatable {
+    public func remove(for item: Int) -> ItemDelegate {
         return items.remove(at: item)
     }
     
-    public func insert(_ item: ItemDelegatable, to index: Int) {
+    public func insert(_ item: ItemDelegate, to index: Int) {
         items.insert(item, at: index)
     }
 }
@@ -51,11 +45,11 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func add(item: ItemDelegatable) -> Section {
+    @discardableResult public func add(item: ItemDelegate) -> Section {
         items.append(item)
         return self
     }
-    @discardableResult public func add(items: [ItemDelegatable]) -> Section {
+    @discardableResult public func add(items: [ItemDelegate]) -> Section {
         self.items.append(contentsOf: items)
         return self
     }
@@ -93,17 +87,5 @@ extension Section {
             footer = headerFooter
         }
         return self
-    }
-}
-
-extension Section: SectionDelegatable {
-    public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
-        return inset?((self, collectionView, collectionViewLayout, section))
-    }
-    public func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat? {
-        return minimumLineSpacing?((self, collectionView, collectionViewLayout, section))
-    }
-    public func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat? {
-        return minimumInteritemSpacing?((self, collectionView, collectionViewLayout, section))
     }
 }
