@@ -105,3 +105,8 @@ So, this definition to be natural expression for UICollectionView data strcture,
 3. When create section or item, you can passed elements for configure UICollectionView.
 Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
+
+# LICENSE
+Conv is released under the MIT license. See LICENSE.txt for details.
+
+
