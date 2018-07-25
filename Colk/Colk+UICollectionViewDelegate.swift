@@ -94,37 +94,39 @@ extension Colk: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
-        fatalError("Not yet implement")
+        return transitionLayout?(collectionView, fromLayout, toLayout) ??
+            UICollectionViewTransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
     }
     
     public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: indexPath)?
+            .canFocusItem(collectionView: collectionView, indexPath: indexPath) ?? false
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
-        fatalError("Not yet implement")
+        return shouldUpdateFocus?(collectionView, context) ?? false
     }
     
     public func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        fatalError("Not yet implement")
+        didUpdateFocus?(collectionView, context, coordinator)
     }
     
     public func indexPathForPreferredFocusedView(in collectionView: UICollectionView) -> IndexPath? {
-        fatalError("Not yet implement")
+        return indexPathForPreferredFocusedView?(collectionView)
     }
-    
     
     public func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: originalIndexPath)?
+            .targetIndexPathForMoveFromItem(collectionView: collectionView, originalIndexPath: originalIndexPath, proposedIndexPath: proposedIndexPath) ?? originalIndexPath
     }
-    
-    
+
     public func collectionView(_ collectionView: UICollectionView, targetContentOffsetForProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
-        fatalError("Not yet implement")
+        return targetContentOffset?(collectionView, proposedContentOffset) ?? proposedContentOffset
     }
     
     
     public func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: indexPath)?
+            .shouldSpringLoadItem(collectionView: collectionView, indexPath: indexPath, context: context) ?? true
     }
 }

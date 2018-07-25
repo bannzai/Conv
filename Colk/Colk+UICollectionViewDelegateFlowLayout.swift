@@ -76,7 +76,7 @@ extension Colk: UICollectionViewDelegateFlowLayout {
             return size
         }
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            return layout.headerReferenceSize
+            return layout.footerReferenceSize
         }
         return .zero
     }

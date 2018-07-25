@@ -29,7 +29,14 @@ public protocol ItemDelegatable: Reusable {
     func shouldShowMenu(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
     func canPerformAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool?
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
+    
+    func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
+    
+    func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool?
+    
+    func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath?
 }
+
 
 public class Item<Cell: UICollectionViewCell>: Reusable {
     public typealias ItemArgument = (item: Item<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
@@ -60,6 +67,12 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var canPerformAction: ((PerformActionArgument) -> Bool)?
     internal var performAction: ((PerformActionArgument) -> Void)?
     
+    internal var canFocusItem: ((Item<Cell>, _ collectionView: UICollectionView, _ indexPath: IndexPath) -> Bool)?
+    
+    internal var shouldSpringLoadItem: ((Item<Cell>, _ collectionView: UICollectionView, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool)?
+    
+    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, _ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
+
     public init(closure: (Item) -> Void) {
         closure(self)
     }
@@ -115,6 +128,14 @@ extension Item {
     }
     public func performAction(_ closure: @escaping ((PerformActionArgument) -> Void)) {
         self.performAction = closure
+    }
+    
+    public func canFocusItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath) -> Bool)) {
+        self.canFocusItem = closure
+    }
+    
+    public func targetIndexPathForMoveFromItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)) {
+        self.targetIndexPathForMoveFromItem = closure
     }
 }
 
@@ -177,5 +198,17 @@ extension Item: ItemDelegatable {
     
     public func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         performAction?((self, collectionView, action, indexPath, sender))
+    }
+    
+    public func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool? {
+        return canFocusItem?(self, collectionView, indexPath)
+    }
+    
+    public func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool? {
+        return shouldSpringLoadItem?(self, collectionView, indexPath, context)
+    }
+    
+    public func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath? {
+        return targetIndexPathForMoveFromItem?(self, collectionView, originalIndexPath, proposedIndexPath)
     }
 }

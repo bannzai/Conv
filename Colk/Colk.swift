@@ -10,10 +10,16 @@ import UIKit
 
 public final class Colk: NSObject {
     public weak var collectionView: UICollectionView?
+    
     public var sections: [Section] = []
     public var didMoveItem: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
-    public var indexTitles: ((UICollectionView) -> [String])?
+    public var indexTitles: ((_ collectionView: UICollectionView) -> [String])?
     public var indexTitle: ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)?
+    public var transitionLayout: ((_ collectionView: UICollectionView, _ fromLayout: UICollectionViewLayout, _ toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout)?
+    public var shouldUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)?
+    public var didUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)?
+    public var indexPathForPreferredFocusedView: ((_ collectionView: UICollectionView) -> IndexPath?)?
+    public var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
 }
 
 extension Colk {
