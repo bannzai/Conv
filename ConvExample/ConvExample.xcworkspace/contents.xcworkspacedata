@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../Colk.xcodeproj">
+      location = "group:../Conv.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:ColkExample.xcodeproj">
+      location = "group:ConvExample.xcodeproj">
    </FileRef>
 </Workspace>
