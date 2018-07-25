@@ -126,6 +126,7 @@ extension Colk: UICollectionViewDelegate {
     
     
     public func collectionView(_ collectionView: UICollectionView, shouldSpringLoadItemAt indexPath: IndexPath, with context: UISpringLoadedInteractionContext) -> Bool {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: indexPath)?
+            .shouldSpringLoadItem(collectionView: collectionView, indexPath: indexPath, context: context) ?? true
     }
 }

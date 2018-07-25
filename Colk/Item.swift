@@ -31,6 +31,8 @@ public protocol ItemDelegatable: Reusable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
     
     func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
+    
+    func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool?
 }
 
 public class Item<Cell: UICollectionViewCell>: Reusable {
@@ -63,6 +65,9 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var performAction: ((PerformActionArgument) -> Void)?
     
     internal var canFocusItem: ((Item<Cell>, UICollectionView, IndexPath) -> Bool)?
+    
+    internal var shouldSpringLoadItem: ((Item<Cell>, UICollectionView, IndexPath, UISpringLoadedInteractionContext) -> Bool)?
+
 
     public init(closure: (Item) -> Void) {
         closure(self)
@@ -189,5 +194,9 @@ extension Item: ItemDelegatable {
     
     public func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool? {
         return canFocusItem?(self, collectionView, indexPath)
+    }
+    
+    public func shouldSpringLoadItem(collectionView: UICollectionView, indexPath: IndexPath, context: UISpringLoadedInteractionContext) -> Bool? {
+        return shouldSpringLoadItem?(self, collectionView, indexPath, context)
     }
 }
