@@ -1,11 +1,9 @@
-# Conv
+# <img width="80px" src="https://user-images.githubusercontent.com/10897361/43182946-57c57d9a-901e-11e8-99ad-3d19664f5f6a.png"/> Conv
 Conv smart represent UICollectionView data structure more than UIKit.  
 And easy definition for UICollectionView DataSource and Delegate methods.  
 
 Conv means Seaweed in Japan.  
 This library inspired [Shoyu](https://github.com/yukiasai/shoyu). Thanks @yukiasai.
-
-<img width="320px" src="https://user-images.githubusercontent.com/10897361/43182946-57c57d9a-901e-11e8-99ad-3d19664f5f6a.png"/>
 
 # Usage
 First, create instance for UICollectionView(or subclass).  
