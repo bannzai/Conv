@@ -1,13 +1,13 @@
 //
 //  ViewController.swift
-//  ColkExample
+//  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/04/25.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
 //
 
 import UIKit
-import Colk
+import Conv
 
 enum SectionType {
     case one
@@ -56,7 +56,7 @@ class ListViewController: UIViewController {
         flowLayout?.minimumInteritemSpacing = 0
 
         collectionView
-            .colk()
+            .Conv()
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
                     header.reusableIdentifier = "ListCollectionReusableView"

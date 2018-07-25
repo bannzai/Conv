@@ -1,13 +1,13 @@
 //
 //  DetailViewController.swift
-//  ColkExample
+//  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/07/24.
 //  Copyright © 2018年 廣瀬雄大. All rights reserved.
 //
 
 import UIKit
-import Colk
+import Conv
 
 public class DetailViewController: UIViewController {
     private let imageName: String
@@ -41,10 +41,10 @@ public class DetailViewController: UIViewController {
             collectionView.register(DetailDescriptionCollectionViewCell.self, forCellWithReuseIdentifier: "DetailDescriptionCollectionViewCell")
         }
         
-        createColk: do {
+        createConv: do {
             let imageName = self.imageName
             collectionView
-                .colk()
+                .Conv()
                 .create { (section) in
                     section
                         .create(item: { (item: Item<DetailImageCollectionViewCell>) in
