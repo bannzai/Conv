@@ -77,10 +77,13 @@ class ListViewController: UIViewController {
                         let viewController = DetailViewController(imageName: viewModel.imageName)
                         self?.navigationController?.pushViewController(viewController, animated: true)
                     }
-                    
-                    let gridCount: CGFloat = 3
-                    let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
-                    item.size = CGSize(width: edge, height: edge)
+
+                    item.sizeFor({ (_, _, _) -> CGSize in
+                        let gridCount: CGFloat = 3
+                        let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
+                        let size = CGSize(width: edge, height: edge)
+                        return size
+                    })
                 })
         }
     }
