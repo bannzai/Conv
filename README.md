@@ -1,27 +1,27 @@
 # Conv
-Conv smart represent UICollectionView data structure more than UIKit.
-And easy definition for UICollectionView DataSource and Delegate methods.
+Conv smart represent UICollectionView data structure more than UIKit.  
+And easy definition for UICollectionView DataSource and Delegate methods.  
 
-Conv means Seaweed in Japan.
+Conv means Seaweed in Japan.  
 This library inspired [Shoyu](https://github.com/yukiasai/shoyu). Thanks.
 
 <img width="320px" src="https://user-images.githubusercontent.com/10897361/43182946-57c57d9a-901e-11e8-99ad-3d19664f5f6a.png"/>
 
 # Usage
-First, create instance for UICollectionView(or subclass).
+First, create instance for UICollectionView(or subclass).  
 
 ```swift
 let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
 ```
 
-Second, register to use cell and reusable view for `collectionView`.
+Second, register to use cell and reusable view for `collectionView`.  
 
 ```
 collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
 collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
 ```
 
-Next, call `conv()` method from `collectionView` and start definition UICollectionView DataSource and Delegate.
+Next, call `conv()` method from `collectionView` and start definition UICollectionView DataSource and Delegate.  
 
 ```swift
         collectionView
@@ -57,11 +57,11 @@ Next, call `conv()` method from `collectionView` and start definition UICollecti
         }
 ```
 
-Last, If you want to render of `collectionView`, you call `collectionView.reloadData()` for best timing.
+Last, If you want to render of `collectionView`, you call `collectionView.reloadData()` for best timing.  
 
 ```swift
 collectionView.reloadData()
 ```
 
-You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)
+You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
 
