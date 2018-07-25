@@ -131,6 +131,6 @@ Pod::Spec.new do |s|
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 
-  spec.ios.deployment_target     = '10.0'
-  spec.social_media_url   = "https://twitter.com/_bannzai_"
+  s.ios.deployment_target     = '10.0'
+  s.social_media_url   = "https://twitter.com/_bannzai_"
 end
