@@ -44,7 +44,7 @@ public class DetailViewController: UIViewController {
         createConv: do {
             let imageName = self.imageName
             collectionView
-                .Conv()
+                .conv()
                 .create { (section) in
                     section
                         .create(item: { (item: Item<DetailImageCollectionViewCell>) in

@@ -56,7 +56,7 @@ class ListViewController: UIViewController {
         flowLayout?.minimumInteritemSpacing = 0
 
         collectionView
-            .Conv()
+            .conv()
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
                     header.reusableIdentifier = "ListCollectionReusableView"
