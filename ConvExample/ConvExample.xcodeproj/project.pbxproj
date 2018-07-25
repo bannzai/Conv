@@ -65,7 +65,7 @@
 		BA7A7FB12090AD5E00F4A24C = {
 			isa = PBXGroup;
 			children = (
-				BA7A7FBC2090AD5E00F4A24C /* ColkExample */,
+				BA7A7FBC2090AD5E00F4A24C /* ConvExample */,
 				BA7A7FBB2090AD5E00F4A24C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +78,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BA7A7FBC2090AD5E00F4A24C /* ColkExample */ = {
+		BA7A7FBC2090AD5E00F4A24C /* ConvExample */ = {
 			isa = PBXGroup;
 			children = (
 				BAFB48E92107324300140EF4 /* Detail */,
@@ -89,7 +89,7 @@
 				BA7A7FC62090AD6000F4A24C /* LaunchScreen.storyboard */,
 				BA7A7FC92090AD6000F4A24C /* Info.plist */,
 			);
-			path = ColkExample;
+			path = ConvExample;
 			sourceTree = "<group>";
 		};
 		BAFB48E82107319C00140EF4 /* List */ = {
