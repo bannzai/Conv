@@ -29,6 +29,8 @@ public protocol ItemDelegatable: Reusable {
     func shouldShowMenu(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
     func canPerformAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool?
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
+    
+    func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
 }
 
 public class Item<Cell: UICollectionViewCell>: Reusable {
@@ -60,6 +62,8 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var canPerformAction: ((PerformActionArgument) -> Bool)?
     internal var performAction: ((PerformActionArgument) -> Void)?
     
+    internal var canFocusItem: ((Item<Cell>, UICollectionView, IndexPath) -> Bool)?
+
     public init(closure: (Item) -> Void) {
         closure(self)
     }
@@ -115,6 +119,10 @@ extension Item {
     }
     public func performAction(_ closure: @escaping ((PerformActionArgument) -> Void)) {
         self.performAction = closure
+    }
+    
+    public func canFocusItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath) -> Bool)) {
+        self.canFocusItem = closure
     }
 }
 
@@ -177,5 +185,9 @@ extension Item: ItemDelegatable {
     
     public func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
         performAction?((self, collectionView, action, indexPath, sender))
+    }
+    
+    public func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool? {
+        return canFocusItem?(self, collectionView, indexPath)
     }
 }

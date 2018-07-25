@@ -98,7 +98,8 @@ extension Colk: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        fatalError("Not yet implement")
+        return itemDelegate(indexPath: indexPath)?
+            .canFocusItem(collectionView: collectionView, indexPath: indexPath) ?? false
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
