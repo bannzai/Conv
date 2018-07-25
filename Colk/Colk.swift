@@ -18,6 +18,7 @@ public final class Colk: NSObject {
     public var transitionLayout: ((UICollectionView, UICollectionViewLayout, UICollectionViewLayout) -> UICollectionViewTransitionLayout)?
     public var shouldUpdateFocus: ((UICollectionView, UICollectionViewFocusUpdateContext) -> Bool)?
     public var didUpdateFocus: ((UICollectionView, UICollectionViewFocusUpdateContext, UIFocusAnimationCoordinator) -> Void)?
+    public var indexPathForPreferredFocusedView: ((UICollectionView) -> IndexPath?)?
 }
 
 extension Colk {

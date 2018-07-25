@@ -112,7 +112,7 @@ extension Colk: UICollectionViewDelegate {
     }
     
     public func indexPathForPreferredFocusedView(in collectionView: UICollectionView) -> IndexPath? {
-        fatalError("Not yet implement")
+        return indexPathForPreferredFocusedView?(collectionView)
     }
     
     
