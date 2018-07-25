@@ -2,7 +2,7 @@
 Conv smart represent UICollectionView data structure more than UIKit.  
 And easy definition for UICollectionView DataSource and Delegate methods.  
 
-Conv means Seaweed in Japan.  
+Conv(called KONBU) means Seaweed in Japan.  
 This library inspired [Shoyu](https://github.com/yukiasai/shoyu). Thanks @yukiasai.
 
 # Usage
@@ -86,4 +86,22 @@ UIKit.UICollectionView has some problems.
 
 1. UICollectionView.dequeueXXX method not type safe. So, should convert to want class each cells. 
 2. UICollectionViewDataSource and UICollectionViewDelegate(or DelegateFlowLayout) far away each configured functions. So, reading configuration flow for each indexPath very difficalt.
+3. Many case to use UICollectionView with Array. But extract element from array using indexPath many time.
 
+Conv resolve these problem.
+1. Conv does not need to call UICollectionView.dequeueXXX. Because you can define configureCell method and get converted custom class cell. 
+
+```
+item.configureCell { (cell, info) in
+
+    // cell was converted to ListCollectionViewCell
+    cell.setup(with: viewModel)
+}
+```
+
+2. You can write to neary for each UICollectionView component. section,item,header and footer.
+So, this definition to be natural expression for UICollectionView data strcture, hierarchy, releation.
+
+3. When create section or item, you can passed elements for configure UICollectionView.
+Next, each element pass closure argument that define Conv.Section or Conv.Item.
+So, You can represent CollectionView data structure with extracted each element.
