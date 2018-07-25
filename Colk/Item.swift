@@ -67,11 +67,11 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var canPerformAction: ((PerformActionArgument) -> Bool)?
     internal var performAction: ((PerformActionArgument) -> Void)?
     
-    internal var canFocusItem: ((Item<Cell>, UICollectionView, IndexPath) -> Bool)?
+    internal var canFocusItem: ((Item<Cell>, _ collectionView: UICollectionView, _ indexPath: IndexPath) -> Bool)?
     
-    internal var shouldSpringLoadItem: ((Item<Cell>, UICollectionView, IndexPath, UISpringLoadedInteractionContext) -> Bool)?
+    internal var shouldSpringLoadItem: ((Item<Cell>, _ collectionView: UICollectionView, _ indexPath: IndexPath, _ context: UISpringLoadedInteractionContext) -> Bool)?
     
-    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)?
+    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, _ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
 
     public init(closure: (Item) -> Void) {
         closure(self)
