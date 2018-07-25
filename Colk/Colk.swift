@@ -16,6 +16,7 @@ public final class Colk: NSObject {
     public var indexTitles: ((UICollectionView) -> [String])?
     public var indexTitle: ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)?
     public var transitionLayout: ((UICollectionView, UICollectionViewLayout, UICollectionViewLayout) -> UICollectionViewTransitionLayout)?
+    public var shouldUpdateFocus: ((UICollectionView, UICollectionViewFocusUpdateContext) -> Bool)?
 }
 
 extension Colk {

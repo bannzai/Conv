@@ -104,7 +104,7 @@ extension Colk: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, shouldUpdateFocusIn context: UICollectionViewFocusUpdateContext) -> Bool {
-        fatalError("Not yet implement")
+        return shouldUpdateFocus?(collectionView, context) ?? false
     }
     
     public func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
