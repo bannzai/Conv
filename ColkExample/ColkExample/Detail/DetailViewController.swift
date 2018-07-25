@@ -65,7 +65,7 @@ public class DetailViewController: UIViewController {
                         item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
                         item.configureCell { (cell, info) in
                             cell.descriptionLabel.text = """
-                            Hi, My name bannzai.
+                            Hi, I'm bannzai.
                             bannzai means \\(^o^)/.
                             Nice to meet you.
                             If you love this library, you should send start request to this repository.
