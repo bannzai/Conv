@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Colk.xcodeproj">
+      location = "self:/Users/hiroseyuudai/develop/oss/Colk/Conv.xcodeproj">
    </FileRef>
 </Workspace>
