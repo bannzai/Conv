@@ -8,12 +8,6 @@
 
 import UIKit
 
-public protocol SectionDelegatable {
-    func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets?
-    func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
-    func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat?
-}
-
 public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegatable] = []
@@ -93,17 +87,5 @@ extension Section {
             footer = headerFooter
         }
         return self
-    }
-}
-
-extension Section: SectionDelegatable {
-    public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
-        return inset?((self, collectionView, collectionViewLayout, section))
-    }
-    public func minimumLineSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat? {
-        return minimumLineSpacing?((self, collectionView, collectionViewLayout, section))
-    }
-    public func minimumInteritemSpacing(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> CGFloat? {
-        return minimumInteritemSpacing?((self, collectionView, collectionViewLayout, section))
     }
 }
