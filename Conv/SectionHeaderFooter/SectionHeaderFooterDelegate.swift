@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SectionHeaderFooterDelegatable: Reusable, SectionHeaderFooterKindable {
+public protocol SectionHeaderFooterDelegate: Reusable, SectionHeaderFooterKindable {
     func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int)
     func sizeFor(_ collectionView: UICollectionView, section: Int) -> CGSize?
     func willDisplay(_ collectionView: UICollectionView, view: UICollectionReusableView, indexPath: IndexPath)

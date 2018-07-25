@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Section: SectionDelegatable {
+extension Section: SectionDelegate {
     public func inset(collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int) -> UIEdgeInsets? {
         return inset?((self, collectionView, collectionViewLayout, section))
     }

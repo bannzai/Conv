@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension SectionHeaderFooter: SectionHeaderFooterDelegatable {
+extension SectionHeaderFooter: SectionHeaderFooterDelegate {
     public func configureView(_ collectionView: UICollectionView, view: UICollectionReusableView, section: Int) {
         guard let view = view as? View else {
             fatalError()

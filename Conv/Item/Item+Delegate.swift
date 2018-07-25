@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension Item: ItemDelegatable {
+extension Item: ItemDelegate {
     public func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath) {
         configureCell?(cell as! Cell, (self, collectionView, indexPath))
     }

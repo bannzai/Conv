@@ -10,10 +10,10 @@ import UIKit
 
 public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
-    public var items: [ItemDelegatable] = []
+    public var items: [ItemDelegate] = []
     
-    public var header: SectionHeaderFooterDelegatable?
-    public var footer: SectionHeaderFooterDelegatable?
+    public var header: SectionHeaderFooterDelegate?
+    public var footer: SectionHeaderFooterDelegate?
     
     internal var inset: ((SectionArgument) -> UIEdgeInsets)?
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
@@ -23,11 +23,11 @@ public class Section {
         closure(self)
     }
     
-    public func remove(for item: Int) -> ItemDelegatable {
+    public func remove(for item: Int) -> ItemDelegate {
         return items.remove(at: item)
     }
     
-    public func insert(_ item: ItemDelegatable, to index: Int) {
+    public func insert(_ item: ItemDelegate, to index: Int) {
         items.insert(item, at: index)
     }
 }
@@ -45,11 +45,11 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func add(item: ItemDelegatable) -> Section {
+    @discardableResult public func add(item: ItemDelegate) -> Section {
         items.append(item)
         return self
     }
-    @discardableResult public func add(items: [ItemDelegatable]) -> Section {
+    @discardableResult public func add(items: [ItemDelegate]) -> Section {
         self.items.append(contentsOf: items)
         return self
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ItemDelegatable: Reusable {
+public protocol ItemDelegate: Reusable {
     func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize?
     
