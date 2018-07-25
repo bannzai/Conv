@@ -94,7 +94,8 @@ extension Colk: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, transitionLayoutForOldLayout fromLayout: UICollectionViewLayout, newLayout toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout {
-        fatalError("Not yet implement")
+        return transitionLayout?(collectionView, fromLayout, toLayout) ??
+            UICollectionViewTransitionLayout(currentLayout: fromLayout, nextLayout: toLayout)
     }
     
     public func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
