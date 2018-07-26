@@ -11,10 +11,6 @@ import ObjectiveC
 
 public extension UICollectionView {
     public func conv() -> Conv {
-        if let conv = _conv {
-            return conv
-        }
-        
         let conv = Conv()
         dataSource = conv
         delegate = conv
