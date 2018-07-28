@@ -44,40 +44,41 @@ public class DetailViewController: UIViewController {
         createConv: do {
             let imageName = self.imageName
             collectionView
-                .conv()
-                .create { (section) in
-                    section
-                        .create(item: { (item: Item<DetailImageCollectionViewCell>) in
-                            let image = UIImage(named: imageName)!
-                            item.reusableIdentifier = "DetailImageCollectionViewCell"
-                            item.configureCell { (cell, info) in
-                                cell.contentImageView.image = image
-                            }
-                            item.sizeFor { (info) -> CGSize in
-                                let ratio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
-                                let height = image.size.width / ratio
-                                return CGSize(width: UIScreen.main.bounds.width, height: height)
-                            }
-                        })
-                }
-                .create { (section) in
-                    section.create { (item: Item<DetailDescriptionCollectionViewCell>) in
-                        item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
-                        item.configureCell { (cell, info) in
-                            cell.descriptionLabel.text = """
-                            Hi, I'm bannzai.
-                            bannzai means \\(^o^)/.
-                            Nice to meet you.
-                            If you love this library, you should send start request to this repository.
-                            ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
-                            So, I'm glad. I'm happy!!
-                            """
+                .define(
+                    Conv().create { (section) in
+                        section
+                            .create(item: { (item: Item<DetailImageCollectionViewCell>) in
+                                let image = UIImage(named: imageName)!
+                                item.reusableIdentifier = "DetailImageCollectionViewCell"
+                                item.configureCell { (cell, info) in
+                                    cell.contentImageView.image = image
+                                }
+                                item.sizeFor { (info) -> CGSize in
+                                    let ratio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
+                                    let height = image.size.width / ratio
+                                    return CGSize(width: UIScreen.main.bounds.width, height: height)
+                                }
+                            })
                         }
-                        item.size = CGSize(width: UIScreen.main.bounds.width, height: 200)
+                        .create { (section) in
+                            section.create { (item: Item<DetailDescriptionCollectionViewCell>) in
+                                item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
+                                item.configureCell { (cell, info) in
+                                    cell.descriptionLabel.text = """
+                                    Hi, I'm bannzai.
+                                    bannzai means \\(^o^)/.
+                                    Nice to meet you.
+                                    If you love this library, you should send start request to this repository.
+                                    ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+                                    So, I'm glad. I'm happy!!
+                                    """
+                                }
+                                item.size = CGSize(width: UIScreen.main.bounds.width, height: 200)
+                            }
                     }
-            }
+            )
         }
-        
+
         title = imageName
     }
     

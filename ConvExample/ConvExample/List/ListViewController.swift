@@ -56,36 +56,38 @@ class ListViewController: UIViewController {
         flowLayout?.minimumInteritemSpacing = 0
 
         collectionView
-            .conv()
-            .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-                    header.reusableIdentifier = "ListCollectionReusableView"
-                    header.configureView { view, _ in
-                        view.nameLabel.text = "\(sectionType)".uppercased()
-                        view.nameLabel.textColor = .white
-                        view.backgroundColor = sectionType.backgroundColor
-                    }
-                    header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
-                })
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: Item<ListCollectionViewCell>) in
-                    item.reusableIdentifier = "ListCollectionViewCell"
-                    item.configureCell { (cell, info) in
-                        cell.setup(with: viewModel)
-                    }
-                    
-                    item.didSelect { [weak self] (item) in
-                        let viewController = DetailViewController(imageName: viewModel.imageName)
-                        self?.navigationController?.pushViewController(viewController, animated: true)
-                    }
-
-                    item.sizeFor({ (_, _, _) -> CGSize in
-                        let gridCount: CGFloat = 3
-                        let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
-                        let size = CGSize(width: edge, height: edge)
-                        return size
-                    })
-                })
-        }
+            .define(
+                Conv()
+                    .create(for: SectionType.elements) { (sectionType, section) in
+                        section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
+                            header.reusableIdentifier = "ListCollectionReusableView"
+                            header.configureView { view, _ in
+                                view.nameLabel.text = "\(sectionType)".uppercased()
+                                view.nameLabel.textColor = .white
+                                view.backgroundColor = sectionType.backgroundColor
+                            }
+                            header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
+                        })
+                        section.create(for: viewModels(section: sectionType), items: { (viewModel, item: Item<ListCollectionViewCell>) in
+                            item.reusableIdentifier = "ListCollectionViewCell"
+                            item.configureCell { (cell, info) in
+                                cell.setup(with: viewModel)
+                            }
+                            
+                            item.didSelect { [weak self] (item) in
+                                let viewController = DetailViewController(imageName: viewModel.imageName)
+                                self?.navigationController?.pushViewController(viewController, animated: true)
+                            }
+                            
+                            item.sizeFor({ (_, _, _) -> CGSize in
+                                let gridCount: CGFloat = 3
+                                let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
+                                let size = CGSize(width: edge, height: edge)
+                                return size
+                            })
+                        })
+                }
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
