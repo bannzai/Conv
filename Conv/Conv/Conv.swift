@@ -12,6 +12,7 @@ public final class Conv: NSObject {
     public weak var collectionView: UICollectionView?
     
     public var sections: [Section] = []
+    public weak var scrollViewDelegate: UIScrollViewDelegate?
     
     internal var didMoveItem: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)?
     internal var indexTitles: ((_ collectionView: UICollectionView) -> [String])?
