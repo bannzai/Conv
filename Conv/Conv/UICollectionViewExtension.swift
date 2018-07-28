@@ -10,8 +10,15 @@ import UIKit
 import ObjectiveC
 
 public extension UICollectionView {
-    @discardableResult public func define(_ conv: Conv) -> Conv {
-        self.conv = conv
+    public func conv() -> Conv {
+        let conv = Conv()
+        _conv = conv
+        return conv
+    }
+    
+    public func conv(with scrollViewDelegate: UIScrollViewDelegate) -> Conv {
+        let conv = Conv(scrollViewDelegate: scrollViewDelegate)
+        _conv = conv
         return conv
     }
 }
@@ -20,8 +27,8 @@ fileprivate struct UICollectionViewAssociatedObjectHandle {
     static var key: UInt8 = 0
 }
 
-extension UICollectionView {
-    public var conv: Conv? {
+fileprivate extension UICollectionView {
+    var _conv: Conv? {
         set {
             dataSource = newValue
             delegate = newValue
