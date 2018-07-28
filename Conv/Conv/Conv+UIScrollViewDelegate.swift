@@ -54,7 +54,7 @@ extension Conv: UIScrollViewDelegate {
     }
     
     public func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        return scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? collectionView?.scrollsToTop ?? false
+        return scrollViewDelegate?.scrollViewShouldScrollToTop?(scrollView) ?? scrollView.scrollsToTop
     }
     
     public func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
