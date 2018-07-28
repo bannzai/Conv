@@ -10,14 +10,8 @@ import UIKit
 import ObjectiveC
 
 public extension UICollectionView {
-    public func conv() -> Conv {
-        let conv = Conv()
-        dataSource = conv
-        delegate = conv
-        conv.collectionView = self
-        
-        _conv = conv
-        
+    @discardableResult public func define(_ conv: Conv) -> Conv {
+        self.conv = conv
         return conv
     }
 }
@@ -26,9 +20,13 @@ fileprivate struct UICollectionViewAssociatedObjectHandle {
     static var key: UInt8 = 0
 }
 
-fileprivate extension UICollectionView {
-    var _conv: Conv? {
+extension UICollectionView {
+    public var conv: Conv? {
         set {
+            dataSource = newValue
+            delegate = newValue
+            newValue?.collectionView = self
+            
             objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {

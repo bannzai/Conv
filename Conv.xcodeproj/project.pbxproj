@@ -27,6 +27,7 @@
 		BA7C1F992100EF10005CDE74 /* Conv.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F942100EF10005CDE74 /* Conv.swift */; };
 		BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F952100EF10005CDE74 /* Item.swift */; };
 		BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F9F21017741005CDE74 /* Reusable.swift */; };
+		BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		BA7C1F942100EF10005CDE74 /* Conv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conv.swift; sourceTree = "<group>"; };
 		BA7C1F952100EF10005CDE74 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BA7C1F9F21017741005CDE74 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				BA6A03F521017B8A00040691 /* Conv+UICollectionViewDataSource.swift */,
 				BA6A03F921017BD900040691 /* Conv+UICollectionViewDelegate.swift */,
 				BA6A03F721017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift */,
+				BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */,
 			);
 			path = Conv;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				BA7C1F972100EF10005CDE74 /* Section.swift in Sources */,
 				BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */,
 				BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */,
+				BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */,
 				BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
