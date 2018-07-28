@@ -44,7 +44,7 @@ public class DetailViewController: UIViewController {
         createConv: do {
             let imageName = self.imageName
             collectionView
-                .conv()
+                .conv(scrollViewDelegate: self)
                 .create { (section) in
                     section
                         .create(item: { (item: Item<DetailImageCollectionViewCell>) in
@@ -85,5 +85,11 @@ public class DetailViewController: UIViewController {
         super.viewWillAppear(animated)
         
         collectionView.reloadData()
+    }
+}
+
+extension DetailViewController: UIScrollViewDelegate {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("scrollView: \(scrollView)")
     }
 }
