@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "Conv"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "Conv smart represent UICollectionView data structure more than UIKit. "
 
   # This description is used to generate tags and improve search results.
