@@ -15,7 +15,7 @@ public final class Conv: NSObject {
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
     public init(
-        scrollViewDelegate: UIScrollViewDelegate
+        scrollViewDelegate: UIScrollViewDelegate?
         ) {
         self.scrollViewDelegate = scrollViewDelegate
     }
