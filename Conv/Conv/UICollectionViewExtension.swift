@@ -16,7 +16,7 @@ public extension UICollectionView {
         return conv
     }
     
-    public func conv(scrollViewDelegate: UIScrollViewDelegate) -> Conv {
+    public func conv(scrollViewDelegate: UIScrollViewDelegate?) -> Conv {
         let conv = Conv(scrollViewDelegate: scrollViewDelegate)
         _conv = conv
         return conv
