@@ -12,9 +12,10 @@ public protocol SectionHeaderFooterKindable {
     var kind: SectionHeaderFooterKind { get }
 }
 
-public enum SectionHeaderFooterKind: String {
+public enum SectionHeaderFooterKind {
     case header
     case footer
+    case custom(String)
     
     init?(kind: String) {
         switch kind {
@@ -23,7 +24,7 @@ public enum SectionHeaderFooterKind: String {
         case UICollectionElementKindSectionFooter:
             self = .footer
         case _:
-            return nil
+            self = .custom(kind)
         }
     }
     
@@ -33,6 +34,8 @@ public enum SectionHeaderFooterKind: String {
             return UICollectionElementKindSectionHeader
         case .footer:
             return UICollectionElementKindSectionFooter
+        case .custom(let kind):
+            return kind
         }
     }
 }
