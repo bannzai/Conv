@@ -14,6 +14,7 @@ public class Section {
     
     public var header: SectionHeaderFooterDelegate?
     public var footer: SectionHeaderFooterDelegate?
+    public var custom: SectionHeaderFooterDelegate?
     
     internal var inset: ((SectionArgument) -> UIEdgeInsets)?
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
@@ -85,6 +86,8 @@ extension Section {
             header = headerFooter
         case .footer:
             footer = headerFooter
+        case .custom:
+            custom = headerFooter
         }
         return self
     }

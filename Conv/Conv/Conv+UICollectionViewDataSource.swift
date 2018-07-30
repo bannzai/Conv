@@ -44,6 +44,11 @@ extension Conv: UICollectionViewDataSource {
                 let view = headerFooterViewFor(headerFooter: footer, collectionView: collectionView, indexPath: indexPath) {
                 return view
             }
+        case .custom(_):
+            if let custom = sections[indexPath.section].custom,
+                let view = headerFooterViewFor(headerFooter: custom, collectionView: collectionView, indexPath: indexPath) {
+                return view
+            }
         }
         fatalError("")
     }
