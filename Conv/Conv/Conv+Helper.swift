@@ -19,6 +19,8 @@ internal extension Conv {
             return sections[section].header
         case .footer:
             return sections[section].footer
+        case .custom:
+            return sections[section].custom
         }
     }
     
