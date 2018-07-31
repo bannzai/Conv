@@ -40,6 +40,10 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     internal var canFocusItem: ((Item<Cell>, _ collectionView: UICollectionView, _ indexPath: IndexPath) -> Bool)?
     
     internal var targetIndexPathForMoveFromItem: ((Item<Cell>, _ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
+    
+    public init() {
+        
+    }
 
     public init(closure: (Item) -> Void) {
         closure(self)
