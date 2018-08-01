@@ -40,7 +40,6 @@ class ItemTests: XCTestCase {
     }
     
     func testSizeFor() {
-        var called = false
         let item = Item<TestCollectionViewCell>()
         
         item.sizeFor { (info) in
