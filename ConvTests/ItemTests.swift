@@ -38,7 +38,20 @@ class ItemTests: XCTestCase {
         
         XCTAssertTrue(called)
     }
-
+    
+    func testSizeFor() {
+        var called = false
+        let item = Item<TestCollectionViewCell>()
+        
+        item.sizeFor { (info) in
+            return CGSize(width: 100, height: 100)
+        }
+        
+        let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
+        
+        XCTAssertEqual(size, CGSize(width: 100, height: 100))
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
