@@ -1,4 +1,4 @@
-<img width="100%" src="https://user-images.githubusercontent.com/10897361/43517671-74e69b38-95c4-11e8-9f21-6c5769ca41fa.png"/> 
+[![Conv](Logo/conv_logo.png)](https://github.com/bannzai/Conv)
 
 # Conv
 
