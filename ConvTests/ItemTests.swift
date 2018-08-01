@@ -9,23 +9,36 @@
 import XCTest
 @testable import Conv
 
+class TestCollectionViewCell: UICollectionViewCell {
+    
+}
+
 class ItemTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testConfigureCell() {
+        let item = Item<TestCollectionViewCell>()
+        
+        var called = false
+
+        item.configureCell { (cell, info) in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        
+        item.configureCell(collectionView: collectionView(), cell: cell(), indexPath: indexPath())
+        
+        XCTAssertTrue(called)
     }
-    
+
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measure {
@@ -33,4 +46,19 @@ class ItemTests: XCTestCase {
         }
     }
     
+}
+
+private extension ItemTests {
+    func collectionView() -> UICollectionView {
+        // Necessary collectionViewLayout
+        return UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    func cell() -> TestCollectionViewCell {
+        return TestCollectionViewCell()
+    }
+    
+    func indexPath() -> IndexPath {
+        return IndexPath()
+    }
 }
