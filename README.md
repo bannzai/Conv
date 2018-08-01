@@ -121,6 +121,8 @@ Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
 
 # LICENSE
-Conv is released under the MIT license. See LICENSE.txt for details.
+[Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
+
+Header logo is released [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed) license. Original design by [noainoue](https://github.com/noainoue).
 
 
