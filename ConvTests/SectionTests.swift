@@ -21,3 +21,5 @@ class SectionTests: XCTestCase {
     
 
 }
+
+extension SectionTests: Stub { }
