@@ -120,6 +120,18 @@ class ItemTests: XCTestCase {
         XCTAssertTrue(called)
     }
 
+    func testDidEndDisplay() {
+        let item = Item<TestCollectionViewCell>()
+        var called = false
+        
+        item.didEndDisplay { (cell, info) in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        item.didEndDisplay(collectionView: collectionView(), cell: cell(), indexPath: indexPath())
+        XCTAssertTrue(called)
+    }
 }
 
 private extension ItemTests {
