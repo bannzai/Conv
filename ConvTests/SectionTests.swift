@@ -19,6 +19,20 @@ class SectionTests: XCTestCase {
         super.tearDown()
     }
     
+    func sectionInset() {
+        let section = Section()
+
+        let inset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        section.inset { args in
+            return inset
+        }
+        
+        let collectionView = self.collectionView()
+        XCTAssertEqual(
+            section.inset(collectionView: collectionView, collectionViewLayout: collectionView.collectionViewLayout, section: 0),
+            inset
+        )
+    }
 
 }
 
