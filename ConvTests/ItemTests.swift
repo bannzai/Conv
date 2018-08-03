@@ -318,20 +318,8 @@ class ItemTests: XCTestCase {
     }
 }
 
+extension ItemTests: Stub { }
 private extension ItemTests {
-    func collectionView() -> UICollectionView {
-        // Necessary collectionViewLayout
-        return UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    func cell() -> TestCollectionViewCell {
-        return TestCollectionViewCell()
-    }
-    
-    func indexPath() -> IndexPath {
-        return IndexPath()
-    }
-    
     @objc func selector() {
         
     }
