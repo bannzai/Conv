@@ -157,12 +157,25 @@ class ItemTests: XCTestCase {
         let item = Item<TestCollectionViewCell>()
         var called = false
         
-        item.didHighlight { (cell, info) in
+        item.didHighlight { info in
             called = true
         }
         
         XCTAssertFalse(called)
         item.didHighlight(collectionView: collectionView(), indexPath: indexPath())
+        XCTAssertTrue(called)
+    }
+    
+    func testDidUnhighlight() {
+        let item = Item<TestCollectionViewCell>()
+        var called = false
+        
+        item.didUnhighlight { info in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        item.didUnhighlight(collectionView: collectionView(), indexPath: indexPath())
         XCTAssertTrue(called)
     }
 }
