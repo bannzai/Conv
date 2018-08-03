@@ -218,6 +218,19 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.shouldDeselect(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
+    
+    func testDidSelect() {
+        let item = Item<TestCollectionViewCell>()
+        var called = false
+        
+        item.didSelect { info in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        item.didSelect(collectionView: collectionView(), indexPath: indexPath())
+        XCTAssertTrue(called)
+    }
 }
 
 private extension ItemTests {
