@@ -284,6 +284,26 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.canPerformAction(collectionView: self.collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
         }
     }
+    
+    func testCanFocusItem() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canFocusItem { (info) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.canFocusItem(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canFocusItem { (info) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.canFocusItem(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+    }
 }
 
 private extension ItemTests {
