@@ -106,6 +106,19 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.canMoveItem(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
+    
+    func testWillDisplay() {
+        let item = Item<TestCollectionViewCell>()
+        var called = false
+        
+        item.willDisplay { (cell, info) in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        item.willDisplay(collectionView: collectionView(), cell: cell(), indexPath: indexPath())
+        XCTAssertTrue(called)
+    }
 
 }
 
