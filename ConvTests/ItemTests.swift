@@ -51,13 +51,27 @@ class ItemTests: XCTestCase {
         XCTAssertEqual(size, CGSize(width: 100, height: 100))
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testCanMove() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canMoveItem { (item) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.canMoveItem(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canMoveItem { (item) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.canMoveItem(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
     
+
 }
 
 private extension ItemTests {
