@@ -40,15 +40,54 @@ class ItemTests: XCTestCase {
     }
     
     func testSizeFor() {
-        let item = Item<TestCollectionViewCell>()
+        let closureSize = CGSize(width: 100, height: 100)
+        let propertySize = CGSize(width: 50, height: 50)
         
-        item.sizeFor { (info) in
-            return CGSize(width: 100, height: 100)
+        XCTContext.runActivity(named: "When configure return size") { _ in
+            let create: () -> Item<TestCollectionViewCell> = {
+                let item = Item<TestCollectionViewCell>()
+                item.sizeFor { (info) in
+                    return closureSize
+                }
+                return item
+            }
+
+            XCTContext.runActivity(named: "and setting propertySize to item.size then return closureSize") { _ in
+                let item = create()
+                item.size = propertySize
+                let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
+                XCTAssertEqual(size, closureSize)
+            }
+            
+            XCTContext.runActivity(named: "and not setting size property then return closureSize") { _ in
+                let item = create()
+                let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
+                XCTAssertEqual(size, closureSize)
+            }
         }
         
-        let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
-        
-        XCTAssertEqual(size, CGSize(width: 100, height: 100))
+        XCTContext.runActivity(named: "When not configure return size") { _ in
+            let create: () -> Item<TestCollectionViewCell> = {
+                let item = Item<TestCollectionViewCell>()
+                //            item.sizeFor { (info) in
+                //                return closureSize
+                //            }
+                return item
+            }
+
+            XCTContext.runActivity(named: "and setting propertySize to item.size then return propertySize") { _ in
+                let item = create()
+                item.size = propertySize
+                let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
+                XCTAssertEqual(size, propertySize)
+            }
+            
+            XCTContext.runActivity(named: "and not setting size property then return nil") { _ in
+                let item = create()
+                let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
+                XCTAssertNil(size)
+            }
+        }
     }
     
     func testCanMove() {
@@ -70,7 +109,6 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.canMoveItem(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
-    
 
 }
 
