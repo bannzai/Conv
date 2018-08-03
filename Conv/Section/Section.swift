@@ -20,6 +20,10 @@ public class Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
+    public init() {
+        
+    }
+    
     public init(closure: (Section) -> Void) {
         closure(self)
     }

@@ -272,7 +272,7 @@ class ItemTests: XCTestCase {
                 return true
             }
             
-            XCTAssertTrue(item.canPerformAction(collectionView: self.collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
+            XCTAssertTrue(item.canPerformAction(collectionView: collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
         }
         
         XCTContext.runActivity(named: "When configure return false") { _ in
@@ -281,7 +281,7 @@ class ItemTests: XCTestCase {
                 return false
             }
             
-            XCTAssertFalse(item.canPerformAction(collectionView: self.collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
+            XCTAssertFalse(item.canPerformAction(collectionView: collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
         }
     }
     
@@ -318,20 +318,8 @@ class ItemTests: XCTestCase {
     }
 }
 
+extension ItemTests: Stub { }
 private extension ItemTests {
-    func collectionView() -> UICollectionView {
-        // Necessary collectionViewLayout
-        return UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    func cell() -> TestCollectionViewCell {
-        return TestCollectionViewCell()
-    }
-    
-    func indexPath() -> IndexPath {
-        return IndexPath()
-    }
-    
     @objc func selector() {
         
     }
