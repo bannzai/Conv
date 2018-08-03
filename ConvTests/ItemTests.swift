@@ -152,6 +152,19 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.shouldHighlight(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
+    
+    func testDidHighlight() {
+        let item = Item<TestCollectionViewCell>()
+        var called = false
+        
+        item.didHighlight { (cell, info) in
+            called = true
+        }
+        
+        XCTAssertFalse(called)
+        item.didHighlight(collectionView: collectionView(), indexPath: indexPath())
+        XCTAssertTrue(called)
+    }
 }
 
 private extension ItemTests {
