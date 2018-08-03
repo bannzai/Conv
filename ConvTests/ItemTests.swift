@@ -25,7 +25,6 @@ class ItemTests: XCTestCase {
     
     func testConfigureCell() {
         let item = Item<TestCollectionViewCell>()
-        
         var called = false
 
         item.configureCell { (cell, info) in
@@ -33,9 +32,7 @@ class ItemTests: XCTestCase {
         }
         
         XCTAssertFalse(called)
-        
         item.configureCell(collectionView: collectionView(), cell: cell(), indexPath: indexPath())
-        
         XCTAssertTrue(called)
     }
     
