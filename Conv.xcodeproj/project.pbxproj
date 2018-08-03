@@ -27,6 +27,7 @@
 		BA7C1F992100EF10005CDE74 /* Conv.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F942100EF10005CDE74 /* Conv.swift */; };
 		BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F952100EF10005CDE74 /* Item.swift */; };
 		BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F9F21017741005CDE74 /* Reusable.swift */; };
+		BA9C2C8B211090AA00C9EBA9 /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C2C8A211090AA00C9EBA9 /* ItemTests.swift */; };
 		BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		BA7C1F942100EF10005CDE74 /* Conv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conv.swift; sourceTree = "<group>"; };
 		BA7C1F952100EF10005CDE74 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BA7C1F9F21017741005CDE74 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		BA9C2C8A211090AA00C9EBA9 /* ItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
 		BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7A7FA52090AC3800F4A24C /* ConvTests.swift */,
+				BA9C2C8A211090AA00C9EBA9 /* ItemTests.swift */,
 				BA7A7FA72090AC3800F4A24C /* Info.plist */,
 			);
 			path = ConvTests;
@@ -314,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA9C2C8B211090AA00C9EBA9 /* ItemTests.swift in Sources */,
 				BA7A7FA62090AC3800F4A24C /* ConvTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
