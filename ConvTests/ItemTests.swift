@@ -244,6 +244,26 @@ class ItemTests: XCTestCase {
         item.didDeselect(collectionView: collectionView(), indexPath: indexPath())
         XCTAssertTrue(called)
     }
+    
+    func testShouldShowMenu() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldShowMenu { (item) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.shouldShowMenu(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldShowMenu { (item) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.shouldShowMenu(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+    }
 }
 
 private extension ItemTests {
