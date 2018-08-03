@@ -34,6 +34,20 @@ class SectionTests: XCTestCase {
         )
     }
 
+    func sectionMinimumLineSpacing() {
+        let section = Section()
+        
+        section.minimumLineSpacing { args in
+            return 10
+        }
+        
+        let collectionView = self.collectionView()
+        XCTAssertEqual(
+            section.minimumLineSpacing(collectionView: collectionView, collectionViewLayout: collectionView.collectionViewLayout, section: 0),
+            10
+        )
+    }
+
 }
 
 extension SectionTests: Stub { }
