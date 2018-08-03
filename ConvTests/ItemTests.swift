@@ -198,6 +198,26 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.shouldSelect(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
+    
+    func testShouldDeselect() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldDeselect { (item) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.shouldDeselect(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldDeselect { (item) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.shouldDeselect(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+    }
 }
 
 private extension ItemTests {
