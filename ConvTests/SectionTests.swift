@@ -48,6 +48,19 @@ class SectionTests: XCTestCase {
         )
     }
 
+    func sectionMinimumInteritemSpacing() {
+        let section = Section()
+        
+        section.minimumLineSpacing { args in
+            return 10
+        }
+        
+        let collectionView = self.collectionView()
+        XCTAssertEqual(
+            section.minimumInteritemSpacing(collectionView: collectionView, collectionViewLayout: collectionView.collectionViewLayout, section: 0),
+            10
+        )
+    }
 }
 
 extension SectionTests: Stub { }
