@@ -132,6 +132,26 @@ class ItemTests: XCTestCase {
         item.didEndDisplay(collectionView: collectionView(), cell: cell(), indexPath: indexPath())
         XCTAssertTrue(called)
     }
+    
+    func testShouldHighlight() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldHighlight { (item) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.shouldHighlight(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.shouldHighlight { (item) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.shouldHighlight(collectionView: collectionView(), indexPath: indexPath())!)
+        }
+    }
 }
 
 private extension ItemTests {
