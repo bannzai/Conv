@@ -264,6 +264,26 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.shouldShowMenu(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
+
+    func testCanPerformAction() {
+        XCTContext.runActivity(named: "When configure return true") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canPerformAction { (item) -> Bool in
+                return true
+            }
+            
+            XCTAssertTrue(item.canPerformAction(collectionView: self.collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
+        }
+        
+        XCTContext.runActivity(named: "When configure return false") { _ in
+            let item = Item<TestCollectionViewCell>()
+            item.canPerformAction { (item) -> Bool in
+                return false
+            }
+            
+            XCTAssertFalse(item.canPerformAction(collectionView: self.collectionView(), action: #selector(selector), forItemAt: indexPath(), withSender: self)!)
+        }
+    }
 }
 
 private extension ItemTests {
@@ -278,5 +298,9 @@ private extension ItemTests {
     
     func indexPath() -> IndexPath {
         return IndexPath()
+    }
+    
+    @objc func selector() {
+        
     }
 }
