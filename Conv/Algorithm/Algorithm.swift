@@ -174,5 +174,26 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
             continue
         }
     }
+    
+    // Configure Operations
+    
+    var steps: [Operation] = []
+    
+    var deletedOffsets: [Int] = []
+    var deletedCount = 0
+
+    for (offset, entry) in oldDiffEntries.enumerated() {
+        deletedOffsets.append(deletedCount)
+        switch entry {
+        case .symbol:
+            steps.append(.delete(offset))
+            deletedCount += 1
+        case .index:
+            continue
+        }
+    }
+    
+
+    
     return []
 }
