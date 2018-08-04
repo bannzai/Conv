@@ -28,7 +28,7 @@ public enum Operation: Equatable {
     }
 }
 
-enum Counter {
+enum Counter: Equatable {
     case zero
     case one
     case many(Int)
@@ -41,6 +41,19 @@ enum Counter {
             self = .many(1)
         case .many(let count):
             self = .many(count + 1)
+        }
+    }
+    
+    static func == (lhs: Counter, rhs: Counter) -> Bool {
+        switch (lhs, rhs) {
+        case (.zero, .zero):
+            return true
+        case (.one, .one):
+            return true
+        case (.many(let l), .many(let r)):
+            return l == r
+        case _:
+            return false
         }
     }
 }
