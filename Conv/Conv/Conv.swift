@@ -14,12 +14,6 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
-    public init(
-        scrollViewDelegate: UIScrollViewDelegate?
-        ) {
-        self.scrollViewDelegate = scrollViewDelegate
-    }
-    
     public override init() {
         super.init()
     }
