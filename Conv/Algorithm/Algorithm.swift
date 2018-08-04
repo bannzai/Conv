@@ -62,6 +62,10 @@ class Entry {
     var oldCounter: Counter = .zero // OC
     var newCounter: Counter = .zero // NC
     var oldIndexNumbers: [Int] = [] // OLNO
+    
+    var isOccursInBoth: Bool {
+        return oldCounter != .zero && newCounter != .zero
+    }
 }
 
 extension Entry {
