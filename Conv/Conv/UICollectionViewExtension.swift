@@ -24,20 +24,34 @@ public extension UICollectionView {
 }
 
 fileprivate struct UICollectionViewAssociatedObjectHandle {
-    static var key: UInt8 = 0
+    static var oldConvKey: UInt8 = 0
+    static var newConvKey: UInt8 = 0
 }
 
 fileprivate extension UICollectionView {
-    var _conv: Conv? {
+    var oldConv: Conv? {
         set {
             dataSource = newValue
             delegate = newValue
             newValue?.collectionView = self
             
-            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.oldConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.key) as? Conv
+            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.oldConvKey) as? Conv
+        }
+    }
+    
+    var newConv: Conv? {
+        set {
+            dataSource = newValue
+            delegate = newValue
+            newValue?.collectionView = self
+            
+            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.newConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+        get {
+            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.newConvKey) as? Conv
         }
     }
 }
