@@ -63,6 +63,8 @@ enum Counter: Equatable {
 class Entry {
     var oldCounter: Counter = .zero // OC
     var newCounter: Counter = .zero // NC
+    // FIXME: ここは配列である必要がない可能性がある
+    // Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
     var oldIndexNumbers: [Int] = [] // OLNO
     
     var isOccursInBoth: Bool {
