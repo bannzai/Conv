@@ -52,7 +52,7 @@ fileprivate struct UICollectionViewAssociatedObjectHandle {
     static var newConvKey: UInt8 = 0
 }
 
-fileprivate extension UICollectionView {
+extension UICollectionView {
     var oldConv: Conv? {
         set {
             dataSource = newValue
