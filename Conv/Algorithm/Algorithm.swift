@@ -213,5 +213,5 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
     }
 
     
-    return []
+    return steps
 }
