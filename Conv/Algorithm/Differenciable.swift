@@ -15,9 +15,9 @@ public protocol Differenciable {
     func shouldUpdate(to compare: Differenciable) -> Bool
 }
 
-public extension Differenciable {
+public extension Differenciable where Self: Equatable {
     public func shouldUpdate(to compare: Self) -> Bool {
-        return differenceIdentifier != compare.differenceIdentifier
+        return self != compare
     }
 }
 
