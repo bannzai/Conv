@@ -60,7 +60,7 @@ enum Counter {
 class Entry {
     var oldCounter: Counter = .zero // OC
     var newCounter: Counter = .zero // NC
-    var oldIndexNumbers: [Int] = []
+    var oldIndexNumbers: [Int] = [] // OLNO
 }
 
 extension Entry {
