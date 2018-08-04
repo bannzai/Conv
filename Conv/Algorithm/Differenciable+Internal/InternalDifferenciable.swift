@@ -9,11 +9,13 @@
 import Foundation
 
 internal struct FakeDifference: Differenciable {
+    typealias DifferenceIdentifier = String
+
     var differenceIdentifier: String {
         return "FakeDifference"
     }
     
-    func isEqual(to compare: Differenciable) -> Bool {
+    func isEqual(to compare: FakeDifference) -> Bool {
         return false
     }
 }
