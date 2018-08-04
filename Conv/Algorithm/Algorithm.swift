@@ -28,6 +28,8 @@ public enum Operation: Equatable {
     }
 }
 
+// FIXME: Counter で管理しなくても oldCounter, newCounter をそれぞれBoolで値を持つ方式でいいかもしれない
+// Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
 enum Counter: Equatable {
     case zero
     case one
