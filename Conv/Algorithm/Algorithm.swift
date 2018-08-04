@@ -40,6 +40,23 @@ struct TableKey<T: Hashable>: Hashable {
     }
 }
 
+enum Counter {
+    case zero
+    case one
+    case many(Int)
+    
+    mutating func next() {
+        switch self {
+        case .zero:
+            self = .one
+        case .one:
+            self = .many(1)
+        case .many(let count):
+            self = .many(count + 1)
+        }
+    }
+}
+
 public func diff<T: Collection>(from old: T, to new: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
 
     return []
