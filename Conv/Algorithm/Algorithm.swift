@@ -153,6 +153,26 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
             continue
         }
     }
-
+    
+    // Fifth step
+    for (i, newEntry) in newDiffEntries.reversed().enumerated() {
+        switch newEntry {
+        case .index(let j) where j > 0:
+            guard
+                case let .symbol(newEntry) = newDiffEntries[i - 1],
+                case let .symbol(oldEntry) = oldDiffEntries[j - 1],
+                newEntry === oldEntry
+                else  {
+                    continue
+            }
+            
+            newDiffEntries[i - 1] = .index(j - 1)
+            oldDiffEntries[j - 1] = .index(i - 1)
+        case .symbol:
+            continue
+        case .index:
+            continue
+        }
+    }
     return []
 }
