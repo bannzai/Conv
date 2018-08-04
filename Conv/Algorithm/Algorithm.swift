@@ -28,7 +28,7 @@ public enum Operation: Equatable {
     }
 }
 
-public func diff<T: Collection>(from source: T, to target: T) -> [Operation] {
+public func diff<T: Collection>(from source: T, to target: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
     
     
     return []
