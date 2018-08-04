@@ -40,7 +40,7 @@ struct TableKey<T: Hashable>: Hashable {
     }
 }
 
-public func diff<T: Collection>(from source: T, to target: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
+public func diff<T: Collection>(from old: T to new: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
 
     return []
 }
