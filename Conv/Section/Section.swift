@@ -21,11 +21,11 @@ public class Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    public init() {
+    init() {
         
     }
     
-    public init(closure: (Section) -> Void) {
+    public init(diffElement: Differenciable, closure: (Section) -> Void) {
         closure(self)
     }
     
