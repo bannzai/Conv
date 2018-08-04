@@ -193,6 +193,24 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
         }
     }
     
+    var insertedCount = 0
+    
+    for (offset, entry) in newDiffEntries.enumerated() {
+        switch entry {
+        case .symbol:
+            steps.append(.insert(offset))
+            insertedCount += 1
+        case .index(let oldIndex):
+            if !oldElements[oldIndex].isEqual(to: newElements[offset]) {
+                steps.append(.update(offset))
+            }
+            
+            let deletedOffset = deletedOffsets[oldIndex]
+            if (oldIndex - deletedOffset + insertedCount) != offset {
+                steps.append(.move(oldIndex, offset))
+            }
+        }
+    }
 
     
     return []
