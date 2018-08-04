@@ -28,3 +28,8 @@ public enum Operation: Equatable {
     }
 }
 
+public func diff<T: Collection>(from source: T, to target: T) -> [Operation] {
+    
+    
+    return []
+}
