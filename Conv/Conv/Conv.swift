@@ -28,7 +28,7 @@ public final class Conv: NSObject {
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
     
     public func reload() {
-        collectionView?.overwriteToNewConv()
+        collectionView?.migrateConv()
     }
 }
 
