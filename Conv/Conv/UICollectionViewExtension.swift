@@ -26,6 +26,15 @@ public extension UICollectionView {
         conv.scrollViewDelegate = scrollViewDelegate
         return conv
     }
+    
+    public func reload() {
+        if let newConv = newConv {
+            newConv.reload()
+            return
+        }
+        
+        oldConv?.reload()
+    }
 }
 
 fileprivate struct UICollectionViewAssociatedObjectHandle {
