@@ -28,18 +28,6 @@ public enum Operation: Equatable {
     }
 }
 
-struct TableKey<T: Hashable>: Hashable {
-    let hashValue: Int
-    
-    init(reference: T) {
-        self.hashValue = reference.hashValue
-    }
-    
-    static func == (lhs: TableKey, rhs: TableKey) -> Bool {
-        return lhs.hashValue == rhs.hashValue
-    }
-}
-
 enum Counter {
     case zero
     case one
