@@ -54,7 +54,7 @@ class Entry {
 extension Entry {
     enum Case {
         // this case not yet find same element from other elements.
-        case symbole(Entry)
+        case symbol(Entry)
         // this case found same element from other elements.
         case index(Int)
     }
@@ -77,7 +77,7 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
             entry = e
         }
         entry.newCounter.next()
-        newDiffEntries.append(entry)
+        newDiffEntries.append(.symbol(entry))
     }
     
 
