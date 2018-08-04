@@ -11,7 +11,6 @@ import UIKit
 public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegate] = []
-    public var diff: Differenciable?
     
     public var header: SectionHeaderFooterDelegate?
     public var footer: SectionHeaderFooterDelegate?
