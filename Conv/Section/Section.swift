@@ -51,29 +51,15 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func add(item: ItemDelegate) -> Section {
-        items.append(item)
-        return self
-    }
-    @discardableResult public func add(items: [ItemDelegate]) -> Section {
-        self.items.append(contentsOf: items)
-        return self
-    }
-    
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
-        return add(item: Item<T>() { closure($0) } )
-    }
-    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
+    @discardableResult public func create<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
         let items = elements.map { element in
-            Item<T>() { item in
+            Item<T>(diffElement: element) { item in
                 closure(element, item)
             }
         }
         
-        return add(items: items)
-    }
-    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, Item<T>) -> Void)) -> Section {
-        return create(for: [UInt](0..<count), items: closure)
+        self.items.append(contentsOf: items)
+        return self
     }
 }
 
