@@ -28,8 +28,19 @@ public enum Operation: Equatable {
     }
 }
 
+struct TableKey<T: Hashable>: Hashable {
+    let hashValue: Int
+    
+    init(reference: T) {
+        self.hashValue = reference.hashValue
+    }
+    
+    static func == (lhs: TableKey, rhs: TableKey) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+}
+
 public func diff<T: Collection>(from source: T, to target: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
-    
-    
+
     return []
 }
