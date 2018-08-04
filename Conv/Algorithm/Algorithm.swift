@@ -67,12 +67,12 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
     var oldDiffEntries: [Entry] = []
     
     // First Step
-    for item in newElements {
+    for element in newElements {
         let entry: Entry
-        switch table[item.differenceIdentifier] {
+        switch table[element.differenceIdentifier] {
         case nil:
             entry = Entry()
-            table[item.differenceIdentifier] = entry
+            table[element.differenceIdentifier] = entry
         case let e?:
             entry = e
         }
