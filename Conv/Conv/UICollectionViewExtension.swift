@@ -27,9 +27,10 @@ public extension UICollectionView {
         return conv
     }
     
-    func migrateConv() {
+    func shiftConv() {
         if let newConv = newConv {
             oldConv = newConv
+            self.newConv = nil
         }
     }
     
@@ -37,7 +38,7 @@ public extension UICollectionView {
         switch (oldConv, newConv) {
         case (_, let newConv?):
             newConv.reload()
-            migrateConv()
+            shiftConv()
         case (let oldConv?, nil):
             oldConv.reload()
         case (nil, nil):
