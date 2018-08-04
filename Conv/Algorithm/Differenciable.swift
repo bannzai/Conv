@@ -8,17 +8,16 @@
 
 import Foundation
 
+public typealias DifferenceIdentifier = String
 public protocol Differenciable {
-    associatedtype DifferenceIdentifier: Hashable
-    
     var differenceIdentifier: DifferenceIdentifier { get }
-    
-    func isEqual(to compare: Self) -> Bool
+   
+    func isEqual(to compare: Differenciable) -> Bool
 }
 
-public extension Differenciable where Self: Equatable {
+public extension Differenciable {
     public func isEqual(to compare: Self) -> Bool {
-        return self == compare
+        return differenceIdentifier == compare.differenceIdentifier
     }
 }
 
