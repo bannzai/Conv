@@ -80,6 +80,21 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
         newDiffEntries.append(.symbol(entry))
     }
     
+    // Second Step
+    for (offset, element) in oldElements.enumerated() {
+        let entry: Entry
+        switch table[element.differenceIdentifier] {
+        case nil:
+            entry = Entry()
+            table[element.differenceIdentifier] = entry
+        case let e?:
+            entry = e
+        }
+        entry.newCounter.next()
+        entry.oldIndexNumbers.append(offset)
+        oldDiffEntries.append(.symbol(entry))
+    }
+
 
     return []
 }
