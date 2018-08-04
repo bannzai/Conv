@@ -19,7 +19,7 @@ internal struct FakeDifference: Differenciable {
         return description
     }
     
-    func isEqual(to compare: Differenciable) -> Bool {
+    func shouldUpdate(to compare: Differenciable) -> Bool {
         return false
     }
 }

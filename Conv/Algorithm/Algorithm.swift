@@ -188,7 +188,7 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
             steps.append(.insert(offset))
             insertedCount += 1
         case .index(let oldIndex):
-            if !oldElements[oldIndex].isEqual(to: newElements[offset]) {
+            if oldElements[oldIndex].shouldUpdate(to: newElements[offset]) {
                 steps.append(.update(offset))
             }
             

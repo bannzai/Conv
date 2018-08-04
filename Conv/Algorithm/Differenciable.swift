@@ -12,12 +12,12 @@ public typealias DifferenceIdentifier = String
 public protocol Differenciable {
     var differenceIdentifier: DifferenceIdentifier { get }
    
-    func isEqual(to compare: Differenciable) -> Bool
+    func shouldUpdate(to compare: Differenciable) -> Bool
 }
 
 public extension Differenciable {
-    public func isEqual(to compare: Self) -> Bool {
-        return differenceIdentifier == compare.differenceIdentifier
+    public func shouldUpdate(to compare: Self) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
     }
 }
 
