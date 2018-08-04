@@ -61,8 +61,24 @@ extension Entry {
 }
 
 
-public func diff<T: Collection>(from old: T, to new: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
+public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
     var table: [T.Iterator.Element.DifferenceIdentifier: Entry] = [:]
+    var newDiffEntries: [Entry] = []
+    var oldDiffEntries: [Entry] = []
+    
+    // First Step
+    for item in newElements {
+        let entry: Entry
+        switch table[item.differenceIdentifier] {
+        case nil:
+            entry = Entry()
+            table[item.differenceIdentifier] = entry
+        case let e?:
+            entry = e
+        }
+        entry.newCounter.next()
+        newDiffEntries.append(entry)
+    }
     
 
     return []
