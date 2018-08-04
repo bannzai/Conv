@@ -111,11 +111,27 @@ public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Oper
         case let e?:
             entry = e
         }
+        
         entry.newCounter.next()
         entry.oldIndexNumbers.append(offset)
         oldDiffEntries.append(.symbol(entry))
     }
-
+    
+    // Third Step
+    for (offset, entry) in newDiffEntries.enumerated() {
+        switch entry {
+        case .symbol(let entry) where entry.isOccursInBoth:
+            assert(!entry.oldIndexNumbers.isEmpty)
+            let oldIndex = entry.oldIndexNumbers.removeFirst()
+            newDiffEntries[offset] = .index(oldIndex)
+            oldDiffEntries[oldIndex] = .index(offset)
+        case .index:
+            continue
+        case .symbol:
+            continue
+        }
+    }
+    
 
     return []
 }
