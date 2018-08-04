@@ -28,12 +28,15 @@ public extension UICollectionView {
     }
     
     public func reload() {
-        if let newConv = newConv {
+        switch (oldConv, newConv) {
+        case (_, let newConv?):
             newConv.reload()
-            return
+            oldConv = newConv
+        case (let oldConv?, nil):
+            oldConv.reload()
+        case (nil, nil):
+           return
         }
-        
-        oldConv?.reload()
     }
 }
 
