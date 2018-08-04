@@ -57,6 +57,23 @@ enum Counter {
     }
 }
 
+class Entry {
+    var oldCounter: Counter = .zero // OC
+    var newCounter: Counter = .zero // NC
+    var oldIndexNumbers: [Int] = []
+}
+
+extension Entry {
+    enum Case {
+        // this case not yet find same element from other elements.
+        case symbole(Entry)
+        // this case found same element from other elements.
+        case index(Int)
+    }
+}
+
+
+
 public func diff<T: Collection>(from old: T, to new: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
 
     return []
