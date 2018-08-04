@@ -73,8 +73,9 @@ extension Entry {
 }
 
 
-
 public func diff<T: Collection>(from old: T, to new: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
+    var table: [T.Iterator.Element.DifferenceIdentifier: Entry] = [:]
+    
 
     return []
 }
