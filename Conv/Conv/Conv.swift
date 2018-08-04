@@ -60,29 +60,15 @@ extension Conv {
 }
 
 extension Conv {
-    @discardableResult public func add(section: Section) -> Self {
-        sections.append(section)
-        return self
-    }
-    @discardableResult public func add(sections: [Section]) -> Self {
-        self.sections.append(contentsOf: sections)
-        return self
-    }
-    
-    @discardableResult public func create(section closure: (Section) -> Void) -> Self {
-        return add(section: Section() { closure($0) } )
-    }
-    @discardableResult public func create<E>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
-            Section() { section in
+            Section(diffElement: element) { section in
                 closure(element, section)
             }
         }
         
-        return add(sections: sections)
-    }
-    @discardableResult public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
-        return create(for: [UInt](0..<count), sections: closure)
+        self.sections.append(contentsOf: sections)
+        return self
     }
 }
 
