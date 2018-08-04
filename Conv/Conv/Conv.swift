@@ -27,8 +27,8 @@ public final class Conv: NSObject {
     internal var indexPathForPreferredFocusedView: ((_ collectionView: UICollectionView) -> IndexPath?)?
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
     
-    func reload() {
-        
+    public func reload() {
+        collectionView?.overwriteToNewConv()
     }
 }
 

@@ -27,11 +27,15 @@ public extension UICollectionView {
         return conv
     }
     
+    func overwriteToNewConv() {
+        oldConv = newConv
+    }
+    
     public func reload() {
         switch (oldConv, newConv) {
         case (_, let newConv?):
             newConv.reload()
-            oldConv = newConv
+            overwriteToNewConv()
         case (let oldConv?, nil):
             oldConv.reload()
         case (nil, nil):
