@@ -8,7 +8,12 @@
 
 import Foundation
 
-public enum Operation {
+enum ItemOperation {
+    
+}
+
+
+enum Operation {
     case insert(Int)
     case delete(Int)
     case move(Int, Int)
@@ -73,7 +78,7 @@ extension Entry {
 }
 
 
-public func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
+func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
     var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
     var newDiffEntries: [Entry.Case] = [] // NA
     var oldDiffEntries: [Entry.Case] = [] // OA
