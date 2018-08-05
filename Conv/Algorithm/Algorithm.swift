@@ -12,7 +12,11 @@ public enum Operation {
     case insert(Int)
     case delete(Int)
     case move(Int, Int)
-    case update(Int)
+    
+    
+    // update has oldIndex and newIndex
+    // If Differenciable is Section, call diff again for items.
+    case update(Int, Int)
 }
 
 // FIXME: Counter で管理しなくても oldCounter, newCounter をそれぞれBoolで値を持つ方式でいいかもしれない
@@ -189,7 +193,7 @@ public func diff(from oldElements: [Differenciable], to newElements: [Differenci
             insertedCount += 1
         case .index(let oldIndex):
             if oldElements[oldIndex].shouldUpdate(to: newElements[offset]) {
-                steps.append(.update(offset))
+                steps.append(.update(oldIndex, offset))
             }
             
             let deletedOffset = deletedOffsets[oldIndex]
