@@ -69,7 +69,7 @@ extension Entry {
 }
 
 
-public func diff<T: Collection>(from oldElements: T, to newElements: T) -> [Operation] where T.Iterator.Element: Differenciable, T.Index == Int {
+public func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
     var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
     var newDiffEntries: [Entry.Case] = [] // NA
     var oldDiffEntries: [Entry.Case] = [] // OA
