@@ -38,6 +38,16 @@ public final class Conv: NSObject {
                 to: newConv.sections.map { $0.diffElement! }
             )
             
+            let updateItemsOperation = sectionOperations
+                .flatMap { sectionOperation -> [Operation] in
+                    switch sectionOperation {
+                    case .update(let oldIndex, let newIndex):
+                        return true
+                    case .insert, .delete, .move:
+                        return []
+                    }
+            }
+            
             collectionView?
                 .performBatchUpdates({
                 collectionView?.deleteItems(at: <#T##[IndexPath]#>)
