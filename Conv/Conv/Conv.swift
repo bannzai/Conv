@@ -28,6 +28,21 @@ public final class Conv: NSObject {
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
     
     public func reload() {
+        guard let oldConv = collectionView?.oldConv else {
+            return
+        }
+        
+        if let newConv = collectionView?.newConv {
+            let sectionOperations = diff(
+                from: oldConv.sections.map { $0.diffElement! },
+                to: newConv.sections.map { $0.diffElement! }
+            )
+            
+            collectionView?
+                .performBatchUpdates({
+                collectionView?.deleteItems(at: <#T##[IndexPath]#>)
+            }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+        }
         collectionView?.shiftConv()
     }
 }
