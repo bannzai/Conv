@@ -111,7 +111,7 @@ struct OperationSet {
 }
 
 
-func diffSection(from oldSections: [Section], new newSections: [Section]) -> [OperationSet] {
+func diffSection(from oldSections: [Section], new newSections: [Section]) -> OperationSet {
     let indexPathForOld = oldSections
         .enumerated()
         .flatMap { section -> [DifferenciableIndexPath] in
