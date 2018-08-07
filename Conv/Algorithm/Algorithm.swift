@@ -13,15 +13,11 @@ enum ItemOperation {
 }
 
 
-enum Operation {
-    case insert(Int)
-    case delete(Int)
-    case move(Int, Int)
-    
-    
-    // update has oldIndex and newIndex
-    // If Differenciable is Section, call diff again for items.
-    case update(Int, Int)
+enum Operation<I> {
+    case insert(I)
+    case delete(I)
+    case move(I, I)
+    case update(I)
 }
 
 // FIXME: Counter で管理しなくても oldCounter, newCounter をそれぞれBoolで値を持つ方式でいいかもしれない
