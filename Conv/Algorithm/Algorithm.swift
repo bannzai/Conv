@@ -179,7 +179,15 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
 }
 
 
-func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
+func diff<D: Differenciable, I>(
+    from oldElements: [D],
+    to newElements: [D],
+    mapDeleteOperation: (Int) -> I,
+    mapInsertOperation: (Int) -> I,
+    mapUpdateOperation: (Int) -> I,
+    mapMoveSourceOperation: (Int) -> I,
+    mapMoveTargetOperation: (Int) -> I
+    ) -> [Operation<I>] {
     var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
     var newDiffEntries: [Entry.Case] = [] // NA
     var oldDiffEntries: [Entry.Case] = [] // OA
@@ -274,7 +282,7 @@ func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) 
     
     // Configure Operations
     
-    var steps: [Operation] = []
+    var steps: [Operation<I>] = []
     
     var deletedOffsets: [Int] = []
     var deletedCount = 0
@@ -283,7 +291,7 @@ func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) 
         deletedOffsets.append(deletedCount)
         switch entry {
         case .symbol:
-            steps.append(.delete(offset))
+            steps.append(.delete(mapDeleteOperation(offset)))
             deletedCount += 1
         case .index:
             continue
@@ -295,16 +303,16 @@ func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) 
     for (offset, entry) in newDiffEntries.enumerated() {
         switch entry {
         case .symbol:
-            steps.append(.insert(offset))
+            steps.append(.insert(mapInsertOperation(offset)))
             insertedCount += 1
         case .index(let oldIndex):
             if oldElements[oldIndex].shouldUpdate(to: newElements[offset]) {
-                steps.append(.update(oldIndex, offset))
+                steps.append(.update(mapUpdateOperation(offset)))
             }
             
             let deletedOffset = deletedOffsets[oldIndex]
             if (oldIndex - deletedOffset + insertedCount) != offset {
-                steps.append(.move(oldIndex, offset))
+                steps.append(.move(mapMoveSourceOperation(oldIndex), mapMoveTargetOperation(offset)))
             }
         }
     }
