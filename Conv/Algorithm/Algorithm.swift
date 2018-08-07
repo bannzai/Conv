@@ -8,15 +8,10 @@
 
 import Foundation
 
-struct RepresentModel {
-    let secton: Int
-    let item: [Int]
+enum ItemOperation {
+    
 }
 
-struct Operations {
-    let parent: Operation
-    let children: [Operation]
-}
 
 enum Operation {
     case insert(Int)
@@ -82,33 +77,6 @@ extension Entry {
     }
 }
 
-
-struct DifferenciableIndexPath: Differenciable {
-    var differenceIdentifier: DifferenceIdentifier {
-        return section.differenceIdentifier + items.reduce(DifferenceIdentifier(), { return $0 + $1.differenceIdentifier })
-    }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        assert(compare is DifferenciableIndexPath)
-        return differenceIdentifier != compare.differenceIdentifier
-    }
-    
-    let section: Section
-    let items: [ItemDelegate]
-    
-    init(section: Section) {
-        self.section = section
-        self.items = section.items
-    }
-}
-
-func diffSection(from oldSections: [Section], to newSections: [Section]) -> [Operation] {
-    let indexPathForOld = oldSections.map { DifferenciableIndexPath(section: $0) }
-    let indexPathForNew = newSections.map { DifferenciableIndexPath(section: $0) }
-    let sectionOperations = diff(from: indexPathForOld, to: indexPathForNew)
-    
-    
-}
 
 func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
     var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
