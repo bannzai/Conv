@@ -145,8 +145,24 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             }
     }
 
-    let sectionOperations = diff(from: oldSections, to: newSections)
-    let itemOperations = diff(from: indexPathForOld, to: indexPathForNew)
+    let sectionOperations = diff(
+        from: oldSections,
+        to: newSections,
+        mapDeleteOperation: { $0 },
+        mapInsertOperation: { $0 },
+        mapUpdateOperation: { $0 },
+        mapMoveSourceOperation: { $0 },
+        mapMoveTargetOperation: { $0 }
+    )
+    let itemOperations = diff(
+        from: indexPathForOld,
+        to: indexPathForNew,
+        mapDeleteOperation: { indexPathForOld[$0] },
+        mapInsertOperation: { indexPathForNew[$0] },
+        mapUpdateOperation: { indexPathForNew[$0] },
+        mapMoveSourceOperation: { indexPathForOld[$0] },
+        mapMoveTargetOperation: { indexPathForNew[$0] }
+    )
     
     var operationSet = OperationSet()
     sectionOperations.forEach {
@@ -157,7 +173,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             operationSet.sectionDelete.append(oldIndex)
         case .move(let sourceIndex, let targetIndex):
             operationSet.sectionMove.append((source: sourceIndex, target: targetIndex))
-        case .update(_, let newIndex):
+        case .update(let newIndex):
             operationSet.sectionUpdate.append(newIndex)
         }
     }
@@ -170,7 +186,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             operationSet.itemDelete.append(oldIndex)
         case .move(let sourceIndex, let targetIndex):
             operationSet.itemMove.append((source: sourceIndex, target: targetIndex))
-        case .update(_, let newIndex):
+        case .update(let newIndex):
             operationSet.itemUpdate.append(newIndex)
         }
     }
