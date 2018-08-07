@@ -78,6 +78,111 @@ extension Entry {
 }
 
 
+struct DifferenciableIndexPath: Differenciable {
+    let section: Section
+    let item: ItemDelegate
+    
+    let sectionIndex: Int
+    let itemIndex: Int
+    
+    var differenceIdentifier: DifferenceIdentifier {
+        return item.differenceIdentifier
+    }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return item.shouldUpdate(to: compare)
+    }
+    
+    var indexPath: IndexPath {
+        return IndexPath(item: itemIndex, section: sectionIndex)
+    }
+}
+
+struct OperationSet {
+    var sectionInsert: [Int] = []
+    var sectionUpdate: [Int] = []
+    var sectionDelete: [Int] = []
+    var sectionMove: [(source: Int, target: Int)] = []
+    
+    var itemInsert: [DifferenciableIndexPath] = []
+    var itemUpdate: [DifferenciableIndexPath] = []
+    var itemDelete: [DifferenciableIndexPath] = []
+    var itemMove: [(source: DifferenciableIndexPath, target: DifferenciableIndexPath)] = []
+    
+    init() {
+        
+    }
+}
+
+
+func diffSection(from oldSections: [Section], new newSections: [Section]) -> [OperationSet] {
+    let indexPathForOld = oldSections
+        .enumerated()
+        .flatMap { section -> [DifferenciableIndexPath] in
+            section
+                .element
+                .items
+                .enumerated()
+                .map { item in
+                    DifferenciableIndexPath(
+                        section: section.element,
+                        item: item.element,
+                        sectionIndex: section.offset,
+                        itemIndex: item.offset
+                        )
+            }
+    }
+    let indexPathForNew = newSections
+        .enumerated()
+        .flatMap { section -> [DifferenciableIndexPath] in
+            section
+                .element
+                .items
+                .enumerated()
+                .map { item in
+                    DifferenciableIndexPath(
+                        section: section.element,
+                        item: item.element,
+                        sectionIndex: section.offset,
+                        itemIndex: item.offset
+                    )
+            }
+    }
+
+    let sectionOperations = diff(from: oldSections, to: newSections)
+    let itemOperations = diff(from: indexPathForOld, to: indexPathForNew)
+    
+    var operationSet = OperationSet()
+    sectionOperations.forEach {
+        switch $0 {
+        case .insert(let newIndex):
+            operationSet.sectionInsert.append(newIndex)
+        case .delete(let oldIndex):
+            operationSet.sectionDelete.append(oldIndex)
+        case .move(let sourceIndex, let targetIndex):
+            operationSet.sectionMove.append((source: sourceIndex, target: targetIndex))
+        case .update(_, let newIndex):
+            operationSet.sectionUpdate.append(newIndex)
+        }
+    }
+    
+    itemOperations.forEach {
+        switch $0 {
+        case .insert(let newIndex):
+            operationSet.itemInsert.append(newIndex)
+        case .delete(let oldIndex):
+            operationSet.itemDelete.append(oldIndex)
+        case .move(let sourceIndex, let targetIndex):
+            operationSet.itemMove.append((source: sourceIndex, target: targetIndex))
+        case .update(_, let newIndex):
+            operationSet.itemUpdate.append(newIndex)
+        }
+    }
+    
+    return operationSet
+}
+
+
 func diff(from oldElements: [Differenciable], to newElements: [Differenciable]) -> [Operation] {
     var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
     var newDiffEntries: [Entry.Case] = [] // NA
