@@ -136,18 +136,18 @@ class ListViewController: UIViewController {
 
 extension ListViewController {
     func viewModels(section: SectionType) -> [ItemViewModel] {
-        func stub(count: UInt) -> [ItemViewModel] {
+        func stub() -> [ItemViewModel] {
             return imageNames
                 .enumerated()
                 .map { ItemViewModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
         }
         switch section {
         case .one:
-            return stub(count: 10)
+            return stub()
         case .two:
-            return stub(count: 10)
+            return stub()
         case .three:
-            return stub(count: 10)
+            return stub()
         }
     }
 }
