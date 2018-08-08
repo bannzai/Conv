@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA0C65EE211B55200099B0F5 /* ReflectionDifferenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C65ED211B55200099B0F5 /* ReflectionDifferenciable.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
 		BA2F7E7C21154DE90085EE41 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E7B21154DE90085EE41 /* Algorithm.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA0C65ED211B55200099B0F5 /* ReflectionDifferenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectionDifferenciable.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BA2F7E7B21154DE90085EE41 /* Algorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				BA2F7E81211632200085EE41 /* Differenciable+Internal */,
 				BA2F7E7B21154DE90085EE41 /* Algorithm.swift */,
 				BA2F7E7D2115613F0085EE41 /* Differenciable.swift */,
+				BA0C65ED211B55200099B0F5 /* ReflectionDifferenciable.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */,
 				BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */,
 				BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */,
+				BA0C65EE211B55200099B0F5 /* ReflectionDifferenciable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
