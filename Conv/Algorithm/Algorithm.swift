@@ -218,7 +218,7 @@ func diff<D: Differenciable, I>(
         case let e?:
             entry = e
         }
-        entry.newCounter.next()
+        entry.oldCounter.next()
         newDiffEntries.append(.symbol(entry))
     }
     
@@ -255,47 +255,63 @@ func diff<D: Differenciable, I>(
     
     // Fourth Step
     let oldDiffEntriesCount = oldDiffEntries.count
-    for (i, newEntry) in newDiffEntries.enumerated() {
-        switch newEntry {
-        case .index(let j) where j < oldDiffEntriesCount - 1:
-            guard
-                case let .symbol(newEntry) = newDiffEntries[i + 1],
-                case let .symbol(oldEntry) = oldDiffEntries[j + 1],
-                newEntry === oldEntry
-                else  {
-                    continue
+    fourthStep: do {
+        // i = 1 Reason target change index to i + 1
+        var i = 1
+        while i < newDiffEntries.count {
+            let newEntry = newDiffEntries[i]
+            switching: switch newEntry {
+            case .index(let j) where j < oldDiffEntriesCount - 1:
+                guard
+                    case let .symbol(newEntry) = newDiffEntries[i + 1],
+                    case let .symbol(oldEntry) = oldDiffEntries[j + 1],
+                    newEntry === oldEntry
+                    else  {
+                        break switching
+                }
+                
+                newDiffEntries[i + 1] = .index(j + 1)
+                oldDiffEntries[j + 1] = .index(i + 1)
+            case .symbol:
+                break switching
+            case .index:
+                break switching
             }
             
-            newDiffEntries[i + 1] = .index(j + 1)
-            oldDiffEntries[j + 1] = .index(i + 1)
-        case .symbol:
-            continue
-        case .index:
-            continue
+            i += 1
         }
     }
-    
+
     // Fifth step
-    for (i, newEntry) in newDiffEntries.reversed().enumerated() {
-        switch newEntry {
-        case .index(let j) where j > 0:
-            guard
-                case let .symbol(newEntry) = newDiffEntries[i - 1],
-                case let .symbol(oldEntry) = oldDiffEntries[j - 1],
-                newEntry === oldEntry
-                else  {
-                    continue
+    fifthStaep: do {
+        // i = newDiffEntries.count - 1 Reason target change index to i - 1
+        var i = newDiffEntries.count - 1
+        while i > 0 {
+            let newEntry = newDiffEntries[i]
+            switcing: switch newEntry {
+            case .index(let j) where j > 0:
+                let adjustedIndex = i + 1
+                guard
+                    case let .symbol(newEntry) = newDiffEntries[adjustedIndex - 1],
+                    case let .symbol(oldEntry) = oldDiffEntries[j - 1],
+                    newEntry === oldEntry
+                    else  {
+                        break switcing
+                }
+                
+                newDiffEntries[i - 1] = .index(j - 1)
+                oldDiffEntries[j - 1] = .index(adjustedIndex - 1)
+            case .symbol:
+                break switcing
+            case .index:
+                break switcing
             }
             
-            newDiffEntries[i - 1] = .index(j - 1)
-            oldDiffEntries[j - 1] = .index(i - 1)
-        case .symbol:
-            continue
-        case .index:
-            continue
+            i -= 1
         }
     }
-    
+
+
     // Configure Operations
     
     var steps: [Operation<I>] = []
