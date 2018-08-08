@@ -62,8 +62,6 @@ class ListViewController: UIViewController {
         flowLayout?.sectionInset = .zero
         flowLayout?.minimumLineSpacing = 0
         flowLayout?.minimumInteritemSpacing = 0
-
-        setupConv()
     }
     
     func setupConv() {
