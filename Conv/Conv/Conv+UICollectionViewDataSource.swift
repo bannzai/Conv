@@ -10,6 +10,7 @@ import UIKit
 
 extension Conv: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("numberOfItemsInSection: \(section), count: \(sections[section].items.count)")
         return sections[section].items.count
     }
     
@@ -25,6 +26,7 @@ extension Conv: UICollectionViewDataSource {
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
+        print("numberOfSections: \(sections.count)")
         return sections.count
     }
     
