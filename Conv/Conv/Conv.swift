@@ -14,6 +14,8 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
+    public var isReloaded = false
+    
     public override init() {
         super.init()
     }
@@ -27,81 +29,6 @@ public final class Conv: NSObject {
     internal var indexPathForPreferredFocusedView: ((_ collectionView: UICollectionView) -> IndexPath?)?
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
     
-    public func reload() {
-        guard let oldConv = collectionView?.oldConv else {
-            assert(collectionView?.newConv == nil)
-            print(" --------- call reloaData ----------- ")
-            collectionView?.reloadData()
-            return
-        }
-        
-        if let newConv = collectionView?.newConv {
-            let operationSet = diffSection(from: oldConv.sections, new: newConv.sections)
-            
-            let itemDelete = operationSet.itemDelete.map { $0.indexPath }
-            let itemInsert = operationSet.itemInsert.map { $0.indexPath }
-            let itemMove = operationSet.itemMove
-            let itemUpdate = operationSet.itemUpdate.map { $0.indexPath }
-            
-            let sectionDelete = operationSet.sectionDelete
-            let sectionInsert = operationSet.sectionInsert
-            let sectionMove = operationSet.sectionMove
-            let sectionUpdate = operationSet.sectionUpdate
-
-            collectionView?
-                .performBatchUpdates({
-                    if !itemDelete.isEmpty {
-                        print(" --------- call deleteItems ----------- ")
-                        print("\(itemDelete)")
-                        collectionView?.deleteItems(at: itemDelete)
-                    }
-                    if !itemInsert.isEmpty {
-                        print(" --------- call insertItems ----------- ")
-                        print("\(itemInsert)")
-                        collectionView?.insertItems(at: itemInsert)
-                    }
-                    if !itemMove.isEmpty {
-                        itemMove.forEach {
-                            print(" --------- call moveItem ----------- ")
-                            print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
-                            collectionView?.moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
-                        }
-                    }
-                    if !itemUpdate.isEmpty {
-                        print(" --------- call reloadItems ----------- ")
-                        print("\(itemUpdate)")
-                        collectionView?.reloadItems(at: itemUpdate)
-                    }
-
-                    if !sectionDelete.isEmpty {
-                        print(" --------- call deleteSections ----------- ")
-                        print("\(sectionDelete)")
-                        collectionView?.deleteSections(IndexSet(sectionDelete))
-                    }
-                    if !sectionInsert.isEmpty {
-                        print(" --------- call insertSections ----------- ")
-                        print("\(sectionInsert)")
-                        collectionView?.insertSections(IndexSet(sectionInsert))
-                    }
-                    if !sectionMove.isEmpty {
-                        sectionMove.forEach {
-                            print(" --------- call moveSection ----------- ")
-                            print("source: \($0.source), target: \($0.target)")
-                            collectionView?.moveSection($0.source, toSection: $0.target)
-                        }
-                    }
-                    if !sectionUpdate.isEmpty {
-                        print(" --------- call reloadSections ----------- ")
-                        print("\(sectionUpdate)")
-                        collectionView?.reloadSections(IndexSet(sectionUpdate))
-                    }
-            }, completion: nil)
-        } else {
-            collectionView?.reloadData()
-        }
-        
-        collectionView?.shiftConv()
-    }
 }
 
 extension Conv {

@@ -35,15 +35,77 @@ public extension UICollectionView {
     }
     
     public func reload() {
-        switch (oldConv, newConv) {
-        case (_, let newConv?):
-            newConv.reload()
-            shiftConv()
-        case (let oldConv?, nil):
-            oldConv.reload()
-        case (nil, nil):
-           return
+        guard let newConv = newConv else {
+            print(" --------- call reloadData ----------- ")
+            reloadData()
+            return
         }
+        
+        let oldSections: [Section] = oldConv?.sections ?? []
+        let newSections: [Section] = newConv.sections
+        
+        let operationSet = diffSection(from: oldSections, new: newSections)
+        
+        let itemDelete = operationSet.itemDelete.map { $0.indexPath }
+        let itemInsert = operationSet.itemInsert.map { $0.indexPath }
+        let itemMove = operationSet.itemMove
+        let itemUpdate = operationSet.itemUpdate.map { $0.indexPath }
+        
+        let sectionDelete = operationSet.sectionDelete
+        let sectionInsert = operationSet.sectionInsert
+        let sectionMove = operationSet.sectionMove
+        let sectionUpdate = operationSet.sectionUpdate
+        
+        performBatchUpdates({
+            if !itemDelete.isEmpty {
+                print(" --------- call deleteItems ----------- ")
+                print("\(itemDelete)")
+                deleteItems(at: itemDelete)
+            }
+            if !itemInsert.isEmpty {
+                print(" --------- call insertItems ----------- ")
+                print("\(itemInsert)")
+                insertItems(at: itemInsert)
+            }
+            if !itemMove.isEmpty {
+                itemMove.forEach {
+                    print(" --------- call moveItem ----------- ")
+                    print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
+                    moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
+                }
+            }
+            if !itemUpdate.isEmpty {
+                print(" --------- call reloadItems ----------- ")
+                print("\(itemUpdate)")
+                reloadItems(at: itemUpdate)
+            }
+            
+            if !sectionDelete.isEmpty {
+                print(" --------- call deleteSections ----------- ")
+                print("\(sectionDelete)")
+                deleteSections(IndexSet(sectionDelete))
+            }
+            if !sectionInsert.isEmpty {
+                print(" --------- call insertSections ----------- ")
+                print("\(sectionInsert)")
+                insertSections(IndexSet(sectionInsert))
+            }
+            if !sectionMove.isEmpty {
+                sectionMove.forEach {
+                    print(" --------- call moveSection ----------- ")
+                    print("source: \($0.source), target: \($0.target)")
+                    moveSection($0.source, toSection: $0.target)
+                }
+            }
+            if !sectionUpdate.isEmpty {
+                print(" --------- call reloadSections ----------- ")
+                print("\(sectionUpdate)")
+                reloadSections(IndexSet(sectionUpdate))
+            }
+        }, completion: { [weak self] _ in
+            self?.shiftConv()
+        })
+        
     }
 }
 
