@@ -8,11 +8,7 @@
 
 import Foundation
 
-extension Section: NestedDifferenciable {
-    public var childDifference: [Differenciable] {
-        return items
-    }
-    
+extension Section: Differenciable {
     public func shouldUpdate(to compare: Differenciable) -> Bool {
         return diffElement.shouldUpdate(to: compare)
     }
