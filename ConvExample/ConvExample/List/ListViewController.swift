@@ -124,6 +124,13 @@ class ListViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemButtonPressed(button:)))
+    }
+    
+    @objc func addItemButtonPressed(button: UIBarButtonItem) {
+        imageNames.append(contentsOf: imageNames)
+        setupConv()
+        collectionView.reload()
     }
 }
 
