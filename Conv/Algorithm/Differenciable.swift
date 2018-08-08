@@ -11,18 +11,10 @@ import Foundation
 public typealias DifferenceIdentifier = String
 public protocol Differenciable {
     var differenceIdentifier: DifferenceIdentifier { get }
-   
-    func shouldUpdate(to compare: Differenciable) -> Bool
 }
 
-public extension Differenciable where Self: Equatable {
-    public func shouldUpdate(to compare: Self) -> Bool {
-        return self != compare
-    }
-}
-
-public extension Differenciable where Self: Hashable {
-    var differenceIdentifier: Self {
-        return self
+public extension Differenciable {
+    public func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
     }
 }
