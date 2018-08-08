@@ -183,6 +183,10 @@ class ListViewController: UIViewController {
         setupConv()
         collectionView.reload()
     }
+    
+    deinit {
+        print("For \(#file), \(#function) called")
+    }
 }
 
 extension ListViewController {
