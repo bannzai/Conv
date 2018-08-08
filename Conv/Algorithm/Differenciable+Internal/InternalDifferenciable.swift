@@ -10,7 +10,6 @@ import Foundation
 
 fileprivate var callCount = 0
 internal struct FakeDifference: Differenciable {
-    
     init() {
         callCount += 1
     }
@@ -20,7 +19,7 @@ internal struct FakeDifference: Differenciable {
     }
     
     func shouldUpdate(to compare: Differenciable) -> Bool {
-        return true
+        return false
     }
 }
 
