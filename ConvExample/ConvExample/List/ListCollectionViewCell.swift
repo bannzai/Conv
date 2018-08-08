@@ -9,10 +9,18 @@
 import UIKit
 import Conv
 
-struct ItemViewModel: ReflectionDifferenciable {
+struct ItemViewModel: Differenciable {
     let index: Int
     let imageName: String
     let image: UIImage
+    
+    var differenceIdentifier: DifferenceIdentifier {
+        return "\(index)" + imageName + "\(image.size)"
+    }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
+    }
 }
 
 class ListCollectionViewCell: UICollectionViewCell {
