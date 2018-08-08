@@ -13,13 +13,6 @@ enum MenuType: Int, Differenciable {
     var differenceIdentifier: DifferenceIdentifier {
         return "\(self)"
     }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        guard let compare = compare as? MenuType else {
-            fatalError()
-        }
-        return self != compare
-    }
 
     case list
     case move
