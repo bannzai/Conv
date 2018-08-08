@@ -29,30 +29,57 @@ public final class Conv: NSObject {
     
     public func reload() {
         guard let oldConv = collectionView?.oldConv else {
+            collectionView?.reloadData()
             return
         }
         
         if let newConv = collectionView?.newConv {
-            let sectionOperations = diff(
-                from: oldConv.sections.map { $0.diffElement! },
-                to: newConv.sections.map { $0.diffElement! }
-            )
+            let operationSet = diffSection(from: oldConv.sections, new: newConv.sections)
             
-            let updateItemsOperation = sectionOperations
-                .flatMap { sectionOperation -> [Operation] in
-                    switch sectionOperation {
-                    case .update(let oldIndex, let newIndex):
-                        return true
-                    case .insert, .delete, .move:
-                        return []
-                    }
-            }
+            let itemDelete = operationSet.itemDelete.map { $0.indexPath }
+            let itemInsert = operationSet.itemInsert.map { $0.indexPath }
+            let itemMove = operationSet.itemMove
+            let itemUpdate = operationSet.itemUpdate.map { $0.indexPath }
             
+            let sectionDelete = operationSet.sectionDelete
+            let sectionInsert = operationSet.sectionInsert
+            let sectionMove = operationSet.sectionMove
+            let sectionUpdate = operationSet.sectionUpdate
+
             collectionView?
                 .performBatchUpdates({
-                collectionView?.deleteItems(at: <#T##[IndexPath]#>)
-            }, completion: <#T##((Bool) -> Void)?##((Bool) -> Void)?##(Bool) -> Void#>)
+                    if !itemDelete.isEmpty {
+                        collectionView?.deleteItems(at: itemDelete)
+                    }
+                    if !itemInsert.isEmpty {
+                        collectionView?.insertItems(at: itemInsert)
+                    }
+                    if !itemMove.isEmpty {
+                        itemMove.forEach {
+                            collectionView?.moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
+                        }
+                    }
+                    if !itemUpdate.isEmpty {
+                        collectionView?.reloadItems(at: itemUpdate)
+                    }
+
+                    if !sectionDelete.isEmpty {
+                        collectionView?.deleteSections(IndexSet(sectionDelete))
+                    }
+                    if !sectionInsert.isEmpty {
+                        collectionView?.insertSections(IndexSet(sectionInsert))
+                    }
+                    if !sectionMove.isEmpty {
+                        sectionMove.forEach {
+                            collectionView?.moveSection($0.source, toSection: $0.target)
+                        }
+                    }
+                    if !sectionUpdate.isEmpty {
+                        collectionView?.reloadSections(IndexSet(sectionUpdate))
+                    }
+            }, completion: nil)
         }
+        
         collectionView?.shiftConv()
     }
 }
