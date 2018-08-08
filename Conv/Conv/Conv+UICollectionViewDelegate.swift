@@ -62,11 +62,31 @@ extension Conv: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        // FIXME: When delete items or sections.
+        // Call this method without updated indexPath.
+        // So, it was caused out of bounds (sections[indexPath.section]) when access itemDelegate.didEndDisplay function
+
+        if sections.count <= indexPath.section {
+            return
+        }
+        let section = sections[indexPath.section]
+        if section.items.count <= indexPath.item {
+            return
+        }
+        
         itemDelegate(indexPath: indexPath)?
             .didEndDisplay(collectionView: collectionView, cell: cell, indexPath: indexPath)
     }
     
     public func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        // FIXME: When delete items or sections.
+        // Call this method without updated indexPath.
+        // So, it was caused out of bounds (sections[indexPath.section]) when access headerFooter.didEndDisplayingSupplementaryView function
+        
+        if sections.count <= indexPath.section {
+            return
+        }
+
         guard
             let headerFooter = headerOrFooterOrNil(for: elementKind, section: indexPath.section)
             else {
