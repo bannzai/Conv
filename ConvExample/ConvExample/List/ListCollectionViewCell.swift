@@ -10,11 +10,12 @@ import UIKit
 import Conv
 
 struct ItemViewModel: Differenciable {
+    let index: Int
     let imageName: String
     let image: UIImage
     
     var differenceIdentifier: DifferenceIdentifier {
-        return imageName + "\(image.size)"
+        return "\(index)" + imageName + "\(image.size)"
     }
     
     func shouldUpdate(to compare: Differenciable) -> Bool {
