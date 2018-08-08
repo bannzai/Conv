@@ -28,9 +28,10 @@ public extension UICollectionView {
     }
     
     func shiftConv() {
-        let newConv = self.newConv
-        self.newConv = nil
-        oldConv = newConv
+        if let newConv = self.newConv {
+            self.newConv = nil
+            oldConv?.sections = newConv.sections
+        }
     }
     
     public func reload() {
@@ -104,8 +105,8 @@ public extension UICollectionView {
                 }
             }
             
-        }, completion: nil)
-        
+        })
+
     }
 }
 
@@ -130,8 +131,6 @@ extension UICollectionView {
     
     var newConv: Conv? {
         set {
-            dataSource = newValue
-            delegate = newValue
             newValue?.collectionView = self
             
             objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.newConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
