@@ -28,10 +28,9 @@ public extension UICollectionView {
     }
     
     func shiftConv() {
-        if let newConv = newConv {
-            oldConv = newConv
-            self.newConv = nil
-        }
+        let newConv = self.newConv
+        self.newConv = nil
+        oldConv = newConv
     }
     
     public func reload() {
