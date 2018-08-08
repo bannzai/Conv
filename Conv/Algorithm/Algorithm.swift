@@ -253,12 +253,14 @@ func diff<D: Differenciable, I>(
         }
     }
     
-    // Fourth Step
     let oldDiffEntriesCount = oldDiffEntries.count
+    let newDiffEntriesCount = newDiffEntries.count
+
+    // Fourth Step
     fourthStep: do {
         // i = 1 Reason target change index to i + 1
         var i = 1
-        while i < newDiffEntries.count {
+        while i < newDiffEntriesCount {
             let newEntry = newDiffEntries[i]
             switching: switch newEntry {
             case .index(let j) where j < oldDiffEntriesCount - 1:
@@ -285,7 +287,7 @@ func diff<D: Differenciable, I>(
     // Fifth step
     fifthStaep: do {
         // i = newDiffEntries.count - 1 Reason target change index to i - 1
-        var i = newDiffEntries.count - 1
+        var i = newDiffEntriesCount - 1
         while i > 0 {
             let newEntry = newDiffEntries[i]
             switcing: switch newEntry {
