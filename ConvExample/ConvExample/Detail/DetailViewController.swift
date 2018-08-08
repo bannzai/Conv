@@ -84,7 +84,7 @@ public class DetailViewController: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        collectionView.reloadData()
+        collectionView.reload()
     }
 }
 

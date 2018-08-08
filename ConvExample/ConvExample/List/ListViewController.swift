@@ -9,7 +9,15 @@
 import UIKit
 import Conv
 
-enum SectionType {
+enum SectionType: Int, Differenciable {
+    var differenceIdentifier: DifferenceIdentifier {
+        return "\(self)"
+    }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
+    }
+    
     case one
     case two
     case three
@@ -55,6 +63,10 @@ class ListViewController: UIViewController {
         flowLayout?.minimumLineSpacing = 0
         flowLayout?.minimumInteritemSpacing = 0
 
+        setupConv()
+    }
+    
+    func setupConv() {
         collectionView
             .conv()
             
@@ -108,8 +120,9 @@ class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
-        
+        setupConv()
+        collectionView.reload()
+
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
