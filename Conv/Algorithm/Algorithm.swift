@@ -218,7 +218,7 @@ func diff<D: Differenciable, I>(
         case let e?:
             entry = e
         }
-        entry.oldCounter.next()
+        entry.newCounter.next()
         newDiffEntries.append(.symbol(entry))
     }
     
@@ -233,7 +233,7 @@ func diff<D: Differenciable, I>(
             entry = e
         }
         
-        entry.newCounter.next()
+        entry.oldCounter.next()
         entry.oldIndexNumbers.append(offset)
         oldDiffEntries.append(.symbol(entry))
     }
@@ -241,14 +241,18 @@ func diff<D: Differenciable, I>(
     // Third Step
     for (offset, entry) in newDiffEntries.enumerated() {
         switch entry {
-        case .symbol(let entry) where entry.isOccursInBoth:
-            assert(!entry.oldIndexNumbers.isEmpty)
+        case .symbol(let entry):
+            if !entry.isOccursInBoth {
+                continue
+            }
+            if entry.oldIndexNumbers.isEmpty {
+                continue
+            }
+            
             let oldIndex = entry.oldIndexNumbers.removeFirst()
             newDiffEntries[offset] = .index(oldIndex)
             oldDiffEntries[oldIndex] = .index(offset)
         case .index:
-            continue
-        case .symbol:
             continue
         }
     }
