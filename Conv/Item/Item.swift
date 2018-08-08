@@ -47,6 +47,7 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     }
 
     public init(diffElement: Differenciable, closure: (Item) -> Void) {
+        self.diffElement = diffElement
         closure(self)
     }
 }

@@ -26,6 +26,7 @@ public class Section {
     }
     
     public init(diffElement: Differenciable, closure: (Section) -> Void) {
+        self.diffElement = diffElement
         closure(self)
     }
     
