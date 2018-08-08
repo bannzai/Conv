@@ -23,15 +23,26 @@ extension ReflectionDifferenciable {
                     return result
                 }
                 
-                let value = "\(label): \(child.value)"
+                let value: String
+                let metatype = type(of: child.value)
+                switch metatype {
+                case is AnyClass:
+                    value = "\(Unmanaged.passUnretained(child.value as AnyObject).toOpaque())"
+                case _:
+                    value = "\(child.value)"
+                }
+                
+                
+                let merged = "\(label): \(value)"
                 switch result.isEmpty {
                 case true:
-                    return result + value
+                    return result + merged
                 case false:
-                    return ", " + result + value
+                    return ", " + result + merged
                 }
             })
         
+        print("value: \(subjectType + propertiesValue)")
         return subjectType + propertiesValue
     }
 }
