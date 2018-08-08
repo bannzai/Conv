@@ -264,7 +264,7 @@ func diff<D: Differenciable, I>(
     fourthStep: do {
         // i = 1 Reason target change index to i + 1
         var i = 1
-        while i < newDiffEntriesCount {
+        while i < newDiffEntriesCount - 1 {
             let newEntry = newDiffEntries[i]
             switching: switch newEntry {
             case .index(let j) where j < oldDiffEntriesCount - 1:
