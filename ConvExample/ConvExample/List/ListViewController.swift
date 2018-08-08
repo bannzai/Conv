@@ -21,10 +21,28 @@ enum SectionType: Int, Differenciable {
     case one
     case two
     case three
+    case four
+    case five
+    case six
+    case seven
+    case eight
+    case nine
     
-    static var elements: [SectionType] {
+    static var firstElements: [SectionType] {
         return [.one, .two, .three]
     }
+    
+    static func append(contents: [SectionType]) -> [SectionType] {
+        guard
+            let last = contents.last,
+            let next = SectionType(rawValue: last.rawValue + 1)
+            else {
+            return contents
+        }
+        
+        return contents + [next]
+    }
+    
     
     var backgroundColor: UIColor {
         return UIColor.black.withAlphaComponent(0.3)
@@ -51,6 +69,8 @@ class ListViewController: UIViewController {
         "water_fall",
     ]
     
+    var elements: [SectionType] = SectionType.firstElements
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +89,7 @@ class ListViewController: UIViewController {
             .conv()
             
             // Create sections for count of elements.
-            .create(for: SectionType.elements) { (sectionType, section) in
+            .create(for: elements) { (sectionType, section) in
                 // In closure passed each element from elements and configuration for section.
                 
                 // Section has creating section header or footer method.
@@ -124,11 +144,42 @@ class ListViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemButtonPressed(button:)))
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemButtonPressed(button:))),
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSectionButtonPressed(button:)))
+        ]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonPressed(button:)))
     }
     
     @objc func addItemButtonPressed(button: UIBarButtonItem) {
         imageNames.append(contentsOf: imageNames)
+        reload()
+    }
+    
+    @objc func addSectionButtonPressed(button: UIBarButtonItem) {
+        elements = SectionType.append(contents: elements)
+        reload()
+    }
+    
+    @objc func refreshButtonPressed(button: UIBarButtonItem) {
+        imageNames = [
+            "forest",
+            "moon",
+            "mountain",
+            "pond",
+            "river",
+            "road",
+            "snow",
+            "volcano",
+            "water_fall",
+        ]
+        
+        elements = SectionType.firstElements
+        
+        reload()
+    }
+    
+    func reload() {
         setupConv()
         collectionView.reload()
     }
@@ -141,14 +192,8 @@ extension ListViewController {
                 .enumerated()
                 .map { ItemViewModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
         }
-        switch section {
-        case .one:
-            return stub()
-        case .two:
-            return stub()
-        case .three:
-            return stub()
-        }
+        
+        return stub()
     }
 }
 
