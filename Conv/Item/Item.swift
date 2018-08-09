@@ -40,8 +40,6 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     
     internal var canFocusItem: ((ItemArgument) -> Bool)?
     
-    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, _ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
-    
     init() {
         
     }
@@ -103,12 +101,7 @@ extension Item {
     public func performAction(_ closure: @escaping ((PerformActionArgument) -> Void)) {
         self.performAction = closure
     }
-    
     public func canFocusItem(_ closure: @escaping ((ItemArgument) -> Bool)) {
         self.canFocusItem = closure
-    }
-    
-    public func targetIndexPathForMoveFromItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)) {
-        self.targetIndexPathForMoveFromItem = closure
     }
 }
