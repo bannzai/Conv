@@ -58,6 +58,7 @@ extension Conv: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         let canMoveItem = itemDelegate(indexPath: indexPath)?
             .canMoveItem(collectionView: collectionView, indexPath: indexPath)
+        print("canMoveItem: \(canMoveItem)")
         return canMoveItem ?? false
     }
     
