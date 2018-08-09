@@ -14,8 +14,6 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
-    public var isReloaded = false
-    
     public override init() {
         super.init()
     }
