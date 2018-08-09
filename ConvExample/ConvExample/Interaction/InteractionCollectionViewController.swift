@@ -77,7 +77,7 @@ public class InteractionCollectionViewController: UIViewController {
     }
     
     func setupConv() {
-        let columns: CGFloat = 5
+        let columns: CGFloat = 4
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
             .conv()
@@ -113,7 +113,7 @@ public class InteractionCollectionViewController: UIViewController {
                 }
                 let emoticon = self.emoticonsForEachSection[sourceIndexPath.section].remove(at: sourceIndexPath.item)
                 self.emoticonsForEachSection[destinationIndexPath.section].insert(emoticon, at: destinationIndexPath.item)
-        }
+            }
     }
     
     func reload() {
