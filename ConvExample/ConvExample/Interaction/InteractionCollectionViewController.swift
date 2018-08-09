@@ -84,13 +84,9 @@ public class InteractionCollectionViewController: UIViewController {
             .conv()
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-                    
-                    // Setting each property and wrapped datasource or delegate method
                     header.reusableIdentifier = "ListCollectionReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
-                        // `view` was converted to ListCollectionReusableView
-                        
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
                         view.backgroundColor = .black
