@@ -128,12 +128,13 @@ public class InteractionCollectionViewController: UIViewController {
                 }
                 let emoticon = self.emoticonsForEachSection[sourceIndexPath.section].remove(at: sourceIndexPath.item)
                 self.emoticonsForEachSection[destinationIndexPath.section].insert(emoticon, at: destinationIndexPath.item)
+                self.reload()
             }
-            .targetIndexPathForMoveFromItem { [weak self] (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
+            .targetIndexPathForMoveFromItem { (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
                 if originalIndexPath.section != proposedIndexPath.section {
                     return originalIndexPath
                 }
-                
+
                 return proposedIndexPath
         }
     }
