@@ -43,7 +43,7 @@ public class InteractionCollectionViewController: UIViewController {
         setupMoveCellGesture()
         
         collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
-        collectionView.register(UINib(nibName: "InteractionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InteractionCollectionViewCell")
+        collectionView.register(UINib(nibName: "EmoticoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmoticoinCollectionViewCell")
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -104,8 +104,8 @@ public class InteractionCollectionViewController: UIViewController {
                 }
                 
                 let emoticons = emoticonsForEachSection[sectionType.rawValue]
-                section.create(for: emoticons, items: { (emoticon, item: Item<InteractionCollectionViewCell>) in
-                    item.reusableIdentifier = "InteractionCollectionViewCell"
+                section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
+                    item.reusableIdentifier = "EmoticoinCollectionViewCell"
                     item.size = CGSize(width: cellWidth, height: cellWidth)
                     item.configureCell({ (cell, info) in
                         cell.configure(text: emoticon)

@@ -13,8 +13,8 @@
 		BA0C65EC211B41550099B0F5 /* ListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA0C65EB211B41550099B0F5 /* ListViewController.storyboard */; };
 		BA0C65F6211C7F550099B0F5 /* InteractionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C65F5211C7F550099B0F5 /* InteractionCollectionViewController.swift */; };
 		BA0C65F8211C7F5A0099B0F5 /* InteractionCollectionViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA0C65F7211C7F5A0099B0F5 /* InteractionCollectionViewController.storyboard */; };
-		BA0C65FB211C7F6E0099B0F5 /* InteractionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C65F9211C7F6E0099B0F5 /* InteractionCollectionViewCell.swift */; };
-		BA0C65FC211C7F6E0099B0F5 /* InteractionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0C65FA211C7F6E0099B0F5 /* InteractionCollectionViewCell.xib */; };
+		BA0C65FB211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0C65F9211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.swift */; };
+		BA0C65FC211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA0C65FA211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib */; };
 		BA30EBCF2108354A0054BFE8 /* Conv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA30EBCE2108354A0054BFE8 /* Conv.framework */; };
 		BA30EBD02108354A0054BFE8 /* Conv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA30EBCE2108354A0054BFE8 /* Conv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA6A040121018F5500040691 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */; };
@@ -52,8 +52,8 @@
 		BA0C65EB211B41550099B0F5 /* ListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ListViewController.storyboard; sourceTree = "<group>"; };
 		BA0C65F5211C7F550099B0F5 /* InteractionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCollectionViewController.swift; sourceTree = "<group>"; };
 		BA0C65F7211C7F5A0099B0F5 /* InteractionCollectionViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InteractionCollectionViewController.storyboard; sourceTree = "<group>"; };
-		BA0C65F9211C7F6E0099B0F5 /* InteractionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionCollectionViewCell.swift; sourceTree = "<group>"; };
-		BA0C65FA211C7F6E0099B0F5 /* InteractionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InteractionCollectionViewCell.xib; sourceTree = "<group>"; };
+		BA0C65F9211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticoinCollectionViewCell.swift; sourceTree = "<group>"; };
+		BA0C65FA211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmoticoinCollectionViewCell.xib; sourceTree = "<group>"; };
 		BA30EBCE2108354A0054BFE8 /* Conv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Conv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA6A040021018F5500040691 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -98,8 +98,6 @@
 			children = (
 				BA0C65F5211C7F550099B0F5 /* InteractionCollectionViewController.swift */,
 				BA0C65F7211C7F5A0099B0F5 /* InteractionCollectionViewController.storyboard */,
-				BA0C65F9211C7F6E0099B0F5 /* InteractionCollectionViewCell.swift */,
-				BA0C65FA211C7F6E0099B0F5 /* InteractionCollectionViewCell.xib */,
 			);
 			path = Interaction;
 			sourceTree = "<group>";
@@ -109,6 +107,8 @@
 			children = (
 				BA6A040321018F7B00040691 /* SectionHeaderReusableView.swift */,
 				BA6A040421018F7B00040691 /* SectionHeaderReusableView.xib */,
+				BA0C65F9211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.swift */,
+				BA0C65FA211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 				BA6A040621018F7B00040691 /* SectionHeaderReusableView.xib in Resources */,
 				BA0C65EC211B41550099B0F5 /* ListViewController.storyboard in Resources */,
 				BA0C65F8211C7F5A0099B0F5 /* InteractionCollectionViewController.storyboard in Resources */,
-				BA0C65FC211C7F6E0099B0F5 /* InteractionCollectionViewCell.xib in Resources */,
+				BA0C65FC211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib in Resources */,
 				BA6A040221018F5500040691 /* ListCollectionViewCell.xib in Resources */,
 				BA7A7FC32090AD5E00F4A24C /* Main.storyboard in Resources */,
 			);
@@ -247,7 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA6A040121018F5500040691 /* ListCollectionViewCell.swift in Sources */,
-				BA0C65FB211C7F6E0099B0F5 /* InteractionCollectionViewCell.swift in Sources */,
+				BA0C65FB211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.swift in Sources */,
 				BA7A7FC02090AD5E00F4A24C /* ListViewController.swift in Sources */,
 				BA0C65E9211B3EFB0099B0F5 /* MenuCollectionViewCell.swift in Sources */,
 				BA7A7FBE2090AD5E00F4A24C /* AppDelegate.swift in Sources */,
