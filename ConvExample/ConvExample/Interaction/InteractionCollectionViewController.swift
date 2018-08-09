@@ -42,7 +42,7 @@ public class InteractionCollectionViewController: UIViewController {
         
         setupMoveCellGesture()
         
-        collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
+        collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
         collectionView.register(UINib(nibName: "InteractionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InteractionCollectionViewCell")
     }
     
@@ -83,8 +83,8 @@ public class InteractionCollectionViewController: UIViewController {
         collectionView
             .conv()
             .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-                    header.reusableIdentifier = "ListCollectionReusableView"
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
+                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
