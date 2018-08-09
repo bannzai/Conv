@@ -10,9 +10,13 @@ import UIKit
 
 class InteractionCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var iconLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+    
+    func configure(text: String) {
+        iconLabel.text = text
     }
 
 }
