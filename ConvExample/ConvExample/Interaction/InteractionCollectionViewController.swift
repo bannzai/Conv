@@ -9,12 +9,6 @@
 import UIKit
 import Conv
 
-extension String: Differenciable {
-    public var differenceIdentifier: DifferenceIdentifier {
-        return self
-    }
-}
-
 public class InteractionCollectionViewController: UIViewController {
     enum SectionType: Int, Differenciable {
         case one
