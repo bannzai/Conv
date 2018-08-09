@@ -73,7 +73,9 @@ public class MenuViewController: UIViewController {
                                 let viewController = storyboard.instantiateInitialViewController()!
                                 self?.navigationController?.pushViewController(viewController, animated: true)
                             case .move:
-                                return
+                                let storyboard = UIStoryboard(name: "InteractionCollectionViewController", bundle: nil)
+                                let viewController = storyboard.instantiateInitialViewController()!
+                                self?.navigationController?.pushViewController(viewController, animated: true)
                             case .shuffle:
                                 return
                             }
