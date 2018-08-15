@@ -32,11 +32,28 @@ class ShuffleViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    private let collectionView = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: UICollectionViewFlowLayout())
     
     var sectionModels: [SectionModel] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(collectionView)
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .lightGray
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            ]
+        )
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.minimumLineSpacing = 1
+            flowLayout.minimumInteritemSpacing = 1
+        }
         
         title = "Shuffle"
         
@@ -84,9 +101,9 @@ class ShuffleViewController: UIViewController {
                     item.configureCell({ (cell, info) in
                         cell.configure(text: emoticon)
                     })
-                    item.willDisplay({ (cell, info) in
+                    item.willDisplay { cell, info in
                         cell.backgroundColor = sectionModel.backgroundColors[info.indexPath.item]
-                    })
+                    }
                 })
             }
     }
@@ -97,13 +114,19 @@ class ShuffleViewController: UIViewController {
     }
     
     func shuffleAllEmoticions() {
-        var flattenEmoticons = sectionModels.flatMap { $0.emoticons }.shuffled()
+        var flattenSectionProperties = sectionModels
+            .flatMap {
+                return zip($0.emoticons, $0.backgroundColors).map { (emoticon: $0.0, backgroundColor: $0.1) }
+            }
+            .shuffled()
+        
         sectionModels = sectionModels
             .map {
                 let count = $0.emoticons.count
-                let emoticons = Array(flattenEmoticons.prefix(count))
-                flattenEmoticons.removeFirst(count)
-                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons, backgroundColors: $0.backgroundColors)
+                let emoticons = Array(flattenSectionProperties.prefix(count)).map { $0.emoticon }
+                let backgroundColors = Array(flattenSectionProperties.prefix(count)).map { $0.backgroundColor }
+                flattenSectionProperties.removeFirst(count)
+                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
         }
         
         reload()
@@ -127,13 +150,13 @@ class ShuffleViewController: UIViewController {
         let backgroundColor: UIColor
         switch sectionType {
         case .one:
-            backgroundColor = UIColor.green.withAlphaComponent(0.2)
+            backgroundColor = UIColor.green.withAlphaComponent(1)
         case .two:
-            backgroundColor = UIColor.orange.withAlphaComponent(0.2)
+            backgroundColor = UIColor.orange.withAlphaComponent(1)
         case .three:
-            backgroundColor = UIColor.purple.withAlphaComponent(0.2)
+            backgroundColor = UIColor.purple.withAlphaComponent(1)
         case .four:
-            backgroundColor = UIColor.yellow.withAlphaComponent(0.2)
+            backgroundColor = UIColor.yellow.withAlphaComponent(1)
         }
         return backgroundColor
     }
