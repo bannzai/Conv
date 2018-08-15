@@ -49,7 +49,6 @@ class AlgorithmTests: XCTestCase {
                 
                 XCTAssert(result.sectionMove.count == 2)
                 
-                print("sectionResult: \(result.sectionMove)")
                 XCTAssert(result.sectionMove[0].source == 2)
                 XCTAssert(result.sectionMove[0].target == 0)
                 

@@ -36,7 +36,6 @@ public extension UICollectionView {
     
     public func reload() {
         guard let newConv = newConv else {
-            print(" --------- call reloadData ----------- ")
             reloadData()
             return
         }
@@ -60,51 +59,28 @@ public extension UICollectionView {
         
         performBatchUpdates({
             if !sectionDelete.isEmpty {
-                print(" --------- call deleteSections ----------- ")
-                print("\(sectionDelete)")
                 deleteSections(IndexSet(sectionDelete))
             }
             if !sectionInsert.isEmpty {
-                print(" --------- call insertSections ----------- ")
-                print("\(sectionInsert)")
                 insertSections(IndexSet(sectionInsert))
-            }
-            if !sectionUpdate.isEmpty {
-                print(" --------- call reloadSections ----------- ")
-                print("\(sectionUpdate)")
-                reloadSections(IndexSet(sectionUpdate))
             }
             if !sectionMove.isEmpty {
                 sectionMove.forEach {
-                    print(" --------- call moveSection ----------- ")
-                    print("source: \($0.source), target: \($0.target)")
                     moveSection($0.source, toSection: $0.target)
                 }
             }
             
             if !itemDelete.isEmpty {
-                print(" --------- call deleteItems ----------- ")
-                print("\(itemDelete)")
                 deleteItems(at: itemDelete)
             }
             if !itemInsert.isEmpty {
-                print(" --------- call insertItems ----------- ")
-                print("\(itemInsert)")
                 insertItems(at: itemInsert)
-            }
-            if !itemUpdate.isEmpty {
-                print(" --------- call reloadItems ----------- ")
-                print("\(itemUpdate)")
-                reloadItems(at: itemUpdate)
             }
             if !itemMove.isEmpty {
                 itemMove.forEach {
-                    print(" --------- call moveItem ----------- ")
-                    print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
                     moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
                 }
             }
-            
         })
 
     }
