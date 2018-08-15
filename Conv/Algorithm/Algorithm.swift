@@ -86,21 +86,13 @@ struct DifferenciableIndexPath: Differenciable {
     var differenceIdentifier: DifferenceIdentifier {
         return "uuid: \(uuid), section: \(section.differenceIdentifier), item: \(item.differenceIdentifier)"
     }
-
-    var indexPath: IndexPath {
-        return IndexPath(item: itemIndex, section: sectionIndex)
-    }
-}
-
-extension DifferenciableIndexPath: Hashable {
-    static func == (lhs: DifferenciableIndexPath, rhs: DifferenciableIndexPath) -> Bool {
-        return lhs.differenceIdentifier == rhs.differenceIdentifier
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
     }
     
-    var hashValue: Int {
-        let a = sectionIndex * 10000000
-        let b = itemIndex * 10
-        return a + b
+    var indexPath: IndexPath {
+        return IndexPath(item: itemIndex, section: sectionIndex)
     }
 }
 
@@ -157,7 +149,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             }
     }
 
-    let sectionOperations = orderedDiff(
+    let sectionOperations = diff(
         from: oldSections,
         to: newSections,
         mapDeleteOperation: { $0 },
@@ -166,7 +158,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
         mapMoveSourceOperation: { $0 },
         mapMoveTargetOperation: { $0 }
     )
-    let itemOperations = orderedDiff(
+    let itemOperations = diff(
         from: indexPathForOld,
         to: indexPathForNew,
         mapDeleteOperation: { indexPathForOld[$0] },
@@ -193,34 +185,34 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     itemOperations.forEach {
         switch $0 {
         case .insert(let newIndex):
-//            let isContainSectionInsert = operationSet.sectionInsert.contains(newIndex.indexPath.section)
-//            if isContainSectionInsert {
-//                // Should only insert section
-//                return
-//            }
+            let isContainSectionInsert = operationSet.sectionInsert.contains(newIndex.indexPath.section)
+            if isContainSectionInsert {
+                // Should only insert section
+                return
+            }
             operationSet.itemInsert.append(newIndex)
         case .delete(let oldIndex):
-//            let isContainSectionDelete = operationSet.sectionDelete.contains(oldIndex.indexPath.section)
-//            if isContainSectionDelete {
-//                // Should only delete section
-//                return
-//            }
+            let isContainSectionDelete = operationSet.sectionDelete.contains(oldIndex.indexPath.section)
+            if isContainSectionDelete {
+                // Should only delete section
+                return
+            }
             operationSet.itemDelete.append(oldIndex)
         case .move(let sourceIndex, let targetIndex):
-//            let isContainSectionMove = operationSet.sectionMove.contains(where: { (source, target) in
-//                return sourceIndex.indexPath.section == source && targetIndex.indexPath.section == target
-//            })
-//            if isContainSectionMove {
-//                // Should only move section
-//                return
-//            }
+            let isContainSectionMove = operationSet.sectionMove.contains(where: { (source, target) in
+                return sourceIndex.indexPath.section == source && targetIndex.indexPath.section == target
+            })
+            if isContainSectionMove {
+                // Should only move section
+                return
+            }
             operationSet.itemMove.append((source: sourceIndex, target: targetIndex))
         case .update(let newIndex):
-//            let isContainSectionUpdate = operationSet.sectionUpdate.contains(newIndex.indexPath.section)
-//            if isContainSectionUpdate {
-//                // Should only delete section
-//                return
-//            }
+            let isContainSectionUpdate = operationSet.sectionUpdate.contains(newIndex.indexPath.section)
+            if isContainSectionUpdate {
+                // Should only delete section
+                return
+            }
             operationSet.itemUpdate.append(newIndex)
         }
     }
@@ -390,52 +382,4 @@ func diff<D: Differenciable, I>(
 
     
     return steps
-}
-
-func orderedDiff<D: Differenciable, I: Hashable>(
-    from oldElements: [D],
-    to newElements: [D],
-    mapDeleteOperation: (Int) -> I,
-    mapInsertOperation: (Int) -> I,
-    mapUpdateOperation: (Int) -> I,
-    mapMoveSourceOperation: (Int) -> I,
-    mapMoveTargetOperation: (Int) -> I
-    ) -> [Operation<I>] {
-    let steps = diff(
-        from: oldElements,
-        to: newElements,
-        mapDeleteOperation: mapDeleteOperation,
-        mapInsertOperation: mapInsertOperation,
-        mapUpdateOperation: mapUpdateOperation,
-        mapMoveSourceOperation: mapMoveSourceOperation,
-        mapMoveTargetOperation: mapMoveTargetOperation
-    )
-    
-    var insertions = [Operation<I>]()
-    var updates = [Operation<I>]()
-    var possibleDeletions: [I: Operation<I>?] = [:]
-    
-    let trackDeletion = { (fromIndex: I, step: Operation<I>) in
-        if possibleDeletions[fromIndex] == nil {
-            possibleDeletions[fromIndex] = step
-        }
-    }
-    
-    for step in steps {
-        switch step {
-        case .insert:
-            insertions.append(step)
-        case let .delete(fromIndex):
-            trackDeletion(fromIndex, step)
-        case let .move(fromIndex, toIndex):
-            insertions.append(.insert(toIndex))
-            trackDeletion(fromIndex, .delete(fromIndex))
-        case .update:
-            updates.append(step)
-        }
-    }
-    
-    let deletions = possibleDeletions.values.compactMap { $0 }.reversed()
-    
-    return deletions + insertions + updates
 }
