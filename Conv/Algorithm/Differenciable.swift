@@ -11,6 +11,8 @@ import Foundation
 public typealias DifferenceIdentifier = String
 public protocol Differenciable {
     var differenceIdentifier: DifferenceIdentifier { get }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool
 }
 
 public extension Differenciable {
