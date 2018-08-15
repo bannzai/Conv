@@ -56,57 +56,97 @@ public extension UICollectionView {
         let sectionMove = operationSet.sectionMove
         let sectionUpdate = operationSet.sectionUpdate
         
-        shiftConv()
+        first: do {
+            sectionDelete.reversed().forEach {
+                oldConv?.sections.remove(at: $0)
+            }
+            itemDelete.reversed().forEach {
+                oldConv?.sections[$0.section].remove(at: $0.item)
+            }
+            performBatchUpdates({
+                if !itemDelete.isEmpty {
+                    print(" --------- call deleteItems ----------- ")
+                    print("\(itemDelete)")
+                    deleteItems(at: itemDelete)
+                }
+                if !sectionDelete.isEmpty {
+                    print(" --------- call deleteSections ----------- ")
+                    print("\(sectionDelete)")
+                    deleteSections(IndexSet(sectionDelete))
+                }
+                if !itemUpdate.isEmpty {
+                    print(" --------- call reloadItems ----------- ")
+                    print("\(itemUpdate)")
+                    reloadItems(at: itemUpdate)
+                }
+            })
+        }
         
-        performBatchUpdates({
-            if !sectionDelete.isEmpty {
-                print(" --------- call deleteSections ----------- ")
-                print("\(sectionDelete)")
-                deleteSections(IndexSet(sectionDelete))
+        second: do {
+            sectionInsert.forEach {
+                oldConv?.sections.insert(newConv.sections[$0], at: $0)
             }
-            if !sectionInsert.isEmpty {
-                print(" --------- call insertSections ----------- ")
-                print("\(sectionInsert)")
-                insertSections(IndexSet(sectionInsert))
-            }
-            if !sectionUpdate.isEmpty {
-                print(" --------- call reloadSections ----------- ")
-                print("\(sectionUpdate)")
-                reloadSections(IndexSet(sectionUpdate))
-            }
-            if !sectionMove.isEmpty {
-                sectionMove.forEach {
-                    print(" --------- call moveSection ----------- ")
-                    print("source: \($0.source), target: \($0.target)")
-                    moveSection($0.source, toSection: $0.target)
-                }
+            sectionMove.forEach {
+                oldConv?.sections.remove(at: $0.source)
+                oldConv?.sections.insert(newConv.sections[$0.target], at: $0.target)
             }
             
-            if !itemDelete.isEmpty {
-                print(" --------- call deleteItems ----------- ")
-                print("\(itemDelete)")
-                deleteItems(at: itemDelete)
-            }
-            if !itemInsert.isEmpty {
-                print(" --------- call insertItems ----------- ")
-                print("\(itemInsert)")
-                insertItems(at: itemInsert)
-            }
-            if !itemUpdate.isEmpty {
-                print(" --------- call reloadItems ----------- ")
-                print("\(itemUpdate)")
-                reloadItems(at: itemUpdate)
-            }
-            if !itemMove.isEmpty {
-                itemMove.forEach {
-                    print(" --------- call moveItem ----------- ")
-                    print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
-                    moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
+            performBatchUpdates({
+                if !sectionInsert.isEmpty {
+                    print(" --------- call insertSections ----------- ")
+                    print("\(sectionInsert)")
+                    insertSections(IndexSet(sectionInsert))
                 }
-            }
+                if !sectionMove.isEmpty {
+                    sectionMove.forEach {
+                        print(" --------- call moveSection ----------- ")
+                        print("source: \($0.source), target: \($0.target)")
+                        moveSection($0.source, toSection: $0.target)
+                    }
+                }
+            })
+        }
+        
+        third: do {
+            shiftConv()
             
-        })
+//            itemInsert.forEach {
+//                oldConv?.sections[$0.section].insert(newConv.sections[$0.section].items[$0.item], to: $0.item)
+//            }
+//            itemMove.forEach {
+//                print("$0.source: \($0.source)")
+//                print("$0.target: \($0.target)")
+//                oldConv?.sections[$0.source.indexPath.section]
+//                    .remove(at: $0.source.indexPath.item)
+//                oldConv?.sections[$0.target.indexPath.section]
+//                    .insert(newConv.sections[$0.target.indexPath.section].items[$0.target.indexPath.item], to: $0.target.indexPath.item)
+//            }
 
+            performBatchUpdates({
+                if !itemInsert.isEmpty {
+                    print(" --------- call insertItems ----------- ")
+                    print("\(itemInsert)")
+                    insertItems(at: itemInsert)
+                }
+                if !itemMove.isEmpty {
+                    itemMove.forEach {
+                        print(" --------- call moveItem ----------- ")
+                        print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
+                        moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
+                    }
+                }
+            })
+        }
+        
+        fourth: do {
+            performBatchUpdates({
+                if !sectionUpdate.isEmpty {
+                    print(" --------- call reloadSections ----------- ")
+                    print("\(sectionUpdate)")
+                    reloadSections(IndexSet(sectionUpdate))
+                }
+            })
+        }
     }
 }
 
