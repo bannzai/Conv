@@ -7,29 +7,100 @@
 //
 
 import XCTest
+@testable import Conv
+
+struct Model: Differenciable {
+    let id: Int
+    var differenceIdentifier: DifferenceIdentifier {
+        return "\(id)"
+    }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
+    }
+}
 
 class AlgorithmTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testMove() {
+        XCTContext.runActivity(named: "diffSection") { (activity) in
+            XCTContext.runActivity(named: "When move only section") { (activity) in
+                let oldConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
+                    section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                let newConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                    section.create(for: [0, 1 ,2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                
+                let result = diffSection(from: oldConv.sections, new: newConv.sections)
+                
+                XCTAssert(result.sectionInsert.isEmpty)
+                XCTAssert(result.sectionUpdate.isEmpty)
+                XCTAssert(result.sectionDelete.isEmpty)
+                XCTAssert(!result.sectionMove.isEmpty)
+                XCTAssert(result.itemInsert.isEmpty)
+                XCTAssert(result.itemDelete.isEmpty)
+                XCTAssert(result.itemUpdate.isEmpty)
+                XCTAssert(result.itemMove.isEmpty)
+                
+                XCTAssert(result.sectionMove.count == 2)
+            }
+            
+            XCTContext.runActivity(named: "When only move item") { (activity) in
+                let oldConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                    section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                let newConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                    section.create(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                
+                let result = diffSection(from: oldConv.sections, new: newConv.sections)
+                
+                XCTAssert(result.sectionInsert.isEmpty)
+                XCTAssert(result.sectionUpdate.isEmpty)
+                XCTAssert(result.sectionDelete.isEmpty)
+                XCTAssert(result.sectionMove.isEmpty)
+                XCTAssert(result.itemInsert.isEmpty)
+                XCTAssert(result.itemDelete.isEmpty)
+                XCTAssert(result.itemUpdate.isEmpty)
+                XCTAssert(!result.itemMove.isEmpty)
+                
+                XCTAssert(result.itemMove.count == 6)
+            }
+            
+            XCTContext.runActivity(named: "When move section and item") { (activity) in
+                let oldConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                    section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                let newConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
+                    section.create(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+                }
+                
+                let result = diffSection(from: oldConv.sections, new: newConv.sections)
+                
+                XCTAssert(result.sectionInsert.isEmpty)
+                XCTAssert(result.sectionUpdate.isEmpty)
+                XCTAssert(result.sectionDelete.isEmpty)
+                XCTAssert(!result.sectionMove.isEmpty)
+                XCTAssert(result.itemInsert.isEmpty)
+                XCTAssert(result.itemDelete.isEmpty)
+                XCTAssert(result.itemUpdate.isEmpty)
+                XCTAssert(!result.itemMove.isEmpty)
+                
+                XCTAssert(result.sectionMove.count == 2)
+                XCTAssert(result.itemMove.count == 2)
+            }
         }
     }
-    
+
+}
+
+private extension AlgorithmTests {
+    func make(_ id: Int) -> Model {
+        return Model(id: id)
+    }
 }
