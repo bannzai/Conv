@@ -29,10 +29,10 @@ class AlgorithmTests: XCTestCase {
     func testMove() {
         XCTContext.runActivity(named: "diffSection") { (activity) in
             XCTContext.runActivity(named: "When move only section") { (activity) in
-                let oldConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
+                let oldConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
                     section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
                 }
-                let newConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                let newConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
                     section.create(for: [0, 1 ,2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
                 }
                 
@@ -48,6 +48,13 @@ class AlgorithmTests: XCTestCase {
                 XCTAssert(result.itemMove.isEmpty)
                 
                 XCTAssert(result.sectionMove.count == 2)
+                
+                print("sectionResult: \(result.sectionMove)")
+                XCTAssert(result.sectionMove[0].source == 2)
+                XCTAssert(result.sectionMove[0].target == 0)
+                
+                XCTAssert(result.sectionMove[1].source == 0)
+                XCTAssert(result.sectionMove[1].target == 2)
             }
             
             XCTContext.runActivity(named: "When only move item") { (activity) in
