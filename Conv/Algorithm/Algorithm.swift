@@ -81,6 +81,7 @@ struct DifferenciableIndexPath: Differenciable {
     let sectionIndex: Int
     let itemIndex: Int
     
+    // TODO: Add Unique property from collection view
     var differenceIdentifier: DifferenceIdentifier {
         return item.differenceIdentifier
     }
