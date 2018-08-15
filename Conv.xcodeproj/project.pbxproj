@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
 		BA2F7E7C21154DE90085EE41 /* Algorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E7B21154DE90085EE41 /* Algorithm.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		BA2F7E7B21154DE90085EE41 /* Algorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				BA2F7E75211484830085EE41 /* SectionTests.swift */,
 				BA7A7FA72090AC3800F4A24C /* Info.plist */,
 				BA2F7E77211485B20085EE41 /* Helper.swift */,
+				BA25977621247F770016ACB7 /* AlgorithmTests.swift */,
 			);
 			path = ConvTests;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 			files = (
 				BA9C2C8B211090AA00C9EBA9 /* ItemTests.swift in Sources */,
 				BA7A7FA62090AC3800F4A24C /* ConvTests.swift in Sources */,
+				BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */,
 				BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */,
 				BA2F7E78211485B20085EE41 /* Helper.swift in Sources */,
 			);

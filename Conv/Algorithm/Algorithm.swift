@@ -75,19 +75,20 @@ extension Entry {
 
 
 struct DifferenciableIndexPath: Differenciable {
+    let uuid: String
+    
     let section: Section
     let item: ItemDelegate
     
     let sectionIndex: Int
     let itemIndex: Int
     
-    // TODO: Add Unique property from collection view
     var differenceIdentifier: DifferenceIdentifier {
-        return item.differenceIdentifier
+        return "uuid: \(uuid), section: \(section.differenceIdentifier), item: \(item.differenceIdentifier)"
     }
     
     func shouldUpdate(to compare: Differenciable) -> Bool {
-        return item.shouldUpdate(to: compare)
+        return differenceIdentifier != compare.differenceIdentifier
     }
     
     var indexPath: IndexPath {
@@ -122,6 +123,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 .enumerated()
                 .map { item in
                     DifferenciableIndexPath(
+                        uuid: "",
                         section: section.element,
                         item: item.element,
                         sectionIndex: section.offset,
@@ -138,6 +140,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 .enumerated()
                 .map { item in
                     DifferenciableIndexPath(
+                        uuid: "",
                         section: section.element,
                         item: item.element,
                         sectionIndex: section.offset,
@@ -210,7 +213,6 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 // Should only delete section
                 return
             }
-
             operationSet.itemUpdate.append(newIndex)
         }
     }
