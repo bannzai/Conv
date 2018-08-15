@@ -321,10 +321,9 @@ func diff<D: Differenciable, I>(
         while i > 0 {
             let newEntry = newDiffEntries[i]
             switcing: switch newEntry {
-            case .index(let j) where j > 0:
-                let adjustedIndex = i + 1
+            case .index(let j) where j - 1 >= 0:
                 guard
-                    case let .symbol(newEntry) = newDiffEntries[adjustedIndex - 1],
+                    case let .symbol(newEntry) = newDiffEntries[i - 1],
                     case let .symbol(oldEntry) = oldDiffEntries[j - 1],
                     newEntry === oldEntry
                     else  {
@@ -332,7 +331,7 @@ func diff<D: Differenciable, I>(
                 }
                 
                 newDiffEntries[i - 1] = .index(j - 1)
-                oldDiffEntries[j - 1] = .index(adjustedIndex - 1)
+                oldDiffEntries[j - 1] = .index(i - 1)
             case .symbol:
                 break switcing
             case .index:
