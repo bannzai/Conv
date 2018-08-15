@@ -25,6 +25,7 @@ class ShuffleViewController: UIViewController {
     struct SectionModel: Differenciable {
         let sectionType: SectionType
         let emoticons: [String]
+        let backgroundColors: [UIColor]
         
         var differenceIdentifier: DifferenceIdentifier {
             return "\(sectionType)"
@@ -76,18 +77,6 @@ class ShuffleViewController: UIViewController {
                     }
                 })
                 
-                let backgroundColor: UIColor
-                switch sectionType {
-                case .one:
-                    backgroundColor = UIColor.green.withAlphaComponent(0.2)
-                case .two:
-                    backgroundColor = UIColor.orange.withAlphaComponent(0.2)
-                case .three:
-                    backgroundColor = UIColor.purple.withAlphaComponent(0.2)
-                case .four:
-                    backgroundColor = UIColor.yellow.withAlphaComponent(0.2)
-                }
-                
                 let emoticons = sectionModels[sectionType.rawValue].emoticons
                 section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
                     item.reusableIdentifier = "EmoticoinCollectionViewCell"
@@ -96,7 +85,7 @@ class ShuffleViewController: UIViewController {
                         cell.configure(text: emoticon)
                     })
                     item.willDisplay({ (cell, info) in
-                        cell.backgroundColor = backgroundColor
+                        cell.backgroundColor = sectionModel.backgroundColors[info.indexPath.item]
                     })
                 })
             }
@@ -114,7 +103,7 @@ class ShuffleViewController: UIViewController {
                 let count = $0.emoticons.count
                 let emoticons = Array(flattenEmoticons.prefix(count))
                 flattenEmoticons.removeFirst(count)
-                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons)
+                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons, backgroundColors: $0.backgroundColors)
         }
         
         reload()
@@ -127,8 +116,26 @@ class ShuffleViewController: UIViewController {
     
     func reset() {
         let emoticons: [String] = (0x1F600...0x1F647).compactMap { UnicodeScalar($0).map(String.init) }
-        sectionModels = SectionType.elements.map { return SectionModel(sectionType: $0, emoticons: emoticons) }
+        sectionModels = SectionType.elements.map { sectionType in
+            let backgroundColors = emoticons.map { _ in cellBackgroundColor(for: sectionType)}
+            return SectionModel(sectionType: sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
+        }
         reload()
+    }
+    
+    func cellBackgroundColor(for sectionType: SectionType) -> UIColor {
+        let backgroundColor: UIColor
+        switch sectionType {
+        case .one:
+            backgroundColor = UIColor.green.withAlphaComponent(0.2)
+        case .two:
+            backgroundColor = UIColor.orange.withAlphaComponent(0.2)
+        case .three:
+            backgroundColor = UIColor.purple.withAlphaComponent(0.2)
+        case .four:
+            backgroundColor = UIColor.yellow.withAlphaComponent(0.2)
+        }
+        return backgroundColor
     }
 }
 
