@@ -82,7 +82,16 @@ public extension UICollectionView {
                 }
             }
         })
-
+        
+        performBatchUpdates({
+            if !sectionUpdate.isEmpty {
+                reloadSections(IndexSet(sectionUpdate))
+            }
+            if !itemUpdate.isEmpty {
+                reloadItems(at: itemUpdate)
+            }
+        })
+        
     }
 }
 
