@@ -15,10 +15,7 @@ class ShuffleViewController: UIViewController {
         case two
         case three
         case four
-        case five
-        case six
-        case seven
-
+        
         static var elements: [SectionType] {
             return [.one, .two, .three, .four]
         }
@@ -63,10 +60,6 @@ class ShuffleViewController: UIViewController {
     
 
     func setupConv() {
-        sectionModels.forEach {
-            print("sectionType: \($0.sectionType)")
-            print("emoticons.count: \($0.emoticons.count)")
-        }
         let columns: CGFloat = 12
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
@@ -122,8 +115,7 @@ class ShuffleViewController: UIViewController {
     }
     
     func reset() {
-        let emoticons: [String] = (0x1F600...0x1F602).compactMap { UnicodeScalar($0).map(String.init) }
-//        let emoticons: [String] = (0x1F600...0x1F647).compactMap { UnicodeScalar($0).map(String.init) }
+        let emoticons: [String] = (0x1F600...0x1F647).compactMap { UnicodeScalar($0).map(String.init) }
         sectionModels = SectionType.elements.map { sectionType in
             let backgroundColors = emoticons.map { _ in cellBackgroundColor(for: sectionType)}
             return SectionModel(sectionType: sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
@@ -142,8 +134,6 @@ class ShuffleViewController: UIViewController {
             backgroundColor = UIColor.purple.withAlphaComponent(0.2)
         case .four:
             backgroundColor = UIColor.yellow.withAlphaComponent(0.2)
-        default:
-            backgroundColor = UIColor.blue.withAlphaComponent(0.4)
         }
         return backgroundColor
     }
