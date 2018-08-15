@@ -30,7 +30,7 @@ public class Section {
         closure(self)
     }
     
-    public func remove(for item: Int) -> ItemDelegate {
+    @discardableResult public func remove(at item: Int) -> ItemDelegate {
         return items.remove(at: item)
     }
     
