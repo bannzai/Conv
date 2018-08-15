@@ -18,7 +18,6 @@
 		BA30EBCF2108354A0054BFE8 /* Conv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA30EBCE2108354A0054BFE8 /* Conv.framework */; };
 		BA30EBD02108354A0054BFE8 /* Conv.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = BA30EBCE2108354A0054BFE8 /* Conv.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		BA4D14A9211CA3B100053B08 /* ShuffleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D14A8211CA3B100053B08 /* ShuffleViewController.swift */; };
-		BA4D14AB211CA3BC00053B08 /* ShuffleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA4D14AA211CA3BC00053B08 /* ShuffleViewController.storyboard */; };
 		BA4D14AE211CA43C00053B08 /* String+Differenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4D14AD211CA43C00053B08 /* String+Differenciable.swift */; };
 		BA6A040121018F5500040691 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */; };
 		BA6A040221018F5500040691 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA6A040021018F5500040691 /* ListCollectionViewCell.xib */; };
@@ -59,7 +58,6 @@
 		BA0C65FA211C7F6E0099B0F5 /* EmoticoinCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmoticoinCollectionViewCell.xib; sourceTree = "<group>"; };
 		BA30EBCE2108354A0054BFE8 /* Conv.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Conv.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA4D14A8211CA3B100053B08 /* ShuffleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleViewController.swift; sourceTree = "<group>"; };
-		BA4D14AA211CA3BC00053B08 /* ShuffleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShuffleViewController.storyboard; sourceTree = "<group>"; };
 		BA4D14AD211CA43C00053B08 /* String+Differenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Differenciable.swift"; sourceTree = "<group>"; };
 		BA6A03FF21018F5400040691 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
 		BA6A040021018F5500040691 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				BA4D14A8211CA3B100053B08 /* ShuffleViewController.swift */,
-				BA4D14AA211CA3BC00053B08 /* ShuffleViewController.storyboard */,
 			);
 			path = Shuffle;
 			sourceTree = "<group>";
@@ -254,7 +251,6 @@
 			files = (
 				BA7A7FC82090AD6000F4A24C /* LaunchScreen.storyboard in Resources */,
 				BA0C65EA211B3EFB0099B0F5 /* MenuCollectionViewCell.xib in Resources */,
-				BA4D14AB211CA3BC00053B08 /* ShuffleViewController.storyboard in Resources */,
 				BA7A7FC52090AD6000F4A24C /* Assets.xcassets in Resources */,
 				BA6A040621018F7B00040691 /* SectionHeaderReusableView.xib in Resources */,
 				BA0C65EC211B41550099B0F5 /* ListViewController.storyboard in Resources */,
