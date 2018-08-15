@@ -14,7 +14,15 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
+    let uuid: String
+    
     public override init() {
+        uuid = UUID().uuidString
+        super.init()
+    }
+    
+    public init(uuid: String)  {
+        self.uuid = uuid
         super.init()
     }
     
