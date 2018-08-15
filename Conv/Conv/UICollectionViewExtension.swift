@@ -64,15 +64,15 @@ public extension UICollectionView {
                 oldConv?.sections[$0.section].remove(at: $0.item)
             }
             performBatchUpdates({
-                if !sectionDelete.isEmpty {
-                    print(" --------- call deleteSections ----------- ")
-                    print("\(sectionDelete)")
-                    deleteSections(IndexSet(sectionDelete))
-                }
                 if !itemDelete.isEmpty {
                     print(" --------- call deleteItems ----------- ")
                     print("\(itemDelete)")
                     deleteItems(at: itemDelete)
+                }
+                if !sectionDelete.isEmpty {
+                    print(" --------- call deleteSections ----------- ")
+                    print("\(sectionDelete)")
+                    deleteSections(IndexSet(sectionDelete))
                 }
                 if !itemUpdate.isEmpty {
                     print(" --------- call reloadItems ----------- ")
@@ -87,12 +87,8 @@ public extension UICollectionView {
                 oldConv?.sections.insert(newConv.sections[$0], at: $0)
             }
             sectionMove.forEach {
-                print("$0.source: \($0.source)")
-                print("$0.target: \($0.target)")
-
-                if let section = oldConv?.sections.remove(at: $0.source) {
-                    oldConv?.sections.insert(section, at: $0.target)
-                }
+                oldConv?.sections.remove(at: $0.source)
+                oldConv?.sections.insert(newConv.sections[$0.target], at: $0.target)
             }
             
             performBatchUpdates({
@@ -111,26 +107,20 @@ public extension UICollectionView {
             })
         }
         
-        print(" --------- step third ----------- ")
         third: do {
-            itemInsert.forEach {
-                oldConv?.sections[$0.section].insert(newConv.sections[$0.section].items[$0.item], to: $0.item)
-            }
+            shiftConv()
             
-            itemMove.forEach {
-                print("$0.source: \($0.source.differenceIdentifier)")
-                print("$0.target: \($0.target.differenceIdentifier)")
-                
-                if let item = oldConv?.sections[$0.source.indexPath.section].remove(at: $0.source.indexPath.item) {
-                    oldConv?.sections[$0.target.indexPath.section].insert(item, to: $0.target.indexPath.item)
-                }
-            }
-            
-            print("oldConv.sections.count: \(oldConv!.sections.count)")
-            oldConv?.sections.enumerated().forEach {
-                print("items.offset: \($0.0)")
-                print("items.count: \($0.1.items.count)")
-            }
+//            itemInsert.forEach {
+//                oldConv?.sections[$0.section].insert(newConv.sections[$0.section].items[$0.item], to: $0.item)
+//            }
+//            itemMove.forEach {
+//                print("$0.source: \($0.source)")
+//                print("$0.target: \($0.target)")
+//                oldConv?.sections[$0.source.indexPath.section]
+//                    .remove(at: $0.source.indexPath.item)
+//                oldConv?.sections[$0.target.indexPath.section]
+//                    .insert(newConv.sections[$0.target.indexPath.section].items[$0.target.indexPath.item], to: $0.target.indexPath.item)
+//            }
 
             performBatchUpdates({
                 if !itemInsert.isEmpty {
@@ -148,9 +138,7 @@ public extension UICollectionView {
             })
         }
         
-        print(" --------- step fourth ----------- ")
         fourth: do {
-            shiftConv()
             performBatchUpdates({
                 if !sectionUpdate.isEmpty {
                     print(" --------- call reloadSections ----------- ")
