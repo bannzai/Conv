@@ -256,57 +256,47 @@ func diff<D: Differenciable, I>(
     mapUpdateOperation: (Int) -> I,
     mapMoveSourceOperation: (Int) -> I,
     mapMoveTargetOperation: (Int) -> I
-    ) -> [Operation<I>] {
-    var table: [DifferenceIdentifier: Entry] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
+    ) -> Result<I> {
+    var table: [DifferenceIdentifier: Occurence] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
+    
+    var newReference: [Int?] = Array(repeating: nil, count: newElements.count)
+    var oldReference: [Int?] = Array(repeating: nil, count: oldElements.count)
+    
     var newDiffEntries: [Entry.Case] = [] // NA
     var oldDiffEntries: [Entry.Case] = [] // OA
     
     // First Step
-    for element in newElements {
-        let entry: Entry
-        switch table[element.differenceIdentifier] {
-        case nil:
-            entry = Entry()
-            table[element.differenceIdentifier] = entry
-        case let e?:
-            entry = e
+    setupTable: do {
+        for (offset, element) in oldElements.enumerated() {
+            switch table[element.differenceIdentifier] {
+            case nil:
+                table[element.differenceIdentifier] = Occurence.start(offset)
+            case .unique(let oldIndex)?:
+                let reference = IndicesReference([oldIndex, offset])
+                table[element.differenceIdentifier] = .many(reference)
+            case .many(let indexies)?:
+                table[element.differenceIdentifier] = .many(indexies.push(offset))
+            }
         }
-        entry.newCounter.next()
-        newDiffEntries.append(.symbol(entry))
     }
-    
+
     // Second Step
-    for (offset, element) in oldElements.enumerated() {
-        let entry: Entry
-        switch table[element.differenceIdentifier] {
-        case nil:
-            entry = Entry()
-            table[element.differenceIdentifier] = entry
-        case let e?:
-            entry = e
-        }
-        
-        entry.oldCounter.next()
-        entry.oldIndexNumbers.append(offset)
-        oldDiffEntries.append(.symbol(entry))
-    }
-    
-    // Third Step
-    for (offset, entry) in newDiffEntries.enumerated() {
-        switch entry {
-        case .symbol(let entry):
-            if !entry.isOccursInBoth {
-                continue
+    recordEachPosition: do {
+        for (offset, element) in newElements.enumerated() {
+            switch table[element.differenceIdentifier] {
+            case nil:
+                break
+            case .unique(let oldIndex)?:
+                if oldReference[oldIndex] == nil {
+                    newReference[offset] = oldIndex
+                    oldReference[oldIndex] = offset
+                }
+            case .many(let indexies)?:
+                if let oldIndex = indexies.pop() {
+                    newReference[offset] = oldIndex
+                    oldReference[oldIndex] = offset
+                }
             }
-            if entry.oldIndexNumbers.isEmpty {
-                continue
-            }
-            
-            let oldIndex = entry.oldIndexNumbers.removeFirst()
-            newDiffEntries[offset] = .index(oldIndex)
-            oldDiffEntries[oldIndex] = .index(offset)
-        case .index:
-            continue
         }
     }
     
