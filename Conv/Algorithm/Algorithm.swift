@@ -66,16 +66,16 @@ struct OperationSet {
 }
 
 struct Diff {
-    func diff(
+    func diffItem(
         from oldIndexPaths: [DifferenciableIndexPath],
         to newIndexPaths: [DifferenciableIndexPath],
         oldSectionReferences: [Int?],
         newSectionReferences: [Int?]
-        ) {
+        ) -> Result<DifferenciableIndexPath> {
         var table: [DifferenceIdentifier: Occurence] = [:]
         
-        var oldReferences: [DifferenciableIndexPath?] = Array(repeating: nil, count: oldIndexPaths.count)
-        var newReferences: [DifferenciableIndexPath?] = Array(repeating: nil, count: newIndexPaths.count)
+        var oldReferences: [Int?] = Array(repeating: nil, count: oldIndexPaths.count)
+        var newReferences: [Int?] = Array(repeating: nil, count: newIndexPaths.count)
 
         setupTable: do {
             for (offset, oldIndexPath) in oldIndexPaths.enumerated() {
@@ -100,32 +100,16 @@ struct Diff {
                     break
                 case .unique(let oldIndex)?:
                     if oldReferences[oldIndex] == nil {
-                        newReferences[offset] = oldIndexPaths[oldIndex]
-                        oldReferences[oldIndex] = newIndexPaths[offset]
+                        newReferences[offset] = oldIndex
+                        oldReferences[oldIndex] = offset
                     }
                 case .many(let indexies)?:
                     if let oldIndex = indexies.pop() {
-                        newReferences[offset] = oldIndexPaths[oldIndex]
-                        oldReferences[oldIndex] = newIndexPaths[offset]
+                        newReferences[offset] = oldIndex
+                        oldReferences[oldIndex] = offset
                     }
                 }
             }
-        }
-
-        let oldItemsEachSection = oldIndexPaths.reduce(into: [[Differenciable]]()) { (result, indexPath: DifferenciableIndexPath) in
-            if result.count <= indexPath.sectionIndex {
-                result.append([])
-            }
-            
-            result[indexPath.sectionIndex].append(indexPath.item)
-        }
-        
-        let newItemsEachSection = newIndexPaths.reduce(into: [[Differenciable]]()) { (result, indexPath: DifferenciableIndexPath) in
-            if result.count <= indexPath.sectionIndex {
-                result.append([])
-            }
-            
-            result[indexPath.sectionIndex].append(indexPath.item)
         }
 
         var steps: [Operation<DifferenciableIndexPath>] = []
@@ -163,80 +147,22 @@ struct Diff {
                 case nil:
                     steps.append(.insert(newIndexPath))
                     insertedCount += 1
-                case let oldIndexPath?:
+                case let oldIndex?:
+                    let oldIndexPath = oldIndexPaths[oldIndex]
+                    
                     if newIndexPath.shouldUpdate(to: oldIndexPath) {
                         steps.append(.update(newIndexPath))
                     }
                     
-                    if let deletedOffset = deletedOffsets[oldIndexPath.sectionIndex]?[oldIndexPath.itemIndex] {
-                        if oldIndexPath.sectionIndex != oldSectionIndex ||
-                        if (oldIndex - deletedOffset + insertedCount) != newIndex {
-                            steps.append(.move(mapMoveSourceOperation(oldIndex), mapMoveTargetOperation(newIndex)))
-                        }
+                    let deletedOffset = deletedOffsets[oldIndex]
+                    if oldIndexPath.sectionIndex != oldSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
+                        steps.append(.move(oldIndexPath, newIndexPath))
                     }
                 }
             }
         }
         
-        // Record the element updates/moves/insertions.
-//        for targetSectionIndex in targetItemsEachSection.indices {
-//            // Should not calculate the element updates/moves/insertions in the inserted section.
-//            guard let sourceSectionIndex = sectionResult.metadata.targetReferences[targetSectionIndex] else {
-//                secondStageSections.append(targetSections[targetSectionIndex])
-//                thirdStageSections.append(targetSections[targetSectionIndex])
-//                continue
-//            }
-//
-//            var untrackedSourceIndex: Int? = 0
-//            let targetElements = targetItemsEachSection[targetSectionIndex]
-//            storedSecondAndThirdStageSection: do {
-//                let sectionDeleteOffset = sectionResult.metadata.sourceTraces[sourceSectionIndex].deleteOffset
-//
-//                let secondStageSection = firstStageSections[sourceSectionIndex - sectionDeleteOffset]
-//                secondStageSections.append(secondStageSection)
-//
-//                let thirdStageSection = Section(model: secondStageSection.model, elements: targetElements)
-//                thirdStageSections.append(thirdStageSection)
-//            }
-//
-//            for targetElementIndex in targetElements.indices {
-//                untrackedSourceIndex = untrackedSourceIndex.flatMap { index in
-//                    sourceElementTraces[sourceSectionIndex].suffix(from: index).index { !$0.isTracked }
-//                }
-//
-//                let targetElementPath = ElementPath(element: targetElementIndex, section: targetSectionIndex)
-//
-//                // If the element source section is recorded as deletion, record its element path as insertion.
-//                guard let sourceElementPath = targetElementReferences[targetElementPath],
-//                    let movedSourceSectionIndex = sectionResult.metadata.sourceTraces[sourceElementPath.section].reference else {
-//                        elementInserted.append(targetElementPath)
-//                        continue
-//                }
-//
-//                sourceElementTraces[sourceElementPath].isTracked = true
-//
-//                compareOldAndNew: do {
-//                    let sourceElement = sourceItemsEachSection[sourceElementPath]
-//                    let targetElement = targetItemsEachSection[targetElementPath]
-//
-//                    if !targetElement.isContentEqual(to: sourceElement) {
-//                        elementUpdated.append(sourceElementPath)
-//                    }
-//                }
-//
-//                do {
-//                    if sourceElementPath.section != sourceSectionIndex || sourceElementPath.element != untrackedSourceIndex {
-//                        let deleteOffset = sourceElementTraces[sourceElementPath].deleteOffset
-//                        let moveSourceElementPath = ElementPath(element: sourceElementPath.element - deleteOffset, section: movedSourceSectionIndex)
-//                        elementMoved.append((source: moveSourceElementPath, target: targetElementPath))
-//                    }
-//                }
-//            }
-//        }
-
-        
-
-
+        return Result(operations: steps, references: References(old: oldReferences, new: newReferences))
     }
     
     func diff<D: Differenciable, I>(
