@@ -35,7 +35,7 @@ struct DifferenciableIndexPath: Differenciable {
     let itemIndex: Int
     
     var differenceIdentifier: DifferenceIdentifier {
-        return section.differenceIdentifier + "000000000000000000" + item.differenceIdentifier
+        return item.differenceIdentifier
     }
     
     var indexPath: IndexPath {
