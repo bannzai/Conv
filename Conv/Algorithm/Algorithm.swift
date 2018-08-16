@@ -21,34 +21,14 @@ enum Operation<I> {
 
 // FIXME: Counter で管理しなくても oldCounter, newCounter をそれぞれBoolで値を持つ方式でいいかもしれない
 // Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
-enum Counter: Equatable {
-    case zero
-    case one
-    case many(Int)
+enum Occurence {
+    case unique(Int)
+    case many(IndicesReference)
     
-    mutating func next() {
-        switch self {
-        case .zero:
-            self = .one
-        case .one:
-            self = .many(1)
-        case .many(let count):
-            self = .many(count + 1)
-        }
+    static func start(_ index: Int) -> Occurence {
+        return .unique(index)
     }
     
-    static func == (lhs: Counter, rhs: Counter) -> Bool {
-        switch (lhs, rhs) {
-        case (.zero, .zero):
-            return true
-        case (.one, .one):
-            return true
-        case (.many(let l), .many(let r)):
-            return l == r
-        case _:
-            return false
-        }
-    }
 }
 
 class Entry {
@@ -57,10 +37,6 @@ class Entry {
     // FIXME: ここは配列である必要がない可能性がある
     // Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
     var oldIndexNumbers: [Int] = [] // OLNO
-    
-    var isOccursInBoth: Bool {
-        return oldCounter != .zero && newCounter != .zero
-    }
 }
 
 extension Entry {
@@ -83,7 +59,7 @@ struct DifferenciableIndexPath: Differenciable {
     let itemIndex: Int
     
     var differenceIdentifier: DifferenceIdentifier {
-        return item.differenceIdentifier
+        return section.differenceIdentifier + "000000000000000000" + item.differenceIdentifier
     }
     
     var indexPath: IndexPath {
@@ -233,6 +209,44 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     return operationSet
 }
 
+func diff(
+    old: [DifferenciableIndexPath],
+    new: [DifferenciableIndexPath]
+    ) {
+    
+}
+
+struct References {
+    let old: [Int]
+    let new: [Int]
+}
+
+/// A mutable reference to indices of elements.
+final class IndicesReference {
+    private var indices: [Int]
+    private var position = 0
+    
+    init(_ indices: [Int]) {
+        self.indices = indices
+    }
+    
+    func push(_ index: Int) -> IndicesReference {
+        indices.append(index)
+    }
+    
+    func pop() -> Int? {
+        guard position < indices.endIndex else {
+            return nil
+        }
+        defer { position += 1 }
+        return indices[position]
+    }
+}
+
+struct Result<I> {
+    let operations: [Operation<I>]
+    let references: References
+}
 
 func diff<D: Differenciable, I>(
     from oldElements: [D],
