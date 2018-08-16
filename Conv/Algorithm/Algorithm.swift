@@ -301,6 +301,7 @@ func diff<D: Differenciable, I>(
         }
     }
     
+    
     // Configure Operations
     
     var steps: [Operation<I>] = []
@@ -318,15 +319,8 @@ func diff<D: Differenciable, I>(
         }
     }
     
-    for (offset, entry) in oldDiffEntries.enumerated() {
-        deletedOffsets.append(deletedCount)
-        switch entry {
-        case .symbol:
-            steps.append(.delete(mapDeleteOperation(offset)))
-            deletedCount += 1
-        case .index:
-            break
-        }
+    recordInsertOrMoveOrUpdate: do {
+        
     }
     
     var insertedCount = 0
