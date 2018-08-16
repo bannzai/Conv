@@ -126,6 +126,10 @@ struct Diff {
                     continue
                 }
                 
+                if let newReference = oldReferences[oldIndexForReference], newReferences[newIndexPaths[newReference].sectionIndex] != nil {
+                    continue
+                }
+                
                 let oldReference = oldReferences[oldIndexForReference]
                 if oldReference == nil {
                     steps.append(.delete(oldIndexPath))
@@ -142,22 +146,21 @@ struct Diff {
                     continue
                 }
                 
-                let newReference = newReferences[newIndexPathOffset]
-                switch newReference {
-                case nil:
+                guard let oldIndex = newReferences[newIndexPathOffset], case .some = oldSectionReferences[oldIndexPaths[oldIndex].sectionIndex] else {
                     steps.append(.insert(newIndexPath))
                     insertedCount += 1
-                case let oldIndex?:
-                    let oldIndexPath = oldIndexPaths[oldIndex]
-                    
-                    if newIndexPath.shouldUpdate(to: oldIndexPath) {
-                        steps.append(.update(newIndexPath))
-                    }
-                    
-                    let deletedOffset = deletedOffsets[oldIndex]
-                    if oldIndexPath.sectionIndex != oldSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
-                        steps.append(.move(oldIndexPath, newIndexPath))
-                    }
+                    continue
+                }
+                
+                let oldIndexPath = oldIndexPaths[oldIndex]
+                
+                if newIndexPath.shouldUpdate(to: oldIndexPath) {
+                    steps.append(.update(newIndexPath))
+                }
+                
+                let deletedOffset = deletedOffsets[oldIndex]
+                if oldIndexPath.sectionIndex != oldSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
+                    steps.append(.move(oldIndexPath, newIndexPath))
                 }
             }
         }
