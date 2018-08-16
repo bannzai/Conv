@@ -329,46 +329,12 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     itemOperations.forEach {
         switch $0 {
         case .insert(let newIndex):
-            let isContainSectionInsert = operationSet.sectionInsert.contains(newIndex.indexPath.section)
-            if isContainSectionInsert {
-                // Should only insert section
-                return
-            }
             operationSet.itemInsert.append(newIndex)
         case .delete(let oldIndex):
-            let isContainSectionDelete = operationSet.sectionDelete.contains(oldIndex.indexPath.section)
-            if isContainSectionDelete {
-                // Should only delete section
-                return
-            }
             operationSet.itemDelete.append(oldIndex)
         case .move(let sourceIndex, let targetIndex):
-            let isContainSectionMove = operationSet.sectionMove.contains(where: { (source, target) in
-                return sourceIndex.indexPath.section == source || targetIndex.indexPath.section == target
-            })
-            if isContainSectionMove {
-                // Should only move section
-                return
-            }
-            let isContainSectionInsert = operationSet.sectionInsert.contains(targetIndex.indexPath.section)
-            if isContainSectionInsert {
-                // Should only insert section
-                return
-            }
-
             operationSet.itemMove.append((source: sourceIndex, target: targetIndex))
         case .update(let newIndex):
-            let isContainSectionUpdate = operationSet.sectionUpdate.contains(newIndex.indexPath.section)
-            if isContainSectionUpdate {
-                // Should only delete section
-                return
-            }
-            let isContainSectionInsert = operationSet.sectionInsert.contains(newIndex.indexPath.section)
-            if isContainSectionInsert {
-                // Should only insert section
-                return
-            }
-
             operationSet.itemUpdate.append(newIndex)
         }
     }
