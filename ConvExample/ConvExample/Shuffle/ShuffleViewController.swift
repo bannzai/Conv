@@ -90,11 +90,11 @@ class ShuffleViewController: UIViewController {
                     header.configureView { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
-                        view.backgroundColor = .black
+                        view.backgroundColor = UIColor.black.withAlphaComponent(0.1)
                     }
                 })
                 
-                let emoticons = sectionModels[sectionType.rawValue].emoticons
+                let emoticons = sectionModel.emoticons
                 section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
                     item.reusableIdentifier = "EmoticoinCollectionViewCell"
                     item.size = CGSize(width: cellWidth, height: cellWidth)
@@ -127,13 +127,13 @@ class ShuffleViewController: UIViewController {
                 let backgroundColors = Array(flattenSectionProperties.prefix(count)).map { $0.backgroundColor }
                 flattenSectionProperties.removeFirst(count)
                 return SectionModel(sectionType: $0.sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
-        }
+    }
         
         reload()
     }
     
     func shuffleSection() {
-        sectionModels = sectionModels.shuffled()
+        sectionModels.shuffle()
         reload()
     }
     
