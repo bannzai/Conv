@@ -300,66 +300,6 @@ func diff<D: Differenciable, I>(
         }
     }
     
-    let oldDiffEntriesCount = oldDiffEntries.count
-    let newDiffEntriesCount = newDiffEntries.count
-
-    // Fourth Step
-    fourthStep: do {
-        // i = 1 Reason target change index to i + 1
-        var i = 1
-        while i < newDiffEntriesCount - 1 {
-            let newEntry = newDiffEntries[i]
-            switching: switch newEntry {
-            case .index(let j) where j + 1 < oldDiffEntriesCount:
-                guard
-                    case let .symbol(newEntry) = newDiffEntries[i + 1],
-                    case let .symbol(oldEntry) = oldDiffEntries[j + 1],
-                    newEntry === oldEntry
-                    else  {
-                        break switching
-                }
-                
-                newDiffEntries[i + 1] = .index(j + 1)
-                oldDiffEntries[j + 1] = .index(i + 1)
-            case .symbol:
-                break switching
-            case .index:
-                break switching
-            }
-            
-            i += 1
-        }
-    }
-
-    // Fifth step
-    fifthStaep: do {
-        // i = newDiffEntries.count - 1 Reason target change index to i - 1
-        var i = newDiffEntriesCount - 1
-        while i > 0 {
-            let newEntry = newDiffEntries[i]
-            switcing: switch newEntry {
-            case .index(let j) where j - 1 >= 0:
-                guard
-                    case let .symbol(newEntry) = newDiffEntries[i - 1],
-                    case let .symbol(oldEntry) = oldDiffEntries[j - 1],
-                    newEntry === oldEntry
-                    else  {
-                        break switcing
-                }
-                
-                newDiffEntries[i - 1] = .index(j - 1)
-                oldDiffEntries[j - 1] = .index(i - 1)
-            case .symbol:
-                break switcing
-            case .index:
-                break switcing
-            }
-            
-            i -= 1
-        }
-    }
-
-
     // Configure Operations
     
     var steps: [Operation<I>] = []
