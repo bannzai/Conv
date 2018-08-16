@@ -294,7 +294,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             }
     }
 
-    let sectionOperations = Diff().diff(
+    let sectionResult = Diff().diff(
         from: oldSections,
         to: newSections,
         mapDeleteOperation: { $0 },
@@ -302,17 +302,16 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
         mapUpdateOperation: { $0 },
         mapMoveSourceOperation: { $0 },
         mapMoveTargetOperation: { $0 }
-    ).operations
-    let itemOperations = Diff().diff(
+    )
+    let sectionOperations = sectionResult.operations
+    
+    let itemOperations = Diff().diffItem(
         from: indexPathForOld,
         to: indexPathForNew,
-        mapDeleteOperation: { indexPathForOld[$0] },
-        mapInsertOperation: { indexPathForNew[$0] },
-        mapUpdateOperation: { indexPathForNew[$0] },
-        mapMoveSourceOperation: { indexPathForOld[$0] },
-        mapMoveTargetOperation: { indexPathForNew[$0] }
-    ).operations
-    
+        oldSectionReferences: sectionResult.references.old,
+        newSectionReferences: sectionResult.references.new
+        ).operations
+
     var operationSet = OperationSet()
     sectionOperations.forEach {
         switch $0 {
