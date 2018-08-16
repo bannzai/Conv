@@ -233,12 +233,11 @@ func diff<D: Differenciable, I>(
     mapMoveSourceOperation: (Int) -> I,
     mapMoveTargetOperation: (Int) -> I
     ) -> Result<I> {
-    var table: [DifferenceIdentifier: Occurence] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
+    var table: [DifferenceIdentifier: Occurence] = [:]
     
     var newReferences: [Int?] = Array(repeating: nil, count: newElements.count)
     var oldReferences: [Int?] = Array(repeating: nil, count: oldElements.count)
 
-    // First Step
     setupTable: do {
         for (offset, element) in oldElements.enumerated() {
             switch table[element.differenceIdentifier] {
@@ -253,7 +252,6 @@ func diff<D: Differenciable, I>(
         }
     }
 
-    // Second Step
     recordRelation: do {
         for (offset, element) in newElements.enumerated() {
             switch table[element.differenceIdentifier] {
