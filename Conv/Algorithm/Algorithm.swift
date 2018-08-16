@@ -259,8 +259,8 @@ func diff<D: Differenciable, I>(
     ) -> Result<I> {
     var table: [DifferenceIdentifier: Occurence] = [:] // table, line -> T.Iterator.Element.DifferenceIdentifier
     
-    var newReference: [Int?] = Array(repeating: nil, count: newElements.count)
-    var oldReference: [Int?] = Array(repeating: nil, count: oldElements.count)
+    var newReferences: [Int?] = Array(repeating: nil, count: newElements.count)
+    var oldReferences: [Int?] = Array(repeating: nil, count: oldElements.count)
     
     var newDiffEntries: [Entry.Case] = [] // NA
     var oldDiffEntries: [Entry.Case] = [] // OA
@@ -281,20 +281,21 @@ func diff<D: Differenciable, I>(
     }
 
     // Second Step
-    recordEachPosition: do {
+    recordRelation: do {
         for (offset, element) in newElements.enumerated() {
             switch table[element.differenceIdentifier] {
             case nil:
+                // The element means to insert after step
                 break
             case .unique(let oldIndex)?:
-                if oldReference[oldIndex] == nil {
-                    newReference[offset] = oldIndex
-                    oldReference[oldIndex] = offset
+                if oldReferences[oldIndex] == nil {
+                    newReferences[offset] = oldIndex
+                    oldReferences[oldIndex] = offset
                 }
             case .many(let indexies)?:
                 if let oldIndex = indexies.pop() {
-                    newReference[offset] = oldIndex
-                    oldReference[oldIndex] = offset
+                    newReferences[offset] = oldIndex
+                    oldReferences[oldIndex] = offset
                 }
             }
         }
@@ -304,9 +305,19 @@ func diff<D: Differenciable, I>(
     
     var steps: [Operation<I>] = []
     
-    var deletedOffsets: [Int] = []
+    var deletedOffsets: [Int] = Array(repeating: 0, count: oldElements.count)
     var deletedCount = 0
 
+    recordForDelete: do {
+        for (oldIndex, oldReference) in oldReferences.enumerated() {
+            deletedOffsets[oldIndex] = deletedCount
+            if oldReference == nil {
+                steps.append(.delete(mapDeleteOperation(oldIndex)))
+                deletedCount += 1
+            }
+        }
+    }
+    
     for (offset, entry) in oldDiffEntries.enumerated() {
         deletedOffsets.append(deletedCount)
         switch entry {
