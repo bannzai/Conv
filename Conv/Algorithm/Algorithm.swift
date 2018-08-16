@@ -12,7 +12,6 @@ enum ItemOperation {
     
 }
 
-
 enum Operation<I> {
     case insert(I)
     case delete(I)
@@ -84,15 +83,17 @@ struct DifferenciableIndexPath: Differenciable {
     let itemIndex: Int
     
     var differenceIdentifier: DifferenceIdentifier {
-        return "uuid: \(uuid), section: \(section.differenceIdentifier), item: \(item.differenceIdentifier)"
-    }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        return differenceIdentifier != compare.differenceIdentifier
+        return item.differenceIdentifier
     }
     
     var indexPath: IndexPath {
         return IndexPath(item: itemIndex, section: sectionIndex)
+    }
+}
+
+extension DifferenciableIndexPath: CustomStringConvertible {
+    var description: String {
+        return "section: \(sectionIndex), item: \(itemIndex)"
     }
 }
 
@@ -200,12 +201,18 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
             operationSet.itemDelete.append(oldIndex)
         case .move(let sourceIndex, let targetIndex):
             let isContainSectionMove = operationSet.sectionMove.contains(where: { (source, target) in
-                return sourceIndex.indexPath.section == source && targetIndex.indexPath.section == target
+                return sourceIndex.indexPath.section == source || targetIndex.indexPath.section == target
             })
             if isContainSectionMove {
                 // Should only move section
                 return
             }
+            let isContainSectionInsert = operationSet.sectionInsert.contains(targetIndex.indexPath.section)
+            if isContainSectionInsert {
+                // Should only insert section
+                return
+            }
+
             operationSet.itemMove.append((source: sourceIndex, target: targetIndex))
         case .update(let newIndex):
             let isContainSectionUpdate = operationSet.sectionUpdate.contains(newIndex.indexPath.section)
@@ -213,6 +220,12 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 // Should only delete section
                 return
             }
+            let isContainSectionInsert = operationSet.sectionInsert.contains(newIndex.indexPath.section)
+            if isContainSectionInsert {
+                // Should only insert section
+                return
+            }
+
             operationSet.itemUpdate.append(newIndex)
         }
     }
@@ -293,7 +306,7 @@ func diff<D: Differenciable, I>(
         while i < newDiffEntriesCount - 1 {
             let newEntry = newDiffEntries[i]
             switching: switch newEntry {
-            case .index(let j) where j < oldDiffEntriesCount - 1:
+            case .index(let j) where j + 1 < oldDiffEntriesCount:
                 guard
                     case let .symbol(newEntry) = newDiffEntries[i + 1],
                     case let .symbol(oldEntry) = oldDiffEntries[j + 1],
@@ -357,7 +370,7 @@ func diff<D: Differenciable, I>(
             steps.append(.delete(mapDeleteOperation(offset)))
             deletedCount += 1
         case .index:
-            continue
+            break
         }
     }
     

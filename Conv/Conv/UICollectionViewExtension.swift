@@ -55,6 +55,8 @@ public extension UICollectionView {
         let sectionMove = operationSet.sectionMove
         let sectionUpdate = operationSet.sectionUpdate
         
+        print("operationSet: \(operationSet)")
+        
         shiftConv()
         
         performBatchUpdates({
