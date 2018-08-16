@@ -276,7 +276,6 @@ func diff<D: Differenciable, I>(
     
     
     // Configure Operations
-    
     var steps: [Operation<I>] = []
     
     var deletedOffsets: [Int] = Array(repeating: 0, count: oldElements.count)
