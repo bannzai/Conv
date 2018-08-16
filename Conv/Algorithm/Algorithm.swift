@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum ItemOperation {
-    
-}
-
 enum Operation<I> {
     case insert(I)
     case delete(I)
@@ -19,8 +15,6 @@ enum Operation<I> {
     case update(I)
 }
 
-// FIXME: Counter で管理しなくても oldCounter, newCounter をそれぞれBoolで値を持つ方式でいいかもしれない
-// Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
 enum Occurence {
     case unique(Int)
     case many(IndicesReference)
@@ -30,24 +24,6 @@ enum Occurence {
     }
     
 }
-
-class Entry {
-    var oldCounter: Counter = .zero // OC
-    var newCounter: Counter = .zero // NC
-    // FIXME: ここは配列である必要がない可能性がある
-    // Differenciable ですでに別のHashを持つものは別のものとして扱うようになるから
-    var oldIndexNumbers: [Int] = [] // OLNO
-}
-
-extension Entry {
-    enum Case {
-        // this case not yet find same element from other elements.
-        case symbol(Entry)
-        // this case found same element from other elements.
-        case index(Int)
-    }
-}
-
 
 struct DifferenciableIndexPath: Differenciable {
     let uuid: String
