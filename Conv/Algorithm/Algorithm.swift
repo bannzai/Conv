@@ -319,27 +319,28 @@ func diff<D: Differenciable, I>(
         }
     }
     
-    recordInsertOrMoveOrUpdate: do {
-        
-    }
-    
-    var insertedCount = 0
-    
-    for (offset, entry) in newDiffEntries.enumerated() {
-        switch entry {
-        case .symbol:
-            steps.append(.insert(mapInsertOperation(offset)))
-            insertedCount += 1
-        case .index(let oldIndex):
-            if oldElements[oldIndex].shouldUpdate(to: newElements[offset]) {
-                steps.append(.update(mapUpdateOperation(offset)))
-            }
-            
-            let deletedOffset = deletedOffsets[oldIndex]
-            if (oldIndex - deletedOffset + insertedCount) != offset {
-                steps.append(.move(mapMoveSourceOperation(oldIndex), mapMoveTargetOperation(offset)))
+    recordInsertOrMoveAndUpdate: do {
+        var insertedCount = 0
+        for (newIndex, newReference) in newReferences.enumerated() {
+            switch newReference {
+            case nil:
+                steps.append(.insert(mapInsertOperation(newIndex)))
+                insertedCount += 1
+            case let oldIndex?:
+                let newElement = newElements[newIndex]
+                let oldElement = oldElements[oldIndex]
+                
+                if newElement.shouldUpdate(to: oldElement) {
+                    steps.append(.update(mapUpdateOperation(newIndex)))
+                }
+                
+                let deletedOffset = deletedOffsets[oldIndex]
+                if (oldIndex - deletedOffset + insertedCount) != newIndex {
+                    steps.append(.move(mapMoveSourceOperation(oldIndex), mapMoveTargetOperation(newIndex)))
+                }
             }
         }
+        
     }
 
     
