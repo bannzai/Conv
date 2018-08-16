@@ -217,8 +217,8 @@ func diff(
 }
 
 struct References {
-    let old: [Int]
-    let new: [Int]
+    let old: [Int?]
+    let new: [Int?]
 }
 
 /// A mutable reference to indices of elements.
@@ -261,10 +261,7 @@ func diff<D: Differenciable, I>(
     
     var newReferences: [Int?] = Array(repeating: nil, count: newElements.count)
     var oldReferences: [Int?] = Array(repeating: nil, count: oldElements.count)
-    
-    var newDiffEntries: [Entry.Case] = [] // NA
-    var oldDiffEntries: [Entry.Case] = [] // OA
-    
+
     // First Step
     setupTable: do {
         for (offset, element) in oldElements.enumerated() {
@@ -340,9 +337,7 @@ func diff<D: Differenciable, I>(
                 }
             }
         }
-        
     }
 
-    
-    return steps
+    return Result(operations: steps, references: References(old: oldReferences, new: newReferences))
 }
