@@ -336,6 +336,43 @@ class AlgorithmTests: XCTestCase {
             XCTAssert(result.itemMove.count == 8)
         }
     }
+    
+    func testMixed() {
+        XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to top, inserted 2 to last") { (activity) in
+            let sections = [make(0), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newSections = [makeForUpdate(1, true), make(2)]
+            let newConv = Conv().create(for: newSections) { (model, section) in
+                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(!result.sectionInsert.isEmpty)
+            XCTAssert(!result.sectionUpdate.isEmpty)
+            XCTAssert(!result.sectionDelete.isEmpty)
+            
+            // Why sectionMove is not changed?
+            // Because already shifted section when before section was deleted.
+            XCTAssert(result.sectionMove.isEmpty)
+            
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            
+            // Need move item to shifted section.
+            XCTAssert(!result.itemMove.isEmpty)
+            
+            XCTAssert(result.sectionInsert.count == 1)
+            XCTAssert(result.sectionUpdate.count == 1)
+            XCTAssert(result.sectionDelete.count == 1)
+            XCTAssert(result.itemMove.count == 1)
+        }
+    }
+
 }
 
 private extension AlgorithmTests {
