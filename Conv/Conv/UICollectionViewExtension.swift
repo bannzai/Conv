@@ -30,6 +30,7 @@ public extension UICollectionView {
     func shiftConv() {
         if let newConv = self.newConv {
             self.newConv = nil
+            oldConv?.sections.removeAll()
             oldConv?.sections = newConv.sections
         }
     }
@@ -83,9 +84,7 @@ public extension UICollectionView {
                     moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
                 }
             }
-        })
-        
-        performBatchUpdates({
+            
             if !sectionUpdate.isEmpty {
                 reloadSections(IndexSet(sectionUpdate))
             }
