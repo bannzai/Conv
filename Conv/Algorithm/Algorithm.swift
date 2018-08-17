@@ -134,12 +134,10 @@ struct Diff {
                     continue
                 }
                 
-                if let newReference = oldReferences[oldIndexForReference]  {
-                    let isAlreadyExistsSection = newSectionReferences[newIndexPaths[newReference].sectionIndex] != nil
-                    if isAlreadyExistsSection {
-                        // For move item or update
-                        continue
-                    }
+                let isExistsIndexPathAtNew = oldReferences[oldIndexForReference] != nil
+                if isExistsIndexPathAtNew {
+                    // if exists new index path, skip recording for remove index path
+                    continue
                 }
                 
                 let oldReference = oldReferences[oldIndexForReference]
@@ -184,10 +182,6 @@ struct Diff {
                 }
                 
                 if containsMovedSection {
-                    continue
-                }
-                
-                if oldIndexPath.sectionIndex == newIndexPath.sectionIndex && oldIndexPath.itemIndex == newIndexPath.itemIndex {
                     continue
                 }
 
