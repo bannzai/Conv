@@ -46,7 +46,7 @@ class AlgorithmTests: XCTestCase {
                 XCTAssert(result.itemDelete.isEmpty)
                 XCTAssert(result.itemUpdate.isEmpty)
                 XCTAssert(result.itemMove.isEmpty)
-                
+
                 XCTAssert(result.sectionMove.count == 2)
                 
                 XCTAssert(result.sectionMove[0].source == 2)
@@ -98,7 +98,7 @@ class AlgorithmTests: XCTestCase {
                 XCTAssert(!result.itemMove.isEmpty)
                 
                 XCTAssert(result.sectionMove.count == 2)
-                XCTAssert(result.itemMove.count == 2)
+                XCTAssert(result.itemMove.count == 6)
             }
         }
     }
