@@ -189,6 +189,103 @@ class AlgorithmTests: XCTestCase {
             XCTAssert(result.itemDelete.count == 1)
         }
     }
+    
+    func testUpdate() {
+        struct ModelForUpdate: Differenciable {
+            let id: Int
+            let forceUpdate: Bool
+            var differenceIdentifier: DifferenceIdentifier {
+                return "\(id)"
+            }
+            
+            func shouldUpdate(to compare: Differenciable) -> Bool {
+                return forceUpdate
+            }
+        }
+        func makeForUpdate(_ id: Int, _ shouldUpdate: Bool) -> ModelForUpdate {
+            return ModelForUpdate(id: id, forceUpdate: shouldUpdate)
+        }
+        
+        XCTContext.runActivity(named: "When update only section") { (activity) in
+            let sections = [makeForUpdate(0, false), makeForUpdate(1, false)]
+            let items = [makeForUpdate(0, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newSections = [makeForUpdate(0, true), makeForUpdate(1, false)]
+            let newConv = Conv().create(for: newSections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(!result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.sectionUpdate.count == 1)
+        }
+        
+        XCTContext.runActivity(named: "When update only item") { (activity) in
+            let sections = [makeForUpdate(0, false)]
+            let items = [makeForUpdate(0, false), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newItems = [makeForUpdate(0, true), makeForUpdate(1, false)]
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(!result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.itemUpdate.count == 1)
+        }
+        
+        XCTContext.runActivity(named: "When update section and item") { (activity) in
+            let sections = [makeForUpdate(0, false), makeForUpdate(1, false)]
+            let items = [makeForUpdate(0, false), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newSections = [makeForUpdate(0, true), makeForUpdate(1, false)]
+            let newItems = [makeForUpdate(0, true), makeForUpdate(1, false)]
+            let newConv = Conv().create(for: newSections) { (model, section) in
+                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(!result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(!result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.sectionUpdate.count == 1)
+            XCTAssert(result.itemUpdate.count == 2)
+        }
+    }
 
     func testMove() {
         XCTContext.runActivity(named: "diffSection") { (activity) in
