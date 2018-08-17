@@ -123,11 +123,16 @@ struct Diff {
 
                 let isDeletedSection = oldSectionReferences[oldIndexPath.sectionIndex] == nil
                 if isDeletedSection {
+                    // Only exec delete section when section deleted
                     continue
                 }
                 
-                if let newReference = oldReferences[oldIndexForReference], newReferences[newIndexPaths[newReference].sectionIndex] != nil {
-                    continue
+                if let newReference = oldReferences[oldIndexForReference]  {
+                    let isAlreadyExistsSection = newSectionReferences[newIndexPaths[newReference].sectionIndex] != nil
+                    if isAlreadyExistsSection {
+                        // For move item or update
+                        continue
+                    }
                 }
                 
                 let oldReference = oldReferences[oldIndexForReference]
@@ -142,11 +147,11 @@ struct Diff {
             var insertedCount = 0
             for (newIndexPathOffset, newIndexPath) in newIndexPaths.enumerated() {
                 guard let oldSectionIndex = newSectionReferences[newIndexPath.sectionIndex] else  {
-                    // already insert section
+                    // Already insert section
                     continue
                 }
                 
-                guard let oldIndex = newReferences[newIndexPathOffset], case .some = oldSectionReferences[oldIndexPaths[oldIndex].sectionIndex] else {
+                guard let oldIndex = newReferences[newIndexPathOffset], let movedSectionIndex = oldSectionReferences[oldIndexPaths[oldIndex].sectionIndex] else {
                     steps.append(.insert(newIndexPath))
                     insertedCount += 1
                     continue
@@ -159,7 +164,9 @@ struct Diff {
                 }
                 
                 let deletedOffset = deletedOffsets[oldIndex]
-                if oldIndexPath.sectionIndex != oldSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
+                
+                // The object is not at the expected position, so move it.
+                if oldIndexPath.sectionIndex != movedSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
                     steps.append(.move(oldIndexPath, newIndexPath))
                 }
             }
