@@ -186,6 +186,10 @@ struct Diff {
                 if containsMovedSection {
                     continue
                 }
+                
+                if oldIndexPath.sectionIndex == newIndexPath.sectionIndex && oldIndexPath.itemIndex == newIndexPath.itemIndex {
+                    continue
+                }
 
                 // The object is not at the expected position, so move it.
                 if oldIndexPath.sectionIndex != movedSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
