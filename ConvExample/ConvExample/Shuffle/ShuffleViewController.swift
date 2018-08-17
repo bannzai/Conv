@@ -140,7 +140,7 @@ class ShuffleViewController: UIViewController {
     
     func reset() {
         let start = 0x1F600
-        let column = 12
+        let column = 16
         sectionModels = SectionType.elements.enumerated().map { offset, sectionType in
             let start = start + offset * (column - 1)
             let end = start + (column - 1)
