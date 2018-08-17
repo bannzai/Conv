@@ -26,6 +26,88 @@ class AlgorithmTests: XCTestCase {
         super.setUp()
     }
     
+    func testInsert() {
+        XCTContext.runActivity(named: "When insert only section") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let insertedSections = sections + [make(1)]
+            let newConv = Conv().create(for: insertedSections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(!result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.sectionInsert.count == 1)
+        }
+        
+        XCTContext.runActivity(named: "When insert only item") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let insertedItems = items + [make(1)]
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(!result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.itemInsert.count == 1)
+        }
+
+        XCTContext.runActivity(named: "When insert section and item") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let insertedItems = items + [make(1)]
+            let insertedSections = sections + [make(1)]
+            let newConv = Conv().create(for: insertedSections) { (model, section) in
+                section.create(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(!result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(!result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.sectionInsert.count == 1)
+            XCTAssert(result.itemInsert.count == 1)
+        }
+    }
+    
     func testMove() {
         XCTContext.runActivity(named: "diffSection") { (activity) in
             XCTContext.runActivity(named: "When move only section") { (activity) in
