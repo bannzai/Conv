@@ -116,10 +116,16 @@ struct Diff {
         
         var deletedOffsets: [Int] = Array(repeating: 0, count: oldIndexPaths.count)
         var deletedCount = 0
+        var deletedOffsetEachSection: [Int: [Int]] = [:]
 
         recordForDelete: do {
             for (oldIndexForReference, oldIndexPath) in oldIndexPaths.enumerated() {
                 deletedOffsets[oldIndexForReference] = deletedCount
+                if deletedOffsetEachSection[oldIndexPath.sectionIndex] == nil {
+                    deletedCount = 0
+                    deletedOffsetEachSection[oldIndexPath.sectionIndex] = []
+                }
+                deletedOffsetEachSection[oldIndexPath.sectionIndex]?.append(deletedCount)
 
                 let isDeletedSection = oldSectionReferences[oldIndexPath.sectionIndex] == nil
                 if isDeletedSection {
@@ -145,7 +151,13 @@ struct Diff {
         
         recordInsertOrMoveAndUpdate: do {
             var insertedCount = 0
+            var savedSectionForResetInsertedCount = 0
             for (newIndexPathOffset, newIndexPath) in newIndexPaths.enumerated() {
+                if savedSectionForResetInsertedCount != newIndexPath.sectionIndex {
+                    insertedCount = 0
+                    savedSectionForResetInsertedCount = newIndexPath.sectionIndex
+                }
+                
                 guard let oldSectionIndex = newSectionReferences[newIndexPath.sectionIndex] else  {
                     // Already insert section
                     continue
@@ -163,7 +175,8 @@ struct Diff {
                     steps.append(.update(newIndexPath))
                 }
                 
-                let deletedOffset = deletedOffsets[oldIndex]
+                let deletedOffset = deletedOffsetEachSection[oldIndexPath.sectionIndex]![oldIndexPath.itemIndex]
+//                let deletedOffset = deletedOffsets[oldIndex]
                 
                 // The object is not at the expected position, so move it.
                 if oldIndexPath.sectionIndex != movedSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
