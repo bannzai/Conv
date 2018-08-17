@@ -9,17 +9,6 @@
 import XCTest
 @testable import Conv
 
-struct Model: Differenciable {
-    let id: Int
-    var differenceIdentifier: DifferenceIdentifier {
-        return "\(id)"
-    }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        return differenceIdentifier != compare.differenceIdentifier
-    }
-}
-
 class AlgorithmTests: XCTestCase {
     
     override func setUp() {
@@ -191,21 +180,7 @@ class AlgorithmTests: XCTestCase {
     }
     
     func testUpdate() {
-        struct ModelForUpdate: Differenciable {
-            let id: Int
-            let forceUpdate: Bool
-            var differenceIdentifier: DifferenceIdentifier {
-                return "\(id)"
-            }
-            
-            func shouldUpdate(to compare: Differenciable) -> Bool {
-                return forceUpdate
-            }
-        }
-        func makeForUpdate(_ id: Int, _ shouldUpdate: Bool) -> ModelForUpdate {
-            return ModelForUpdate(id: id, forceUpdate: shouldUpdate)
-        }
-        
+
         XCTContext.runActivity(named: "When update only section") { (activity) in
             let sections = [makeForUpdate(0, false), makeForUpdate(1, false)]
             let items = [makeForUpdate(0, false)]
@@ -361,11 +336,27 @@ class AlgorithmTests: XCTestCase {
             XCTAssert(result.itemMove.count == 8)
         }
     }
-
 }
 
 private extension AlgorithmTests {
+    struct Model: Differenciable {
+        let id: Int
+        let isNecessaryUpdate: Bool
+        
+        var differenceIdentifier: DifferenceIdentifier {
+            return "\(id)"
+        }
+        
+        func shouldUpdate(to compare: Differenciable) -> Bool {
+            return isNecessaryUpdate
+        }
+    }
+    
     func make(_ id: Int) -> Model {
-        return Model(id: id)
+        return Model(id: id, isNecessaryUpdate: false)
+    }
+    
+    func makeForUpdate(_ id: Int, _ shouldUpdate: Bool) -> Model {
+        return Model(id: id, isNecessaryUpdate: shouldUpdate)
     }
 }
