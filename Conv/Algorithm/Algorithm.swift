@@ -70,7 +70,8 @@ struct Diff {
         from oldIndexPaths: [DifferenciableIndexPath],
         to newIndexPaths: [DifferenciableIndexPath],
         oldSectionReferences: [Int?],
-        newSectionReferences: [Int?]
+        newSectionReferences: [Int?],
+        movedIndexies: [(old: Int, new: Int)]
         ) -> Result<DifferenciableIndexPath> {
         var table: [DifferenceIdentifier: Occurence] = [:]
         
@@ -178,6 +179,14 @@ struct Diff {
                 let deletedOffset = deletedOffsetEachSection[oldIndexPath.sectionIndex]![oldIndexPath.itemIndex]
 //                let deletedOffset = deletedOffsets[oldIndex]
                 
+                let containsMovedSection = movedIndexies.contains { (old, new) -> Bool in
+                    return old == oldIndexPath.sectionIndex && new == newIndexPath.sectionIndex
+                }
+                
+                if containsMovedSection {
+                    continue
+                }
+
                 // The object is not at the expected position, so move it.
                 if oldIndexPath.sectionIndex != movedSectionIndex || (oldIndex - deletedOffset + insertedCount) != newIndexPathOffset {
                     steps.append(.move(oldIndexPath, newIndexPath))
@@ -328,11 +337,21 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     )
     let sectionOperations = sectionResult.operations
     
+    let movedIndexies: [(old: Int, new: Int)] = sectionOperations.compactMap {
+        switch $0 {
+        case .move(let old, let new):
+            return (old: old, new: new)
+        case _:
+            return nil
+        }
+    }
+
     let itemOperations = Diff().diffItem(
         from: indexPathForOld,
         to: indexPathForNew,
         oldSectionReferences: sectionResult.references.old,
-        newSectionReferences: sectionResult.references.new
+        newSectionReferences: sectionResult.references.new,
+        movedIndexies: movedIndexies
         ).operations
 
     var operationSet = OperationSet()
