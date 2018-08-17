@@ -57,10 +57,10 @@ class ShuffleViewController: UIViewController {
         
         title = "Shuffle"
         
-        reset()
-
         collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
         collectionView.register(UINib(nibName: "EmoticoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmoticoinCollectionViewCell")
+        
+        reset()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
