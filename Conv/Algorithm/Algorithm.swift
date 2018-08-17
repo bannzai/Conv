@@ -38,6 +38,10 @@ struct DifferenciableIndexPath: Differenciable {
         return item.differenceIdentifier
     }
     
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return item.shouldUpdate(to: compare)
+    }
+    
     var indexPath: IndexPath {
         return IndexPath(item: itemIndex, section: sectionIndex)
     }
