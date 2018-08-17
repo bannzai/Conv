@@ -78,7 +78,7 @@ class ShuffleViewController: UIViewController {
 
     func setupConv() {
         let columns: CGFloat = 12
-        let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
+        let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns) * 3
         collectionView
             .conv()
             .create(for: sectionModels) { (sectionModel, section) in
@@ -139,8 +139,12 @@ class ShuffleViewController: UIViewController {
     }
     
     func reset() {
-        let emoticons: [String] = (0x1F600...0x1F647).compactMap { UnicodeScalar($0).map(String.init) }
-        sectionModels = SectionType.elements.map { sectionType in
+        let start = 0x1F600
+        let column = 12
+        sectionModels = SectionType.elements.enumerated().map { offset, sectionType in
+            let start = start + offset * (column - 1)
+            let end = start + (column - 1)
+            let emoticons: [String] = (start...end).compactMap { UnicodeScalar($0).map(String.init) }
             let backgroundColors = emoticons.map { _ in cellBackgroundColor(for: sectionType)}
             return SectionModel(sectionType: sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
         }
