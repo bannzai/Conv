@@ -133,7 +133,8 @@ class ShuffleViewController: UIViewController {
     }
     
     func shuffleSection() {
-        sectionModels.shuffle()
+        let section = sectionModels.removeFirst()
+        sectionModels.append(section)
         reload()
     }
     
