@@ -117,8 +117,7 @@ func diffItem(
             }
             
             let deletedOffset = deletedOffsetEachSection[oldIndexPath.sectionIndex]![oldIndexPath.itemIndex]
-            //                let deletedOffset = deletedOffsets[oldIndex]
-            
+
             let containsMovedSection = movedIndexies.contains { (old, new) -> Bool in
                 return old == oldIndexPath.sectionIndex && new == newIndexPath.sectionIndex
             }
