@@ -93,6 +93,15 @@ You can write it into target and exec `pod install`.
 pod 'Conv'
 ```
 
+## Carthage
+Conv is available through Carhtage.  
+You can write it into target and exec `carthage update --platform iOS`.
+And find conv framework and embed your project.
+
+```
+github 'bannzai/Conv'
+```
+
 
 
 # Why Conv?
