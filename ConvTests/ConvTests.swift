@@ -73,13 +73,29 @@ class ConvTests: XCTestCase {
             return titles
         }
         
-        conv.indexTitle { (_, title, index) -> IndexPath in
+        conv.indexTitle { (collectionView, title, index) -> IndexPath in
             return indexPathOfTitle
         }
         
         let result = conv.indexTitle?(collectionView(), titles[0], 0)
         
         XCTAssert(result == indexPathOfTitle)
+    }
+    
+    func testTransitionLayout() {
+        let conv = Conv()
+        
+        let currentLayout = UICollectionViewLayout()
+        let nextLayout = UICollectionViewLayout()
+
+        conv.transitionLayout { (collectionView, fromLayout, toLayout) -> UICollectionViewTransitionLayout in
+            return UICollectionViewTransitionLayout(currentLayout: currentLayout, nextLayout: nextLayout)
+        }
+        
+        let result = conv.transitionLayout?(collectionView(), UICollectionViewLayout(), UICollectionViewLayout())
+        
+        XCTAssert(result?.currentLayout === currentLayout)
+        XCTAssert(result?.nextLayout === nextLayout)
     }
 }
 
