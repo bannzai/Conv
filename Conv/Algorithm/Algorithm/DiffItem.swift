@@ -99,11 +99,12 @@ func diffItem(
                 savedSectionForResetInsertedCount = newIndexPath.sectionIndex
             }
             
-            guard let oldSectionIndex = newSectionReferences[newIndexPath.sectionIndex] else  {
-                // Already insert section
+            
+            let isAlreadyInsertedSection = newSectionReferences[newIndexPath.sectionIndex] == nil
+            if isAlreadyInsertedSection {
                 continue
             }
-            
+
             guard let oldIndex = newReferences[newIndexPathOffset], let movedSectionIndex = oldSectionReferences[oldIndexPaths[oldIndex].sectionIndex] else {
                 steps.append(.insert(newIndexPath))
                 insertedCount += 1
