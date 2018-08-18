@@ -1,5 +1,16 @@
 [![Conv](Logo/conv_logo.png)](https://github.com/bannzai/Conv)
 
+
+<p align="center">
+  <a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-swift4-blue.svg?style=flat"/></a>
+  <a href="https://cocoapods.org/pods/Conv"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/Conv.svg"/></a>
+  <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"/></a>
+  </br>
+  <a href="https://developer.apple.com/swift/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS-green.svg"/></a>
+  <a href="https://github.com/bannzai/Conv/blob/master/LICENSE.txt"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg?style=flat"/></a>
+</p>
+
+
 # Conv
 
 Conv smart represent UICollectionView data structure more than UIKit.  
@@ -76,10 +87,12 @@ Next, call `define()` method from `collectionView` and create `Conv` and start d
         }
 ```
 
-Last, If you want to render of `collectionView`, you call `collectionView.reloadData()` for best timing.  
+Last, If you want to render of `collectionView`, you call `collectionView.reload()` for best timing.  
+`reload()` calculate diff for between before section and between before items and for minimum reloading data.  
+So, fast reloading more than `collectionView.reloadData()`.
 
 ```swift
-collectionView.reloadData()
+collectionView.reload()
 ```
 
 You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
@@ -93,7 +106,14 @@ You can write it into target and exec `pod install`.
 pod 'Conv'
 ```
 
+## Carthage
+Conv is available through Carhtage.  
+You can write it into target and exec `carthage update --platform iOS`.
+And find conv framework and embed your project.
 
+```
+github 'bannzai/Conv'
+```
 
 # Why Conv?
 UIKit.UICollectionView has some problems.
@@ -119,6 +139,15 @@ So, this definition to be natural expression for UICollectionView data strcture,
 3. When create section or item, you can passed elements for configure UICollectionView.
 Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
+
+## Other
+### Algorithm
+Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
+And I also referred to other libraries below.  
+
+- https://github.com/mcudich/HeckelDiff
+- https://github.com/ra1028/DifferenceKit
+- https://github.com/Instagram/IGListKit/
 
 # LICENSE
 [Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
