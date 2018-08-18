@@ -22,6 +22,9 @@ final class IndexStack {
     }
     
     func pop() -> Int? {
+        if indices.isEmpty {
+            return nil
+        }
         return indices.removeFirst()
     }
 }
