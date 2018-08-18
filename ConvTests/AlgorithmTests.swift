@@ -441,6 +441,100 @@ class AlgorithmTests: XCTestCase {
         }
     }
     
+    func testMixedForItem() {
+        XCTContext.runActivity(named: "When change item about delete 0, update 1, move 1 to top, inserted 2 to last") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newItems = [makeForUpdate(1, true), make(2)]
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            
+            XCTAssert(!result.itemInsert.isEmpty)
+            XCTAssert(!result.itemDelete.isEmpty)
+            XCTAssert(!result.itemUpdate.isEmpty)
+            // Why itemMove is not changed?
+            // Because already shifted section when before section was deleted.
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.itemInsert.count == 1)
+            XCTAssert(result.itemUpdate.count == 1)
+            XCTAssert(result.itemDelete.count == 1)
+        }
+        
+        XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newItems = [make(2), make(3), makeForUpdate(1, true)]
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            
+            XCTAssert(!result.itemInsert.isEmpty)
+            XCTAssert(!result.itemDelete.isEmpty)
+            XCTAssert(!result.itemUpdate.isEmpty)
+            // Why itemMove is not changed?
+            // Because already shifted section when before section was inserted.
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.itemInsert.count == 2)
+            XCTAssert(result.itemUpdate.count == 1)
+            XCTAssert(result.itemDelete.count == 1)
+        }
+        
+        XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
+            let sections = [make(0)]
+            let items = [make(0), makeForUpdate(1, false)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newItems = [make(2), make(3), makeForUpdate(1, true)]
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            
+            XCTAssert(!result.itemInsert.isEmpty)
+            XCTAssert(!result.itemDelete.isEmpty)
+            XCTAssert(!result.itemUpdate.isEmpty)
+            // Why itemMove is not changed?
+            // Because already shifted section when before section was inserted.
+            XCTAssert(result.itemMove.isEmpty)
+            
+            XCTAssert(result.itemInsert.count == 2)
+            XCTAssert(result.itemUpdate.count == 1)
+            XCTAssert(result.itemDelete.count == 1)
+        }
+    }
 
 }
 
