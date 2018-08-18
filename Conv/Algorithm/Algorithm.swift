@@ -325,29 +325,6 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     return operationSet
 }
 
-/// A mutable reference to indices of elements.
-final class IndexStack {
-    private var indices: [Int]
-    private var position = 0
-    
-    init(_ indices: [Int]) {
-        self.indices = indices
-    }
-    
-    func push(_ index: Int) -> IndexStack {
-        indices.append(index)
-        return self
-    }
-    
-    func pop() -> Int? {
-        guard position < indices.endIndex else {
-            return nil
-        }
-        defer { position += 1 }
-        return indices[position]
-    }
-}
-
 struct Result<I> {
     let operations: [Operation<I>]
     let ParentReferences: ParentReferences

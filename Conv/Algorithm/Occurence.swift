@@ -10,7 +10,7 @@ import Foundation
 
 enum Occurence {
     case unique(Int)
-    case many(IndicesReference)
+    case many(IndexStack)
     
     static func start(_ index: Int) -> Occurence {
         return .unique(index)

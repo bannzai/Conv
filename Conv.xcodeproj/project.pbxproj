@@ -12,6 +12,7 @@
 		BA1759072127AEE6003EB4F0 /* DifferenciableIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */; };
 		BA1759092127AF08003EB4F0 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759082127AF08003EB4F0 /* OperationSet.swift */; };
 		BA17590B2127AF2F003EB4F0 /* ParentReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17590A2127AF2E003EB4F0 /* ParentReferences.swift */; };
+		BA17590D2127BC91003EB4F0 /* IndexStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17590C2127BC91003EB4F0 /* IndexStack.swift */; };
 		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
@@ -60,6 +61,7 @@
 		BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenciableIndexPath.swift; sourceTree = "<group>"; };
 		BA1759082127AF08003EB4F0 /* OperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
 		BA17590A2127AF2E003EB4F0 /* ParentReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentReferences.swift; sourceTree = "<group>"; };
+		BA17590C2127BC91003EB4F0 /* IndexStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexStack.swift; sourceTree = "<group>"; };
 		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				BA1759022127AE85003EB4F0 /* Operation.swift */,
 				BA1759042127AEC3003EB4F0 /* Occurence.swift */,
 				BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */,
+				BA17590C2127BC91003EB4F0 /* IndexStack.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */,
 				BA2F7E7C21154DE90085EE41 /* Algorithm.swift in Sources */,
 				BA30EBD7210838830054BFE8 /* ItemDelegate.swift in Sources */,
+				BA17590D2127BC91003EB4F0 /* IndexStack.swift in Sources */,
 				BA30EBD92108389E0054BFE8 /* Item+Delegate.swift in Sources */,
 				BA30EBDF210838FE0054BFE8 /* SectionHeaderFooterKind.swift in Sources */,
 				BA17590B2127AF2F003EB4F0 /* ParentReferences.swift in Sources */,
