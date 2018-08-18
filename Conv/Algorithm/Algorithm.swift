@@ -15,7 +15,7 @@ struct Diff {
         oldSectionReferences: [Int?],
         newSectionReferences: [Int?],
         movedIndexies: [(old: Int, new: Int)]
-        ) -> Result<DifferenciableIndexPath> {
+        ) -> SectionResult<DifferenciableIndexPath> {
         var table: [DifferenceIdentifier: Occurence] = [:]
         
         var oldReferences: [Int?] = Array(repeating: nil, count: oldIndexPaths.count)
@@ -135,7 +135,7 @@ struct Diff {
             }
         }
         
-        return Result(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
+        return SectionResult(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
     }
     
     func diff<D: Differenciable, I>(
@@ -146,7 +146,7 @@ struct Diff {
         mapUpdateOperation: (Int) -> I,
         mapMoveSourceOperation: (Int) -> I,
         mapMoveTargetOperation: (Int) -> I
-        ) -> Result<I> {
+        ) -> SectionResult<I> {
         var table: [DifferenceIdentifier: Occurence] = [:]
         
         var newReferences: [Int?] = Array(repeating: nil, count: newElements.count)
@@ -227,7 +227,7 @@ struct Diff {
             }
         }
         
-        return Result(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
+        return SectionResult(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
     }
 }
 
@@ -323,10 +323,5 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     }
     
     return operationSet
-}
-
-struct Result<I> {
-    let operations: [Operation<I>]
-    let ParentReferences: ParentReferences
 }
 
