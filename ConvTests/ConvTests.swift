@@ -138,6 +138,19 @@ class ConvTests: XCTestCase {
         
         XCTAssertEqual(result, indexPath)
     }
+    
+    func testTargetContentOffset() {
+        let conv = Conv()
+        
+        let offset = CGPoint(x: 1, y: 1)
+        conv.targetContentOffset { (collectionView, propsosedContentOffset) -> CGPoint in
+            return propsosedContentOffset
+        }
+
+        let result = conv.targetContentOffset?(collectionView(), offset)
+        
+        XCTAssertEqual(result, offset)
+    }
 }
 
 extension ConvTests: Stub { }
