@@ -11,14 +11,20 @@ import ObjectiveC
 
 public extension UICollectionView {
     public func conv() -> Conv {
-        let conv = Conv()
         switch (oldConv, newConv) {
-        case (nil, _):
+        case (nil, nil):
+            let conv = Conv()
             self.oldConv = conv
-        case (_, _):
+            return conv
+        case (nil, let newConv?):
+            let conv = Conv(uuid: newConv.uuid)
             self.newConv = conv
+            return conv
+        case (let oldConv?, _):
+            let conv = Conv(uuid: oldConv.uuid)
+            self.newConv = conv
+            return conv
         }
-        return conv
     }
     
     public func conv(scrollViewDelegate: UIScrollViewDelegate?) -> Conv {
