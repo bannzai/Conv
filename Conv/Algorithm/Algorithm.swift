@@ -28,7 +28,7 @@ struct Diff {
                 case nil:
                     table[key] = Occurence.start(offset)
                 case .unique(let oldIndex)?:
-                    let reference = IndicesReference([oldIndex, offset])
+                    let reference = IndexStack([oldIndex, offset])
                     table[key] = .many(reference)
                 case .many(let indexies)?:
                     table[key] = .many(indexies.push(offset))
@@ -159,7 +159,7 @@ struct Diff {
                 case nil:
                     table[key] = Occurence.start(offset)
                 case .unique(let oldIndex)?:
-                    let reference = IndicesReference([oldIndex, offset])
+                    let reference = IndexStack([oldIndex, offset])
                     table[key] = .many(reference)
                 case .many(let indexies)?:
                     table[key] = .many(indexies.push(offset))
@@ -326,7 +326,7 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
 }
 
 /// A mutable reference to indices of elements.
-final class IndicesReference {
+final class IndexStack {
     private var indices: [Int]
     private var position = 0
     
@@ -334,7 +334,7 @@ final class IndicesReference {
         self.indices = indices
     }
     
-    func push(_ index: Int) -> IndicesReference {
+    func push(_ index: Int) -> IndexStack {
         indices.append(index)
         return self
     }
