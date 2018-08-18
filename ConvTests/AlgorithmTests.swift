@@ -562,26 +562,3 @@ class AlgorithmTests: XCTestCase {
     }
 
 }
-
-private extension AlgorithmTests {
-    struct Model: Differenciable {
-        let id: Int
-        let isNecessaryUpdate: Bool
-        
-        var differenceIdentifier: DifferenceIdentifier {
-            return "\(id)"
-        }
-        
-        func shouldUpdate(to compare: Differenciable) -> Bool {
-            return isNecessaryUpdate
-        }
-    }
-    
-    func make(_ id: Int) -> Model {
-        return Model(id: id, isNecessaryUpdate: false)
-    }
-    
-    func makeForUpdate(_ id: Int, _ shouldUpdate: Bool) -> Model {
-        return Model(id: id, isNecessaryUpdate: shouldUpdate)
-    }
-}
