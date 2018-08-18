@@ -8,16 +8,6 @@
 
 import Foundation
 
-enum Occurence {
-    case unique(Int)
-    case many(IndicesReference)
-    
-    static func start(_ index: Int) -> Occurence {
-        return .unique(index)
-    }
-    
-}
-
 struct DifferenciableIndexPath: Differenciable {
     let uuid: String
     

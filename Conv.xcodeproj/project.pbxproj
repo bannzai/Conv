@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BA1759032127AE85003EB4F0 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759022127AE85003EB4F0 /* Operation.swift */; };
+		BA1759052127AEC4003EB4F0 /* Occurence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759042127AEC3003EB4F0 /* Occurence.swift */; };
 		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
@@ -52,6 +53,7 @@
 
 /* Begin PBXFileReference section */
 		BA1759022127AE85003EB4F0 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		BA1759042127AEC3003EB4F0 /* Occurence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Occurence.swift; sourceTree = "<group>"; };
 		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				BA2F7E7B21154DE90085EE41 /* Algorithm.swift */,
 				BA2F7E7D2115613F0085EE41 /* Differenciable.swift */,
 				BA1759022127AE85003EB4F0 /* Operation.swift */,
+				BA1759042127AEC3003EB4F0 /* Occurence.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				BAA559B72118A6B3001A31C6 /* Item+Diffrenciable.swift in Sources */,
 				BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */,
 				BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */,
+				BA1759052127AEC4003EB4F0 /* Occurence.swift in Sources */,
 				BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */,
 				BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */,
 			);
