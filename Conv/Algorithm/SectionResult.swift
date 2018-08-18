@@ -10,7 +10,7 @@ import Foundation
 
 struct SectionResult<I> {
     let operations: [Operation<I>]
-    let ParentReferences: ParentReferences
+    let SectionReference: SectionReference
 }
 
 

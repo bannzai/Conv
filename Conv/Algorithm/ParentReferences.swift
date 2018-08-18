@@ -1,5 +1,5 @@
 //
-//  ParentReferences.swift
+//  SectionReference.swift
 //  Conv
 //
 //  Created by Yudai.Hirose on 2018/08/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ParentReferences {
+struct SectionReference {
     let old: [Int?]
     let new: [Int?]
 }
