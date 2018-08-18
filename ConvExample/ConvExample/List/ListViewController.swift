@@ -77,8 +77,10 @@ class ListViewController: UIViewController {
         title = "List"
         
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
-        collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
+        collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
 
+        collectionView.contentInset.bottom = 40
+        
         flowLayout?.sectionInset = .zero
         flowLayout?.minimumLineSpacing = 0
         flowLayout?.minimumInteritemSpacing = 0
@@ -93,14 +95,14 @@ class ListViewController: UIViewController {
                 // In closure passed each element from elements and configuration for section.
                 
                 // Section has creating section header or footer method.
-                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
+                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<SectionHeaderReusableView>)
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "ListCollectionReusableView"
+                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
-                        // `view` was converted to ListCollectionReusableView
+                        // `view` was converted to SectionHeaderReusableView
                         
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white

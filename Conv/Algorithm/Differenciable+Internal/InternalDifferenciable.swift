@@ -8,10 +8,12 @@
 
 import Foundation
 
-fileprivate var callCount = 0
 internal struct FakeDifference: Differenciable {
-    init() {
-        callCount += 1
+    private let position: Int
+    private let uuid: String
+    init(position: Int, uuid: String) {
+        self.position = position
+        self.uuid = uuid
     }
     
     var differenceIdentifier: String {
@@ -25,6 +27,6 @@ internal struct FakeDifference: Differenciable {
 
 extension FakeDifference: CustomStringConvertible {
     var description: String {
-        return "FakeDifference: \(callCount)"
+        return "FakeDifference position: \(position) + uuid: \(uuid)"
     }
 }

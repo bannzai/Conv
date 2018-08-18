@@ -11,14 +11,20 @@ import ObjectiveC
 
 public extension UICollectionView {
     public func conv() -> Conv {
-        let conv = Conv()
-        switch (oldConv, newConv) {
-        case (nil, _):
-            self.oldConv = conv
-        case (_, _):
-            self.newConv = conv
+        switch (mainConv, convForOverwrite) {
+        case (nil, nil):
+            let conv = Conv()
+            self.mainConv = conv
+            return conv
+        case (nil, let convForOverwrite?):
+            let conv = Conv(uuid: convForOverwrite.uuid)
+            self.convForOverwrite = conv
+            return conv
+        case (let mainConv?, _):
+            let conv = Conv(uuid: mainConv.uuid)
+            self.convForOverwrite = conv
+            return conv
         }
-        return conv
     }
     
     public func conv(scrollViewDelegate: UIScrollViewDelegate?) -> Conv {
@@ -28,21 +34,21 @@ public extension UICollectionView {
     }
     
     func shiftConv() {
-        if let newConv = self.newConv {
-            self.newConv = nil
-            oldConv?.sections = newConv.sections
+        if let convForOverwrite = self.convForOverwrite {
+            self.convForOverwrite = nil
+            mainConv?.sections.removeAll()
+            mainConv?.sections = convForOverwrite.sections
         }
     }
     
     public func reload() {
-        guard let newConv = newConv else {
-            print(" --------- call reloadData ----------- ")
+        guard let convForOverwrite = convForOverwrite else {
             reloadData()
             return
         }
         
-        let oldSections: [Section] = oldConv?.sections ?? []
-        let newSections: [Section] = newConv.sections
+        let oldSections: [Section] = mainConv?.sections ?? []
+        let newSections: [Section] = convForOverwrite.sections
         
         let operationSet = diffSection(from: oldSections, new: newSections)
         
@@ -56,57 +62,43 @@ public extension UICollectionView {
         let sectionMove = operationSet.sectionMove
         let sectionUpdate = operationSet.sectionUpdate
         
+        print("operationSet: \(operationSet)")
+        
         shiftConv()
         
         performBatchUpdates({
             if !sectionDelete.isEmpty {
-                print(" --------- call deleteSections ----------- ")
-                print("\(sectionDelete)")
                 deleteSections(IndexSet(sectionDelete))
             }
             if !sectionInsert.isEmpty {
-                print(" --------- call insertSections ----------- ")
-                print("\(sectionInsert)")
                 insertSections(IndexSet(sectionInsert))
-            }
-            if !sectionUpdate.isEmpty {
-                print(" --------- call reloadSections ----------- ")
-                print("\(sectionUpdate)")
-                reloadSections(IndexSet(sectionUpdate))
             }
             if !sectionMove.isEmpty {
                 sectionMove.forEach {
-                    print(" --------- call moveSection ----------- ")
-                    print("source: \($0.source), target: \($0.target)")
                     moveSection($0.source, toSection: $0.target)
                 }
             }
             
             if !itemDelete.isEmpty {
-                print(" --------- call deleteItems ----------- ")
-                print("\(itemDelete)")
                 deleteItems(at: itemDelete)
             }
             if !itemInsert.isEmpty {
-                print(" --------- call insertItems ----------- ")
-                print("\(itemInsert)")
                 insertItems(at: itemInsert)
-            }
-            if !itemUpdate.isEmpty {
-                print(" --------- call reloadItems ----------- ")
-                print("\(itemUpdate)")
-                reloadItems(at: itemUpdate)
             }
             if !itemMove.isEmpty {
                 itemMove.forEach {
-                    print(" --------- call moveItem ----------- ")
-                    print("source: \($0.source.indexPath), target: \($0.target.indexPath)")
                     moveItem(at: $0.source.indexPath, to: $0.target.indexPath)
                 }
             }
             
+            if !sectionUpdate.isEmpty {
+                reloadSections(IndexSet(sectionUpdate))
+            }
+            if !itemUpdate.isEmpty {
+                reloadItems(at: itemUpdate)
+            }
         })
-
+        
     }
 }
 
@@ -116,7 +108,7 @@ fileprivate struct UICollectionViewAssociatedObjectHandle {
 }
 
 extension UICollectionView {
-    var oldConv: Conv? {
+    var mainConv: Conv? {
         set {
             dataSource = newValue
             delegate = newValue
@@ -129,7 +121,7 @@ extension UICollectionView {
         }
     }
     
-    var newConv: Conv? {
+    var convForOverwrite: Conv? {
         set {
             newValue?.collectionView = self
             

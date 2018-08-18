@@ -21,11 +21,11 @@ enum MenuType: Int, Differenciable {
     var title: String {
         switch self {
         case .list:
-            return "List view for add section or item, and refresh"
+            return "Add section or item, and delete it"
         case .move:
             return "Moving interactive collection view cell"
         case .shuffle:
-            return "Moving randomize shuffling collection view cell"
+            return "Shuffle section and items"
         }
     }
     
@@ -53,6 +53,10 @@ public class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         reload()
+        
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     func setupConv() {
@@ -77,7 +81,8 @@ public class MenuViewController: UIViewController {
                                 let viewController = storyboard.instantiateInitialViewController()!
                                 self?.navigationController?.pushViewController(viewController, animated: true)
                             case .shuffle:
-                                return
+                                let viewController = ShuffleViewController()
+                                self?.navigationController?.pushViewController(viewController, animated: true)
                             }
                         })
                     }

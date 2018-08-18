@@ -10,7 +10,6 @@ import UIKit
 
 extension Conv: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("numberOfItemsInSection: \(section), count: \(sections[section].items.count)")
         return sections[section].items.count
     }
     
@@ -26,7 +25,6 @@ extension Conv: UICollectionViewDataSource {
     }
     
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        print("numberOfSections: \(sections.count)")
         return sections.count
     }
     
@@ -58,14 +56,11 @@ extension Conv: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         let canMoveItem = itemDelegate(indexPath: indexPath)?
             .canMoveItem(collectionView: collectionView, indexPath: indexPath)
-        print("canMoveItem: \(canMoveItem)")
         return canMoveItem ?? false
     }
     
     public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        print("sourceIndexPath: \(sourceIndexPath)")
-        print("destinationIndexPath: \(destinationIndexPath)")
-        let item = sections[sourceIndexPath.section].remove(for: sourceIndexPath.item)
+        let item = sections[sourceIndexPath.section].remove(at: sourceIndexPath.item)
         sections[destinationIndexPath.section].insert(item, to: destinationIndexPath.item)
         didMoveItem?(sourceIndexPath, destinationIndexPath)
     }

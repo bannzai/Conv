@@ -9,12 +9,6 @@
 import UIKit
 import Conv
 
-extension String: Differenciable {
-    public var differenceIdentifier: DifferenceIdentifier {
-        return self
-    }
-}
-
 public class InteractionCollectionViewController: UIViewController {
     enum SectionType: Int, Differenciable {
         case one
@@ -42,8 +36,8 @@ public class InteractionCollectionViewController: UIViewController {
         
         setupMoveCellGesture()
         
-        collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
-        collectionView.register(UINib(nibName: "InteractionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "InteractionCollectionViewCell")
+        collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
+        collectionView.register(UINib(nibName: "EmoticoinCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "EmoticoinCollectionViewCell")
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -83,14 +77,10 @@ public class InteractionCollectionViewController: UIViewController {
         collectionView
             .conv()
             .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-                    
-                    // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "ListCollectionReusableView"
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
+                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
-                        // `view` was converted to ListCollectionReusableView
-                        
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
                         view.backgroundColor = .black
@@ -108,8 +98,8 @@ public class InteractionCollectionViewController: UIViewController {
                 }
                 
                 let emoticons = emoticonsForEachSection[sectionType.rawValue]
-                section.create(for: emoticons, items: { (emoticon, item: Item<InteractionCollectionViewCell>) in
-                    item.reusableIdentifier = "InteractionCollectionViewCell"
+                section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
+                    item.reusableIdentifier = "EmoticoinCollectionViewCell"
                     item.size = CGSize(width: cellWidth, height: cellWidth)
                     item.configureCell({ (cell, info) in
                         cell.configure(text: emoticon)

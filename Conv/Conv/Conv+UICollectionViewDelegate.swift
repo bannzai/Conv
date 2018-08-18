@@ -136,8 +136,6 @@ extension Conv: UICollectionViewDelegate {
     }
     
     public func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
-        print("originalIndexPath: \(originalIndexPath)")
-        print("proposedIndexPath: \(proposedIndexPath)")
         return targetIndexPathForMoveFromItem?(collectionView, originalIndexPath, proposedIndexPath) ?? proposedIndexPath
     }
 

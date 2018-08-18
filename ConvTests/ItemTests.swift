@@ -304,18 +304,6 @@ class ItemTests: XCTestCase {
             XCTAssertFalse(item.canFocusItem(collectionView: collectionView(), indexPath: indexPath())!)
         }
     }
-    
-    func testTargetIndexPathForMoveFromItem() {
-        let item = Item<TestCollectionViewCell>()
-        let testIndexPath = IndexPath(item: 1, section: 2)
-            
-        item.targetIndexPathForMoveFromItem { (item, collectionView, originalIndexPath, proposedIndexPath) in
-            return testIndexPath
-        }
-        
-        let movedIndexPath = item.targetIndexPathForMoveFromItem(collectionView: collectionView(), originalIndexPath: indexPath(), proposedIndexPath: indexPath())
-        XCTAssertEqual(movedIndexPath, testIndexPath)
-    }
 }
 
 extension ItemTests: Stub { }

@@ -1,5 +1,5 @@
 //
-//  InteractionCollectionViewCell.swift
+//  EmoticoinCollectionViewCell.swift
 //  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/08/09.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InteractionCollectionViewCell: UICollectionViewCell {
+class EmoticoinCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var iconLabel: UILabel!
     override func awakeFromNib() {
