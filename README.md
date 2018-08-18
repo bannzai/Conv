@@ -1,5 +1,16 @@
 [![Conv](Logo/conv_logo.png)](https://github.com/bannzai/Conv)
 
+
+<p align="center">
+  <a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-swift4-blue.svg?style=flat"/></a>
+  <a href="https://cocoapods.org/pods/Conv"><img alt="CocoaPods" src="https://img.shields.io/cocoapods/v/Conv.svg"/></a>
+  <a href="https://github.com/Carthage/Carthage"><img alt="Carthage" src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"/></a>
+  </br>
+  <a href="https://developer.apple.com/swift/"><img alt="Platform" src="https://img.shields.io/badge/platform-iOS-green.svg"/></a>
+  <a href="https://github.com/bannzai/Conv/blob/master/LICENSE.txt"><img alt="Lincense" src="http://img.shields.io/badge/license-MIT-000000.svg?style=flat"/></a>
+</p>
+
+
 # Conv
 
 Conv smart represent UICollectionView data structure more than UIKit.  
@@ -103,8 +114,6 @@ And find conv framework and embed your project.
 ```
 github 'bannzai/Conv'
 ```
-
-
 
 # Why Conv?
 UIKit.UICollectionView has some problems.
