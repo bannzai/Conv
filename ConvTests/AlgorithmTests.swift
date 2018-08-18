@@ -15,6 +15,31 @@ class AlgorithmTests: XCTestCase {
         super.setUp()
     }
     
+    func testNoChange() {
+        XCTContext.runActivity(named: "When no change") { (activity) in
+            let sections = [make(0), make(1)]
+            let items = [make(0), make(1)]
+            let oldConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let newConv = Conv().create(for: sections) { (model, section) in
+                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            }
+            
+            let result = diffSection(from: oldConv.sections, new: newConv.sections)
+            
+            XCTAssert(result.sectionInsert.isEmpty)
+            XCTAssert(result.sectionUpdate.isEmpty)
+            XCTAssert(result.sectionDelete.isEmpty)
+            XCTAssert(result.sectionMove.isEmpty)
+            XCTAssert(result.itemInsert.isEmpty)
+            XCTAssert(result.itemDelete.isEmpty)
+            XCTAssert(result.itemUpdate.isEmpty)
+            XCTAssert(result.itemMove.isEmpty)
+        }
+    }
+    
     func testInsert() {
         XCTContext.runActivity(named: "When insert only section") { (activity) in
             let sections = [make(0)]
