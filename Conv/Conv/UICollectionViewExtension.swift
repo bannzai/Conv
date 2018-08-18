@@ -11,18 +11,18 @@ import ObjectiveC
 
 public extension UICollectionView {
     public func conv() -> Conv {
-        switch (oldConv, newConv) {
+        switch (mainConv, convForOverwrite) {
         case (nil, nil):
             let conv = Conv()
-            self.oldConv = conv
+            self.mainConv = conv
             return conv
-        case (nil, let newConv?):
-            let conv = Conv(uuid: newConv.uuid)
-            self.newConv = conv
+        case (nil, let convForOverwrite?):
+            let conv = Conv(uuid: convForOverwrite.uuid)
+            self.convForOverwrite = conv
             return conv
-        case (let oldConv?, _):
-            let conv = Conv(uuid: oldConv.uuid)
-            self.newConv = conv
+        case (let mainConv?, _):
+            let conv = Conv(uuid: mainConv.uuid)
+            self.convForOverwrite = conv
             return conv
         }
     }
@@ -34,21 +34,21 @@ public extension UICollectionView {
     }
     
     func shiftConv() {
-        if let newConv = self.newConv {
-            self.newConv = nil
-            oldConv?.sections.removeAll()
-            oldConv?.sections = newConv.sections
+        if let convForOverwrite = self.convForOverwrite {
+            self.convForOverwrite = nil
+            mainConv?.sections.removeAll()
+            mainConv?.sections = convForOverwrite.sections
         }
     }
     
     public func reload() {
-        guard let newConv = newConv else {
+        guard let convForOverwrite = convForOverwrite else {
             reloadData()
             return
         }
         
-        let oldSections: [Section] = oldConv?.sections ?? []
-        let newSections: [Section] = newConv.sections
+        let oldSections: [Section] = mainConv?.sections ?? []
+        let newSections: [Section] = convForOverwrite.sections
         
         let operationSet = diffSection(from: oldSections, new: newSections)
         
@@ -108,7 +108,7 @@ fileprivate struct UICollectionViewAssociatedObjectHandle {
 }
 
 extension UICollectionView {
-    var oldConv: Conv? {
+    var mainConv: Conv? {
         set {
             dataSource = newValue
             delegate = newValue
@@ -121,7 +121,7 @@ extension UICollectionView {
         }
     }
     
-    var newConv: Conv? {
+    var convForOverwrite: Conv? {
         set {
             newValue?.collectionView = self
             
