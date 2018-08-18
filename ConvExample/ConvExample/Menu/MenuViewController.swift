@@ -21,11 +21,11 @@ enum MenuType: Int, Differenciable {
     var title: String {
         switch self {
         case .list:
-            return "List view for add section or item, and refresh"
+            return "Add section or item, and delete it"
         case .move:
             return "Moving interactive collection view cell"
         case .shuffle:
-            return "Moving randomize shuffling collection view cell"
+            return "shuffle section and items"
         }
     }
     
