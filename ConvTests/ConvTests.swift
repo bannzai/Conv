@@ -44,6 +44,22 @@ class ConvTests: XCTestCase {
         }
         
         conv.didMoveItem?(indexPath(), indexPath())
+        
+        XCTAssertTrue(called)
+    }
+    
+    func testIndexTitles() {
+        let conv = Conv()
+        
+        let titles: [String] = ["1", "2"]
+
+        conv.indexTitles { (collectionView) -> [String] in
+            return titles
+        }
+
+        let result = conv.indexTitles?(collectionView())
+        
+        XCTAssert(result == titles)
     }
 }
 
