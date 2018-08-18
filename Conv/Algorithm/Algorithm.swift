@@ -8,13 +8,6 @@
 
 import Foundation
 
-enum Operation<I> {
-    case insert(I)
-    case delete(I)
-    case move(I, I)
-    case update(I)
-}
-
 enum Occurence {
     case unique(Int)
     case many(IndicesReference)

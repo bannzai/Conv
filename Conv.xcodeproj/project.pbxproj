@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA1759032127AE85003EB4F0 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759022127AE85003EB4F0 /* Operation.swift */; };
 		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA1759022127AE85003EB4F0 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
 		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				BA2F7E81211632200085EE41 /* Differenciable+Internal */,
 				BA2F7E7B21154DE90085EE41 /* Algorithm.swift */,
 				BA2F7E7D2115613F0085EE41 /* Differenciable.swift */,
+				BA1759022127AE85003EB4F0 /* Operation.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */,
 				BA6A03FA21017BD900040691 /* Conv+UICollectionViewDelegate.swift in Sources */,
 				BA2F7E7E2115613F0085EE41 /* Differenciable.swift in Sources */,
+				BA1759032127AE85003EB4F0 /* Operation.swift in Sources */,
 				BA2F7E80211631EB0085EE41 /* Section+Differenciable.swift in Sources */,
 				BA6A03F821017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */,
