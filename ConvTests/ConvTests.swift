@@ -97,6 +97,19 @@ class ConvTests: XCTestCase {
         XCTAssert(result?.currentLayout === currentLayout)
         XCTAssert(result?.nextLayout === nextLayout)
     }
+    
+//    func testShouldUpdateFocus() {
+//        let conv = Conv()
+//
+//        conv.shouldUpdateFocus { (collectionView, context) -> Bool in
+//            return true
+//        }
+//
+//        let context: UICollectionViewFocusUpdateContext = UICollectionViewFocusUpdateContext()
+//        let result = conv.shouldUpdateFocus?(collectionView(), context)
+//
+//        XCTAssertTrue(result!)
+//    }
 }
 
 extension ConvTests: Stub { }
