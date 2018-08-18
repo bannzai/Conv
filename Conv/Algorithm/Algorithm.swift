@@ -135,7 +135,7 @@ struct Diff {
             }
         }
         
-        return Result(operations: steps, references: References(old: oldReferences, new: newReferences))
+        return Result(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
     }
     
     func diff<D: Differenciable, I>(
@@ -227,7 +227,7 @@ struct Diff {
             }
         }
         
-        return Result(operations: steps, references: References(old: oldReferences, new: newReferences))
+        return Result(operations: steps, ParentReferences: ParentReferences(old: oldReferences, new: newReferences))
     }
 }
 
@@ -290,8 +290,8 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     let itemOperations = Diff().diffItem(
         from: indexPathForOld,
         to: indexPathForNew,
-        oldSectionReferences: sectionResult.references.old,
-        newSectionReferences: sectionResult.references.new,
+        oldSectionReferences: sectionResult.ParentReferences.old,
+        newSectionReferences: sectionResult.ParentReferences.new,
         movedIndexies: movedIndexies
         ).operations
 
@@ -350,6 +350,6 @@ final class IndicesReference {
 
 struct Result<I> {
     let operations: [Operation<I>]
-    let references: References
+    let ParentReferences: ParentReferences
 }
 
