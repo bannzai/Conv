@@ -21,12 +21,19 @@ public class Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
+    private let uuid: String
+    
     init() {
-        
+        self.uuid = UUID().uuidString
     }
     
-    public init(diffElement: Differenciable, closure: (Section) -> Void) {
+    init(uuid: String) {
+        self.uuid = uuid
+    }
+    
+    public init(diffElement: Differenciable, uuid: String, closure: (Section) -> Void) {
         self.diffElement = diffElement
+        self.uuid = uuid
         closure(self)
     }
     
@@ -53,7 +60,7 @@ extension Section {
 
 extension Section {
     @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
-        create(for: [FakeDifference()]) { (_, item) in
+        create(for: [FakeDifference(position: items.count + 1, uuid: uuid)]) { (_, item) in
             closure(item)
         }
         return self
