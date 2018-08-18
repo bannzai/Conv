@@ -131,6 +131,15 @@ So, this definition to be natural expression for UICollectionView data strcture,
 Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
 
+## Other
+### Algorithm
+Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
+And I also referred to other libraries below.  
+
+- https://github.com/mcudich/HeckelDiff
+- https://github.com/ra1028/DifferenceKit
+- https://github.com/Instagram/IGListKit/
+
 # LICENSE
 [Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
 
