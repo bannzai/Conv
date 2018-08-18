@@ -25,7 +25,7 @@ enum MenuType: Int, Differenciable {
         case .move:
             return "Moving interactive collection view cell"
         case .shuffle:
-            return "shuffle section and items"
+            return "Shuffle section and items"
         }
     }
     
