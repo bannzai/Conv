@@ -33,4 +33,18 @@ class ConvTests: XCTestCase {
             XCTAssert(conv.sections.count == 2)
         }
     }
+    
+    func testDidMoveItem() {
+        let conv = Conv()
+        
+        var called = false
+        
+        conv.didMoveItem { (sourceIndexPath, destinationIndexPath) in
+            called = true
+        }
+        
+        conv.didMoveItem?(indexPath(), indexPath())
+    }
 }
+
+extension ConvTests: Stub { }
