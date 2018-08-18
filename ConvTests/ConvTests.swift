@@ -124,6 +124,20 @@ class ConvTests: XCTestCase {
         
         XCTAssertEqual(result, indexPath)
     }
+    
+    func testTargetIndexPathForMoveFromItem() {
+        let conv = Conv()
+        
+        let indexPath = self.indexPath()
+        
+        conv.targetIndexPathForMoveFromItem { (collectionView, originalIndexPath, proposedIndexPath) -> IndexPath in
+            return indexPath
+        }
+
+        let result = conv.targetIndexPathForMoveFromItem?(collectionView(), self.indexPath(), self.indexPath())
+        
+        XCTAssertEqual(result, indexPath)
+    }
 }
 
 extension ConvTests: Stub { }
