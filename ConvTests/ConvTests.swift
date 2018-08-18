@@ -110,6 +110,20 @@ class ConvTests: XCTestCase {
 //
 //        XCTAssertTrue(result!)
 //    }
+    
+    func testIndexPathForPreferredFocusedView() {
+        let conv = Conv()
+        
+        let indexPath = self.indexPath()
+
+        conv.indexPathForPreferredFocusedView { (collectionView) -> IndexPath? in
+            return indexPath
+        }
+        
+        let result = conv.indexPathForPreferredFocusedView?(collectionView())
+        
+        XCTAssertEqual(result, indexPath)
+    }
 }
 
 extension ConvTests: Stub { }
