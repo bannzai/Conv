@@ -325,11 +325,6 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
     return operationSet
 }
 
-struct References {
-    let old: [Int?]
-    let new: [Int?]
-}
-
 /// A mutable reference to indices of elements.
 final class IndicesReference {
     private var indices: [Int]
