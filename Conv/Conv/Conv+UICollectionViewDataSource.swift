@@ -60,7 +60,7 @@ extension Conv: UICollectionViewDataSource {
     }
     
     public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = sections[sourceIndexPath.section].remove(for: sourceIndexPath.item)
+        let item = sections[sourceIndexPath.section].remove(at: sourceIndexPath.item)
         sections[destinationIndexPath.section].insert(item, to: destinationIndexPath.item)
         didMoveItem?(sourceIndexPath, destinationIndexPath)
     }

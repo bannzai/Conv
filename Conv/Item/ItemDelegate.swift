@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol ItemDelegate: Reusable {
+public protocol ItemDelegate: Reusable, Differenciable {
     func configureCell(collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath)
     func sizeFor(collectionView: UICollectionView, indexPath: IndexPath) -> CGSize?
     
@@ -31,7 +31,5 @@ public protocol ItemDelegate: Reusable {
     func performAction(collectionView: UICollectionView, action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?)
     
     func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool?
-    
-    func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath?
 }
 

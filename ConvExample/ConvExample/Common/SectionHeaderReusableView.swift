@@ -1,6 +1,6 @@
 
 //
-//  ListCollectionReusableView.swift
+//  SectionHeaderReusableView.swift
 //  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/07/20.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ListCollectionReusableView: UICollectionReusableView {
+class SectionHeaderReusableView: UICollectionReusableView {
 
     @IBOutlet weak var nameLabel: UILabel!
     override func awakeFromNib() {

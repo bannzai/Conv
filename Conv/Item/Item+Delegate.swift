@@ -72,8 +72,4 @@ extension Item: ItemDelegate {
     public func canFocusItem(collectionView: UICollectionView, indexPath: IndexPath) -> Bool? {
         return canFocusItem?((self, collectionView, indexPath))
     }
-    
-    public func targetIndexPathForMoveFromItem(collectionView: UICollectionView, originalIndexPath: IndexPath, proposedIndexPath: IndexPath) -> IndexPath? {
-        return targetIndexPathForMoveFromItem?(self, collectionView, originalIndexPath, proposedIndexPath)
-    }
 }

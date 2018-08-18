@@ -13,6 +13,7 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     public typealias PerformActionArgument = (item: Item<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
     public var reusableIdentifier: String?
+    public var diffElement: Differenciable!
 
     public var size: CGSize?
     
@@ -39,13 +40,12 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     
     internal var canFocusItem: ((ItemArgument) -> Bool)?
     
-    internal var targetIndexPathForMoveFromItem: ((Item<Cell>, _ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
-    
-    public init() {
+    init() {
         
     }
 
-    public init(closure: (Item) -> Void) {
+    public init(diffElement: Differenciable, closure: (Item) -> Void) {
+        self.diffElement = diffElement
         closure(self)
     }
 }
@@ -101,12 +101,7 @@ extension Item {
     public func performAction(_ closure: @escaping ((PerformActionArgument) -> Void)) {
         self.performAction = closure
     }
-    
     public func canFocusItem(_ closure: @escaping ((ItemArgument) -> Bool)) {
         self.canFocusItem = closure
-    }
-    
-    public func targetIndexPathForMoveFromItem(_ closure: @escaping ((Item<Cell>, UICollectionView, IndexPath, IndexPath) -> IndexPath)) {
-        self.targetIndexPathForMoveFromItem = closure
     }
 }

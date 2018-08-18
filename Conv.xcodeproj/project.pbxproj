@@ -7,8 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA1759032127AE85003EB4F0 /* Operation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759022127AE85003EB4F0 /* Operation.swift */; };
+		BA1759052127AEC4003EB4F0 /* Occurence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759042127AEC3003EB4F0 /* Occurence.swift */; };
+		BA1759072127AEE6003EB4F0 /* DifferenciableIndexPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */; };
+		BA1759092127AF08003EB4F0 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759082127AF08003EB4F0 /* OperationSet.swift */; };
+		BA17590B2127AF2F003EB4F0 /* ParentReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17590A2127AF2E003EB4F0 /* ParentReferences.swift */; };
+		BA17590D2127BC91003EB4F0 /* IndexStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17590C2127BC91003EB4F0 /* IndexStack.swift */; };
+		BA17590F2127BCEC003EB4F0 /* SectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA17590E2127BCEC003EB4F0 /* SectionResult.swift */; };
+		BA1759122127BDB6003EB4F0 /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759112127BDB6003EB4F0 /* Diff.swift */; };
+		BA1759142127BDDA003EB4F0 /* DiffSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759132127BDDA003EB4F0 /* DiffSection.swift */; };
+		BA1759162127BE06003EB4F0 /* DiffItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1759152127BE06003EB4F0 /* DiffItem.swift */; };
+		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
+		BA2F7E7E2115613F0085EE41 /* Differenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E7D2115613F0085EE41 /* Differenciable.swift */; };
+		BA2F7E80211631EB0085EE41 /* Section+Differenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E7F211631EB0085EE41 /* Section+Differenciable.swift */; };
+		BA2F7E832116323B0085EE41 /* InternalDifferenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E822116323B0085EE41 /* InternalDifferenciable.swift */; };
 		BA30EBD7210838830054BFE8 /* ItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBD6210838830054BFE8 /* ItemDelegate.swift */; };
 		BA30EBD92108389E0054BFE8 /* Item+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */; };
 		BA30EBDB210838C60054BFE8 /* SectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */; };
@@ -30,6 +44,7 @@
 		BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F952100EF10005CDE74 /* Item.swift */; };
 		BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7C1F9F21017741005CDE74 /* Reusable.swift */; };
 		BA9C2C8B211090AA00C9EBA9 /* ItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9C2C8A211090AA00C9EBA9 /* ItemTests.swift */; };
+		BAA559B72118A6B3001A31C6 /* Item+Diffrenciable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA559B62118A6B3001A31C6 /* Item+Diffrenciable.swift */; };
 		BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,8 +59,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA1759022127AE85003EB4F0 /* Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operation.swift; sourceTree = "<group>"; };
+		BA1759042127AEC3003EB4F0 /* Occurence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Occurence.swift; sourceTree = "<group>"; };
+		BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifferenciableIndexPath.swift; sourceTree = "<group>"; };
+		BA1759082127AF08003EB4F0 /* OperationSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
+		BA17590A2127AF2E003EB4F0 /* ParentReferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentReferences.swift; sourceTree = "<group>"; };
+		BA17590C2127BC91003EB4F0 /* IndexStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexStack.swift; sourceTree = "<group>"; };
+		BA17590E2127BCEC003EB4F0 /* SectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionResult.swift; sourceTree = "<group>"; };
+		BA1759112127BDB6003EB4F0 /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		BA1759132127BDDA003EB4F0 /* DiffSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffSection.swift; sourceTree = "<group>"; };
+		BA1759152127BE06003EB4F0 /* DiffItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffItem.swift; sourceTree = "<group>"; };
+		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		BA2F7E7D2115613F0085EE41 /* Differenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Differenciable.swift; sourceTree = "<group>"; };
+		BA2F7E7F211631EB0085EE41 /* Section+Differenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Section+Differenciable.swift"; sourceTree = "<group>"; };
+		BA2F7E822116323B0085EE41 /* InternalDifferenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalDifferenciable.swift; sourceTree = "<group>"; };
 		BA30EBD6210838830054BFE8 /* ItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDelegate.swift; sourceTree = "<group>"; };
 		BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Delegate.swift"; sourceTree = "<group>"; };
 		BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +99,7 @@
 		BA7C1F952100EF10005CDE74 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		BA7C1F9F21017741005CDE74 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		BA9C2C8A211090AA00C9EBA9 /* ItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTests.swift; sourceTree = "<group>"; };
+		BAA559B62118A6B3001A31C6 /* Item+Diffrenciable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+Diffrenciable.swift"; sourceTree = "<group>"; };
 		BAB79CBC210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Conv+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,6 +122,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA1759102127BDA9003EB4F0 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				BA1759112127BDB6003EB4F0 /* Diff.swift */,
+				BA1759132127BDDA003EB4F0 /* DiffSection.swift */,
+				BA1759152127BE06003EB4F0 /* DiffItem.swift */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		BA2F7E7A21154DDC0085EE41 /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				BA1759102127BDA9003EB4F0 /* Algorithm */,
+				BA2F7E81211632200085EE41 /* Differenciable+Internal */,
+				BA1759082127AF08003EB4F0 /* OperationSet.swift */,
+				BA17590A2127AF2E003EB4F0 /* ParentReferences.swift */,
+				BA2F7E7D2115613F0085EE41 /* Differenciable.swift */,
+				BA1759022127AE85003EB4F0 /* Operation.swift */,
+				BA1759042127AEC3003EB4F0 /* Occurence.swift */,
+				BA1759062127AEE6003EB4F0 /* DifferenciableIndexPath.swift */,
+				BA17590C2127BC91003EB4F0 /* IndexStack.swift */,
+				BA17590E2127BCEC003EB4F0 /* SectionResult.swift */,
+			);
+			path = Algorithm;
+			sourceTree = "<group>";
+		};
+		BA2F7E81211632200085EE41 /* Differenciable+Internal */ = {
+			isa = PBXGroup;
+			children = (
+				BA2F7E822116323B0085EE41 /* InternalDifferenciable.swift */,
+			);
+			path = "Differenciable+Internal";
+			sourceTree = "<group>";
+		};
 		BA30EBD1210838240054BFE8 /* Conv */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7C1F952100EF10005CDE74 /* Item.swift */,
+				BAA559B62118A6B3001A31C6 /* Item+Diffrenciable.swift */,
 				BA30EBD6210838830054BFE8 /* ItemDelegate.swift */,
 				BA30EBD82108389E0054BFE8 /* Item+Delegate.swift */,
 			);
@@ -120,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				BA7C1F922100EF10005CDE74 /* Section.swift */,
+				BA2F7E7F211631EB0085EE41 /* Section+Differenciable.swift */,
 				BA30EBDA210838C60054BFE8 /* SectionDelegate.swift */,
 				BA30EBDC210838DB0054BFE8 /* Section+Delegate.swift */,
 			);
@@ -166,6 +233,7 @@
 		BA7A7F992090AC3800F4A24C /* Conv */ = {
 			isa = PBXGroup;
 			children = (
+				BA2F7E7A21154DDC0085EE41 /* Algorithm */,
 				BA30EBD1210838240054BFE8 /* Conv */,
 				BA30EBD3210838390054BFE8 /* Section */,
 				BA30EBD4210838420054BFE8 /* SectionHeaderFooter */,
@@ -185,6 +253,7 @@
 				BA2F7E75211484830085EE41 /* SectionTests.swift */,
 				BA7A7FA72090AC3800F4A24C /* Info.plist */,
 				BA2F7E77211485B20085EE41 /* Helper.swift */,
+				BA25977621247F770016ACB7 /* AlgorithmTests.swift */,
 			);
 			path = ConvTests;
 			sourceTree = "<group>";
@@ -300,20 +369,34 @@
 			files = (
 				BA7C1FA021017741005CDE74 /* Reusable.swift in Sources */,
 				BA30EBD7210838830054BFE8 /* ItemDelegate.swift in Sources */,
+				BA17590D2127BC91003EB4F0 /* IndexStack.swift in Sources */,
 				BA30EBD92108389E0054BFE8 /* Item+Delegate.swift in Sources */,
 				BA30EBDF210838FE0054BFE8 /* SectionHeaderFooterKind.swift in Sources */,
+				BA17590B2127AF2F003EB4F0 /* ParentReferences.swift in Sources */,
+				BA1759092127AF08003EB4F0 /* OperationSet.swift in Sources */,
 				BA30EBDB210838C60054BFE8 /* SectionDelegate.swift in Sources */,
+				BA1759072127AEE6003EB4F0 /* DifferenciableIndexPath.swift in Sources */,
+				BA1759122127BDB6003EB4F0 /* Diff.swift in Sources */,
 				BA30EBDD210838DB0054BFE8 /* Section+Delegate.swift in Sources */,
+				BA1759162127BE06003EB4F0 /* DiffItem.swift in Sources */,
 				BA7C1F9A2100EF10005CDE74 /* Item.swift in Sources */,
 				BA7C1F962100EF10005CDE74 /* SectionHeaderFooter.swift in Sources */,
 				BA6A03FA21017BD900040691 /* Conv+UICollectionViewDelegate.swift in Sources */,
+				BA2F7E7E2115613F0085EE41 /* Differenciable.swift in Sources */,
+				BA1759032127AE85003EB4F0 /* Operation.swift in Sources */,
+				BA2F7E80211631EB0085EE41 /* Section+Differenciable.swift in Sources */,
 				BA6A03F821017BAE00040691 /* Conv+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				BA7C1F982100EF10005CDE74 /* UICollectionViewExtension.swift in Sources */,
+				BA2F7E832116323B0085EE41 /* InternalDifferenciable.swift in Sources */,
 				BA7C1F992100EF10005CDE74 /* Conv.swift in Sources */,
 				BA30EBE1210839250054BFE8 /* SectionHeaderFooterDelegate.swift in Sources */,
+				BA17590F2127BCEC003EB4F0 /* SectionResult.swift in Sources */,
 				BA7C1F972100EF10005CDE74 /* Section.swift in Sources */,
+				BAA559B72118A6B3001A31C6 /* Item+Diffrenciable.swift in Sources */,
+				BA1759142127BDDA003EB4F0 /* DiffSection.swift in Sources */,
 				BA6A03FC21017BF000040691 /* Conv+Helper.swift in Sources */,
 				BA6A03F621017B8A00040691 /* Conv+UICollectionViewDataSource.swift in Sources */,
+				BA1759052127AEC4003EB4F0 /* Occurence.swift in Sources */,
 				BAB79CBD210CC4DC0026271B /* Conv+UIScrollViewDelegate.swift in Sources */,
 				BA30EBE32108393C0054BFE8 /* SectionHeaderFooter+Delegate.swift in Sources */,
 			);
@@ -325,6 +408,7 @@
 			files = (
 				BA9C2C8B211090AA00C9EBA9 /* ItemTests.swift in Sources */,
 				BA7A7FA62090AC3800F4A24C /* ConvTests.swift in Sources */,
+				BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */,
 				BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */,
 				BA2F7E78211485B20085EE41 /* Helper.swift in Sources */,
 			);

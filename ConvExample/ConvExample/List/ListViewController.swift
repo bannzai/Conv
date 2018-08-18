@@ -9,14 +9,40 @@
 import UIKit
 import Conv
 
-enum SectionType {
+enum SectionType: Int, Differenciable {
+    var differenceIdentifier: DifferenceIdentifier {
+        return "\(self)"
+    }
+    
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return differenceIdentifier != compare.differenceIdentifier
+    }
+    
     case one
     case two
     case three
+    case four
+    case five
+    case six
+    case seven
+    case eight
+    case nine
     
-    static var elements: [SectionType] {
+    static var firstElements: [SectionType] {
         return [.one, .two, .three]
     }
+    
+    static func append(contents: [SectionType]) -> [SectionType] {
+        guard
+            let last = contents.last,
+            let next = SectionType(rawValue: last.rawValue + 1)
+            else {
+            return contents
+        }
+        
+        return contents + [next]
+    }
+    
     
     var backgroundColor: UIColor {
         return UIColor.black.withAlphaComponent(0.3)
@@ -43,34 +69,40 @@ class ListViewController: UIViewController {
         "water_fall",
     ]
     
+    var elements: [SectionType] = SectionType.firstElements
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "\\(^o^)/"
+        title = "List"
         
         collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
-        collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
+        collectionView.register(UINib(nibName: "SectionHeaderReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "SectionHeaderReusableView")
 
+        collectionView.contentInset.bottom = 40
+        
         flowLayout?.sectionInset = .zero
         flowLayout?.minimumLineSpacing = 0
         flowLayout?.minimumInteritemSpacing = 0
-
+    }
+    
+    func setupConv() {
         collectionView
             .conv()
             
             // Create sections for count of elements.
-            .create(for: SectionType.elements) { (sectionType, section) in
+            .create(for: elements) { (sectionType, section) in
                 // In closure passed each element from elements and configuration for section.
                 
                 // Section has creating section header or footer method.
-                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
+                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<SectionHeaderReusableView>)
+                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "ListCollectionReusableView"
+                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
-                        // `view` was converted to ListCollectionReusableView
+                        // `view` was converted to SectionHeaderReusableView
                         
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
@@ -108,28 +140,66 @@ class ListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        collectionView.reloadData()
-        
+        setupConv()
+        collectionView.reload()
+
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.barTintColor = .black
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addItemButtonPressed(button:))),
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSectionButtonPressed(button:))),
+            UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshButtonPressed(button:)))
+        ]
+    }
+    
+    @objc func addItemButtonPressed(button: UIBarButtonItem) {
+        imageNames.append(contentsOf: imageNames)
+        reload()
+    }
+    
+    @objc func addSectionButtonPressed(button: UIBarButtonItem) {
+        elements = SectionType.append(contents: elements)
+        reload()
+    }
+    
+    @objc func refreshButtonPressed(button: UIBarButtonItem) {
+        imageNames = [
+            "forest",
+            "moon",
+            "mountain",
+            "pond",
+            "river",
+            "road",
+            "snow",
+            "volcano",
+            "water_fall",
+        ]
+        
+        elements = SectionType.firstElements
+        
+        reload()
+    }
+    
+    func reload() {
+        setupConv()
+        collectionView.reload()
+    }
+    
+    deinit {
+        print("For \(#file), \(#function) called")
     }
 }
 
 extension ListViewController {
     func viewModels(section: SectionType) -> [ItemViewModel] {
-        func stub(count: UInt) -> [ItemViewModel] {
+        func stub() -> [ItemViewModel] {
             return imageNames
-                .map { ItemViewModel(imageName: $0, image: UIImage(named: $0)!) }
+                .enumerated()
+                .map { ItemViewModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
         }
-        switch section {
-        case .one:
-            return stub(count: 10)
-        case .two:
-            return stub(count: 10)
-        case .three:
-            return stub(count: 10)
-        }
+        
+        return stub()
     }
 }
 

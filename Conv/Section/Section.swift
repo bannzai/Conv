@@ -11,6 +11,7 @@ import UIKit
 public class Section {
     public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegate] = []
+    public var diffElement: Differenciable!
     
     public var header: SectionHeaderFooterDelegate?
     public var footer: SectionHeaderFooterDelegate?
@@ -20,15 +21,23 @@ public class Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    public init() {
-        
+    private let uuid: String
+    
+    init() {
+        self.uuid = UUID().uuidString
     }
     
-    public init(closure: (Section) -> Void) {
+    init(uuid: String) {
+        self.uuid = uuid
+    }
+    
+    public init(diffElement: Differenciable, uuid: String, closure: (Section) -> Void) {
+        self.diffElement = diffElement
+        self.uuid = uuid
         closure(self)
     }
     
-    public func remove(for item: Int) -> ItemDelegate {
+    @discardableResult public func remove(at item: Int) -> ItemDelegate {
         return items.remove(at: item)
     }
     
@@ -50,29 +59,22 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func add(item: ItemDelegate) -> Section {
-        items.append(item)
-        return self
-    }
-    @discardableResult public func add(items: [ItemDelegate]) -> Section {
-        self.items.append(contentsOf: items)
+    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
+        create(for: [FakeDifference(position: items.count + 1, uuid: uuid)]) { (_, item) in
+            closure(item)
+        }
         return self
     }
     
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
-        return add(item: Item<T>() { closure($0) } )
-    }
-    @discardableResult public func create<E, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
+    @discardableResult public func create<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
         let items = elements.map { element in
-            Item<T>() { item in
+            Item<T>(diffElement: element) { item in
                 closure(element, item)
             }
         }
         
-        return add(items: items)
-    }
-    @discardableResult public func create<T: UICollectionViewCell>(with count: UInt, items closure: ((UInt, Item<T>) -> Void)) -> Section {
-        return create(for: [UInt](0..<count), items: closure)
+        self.items.append(contentsOf: items)
+        return self
     }
 }
 

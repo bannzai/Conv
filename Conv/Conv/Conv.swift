@@ -14,13 +14,15 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
-    public init(
-        scrollViewDelegate: UIScrollViewDelegate?
-        ) {
-        self.scrollViewDelegate = scrollViewDelegate
-    }
+    let uuid: String
     
     public override init() {
+        uuid = UUID().uuidString
+        super.init()
+    }
+    
+    public init(uuid: String)  {
+        self.uuid = uuid
         super.init()
     }
     
@@ -31,60 +33,69 @@ public final class Conv: NSObject {
     internal var shouldUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)?
     internal var didUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)?
     internal var indexPathForPreferredFocusedView: ((_ collectionView: UICollectionView) -> IndexPath?)?
+    internal var targetIndexPathForMoveFromItem: ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)?
     internal var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)?
+    
 }
 
 extension Conv {
-    public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) {
+    @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
-    }
-    public func indexTitles(_ closure: @escaping ((_ collectionView: UICollectionView) -> [String])) {
-        self.indexTitles = closure
-    }
-    public func indexTitle(_ closure: @escaping ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)) {
-        self.indexTitle = closure
-    }
-    public func transitionLayout(_ closure: @escaping ((_ collectionView: UICollectionView, _ fromLayout: UICollectionViewLayout, _ toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout)) {
-        self.transitionLayout = closure
-    }
-    public func shouldUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)) {
-        self.shouldUpdateFocus = closure
-    }
-    public func didUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)) {
-        self.didUpdateFocus = closure
-    }
-    public func indexPathForPreferredFocusedView(_ closure: @escaping ((_ collectionView: UICollectionView) -> IndexPath?)) {
-        self.indexPathForPreferredFocusedView = closure
-    }
-    public func targetContentOffset(_ closure: @escaping ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)) {
-        self.targetContentOffset = closure
-    }
-}
-
-extension Conv {
-    @discardableResult public func add(section: Section) -> Self {
-        sections.append(section)
         return self
     }
-    @discardableResult public func add(sections: [Section]) -> Self {
-        self.sections.append(contentsOf: sections)
+    @discardableResult public func indexTitles(_ closure: @escaping ((_ collectionView: UICollectionView) -> [String])) -> Self {
+        self.indexTitles = closure
+        return self
+    }
+    @discardableResult public func indexTitle(_ closure: @escaping ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)) -> Self {
+        self.indexTitle = closure
+        return self
+    }
+    @discardableResult public func transitionLayout(_ closure: @escaping ((_ collectionView: UICollectionView, _ fromLayout: UICollectionViewLayout, _ toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout)) -> Self {
+        self.transitionLayout = closure
+        return self
+    }
+    @discardableResult public func shouldUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)) -> Self {
+        self.shouldUpdateFocus = closure
+        return self
+    }
+    @discardableResult public func didUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)) -> Self {
+        self.didUpdateFocus = closure
+        return self
+    }
+    @discardableResult public func indexPathForPreferredFocusedView(_ closure: @escaping ((_ collectionView: UICollectionView) -> IndexPath?)) -> Self {
+        self.indexPathForPreferredFocusedView = closure
         return self
     }
     
-    @discardableResult public func create(section closure: (Section) -> Void) -> Self {
-        return add(section: Section() { closure($0) } )
+    @discardableResult public func targetIndexPathForMoveFromItem(_ closure: @escaping ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ toProposedIndexPath: IndexPath) -> IndexPath)) -> Self {
+        self.targetIndexPathForMoveFromItem = closure
+        return self
     }
-    @discardableResult public func create<E>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    @discardableResult public func targetContentOffset(_ closure: @escaping ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)) -> Self {
+        self.targetContentOffset = closure
+        return self
+    }
+}
+
+extension Conv {
+    @discardableResult public func create(section closure: (Section) -> Void) -> Self {
+        create(for: [FakeDifference(position: sections.count + 1, uuid: uuid)]) { (_, section) in
+            closure(section)
+        }
+        
+        return self
+    }
+    
+    @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
-            Section() { section in
+            Section(diffElement: element, uuid: uuid) { section in
                 closure(element, section)
             }
         }
         
-        return add(sections: sections)
-    }
-    @discardableResult public func create(with count: UInt, sections closure: ((UInt, Section) -> Void)) -> Self {
-        return create(for: [UInt](0..<count), sections: closure)
+        self.sections.append(contentsOf: sections)
+        return self
     }
 }
 
