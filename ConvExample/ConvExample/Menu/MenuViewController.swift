@@ -53,6 +53,10 @@ public class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         reload()
+        
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.barTintColor = .black
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     func setupConv() {

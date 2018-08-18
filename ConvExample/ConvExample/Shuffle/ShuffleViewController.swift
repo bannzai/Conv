@@ -25,8 +25,7 @@ class ShuffleViewController: UIViewController {
     struct SectionModel: Differenciable {
         let sectionType: SectionType
         let emoticons: [String]
-        let backgroundColors: [UIColor]
-        
+
         var differenceIdentifier: DifferenceIdentifier {
             return "\(sectionType)"
         }
@@ -77,8 +76,8 @@ class ShuffleViewController: UIViewController {
     
     
     func setupConv() {
-        let columns: CGFloat = 12
-        let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns) * 3
+        let columns: CGFloat = 4
+        let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
             .conv()
             .create(for: sectionModels) { (sectionModel, section) in
@@ -101,9 +100,9 @@ class ShuffleViewController: UIViewController {
                     item.configureCell({ (cell, info) in
                         cell.configure(text: emoticon)
                     })
-                    item.willDisplay { cell, info in
-                        cell.backgroundColor = sectionModel.backgroundColors[info.indexPath.item]
-                    }
+                    item.willDisplay({ (cell, info) in
+                        cell.backgroundColor = .white
+                    })
                 })
             }
     }
@@ -114,19 +113,16 @@ class ShuffleViewController: UIViewController {
     }
     
     func shuffleAllEmoticions() {
-        var flattenSectionProperties = sectionModels
-            .flatMap {
-                return zip($0.emoticons, $0.backgroundColors).map { (emoticon: $0.0, backgroundColor: $0.1) }
-            }
+        var flattenEmoticons = sectionModels
+            .flatMap { $0.emoticons }
             .shuffled()
         
         sectionModels = sectionModels
             .map {
                 let count = $0.emoticons.count
-                let emoticons = Array(flattenSectionProperties.prefix(count)).map { $0.emoticon }
-                let backgroundColors = Array(flattenSectionProperties.prefix(count)).map { $0.backgroundColor }
-                flattenSectionProperties.removeFirst(count)
-                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
+                let emoticons = Array(flattenEmoticons.prefix(count))
+                flattenEmoticons.removeFirst(count)
+                return SectionModel(sectionType: $0.sectionType, emoticons: emoticons)
     }
         
         reload()
@@ -145,25 +141,9 @@ class ShuffleViewController: UIViewController {
             let start = start + offset * column
             let end = start + (column - 1)
             let emoticons: [String] = (start...end).compactMap { UnicodeScalar($0).map(String.init) }
-            let backgroundColors = emoticons.map { _ in cellBackgroundColor(for: sectionType)}
-            return SectionModel(sectionType: sectionType, emoticons: emoticons, backgroundColors: backgroundColors)
+            return SectionModel(sectionType: sectionType, emoticons: emoticons)
         }
         reload()
-    }
-    
-    func cellBackgroundColor(for sectionType: SectionType) -> UIColor {
-        let backgroundColor: UIColor
-        switch sectionType {
-        case .one:
-            backgroundColor = UIColor.green.withAlphaComponent(1)
-        case .two:
-            backgroundColor = UIColor.orange.withAlphaComponent(1)
-        case .three:
-            backgroundColor = UIColor.purple.withAlphaComponent(1)
-        case .four:
-            backgroundColor = UIColor.yellow.withAlphaComponent(1)
-        }
-        return backgroundColor
     }
 }
 
