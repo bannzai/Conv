@@ -61,6 +61,26 @@ class ConvTests: XCTestCase {
         
         XCTAssert(result == titles)
     }
+    
+    func testIndexTitle() {
+        let conv = Conv()
+        
+        let titles: [String] = ["1", "2"]
+        let indexPathOfTitle = IndexPath(item: 1, section: 0)
+        
+        // Should implement for indexTitle
+        conv.indexTitles { (collectionView) -> [String] in
+            return titles
+        }
+        
+        conv.indexTitle { (_, title, index) -> IndexPath in
+            return indexPathOfTitle
+        }
+        
+        let result = conv.indexTitle?(collectionView(), titles[0], 0)
+        
+        XCTAssert(result == indexPathOfTitle)
+    }
 }
 
 extension ConvTests: Stub { }
