@@ -17,7 +17,7 @@ Conv smart represent UICollectionView data structure more than UIKit.
 And easy definition for UICollectionView DataSource and Delegate methods.  
 
 Conv(called KONBU) means Seaweed in Japan.  
-This library inspired by [Shoyu](https://github.com/yukiasai/shoyu). Thanks @yukiasai.
+This library is inspired by [Shoyu](https://github.com/yukiasai/shoyu). Thanks @yukiasai.
 
 # Usage
 First, create instance for UICollectionView(or subclass).  
