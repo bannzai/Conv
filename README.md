@@ -149,6 +149,11 @@ And I also referred to other libraries below.
 - https://github.com/ra1028/DifferenceKit
 - https://github.com/Instagram/IGListKit/
 
+|  Insert and Delete  |  Move item and section  |
+| ---- | ---- |
+|  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513426-484e6e80-a6f8-11e8-83cc-78e533521588.gif" />  |  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513427-48e70500-a6f8-11e8-9e1e-7957f60a2918.gif" />  |
+
+
 # LICENSE
 [Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
 
