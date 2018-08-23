@@ -87,9 +87,9 @@ Next, call `define()` method from `collectionView` and create `Conv` and start d
         }
 ```
 
-Last, If you want to render of `collectionView`, you call `collectionView.reload()` for best timing.  
+Last, If you want to render of `collectionView`, you call `collectionView.reload()` your best timing.  
 `reload()` calculate diff for between before section and between before items and for minimum reloading data.  
-So, fast reloading more than `collectionView.reloadData()`.
+So, it can reload faster more than `collectionView.reloadData()`.
 
 ```swift
 collectionView.reload()
