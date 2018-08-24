@@ -96,6 +96,19 @@ collectionView.reload()
 
 You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
 
+# Algorithm
+Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
+And I also referred to other libraries below.  
+
+- https://github.com/mcudich/HeckelDiff
+- https://github.com/ra1028/DifferenceKit
+- https://github.com/Instagram/IGListKit/
+
+|  Insert and Delete  |  Move item and section  |
+| ---- | ---- |
+|  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513426-484e6e80-a6f8-11e8-83cc-78e533521588.gif" />  |  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513427-48e70500-a6f8-11e8-9e1e-7957f60a2918.gif" />  |
+
+
 # Install
 ## CocoaPods
 Conv is available through Cocoapods.  
@@ -138,19 +151,6 @@ So, this definition to be natural expression for UICollectionView data strcture,
 3. When create section or item, you can passed elements for configure UICollectionView.
 Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
-
-## Algorithm
-Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
-And I also referred to other libraries below.  
-
-- https://github.com/mcudich/HeckelDiff
-- https://github.com/ra1028/DifferenceKit
-- https://github.com/Instagram/IGListKit/
-
-|  Insert and Delete  |  Move item and section  |
-| ---- | ---- |
-|  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513426-484e6e80-a6f8-11e8-83cc-78e533521588.gif" />  |  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513427-48e70500-a6f8-11e8-9e1e-7957f60a2918.gif" />  |
-
 
 # LICENSE
 [Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
