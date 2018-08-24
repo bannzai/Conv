@@ -62,7 +62,7 @@ public class MenuViewController: UIViewController {
     func setupConv() {
         collectionView
             .conv()
-            .create { (section) in
+            .create(with: "Section 0") { (section) in
                 section
                     .create(for: MenuType.elements, items: { (menuType, item: Item<MenuCollectionViewCell>) in
                         item.reusableIdentifier = "MenuCollectionViewCell"

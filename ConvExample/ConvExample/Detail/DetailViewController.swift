@@ -45,9 +45,9 @@ public class DetailViewController: UIViewController {
             let imageName = self.imageName
             collectionView
                 .conv(scrollViewDelegate: self)
-                .create { (section) in
+                .create(with: "Section 0") { (section) in
                     section
-                        .create(item: { (item: Item<DetailImageCollectionViewCell>) in
+                        .create(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in
                             let image = UIImage(named: imageName)!
                             item.reusableIdentifier = "DetailImageCollectionViewCell"
                             item.configureCell { (cell, info) in
@@ -60,8 +60,8 @@ public class DetailViewController: UIViewController {
                             }
                         })
                 }
-                .create { (section) in
-                    section.create { (item: Item<DetailDescriptionCollectionViewCell>) in
+                .create(with: "Section 1") { (section) in
+                    section.create(with: "Item in Section 1") { (item: Item<DetailDescriptionCollectionViewCell>) in
                         item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
                         item.configureCell { (cell, info) in
                             cell.descriptionLabel.text = """
