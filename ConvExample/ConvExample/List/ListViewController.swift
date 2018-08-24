@@ -9,45 +9,6 @@
 import UIKit
 import Conv
 
-enum SectionType: Int, Differenciable {
-    var differenceIdentifier: DifferenceIdentifier {
-        return "\(self)"
-    }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        return differenceIdentifier != compare.differenceIdentifier
-    }
-    
-    case one
-    case two
-    case three
-    case four
-    case five
-    case six
-    case seven
-    case eight
-    case nine
-    
-    static var firstElements: [SectionType] {
-        return [.one, .two, .three]
-    }
-    
-    static func append(contents: [SectionType]) -> [SectionType] {
-        guard
-            let last = contents.last,
-            let next = SectionType(rawValue: last.rawValue + 1)
-            else {
-            return contents
-        }
-        
-        return contents + [next]
-    }
-    
-    
-    var backgroundColor: UIColor {
-        return UIColor.black.withAlphaComponent(0.3)
-    }
-}
 
 class ListViewController: UIViewController {
     
@@ -192,11 +153,11 @@ class ListViewController: UIViewController {
 }
 
 extension ListViewController {
-    func viewModels(section: SectionType) -> [ItemViewModel] {
-        func stub() -> [ItemViewModel] {
+    func viewModels(section: SectionType) -> [ItemModel] {
+        func stub() -> [ItemModel] {
             return imageNames
                 .enumerated()
-                .map { ItemViewModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
+                .map { ItemModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
         }
         
         return stub()
