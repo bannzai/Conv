@@ -79,32 +79,18 @@ It use prepared Differenciable array.
 
 ```swift
 collectionView
-    .conv()
-    .create(for: sectionTypes) { (sectionType, section) in
-        // In closure passed each element from variable for sectionTypes and configuration for section.
-        
-        // Section has creating section header or footer method.
-        // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
-        section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-            
-            // Setting each property and wrapped datasource or delegate method
+    .conv() // #1
+    .create(for: sectionTypes) { (sectionType, section) in // #2
+        section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in // #3
             header.reusableIdentifier = "ListCollectionReusableView"
             header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
             header.configureView { view, _ in
-                // `view` was converted to ListCollectionReusableView
-                
                 view.nameLabel.text = "\(sectionType)".uppercased()
                 view.nameLabel.textColor = .white
                 view.backgroundColor = sectionType.backgroundColor
             }
         })
-        
-        // Section has creating items for count of elements.
-        // `create item` method to use generics type and convert automaticary to each datasource and delegate method. (e.g Item<ListCollectionViewCell>)
-        section.create(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
-            // In closure passed each element from variable of itemModels and configuration for item.
-            
-            // Setting each property and wrapped datasource or delegate method
+        section.create(for: itemModels, items: { (itemModel, item: Item<ListCollectionViewCell>) in // #4
             item.reusableIdentifier = "ListCollectionViewCell"
             item.sizeFor({ _ -> CGSize in
                 let gridCount: CGFloat = 3
@@ -114,21 +100,25 @@ collectionView
             })
             
             item.configureCell { (cell, info) in
-                
-                // cell was converted to ListCollectionViewCell
-                cell.setup(with: viewModel)
+                cell.setup(with: itemModel)
             }
             
             item.didSelect { [weak self] (item) in
-                let viewController = DetailViewController(imageName: viewModel.imageName)
+                let viewController = DetailViewController(imageName: itemModel.imageName)
                 self?.navigationController?.pushViewController(viewController, animated: true)
             }
         })
 }
 ```
 
+This swift code has the following meaning. It explain for `#` mark in code.
+1. Start to define UICollectionView data structure it using `Conv`.
+2. Create sections that number of sectionTypes. And start define about section. 
+3. Create section header for each section. And start define about section header.
+4. Create items that number of itemModels for each section. And start define about item.
+
 **Last**, If you want to render of `collectionView`, you call `collectionView.reload()` your best timing.  
-`reload()` calculate diff for between before section and between before items and for minimum reloading data.  
+`reload()` calculate diff for minimum reloading data between before section and between before items.
 So, it can reload faster more than `collectionView.reloadData()`.
 
 ```swift
@@ -179,18 +169,20 @@ Conv resolve these problem.
 1. Conv does not need to call UICollectionView.dequeueXXX. Because you can define configureCell method and get converted custom class cell. 
 
 ```swift
-item.configureCell { (cell, info) in
-
-    // cell was converted to ListCollectionViewCell
-    cell.setup(with: viewModel)
-}
+section.create(for: itemModels, items: { (itemModel, item: Item<ListCollectionViewCell>) in // #4
+    ...
+    item.configureCell { (cell, info) in
+        // cell is converted ListCollectionViewCell
+        cell.setup(with: itemModel)
+    }
+})
 ```
 
 2. You can write to neary for each UICollectionView component. section,item,header and footer.
 So, this definition to be natural expression for UICollectionView data strcture, hierarchy, releation.
 
 3. When create section or item, you can passed elements for configure UICollectionView.
-Next, each element pass closure argument that define Conv.Section or Conv.Item.
+Next each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
 
 # LICENSE
