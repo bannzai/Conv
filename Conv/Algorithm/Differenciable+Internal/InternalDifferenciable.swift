@@ -10,23 +10,19 @@ import Foundation
 
 internal struct FakeDifference: Differenciable {
     private let position: Int
-    private let uuid: String
-    init(position: Int, uuid: String) {
+    private let _differenceIdentifier: DifferenceIdentifier
+    init(position: Int, differenceIdentifier: DifferenceIdentifier) {
         self.position = position
-        self.uuid = uuid
+        self._differenceIdentifier = differenceIdentifier
     }
     
     var differenceIdentifier: String {
         return description
     }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        return true
-    }
 }
 
 extension FakeDifference: CustomStringConvertible {
     var description: String {
-        return "FakeDifference position: \(position) + uuid: \(uuid)"
+        return "FakeDifference position: \(position) + _differenceIdentifier: \(_differenceIdentifier)"
     }
 }

@@ -9,20 +9,6 @@
 import UIKit
 import Conv
 
-struct ItemViewModel: Differenciable {
-    let index: Int
-    let imageName: String
-    let image: UIImage
-    
-    var differenceIdentifier: DifferenceIdentifier {
-        return "\(index)" + imageName + "\(image.size)"
-    }
-    
-    func shouldUpdate(to compare: Differenciable) -> Bool {
-        return differenceIdentifier != compare.differenceIdentifier
-    }
-}
-
 class ListCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
@@ -32,7 +18,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setup(with viewModel: ItemViewModel) {
+    func setup(with viewModel: ItemModel) {
         nameLabel.text = viewModel.imageName
         sceneImageView.image = viewModel.image
     }

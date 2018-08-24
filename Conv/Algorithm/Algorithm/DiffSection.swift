@@ -18,7 +18,6 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 .enumerated()
                 .map { item in
                     DifferenciableIndexPath(
-                        uuid: "",
                         section: section.element,
                         item: item.element,
                         sectionIndex: section.offset,
@@ -35,7 +34,6 @@ func diffSection(from oldSections: [Section], new newSections: [Section]) -> Ope
                 .enumerated()
                 .map { item in
                     DifferenciableIndexPath(
-                        uuid: "",
                         section: section.element,
                         item: item.element,
                         sectionIndex: section.offset,

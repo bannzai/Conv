@@ -14,79 +14,120 @@
 # Conv
 
 Conv smart represent UICollectionView data structure more than UIKit.  
-And easy definition for UICollectionView DataSource and Delegate methods.  
+Easy definition for UICollectionView DataSource and Delegate methods.  
+
+And Conv reload fast to use diffing algorithm based on the Paul Heckel's algorithm.   
 
 Conv(called KONBU) means Seaweed in Japan.  
 This library is inspired by [Shoyu](https://github.com/yukiasai/shoyu). Thanks @yukiasai.
 
-# Usage
-First, create instance for UICollectionView(or subclass).  
+# Example
+**First**, Conv need to prepare array of definition datastructure for section and item.
+And then it should conform `Differenciable` protocol for difference algorithm.
 
+### Section
 ```swift
-let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+enum SectionType: Int {
+  case one
+  case two
+  case three
+
+  static var elements: [SectionType] {
+    return [.one, .two, .three]
+  }
+}
+
+extension SectionType: Differenciable {
+  var differenceIdentifier: DifferenceIdentifier {
+    return "\(self)"
+  }
+}
 ```
 
-Second, register to use cell and reusable view for `collectionView`.  
-
 ```swift
-collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
-collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
+let sectionTypes = SectionType.elements
 ```
 
-Next, call `conv()` and start definition UICollectionView DataSource and Delegate.  
+### Item
+```swift
+struct ItemModel {
+    let index: Int
+    let imageName: String
+    var image: UIImage {
+        return UIImage(named: imageName)!
+    }
+}
+
+extension ItemModel: Differenciable {
+    var differenceIdentifier: DifferenceIdentifier {
+        return "\(index)" + imageName
+    }
+}
+```
 
 ```swift
-        collectionView
-            .conv()
-            // Create sections for count of elements.
-            .create(for: SectionType.elements) { (sectionType, section) in
-                // In closure passed each element from elements and configuration for section.
+let itemModels = [
+    ItemModel(index: 1, imageName: "forest"),
+    ItemModel(index: 2, imageName: "moon"),
+    ItemModel(index: 3, imageName: "pond"),
+    ItemModel(index: 4, imageName: "river"),
+]
+```
+
+**Second**, start to define data structure for section and item.   
+It use prepared Differenciable array.  
+
+```swift
+collectionView
+    .conv()
+    .create(for: sectionTypes) { (sectionType, section) in
+        // In closure passed each element from variable for sectionTypes and configuration for section.
+        
+        // Section has creating section header or footer method.
+        // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
+        section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
+            
+            // Setting each property and wrapped datasource or delegate method
+            header.reusableIdentifier = "ListCollectionReusableView"
+            header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
+            header.configureView { view, _ in
+                // `view` was converted to ListCollectionReusableView
                 
-                // Section has creating section header or footer method.
-                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ListCollectionReusableView>) in
-                    
-                    // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "ListCollectionReusableView"
-                    header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
-                    header.configureView { view, _ in
-                        // `view` was converted to ListCollectionReusableView
-                        
-                        view.nameLabel.text = "\(sectionType)".uppercased()
-                        view.nameLabel.textColor = .white
-                        view.backgroundColor = sectionType.backgroundColor
-                    }
-                })
+                view.nameLabel.text = "\(sectionType)".uppercased()
+                view.nameLabel.textColor = .white
+                view.backgroundColor = sectionType.backgroundColor
+            }
+        })
+        
+        // Section has creating items for count of elements.
+        // `create item` method to use generics type and convert automaticary to each datasource and delegate method. (e.g Item<ListCollectionViewCell>)
+        section.create(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
+            // In closure passed each element from variable of itemModels and configuration for item.
+            
+            // Setting each property and wrapped datasource or delegate method
+            item.reusableIdentifier = "ListCollectionViewCell"
+            item.sizeFor({ _ -> CGSize in
+                let gridCount: CGFloat = 3
+                let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
+                let size = CGSize(width: edge, height: edge)
+                return size
+            })
+            
+            item.configureCell { (cell, info) in
                 
-                // Section has creating items for count of elements.
-                // `create item` method to use generics type and convert automaticary to each datasource and delegate method. (e.g Item<ListCollectionViewCell>)
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: Item<ListCollectionViewCell>) in
-                    // In closure passed each element from elements and configuration for section.
-                    
-                    // Setting each property and wrapped datasource or delegate method
-                    item.reusableIdentifier = "ListCollectionViewCell"
-                    item.sizeFor({ _ -> CGSize in
-                        let gridCount: CGFloat = 3
-                        let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
-                        let size = CGSize(width: edge, height: edge)
-                        return size
-                    })
-                    
-                    item.configureCell { (cell, info) in
-                        
-                        // cell was converted to ListCollectionViewCell
-                        cell.setup(with: viewModel)
-                    }
-                    
-                    item.didSelect { [weak self] (item) in
-                        let viewController = DetailViewController(imageName: viewModel.imageName)
-                        self?.navigationController?.pushViewController(viewController, animated: true)
-                    }
-                })
-        }
+                // cell was converted to ListCollectionViewCell
+                cell.setup(with: viewModel)
+            }
+            
+            item.didSelect { [weak self] (item) in
+                let viewController = DetailViewController(imageName: viewModel.imageName)
+                self?.navigationController?.pushViewController(viewController, animated: true)
+            }
+        })
+}
 ```
 
-Last, If you want to render of `collectionView`, you call `collectionView.reload()` your best timing.  
+**Last**, If you want to render of `collectionView`, you call `collectionView.reload()` your best timing.  
 `reload()` calculate diff for between before section and between before items and for minimum reloading data.  
 So, it can reload faster more than `collectionView.reloadData()`.
 
@@ -94,7 +135,20 @@ So, it can reload faster more than `collectionView.reloadData()`.
 collectionView.reload()
 ```
 
-You can check more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
+You can see more example to [ConvExmaple](https://github.com/bannzai/Conv/tree/master/ConvExample/)  
+
+# Algorithm
+Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
+And I also referred to other libraries below.  
+
+- https://github.com/mcudich/HeckelDiff
+- https://github.com/ra1028/DifferenceKit
+- https://github.com/Instagram/IGListKit/
+
+|  Insert and Delete  |  Move item and section  |
+| ---- | ---- |
+|  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513426-484e6e80-a6f8-11e8-83cc-78e533521588.gif" />  |  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513427-48e70500-a6f8-11e8-9e1e-7957f60a2918.gif" />  |
+
 
 # Install
 ## CocoaPods
@@ -138,19 +192,6 @@ So, this definition to be natural expression for UICollectionView data strcture,
 3. When create section or item, you can passed elements for configure UICollectionView.
 Next, each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
-
-## Algorithm
-Conv to use diffing algorithm based on the Paul Heckel's algorithm.    
-And I also referred to other libraries below.  
-
-- https://github.com/mcudich/HeckelDiff
-- https://github.com/ra1028/DifferenceKit
-- https://github.com/Instagram/IGListKit/
-
-|  Insert and Delete  |  Move item and section  |
-| ---- | ---- |
-|  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513426-484e6e80-a6f8-11e8-83cc-78e533521588.gif" />  |  <img width="320px" src="https://user-images.githubusercontent.com/10897361/44513427-48e70500-a6f8-11e8-9e1e-7957f60a2918.gif" />  |
-
 
 # LICENSE
 [Conv](https://github.com/bannzai/Conv/) is released under the MIT license. See [LICENSE](https://github.com/bannzai/Conv/blob/master/LICENSE.txt) for details.
