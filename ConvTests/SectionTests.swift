@@ -23,7 +23,7 @@ class SectionTests: XCTestCase {
         XCTContext.runActivity(named: "create item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.create { (_) in return }
+            section.create(with: "Item") { (_) in return }
             XCTAssert(section.items.count == 1)
         }
         XCTContext.runActivity(named: "create two items") { (activity) in
