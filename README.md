@@ -33,12 +33,11 @@ collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), f
 collectionView.register(UINib(nibName: "ListCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ListCollectionReusableView")
 ```
 
-Next, call `define()` method from `collectionView` and create `Conv` and start definition UICollectionView DataSource and Delegate.  
+Next, call `conv()` and start definition UICollectionView DataSource and Delegate.  
 
 ```swift
         collectionView
             .conv()
-            
             // Create sections for count of elements.
             .create(for: SectionType.elements) { (sectionType, section) in
                 // In closure passed each element from elements and configuration for section.
