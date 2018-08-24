@@ -59,8 +59,8 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
-        create(for: [FakeDifference(position: items.count + 1, uuid: uuid)]) { (_, item) in
+    @discardableResult public func create<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, item closure: (Item<T>) -> Void) -> Section {
+        create(for: [FakeDifference(position: items.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, item) in
             closure(item)
         }
         return self
