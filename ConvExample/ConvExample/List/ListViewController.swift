@@ -157,7 +157,7 @@ extension ListViewController {
         func stub() -> [ItemModel] {
             return imageNames
                 .enumerated()
-                .map { ItemModel(index: $0.0, imageName: $0.1, image: UIImage(named: $0.1)!) }
+                .map { ItemModel(index: $0.0, imageName: $0.1) }
         }
         
         return stub()

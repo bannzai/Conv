@@ -12,11 +12,13 @@ import Conv
 struct ItemModel {
     let index: Int
     let imageName: String
-    let image: UIImage
+    var image: UIImage {
+        return UIImage(named: imageName)!
+    }
 }
 
 extension ItemModel: Differenciable {
     var differenceIdentifier: DifferenceIdentifier {
-        return "\(index)" + imageName + "\(image.size)"
+        return "\(index)" + imageName
     }
 }
