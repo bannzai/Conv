@@ -30,7 +30,7 @@ class ListViewController: UIViewController {
         "water_fall",
     ]
     
-    var elements: [SectionType] = SectionType.firstElements
+    var sectionTypes: [SectionType] = SectionType.firstElements
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,20 +50,18 @@ class ListViewController: UIViewController {
     func setupConv() {
         collectionView
             .conv()
-            
-            // Create sections for count of elements.
-            .create(for: elements) { (sectionType, section) in
-                // In closure passed each element from elements and configuration for section.
+            .create(for: sectionTypes) { (sectionType, section) in
+                // In closure passed each element from variable for sectionTypes and configuration for section.
                 
                 // Section has creating section header or footer method.
-                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<SectionHeaderReusableView>)
+                // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "SectionHeaderReusableView"
+                    header.reusableIdentifier = "ListCollectionReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
-                        // `view` was converted to SectionHeaderReusableView
+                        // `view` was converted to ListCollectionReusableView
                         
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
@@ -73,8 +71,12 @@ class ListViewController: UIViewController {
                 
                 // Section has creating items for count of elements.
                 // `create item` method to use generics type and convert automaticary to each datasource and delegate method. (e.g Item<ListCollectionViewCell>)
-                section.create(for: viewModels(section: sectionType), items: { (viewModel, item: Item<ListCollectionViewCell>) in
-                    // In closure passed each element from elements and configuration for section.
+                let itemModels = imageNames
+                    .enumerated()
+                    .map { ItemModel(index: $0.0, imageName: $0.1) }
+                
+                section.create(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
+                    // In closure passed each element from variable of itemModels and configuration for item.
                     
                     // Setting each property and wrapped datasource or delegate method
                     item.reusableIdentifier = "ListCollectionViewCell"
@@ -120,7 +122,7 @@ class ListViewController: UIViewController {
     }
     
     @objc func addSectionButtonPressed(button: UIBarButtonItem) {
-        elements = SectionType.append(contents: elements)
+        sectionTypes = SectionType.append(contents: sectionTypes)
         reload()
     }
     
@@ -137,7 +139,7 @@ class ListViewController: UIViewController {
             "water_fall",
         ]
         
-        elements = SectionType.firstElements
+        sectionTypes = SectionType.firstElements
         
         reload()
     }
@@ -151,16 +153,3 @@ class ListViewController: UIViewController {
         print("For \(#file), \(#function) called")
     }
 }
-
-extension ListViewController {
-    func viewModels(section: SectionType) -> [ItemModel] {
-        func stub() -> [ItemModel] {
-            return imageNames
-                .enumerated()
-                .map { ItemModel(index: $0.0, imageName: $0.1) }
-        }
-        
-        return stub()
-    }
-}
-
