@@ -79,14 +79,6 @@ extension Conv {
 }
 
 extension Conv {
-    @discardableResult public func create(section closure: (Section) -> Void) -> Self {
-        create(for: [FakeDifference(position: sections.count + 1, uuid: uuid)]) { (_, section) in
-            closure(section)
-        }
-        
-        return self
-    }
-    
     @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
             Section(diffElement: element, uuid: uuid) { section in

@@ -59,13 +59,6 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func create<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
-        create(for: [FakeDifference(position: items.count + 1, uuid: uuid)]) { (_, item) in
-            closure(item)
-        }
-        return self
-    }
-    
     @discardableResult public func create<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
         let items = elements.map { element in
             Item<T>(diffElement: element) { item in
