@@ -14,15 +14,7 @@ public final class Conv: NSObject {
     public var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
-    let uuid: String
-    
     public override init() {
-        uuid = UUID().uuidString
-        super.init()
-    }
-    
-    public init(uuid: String)  {
-        self.uuid = uuid
         super.init()
     }
     
@@ -89,7 +81,7 @@ extension Conv {
     
     @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
-            Section(diffElement: element, uuid: uuid) { section in
+            Section(diffElement: element) { section in
                 closure(element, section)
             }
         }

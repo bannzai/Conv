@@ -21,19 +21,11 @@ public class Section {
     internal var minimumLineSpacing: ((SectionArgument) -> CGFloat)?
     internal var minimumInteritemSpacing: ((SectionArgument) -> CGFloat)?
     
-    private let uuid: String
-    
     init() {
-        self.uuid = UUID().uuidString
+        
     }
-    
-    init(uuid: String) {
-        self.uuid = uuid
-    }
-    
-    public init(diffElement: Differenciable, uuid: String, closure: (Section) -> Void) {
-        self.diffElement = diffElement
-        self.uuid = uuid
+
+    public init(diffElement: Differenciable, closure: (Section) -> Void) {
         closure(self)
     }
     

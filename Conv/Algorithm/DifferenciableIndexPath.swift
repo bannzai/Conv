@@ -9,8 +9,6 @@
 import Foundation
 
 struct DifferenciableIndexPath: Differenciable {
-    let uuid: String
-    
     let section: Section
     let item: ItemDelegate
     

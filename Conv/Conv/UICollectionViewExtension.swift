@@ -17,11 +17,11 @@ public extension UICollectionView {
             self.mainConv = conv
             return conv
         case (nil, let convForOverwrite?):
-            let conv = Conv(uuid: convForOverwrite.uuid)
+            let conv = Conv()
             self.convForOverwrite = conv
             return conv
         case (let mainConv?, _):
-            let conv = Conv(uuid: mainConv.uuid)
+            let conv = Conv()
             self.convForOverwrite = conv
             return conv
         }
