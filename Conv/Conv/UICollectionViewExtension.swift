@@ -16,11 +16,7 @@ public extension UICollectionView {
             let conv = Conv()
             self.mainConv = conv
             return conv
-        case (nil, let convForOverwrite?):
-            let conv = Conv()
-            self.convForOverwrite = conv
-            return conv
-        case (let mainConv?, _):
+        case _:
             let conv = Conv()
             self.convForOverwrite = conv
             return conv
