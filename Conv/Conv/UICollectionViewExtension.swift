@@ -60,6 +60,12 @@ public extension UICollectionView {
         
         shiftConv()
         
+        let diffs: [[Any]] = [itemDelete, itemInsert, itemMove, itemUpdate, sectionDelete, sectionInsert, sectionMove, sectionUpdate]
+        let shouldNotReload = diffs.map { $0.isEmpty }.reduce(true) { $0 && $1 }
+        if shouldNotReload {
+            return
+        }
+
         performBatchUpdates({
             if !sectionDelete.isEmpty {
                 deleteSections(IndexSet(sectionDelete))
