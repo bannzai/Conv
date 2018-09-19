@@ -17,11 +17,8 @@ class UICollectionViewExtensionTests: XCTestCase {
     
     func testConv() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        let closure: (Differenciable, Section) -> Void = { _, section in
-            section.create(for: [1, 2, 3].map(make), items: { (_, item: Item<TestCollectionViewCell>) in
-                
-            })
-        }
+        let closure: (Differenciable, Section) -> Void = { _, _ in }
+        
         first: do {
             let conv = collectionView.conv().create(for: [1, 2, 3].map { make($0) }, sections: closure)
             
