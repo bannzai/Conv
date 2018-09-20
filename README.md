@@ -1,4 +1,6 @@
-<img width="70%" src="Logo/conv_logo.png" />
+<div align="center" >
+  <img width="70%" src="Logo/conv_logo.png" />
+</div>
 
 <p align="center">
   <a href="https://developer.apple.com/swift"><img alt="Swift4" src="https://img.shields.io/badge/language-swift4-blue.svg?style=flat"/></a>
