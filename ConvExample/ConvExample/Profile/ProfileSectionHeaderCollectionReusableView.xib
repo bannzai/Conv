@@ -23,6 +23,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <color key="backgroundColor" red="0.11372549019607843" green="0.16078431372549018" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="3Rp-ae-YDh" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="cHE-Ci-xw0"/>
                 <constraint firstItem="3Rp-ae-YDh" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="16" id="dYK-ts-Rbo"/>
@@ -31,7 +32,7 @@
             <connections>
                 <outlet property="titleLabel" destination="3Rp-ae-YDh" id="AXo-DS-PuE"/>
             </connections>
-            <point key="canvasLocation" x="-316" y="-52"/>
+            <point key="canvasLocation" x="-488" y="-167"/>
         </collectionReusableView>
     </objects>
 </document>
