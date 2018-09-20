@@ -71,6 +71,14 @@ extension Conv {
 }
 
 extension Conv {
+    @discardableResult public func create(section closure: (Section) -> Void, functionName: String = #function, line: Int = #line) -> Self {
+        create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "functionName: \(functionName), line: \(line)")]) { (_, section) in
+            closure(section)
+        }
+        
+        return self
+    }
+    
     @discardableResult public func create(with differenceIdentifier: DifferenceIdentifier, section closure: (Section) -> Void) -> Self {
         create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, section) in
             closure(section)
