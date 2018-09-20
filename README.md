@@ -28,7 +28,7 @@ And Conv reload fast to use diffing algorithm based on the Paul Heckel's algorit
 Conv(called KONBU) means Seaweed in Japan.  
 This library is inspired by [Shoyu](https://github.com/yukiasai/shoyu). Thanks [@yukiasai](https://github.com/yukiasai).
 
-# Example
+# Usage
 **First**, Conv need to prepare array of definition datastructure for section and item.
 And then it should conform `Differenciable` protocol for difference algorithm.
 
