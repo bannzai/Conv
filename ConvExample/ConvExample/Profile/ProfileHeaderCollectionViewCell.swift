@@ -20,13 +20,17 @@ class ProfileHeaderCollectionViewCell: UICollectionViewCell {
         
         profileImageBackgroundView.layer.borderColor = UIColor.white.cgColor
         profileImageBackgroundView.layer.borderWidth = 1
-        profileImageBackgroundView.layer.cornerRadius = 60
+        profileImageBackgroundView.layer.cornerRadius = 50
     }
     
     func configure(user: User) {
         profileIconImageView.image = user.profileImage
         nameLabel.text = user.name
-        introductionLabel.text = user.introduction
+        let attributedString = NSMutableAttributedString(string: user.introduction)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 3
+        attributedString.addAttributes([NSAttributedStringKey.paragraphStyle : paragraphStyle], range: NSMakeRange(0, user.introduction.count))
+        introductionLabel.attributedText = attributedString
     }
     
     @IBAction func sendButtonPressed(_ sender: Any) {

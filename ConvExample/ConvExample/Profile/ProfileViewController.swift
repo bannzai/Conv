@@ -10,6 +10,10 @@ import UIKit
 import Conv
 
 public class ProfileViewController: UIViewController {
+    typealias ProfileCell = ProfileHeaderCollectionViewCell
+    typealias SectionHeader = ProfileSectionHeaderCollectionReusableView
+    typealias ImageCell = ListCollectionViewCell
+    
     private let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     var flowLayout: UICollectionViewFlowLayout? {
         return collectionView.collectionViewLayout as? UICollectionViewFlowLayout
@@ -47,9 +51,9 @@ public class ProfileViewController: UIViewController {
                 ]
             )
             
-            collectionView.register(UINib(nibName: "ProfileHeaderCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileHeaderCollectionViewCell")
-            collectionView.register(UINib(nibName: "ProfileSectionHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProfileSectionHeaderCollectionReusableView")
-            collectionView.register(UINib(nibName: "ListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ListCollectionViewCell")
+            collectionView.register(UINib(nibName: ProfileCell.identifier, bundle: nil), forCellWithReuseIdentifier: ProfileCell.identifier)
+            collectionView.register(UINib(nibName: SectionHeader.identifier, bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier)
+            collectionView.register(UINib(nibName: ImageCell.identifier, bundle: nil), forCellWithReuseIdentifier: ImageCell.identifier)
         }
         
         flowLayout?.sectionInset = .zero
@@ -74,28 +78,28 @@ public class ProfileViewController: UIViewController {
         collectionView
             .conv()
             .create { (section) in
-                section.create(item: { (item: Item<ProfileHeaderCollectionViewCell>) in
-                    item.reusableIdentifier = "ProfileHeaderCollectionViewCell"
+                section.create{ (item: Item<ProfileCell>) in
+                    item.reusableIdentifier = ProfileCell.identifier
                     item.sizeFor { (item, collectionView, indexPath) in
-                        return ProfileHeaderCollectionViewCell.size(with: collectionView.bounds.width, user: me)
+                        return ProfileCell.size(with: collectionView.bounds.width, user: me)
                     }
-                    item.configureCell({ (cell, itemInfo) in
+                    item.configureCell { (cell, itemInfo) in
                         cell.configure(user: me)
-                    })
-                })
+                    }
+                }
             }
             .create { (section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<ProfileSectionHeaderCollectionReusableView>) in
-                    header.reusableIdentifier = "ProfileSectionHeaderCollectionReusableView"
+                section.create(.header) { (header: SectionHeaderFooter<SectionHeader>) in
+                    header.reusableIdentifier = SectionHeader.identifier
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)
                     }
                     header.configureView({ (header, headerInfo) in
                         header.titleLabel.text = "My Photos"
                     })
-                })
-                section.create(for: images, items: { (viewModel, item: Item<ListCollectionViewCell>) in
-                    item.reusableIdentifier = "ListCollectionViewCell"
+                }
+                section.create(for: images) { (viewModel, item: Item<ImageCell>) in
+                    item.reusableIdentifier = ImageCell.identifier
                     item.sizeFor({ _ -> CGSize in
                         let gridCount: CGFloat = 3
                         let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
@@ -109,7 +113,7 @@ public class ProfileViewController: UIViewController {
                         let viewController = DetailViewController(imageName: viewModel.imageName)
                         self?.navigationController?.pushViewController(viewController, animated: true)
                     }
-                })
+                }
         }
     }
 }

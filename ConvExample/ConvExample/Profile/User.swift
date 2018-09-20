@@ -14,10 +14,8 @@ struct User {
     let introduction = """
                             Hi, I'm bannzai.
                             bannzai means \\(^o^)/.
-                            Nice to meet you.
                             If you love this library, you should send start request to this repository.
                             ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
-                            So, I'm glad. I'm happy!!
                             """
 }
 
