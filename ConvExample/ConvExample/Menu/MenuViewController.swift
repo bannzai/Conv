@@ -98,6 +98,6 @@ public class MenuViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.reload()
+        collectionView.update()
     }
 }
