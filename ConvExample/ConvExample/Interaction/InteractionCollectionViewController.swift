@@ -131,6 +131,6 @@ public class InteractionCollectionViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.reload()
+        collectionView.update()
     }
 }

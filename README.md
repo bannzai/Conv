@@ -125,9 +125,15 @@ This swift code has the following meaning. It explain for `#` mark in code.
 3. Create section header for each section. And start define about section header.
 4. Create items that number of itemModels for each section. And start define about item.
 
-**Last**, If you want to render of `collectionView`, you call `collectionView.reload()` your best timing.  
-`reload()` calculate diff for minimum reloading data between before section and between before items.
-So, it can reload faster more than `collectionView.reloadData()`.
+**Last**, If you want to render of `collectionView`, you call `collectionView.update()` your best timing.  
+`update()` calculate diff for minimum reloading data between before section and between before items.
+
+```swift
+collectionView.update()
+```
+
+Or if you want to all realod cells, you can call `reload()`. 
+It will be same behavior of `collectionView.reloadData()`.
 
 ```swift
 collectionView.reload()

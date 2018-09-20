@@ -58,7 +58,7 @@ class ListViewController: UIViewController {
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "ListCollectionReusableView"
+                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
                         // `view` was converted to ListCollectionReusableView
@@ -104,7 +104,7 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupConv()
-        collectionView.reload()
+        collectionView.update()
 
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
@@ -146,7 +146,7 @@ class ListViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.reload()
+        collectionView.update()
     }
     
     deinit {
