@@ -1,5 +1,5 @@
 //
-//  ItemModel.swift
+//  ImageModel.swift
 //  ConvExample
 //
 //  Created by Yudai.Hirose on 2018/08/24.
@@ -9,7 +9,7 @@
 import Foundation
 import Conv
 
-struct ItemModel {
+struct ImageModel {
     let index: Int
     let imageName: String
     var image: UIImage {
@@ -17,7 +17,7 @@ struct ItemModel {
     }
 }
 
-extension ItemModel: Differenciable {
+extension ImageModel: Differenciable {
     var differenceIdentifier: DifferenceIdentifier {
         return "\(index)" + imageName
     }
