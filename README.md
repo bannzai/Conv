@@ -17,7 +17,7 @@
 Conv smart represent UICollectionView data structure more than UIKit.  
 Easy definition for UICollectionView DataSource and Delegate methods.  
 
-<img width="100%" src="https://user-images.githubusercontent.com/10897361/45797621-6dc39d80-bce1-11e8-8262-03ffaf77894f.png" />
+<img width="100%" src="https://user-images.githubusercontent.com/10897361/45803758-54c4e780-bcf5-11e8-8724-7ea779589331.png" />
 
 
 And Conv reload fast to use diffing algorithm based on the Paul Heckel's algorithm.   
