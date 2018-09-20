@@ -9,7 +9,6 @@
 import UIKit
 
 struct User {
-    let headerImage = #imageLiteral(resourceName: "conv_logo")
     let profileImage = #imageLiteral(resourceName: "bannzai")
     let name = "bannzai"
     let introduction = """
