@@ -40,7 +40,7 @@ enum SectionType: Int {
   case two
   case three
 
-  static var elements: [SectionType] {
+  static var allCases: [SectionType] {
     return [.one, .two, .three]
   }
 }
@@ -53,7 +53,7 @@ extension SectionType: Differenciable {
 ```
 
 ```swift
-let sectionTypes = SectionType.elements
+let sectionTypes = SectionType.allCases
 ```
 
 ### Item
@@ -190,7 +190,7 @@ section.create(for: itemModels, items: { (itemModel, item: Item<ListCollectionVi
 2. You can write to neary for each UICollectionView component. section,item,header and footer.
 So, this definition to be natural expression for UICollectionView data strcture, hierarchy, releation.
 
-3. When create section or item, you can passed elements for configure UICollectionView.
+3. When create section or item, you can passed allCases for configure UICollectionView.
 Next each element pass closure argument that define Conv.Section or Conv.Item.
 So, You can represent CollectionView data structure with extracted each element.
 
