@@ -94,7 +94,6 @@ public class ProfileViewController: UIViewController {
                         header.titleLabel.text = "My Photos"
                     })
                 })
-                
                 section.create(for: images, items: { (viewModel, item: Item<ListCollectionViewCell>) in
                     item.reusableIdentifier = "ListCollectionViewCell"
                     item.sizeFor({ _ -> CGSize in
