@@ -52,8 +52,8 @@ extension Section {
 }
 
 extension Section {
-    @discardableResult public func create<T: UICollectionViewCell>(functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
-        create(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "functionName: \(functionName), line: \(line)")]) { (_, item) in
+    @discardableResult public func create<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
+        create(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, item) in
             closure(item)
         }
         
