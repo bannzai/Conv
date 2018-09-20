@@ -73,7 +73,7 @@ class ListViewController: UIViewController {
                 // `create item` method to use generics type and convert automaticary to each datasource and delegate method. (e.g Item<ListCollectionViewCell>)
                 let itemModels = imageNames
                     .enumerated()
-                    .map { ItemModel(index: $0.0, imageName: $0.1) }
+                    .map { ImageModel(index: $0.0, imageName: $0.1) }
                 
                 section.create(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
                     // In closure passed each element from variable of itemModels and configuration for item.

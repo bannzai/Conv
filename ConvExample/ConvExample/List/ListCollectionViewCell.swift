@@ -18,7 +18,7 @@ class ListCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setup(with viewModel: ItemModel) {
+    func setup(with viewModel: ImageModel) {
         nameLabel.text = viewModel.imageName
         sceneImageView.image = viewModel.image
     }

@@ -17,6 +17,7 @@ enum MenuType: Int, Differenciable {
     case list
     case move
     case shuffle
+    case profile
     
     var title: String {
         switch self {
@@ -26,11 +27,13 @@ enum MenuType: Int, Differenciable {
             return "Moving interactive collection view cell"
         case .shuffle:
             return "Shuffle section and items"
+        case .profile:
+            return "Example like profile screen"
         }
     }
     
     static var elements: [MenuType] {
-        return [.list, .move, .shuffle]
+        return [.list, .move, .shuffle, .profile]
     }
 }
 
@@ -82,6 +85,9 @@ public class MenuViewController: UIViewController {
                                 self?.navigationController?.pushViewController(viewController, animated: true)
                             case .shuffle:
                                 let viewController = ShuffleViewController()
+                                self?.navigationController?.pushViewController(viewController, animated: true)
+                            case .profile:
+                                let viewController = ProfileViewController()
                                 self?.navigationController?.pushViewController(viewController, animated: true)
                             }
                         })
