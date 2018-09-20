@@ -71,7 +71,7 @@ public class ProfileViewController: UIViewController {
                 .enumerated()
                 .map { ImageModel(index: $0.0, imageName: $0.1) }
         )
-        collectionView.update()
+        collectionView.reload()
     }
     
     func setup(me: User, images: [ImageModel]) {

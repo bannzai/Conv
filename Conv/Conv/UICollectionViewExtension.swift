@@ -93,6 +93,16 @@ public extension UICollectionView {
             }
         })
     }
+    
+    public func reload() {
+        if convForOverwrite == nil {
+            reloadData()
+            return
+        }
+
+        shiftConv()
+        reloadData()
+    }
 }
 
 fileprivate struct UICollectionViewAssociatedObjectHandle {
