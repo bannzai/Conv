@@ -15,7 +15,16 @@ class ProfileHeaderCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var introductionLabel: UILabel!
     @IBOutlet weak var sendStarButton: UIButton!
     
+    var pressed: (() -> Void)?
+    
+    func configure(user: User) {
+        headerImageView.image = user.headerImage
+        profileIconImageView.image = user.profileImage
+        nameLabel.text = user.name
+        introductionLabel.text = user.introduction
+    }
+    
     @IBAction func sendButtonPressed(_ sender: Any) {
-        
+        pressed?()
     }
 }
