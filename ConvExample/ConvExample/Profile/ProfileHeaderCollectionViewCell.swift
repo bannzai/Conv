@@ -9,22 +9,37 @@
 import UIKit
 
 class ProfileHeaderCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var profileImageBackgroundView: UIView!
     @IBOutlet weak var profileIconImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var introductionLabel: UILabel!
     @IBOutlet weak var sendStarButton: UIButton!
     
-    var pressed: (() -> Void)?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        profileImageBackgroundView.layer.borderColor = UIColor.white.cgColor
+        profileImageBackgroundView.layer.borderWidth = 1
+        profileImageBackgroundView.layer.cornerRadius = 60
+    }
     
     func configure(user: User) {
-        headerImageView.image = user.headerImage
         profileIconImageView.image = user.profileImage
         nameLabel.text = user.name
         introductionLabel.text = user.introduction
     }
     
     @IBAction func sendButtonPressed(_ sender: Any) {
-        pressed?()
+        UIApplication.shared.open(URL(string: "https://github.com/bannzai/conv")!, options: [:], completionHandler: nil)
+    }
+    
+    static let cellForCalcSize: ProfileHeaderCollectionViewCell = UINib(nibName: "ProfileHeaderCollectionViewCell", bundle: nil)
+        .instantiate(withOwner: nil, options: nil)
+        .first! as! ProfileHeaderCollectionViewCell
+    
+    static func size(with width: CGFloat, user: User) -> CGSize {
+        cellForCalcSize.configure(user: user)
+        let size = cellForCalcSize.fittingSize(with: width)
+        return size
     }
 }
