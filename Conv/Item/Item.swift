@@ -12,7 +12,7 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     public typealias ItemArgument = (item: Item<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
     public typealias PerformActionArgument = (item: Item<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
-    public var reuseIdentifier: String?
+    public private(set) var reuseIdentifier: String?
     public var diffElement: Differenciable!
 
     public var size: CGSize?
@@ -51,7 +51,8 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
 }
 
 extension Item {
-    public func configureCell(_ closure: @escaping ((Cell, ItemArgument) -> Void)) {
+    public func configureCell(for reuseIdentifier: String, _ closure: @escaping ((Cell, ItemArgument) -> Void)) {
+        self.reuseIdentifier = reuseIdentifier
         self.configureCell = closure
     }
     public func sizeFor(_ closure: @escaping ((ItemArgument) -> CGSize)) {

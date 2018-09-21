@@ -22,7 +22,7 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: Reusable {
         closure(self)
     }
     
-    open var reuseIdentifier: String?
+    open private(set) var reuseIdentifier: String?
 
     open var size: CGSize?
     open let kind: SectionHeaderFooterKind
@@ -35,7 +35,8 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: Reusable {
 }
 
 extension SectionHeaderFooter {
-    public func configureView(_ closure: @escaping ((View, SectionHeaderFooterInformation) -> Void)) {
+    public func configureView(for reuseIdentifier: String, _ closure: @escaping ((View, SectionHeaderFooterInformation) -> Void)) {
+        self.reuseIdentifier = reuseIdentifier
         self.configureView = closure
     }
     public func createView(_ closure: @escaping ((View, SectionHeaderFooterInformation) -> Void)) {
