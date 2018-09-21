@@ -22,7 +22,7 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: Reusable {
         closure(self)
     }
     
-    open var reusableIdentifier: String?
+    open var reuseIdentifier: String?
 
     open var size: CGSize?
     open let kind: SectionHeaderFooterKind

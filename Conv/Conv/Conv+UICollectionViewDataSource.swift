@@ -15,7 +15,7 @@ extension Conv: UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = sections[indexPath.section].items[indexPath.item]
-        if let reuseIdentifier = item.reusableIdentifier {
+        if let reuseIdentifier = item.reuseIdentifier {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
             item.configureCell(collectionView: collectionView, cell: cell, indexPath: indexPath)
             return cell

@@ -49,7 +49,7 @@ public class DetailViewController: UIViewController {
                     section
                         .create(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in
                             let image = UIImage(named: imageName)!
-                            item.reusableIdentifier = "DetailImageCollectionViewCell"
+                            item.reuseIdentifier = "DetailImageCollectionViewCell"
                             item.configureCell { (cell, info) in
                                 cell.contentImageView.image = image
                             }
@@ -62,7 +62,7 @@ public class DetailViewController: UIViewController {
                 }
                 .create(with: "Section 1") { (section) in
                     section.create(with: "Item in Section 1") { (item: Item<DetailDescriptionCollectionViewCell>) in
-                        item.reusableIdentifier = "DetailDescriptionCollectionViewCell"
+                        item.reuseIdentifier = "DetailDescriptionCollectionViewCell"
                         item.configureCell { (cell, info) in
                             cell.descriptionLabel.text = """
                             Hi, I'm bannzai.

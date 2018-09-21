@@ -12,7 +12,7 @@ public class Item<Cell: UICollectionViewCell>: Reusable {
     public typealias ItemArgument = (item: Item<Cell>, collectionView: UICollectionView, indexPath: IndexPath)
     public typealias PerformActionArgument = (item: Item<Cell>, collectionView: UICollectionView, action: Selector, indexPath: IndexPath, sender: Any?)
     
-    public var reusableIdentifier: String?
+    public var reuseIdentifier: String?
     public var diffElement: Differenciable!
 
     public var size: CGSize?

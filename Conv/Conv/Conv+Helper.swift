@@ -33,7 +33,7 @@ internal extension Conv {
     
     func headerFooterViewFor(headerFooter: SectionHeaderFooterDelegate, collectionView: UICollectionView, indexPath: IndexPath) -> UICollectionReusableView? {
         // Dequeue
-        if let identifier = headerFooter.reusableIdentifier {
+        if let identifier = headerFooter.reuseIdentifier {
             let view = dequeueReusableSupplementaryView(collectionView: collectionView, kind: headerFooter.kind.kind, identifier: identifier, indexPath: indexPath)
             headerFooter.configureView(collectionView, view: view, section: indexPath.section)
             return view

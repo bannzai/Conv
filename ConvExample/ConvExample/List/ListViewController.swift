@@ -58,7 +58,7 @@ class ListViewController: UIViewController {
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
-                    header.reusableIdentifier = "SectionHeaderReusableView"
+                    header.reuseIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView { view, _ in
                         // `view` was converted to ListCollectionReusableView
@@ -79,7 +79,7 @@ class ListViewController: UIViewController {
                     // In closure passed each element from variable of itemModels and configuration for item.
                     
                     // Setting each property and wrapped datasource or delegate method
-                    item.reusableIdentifier = "ListCollectionViewCell"
+                    item.reuseIdentifier = "ListCollectionViewCell"
                     item.sizeFor({ _ -> CGSize in
                         let gridCount: CGFloat = 3
                         let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)

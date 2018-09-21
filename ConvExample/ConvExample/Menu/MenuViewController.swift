@@ -68,7 +68,7 @@ public class MenuViewController: UIViewController {
             .create(with: "Section 0") { (section) in
                 section
                     .create(for: MenuType.elements, items: { (menuType, item: Item<MenuCollectionViewCell>) in
-                        item.reusableIdentifier = "MenuCollectionViewCell"
+                        item.reuseIdentifier = "MenuCollectionViewCell"
                         item.configureCell({ (cell, info) in
                             cell.setup(title: menuType.title)
                         })
