@@ -8,6 +8,6 @@
 
 import Foundation
 
-internal protocol Reusable {
-    var reuseIdentifier: String? { get set }
+public protocol Reusable {
+    var reuseIdentifier: String? { get }
 }
