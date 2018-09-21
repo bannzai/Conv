@@ -49,11 +49,10 @@ public class DetailViewController: UIViewController {
                     section
                         .create(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in
                             let image = UIImage(named: imageName)!
-                            item.reuseIdentifier = "DetailImageCollectionViewCell"
-                            item.configureCell { (cell, info) in
+                            item.configureCell(for: "DetailImageCollectionViewCell") { (cell, info) in
                                 cell.contentImageView.image = image
                             }
-                            item.sizeFor { (info) -> CGSize in
+                            item.sizeFor() { (info) -> CGSize in
                                 let ratio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
                                 let height = image.size.width / ratio
                                 return CGSize(width: UIScreen.main.bounds.width, height: height)
@@ -62,8 +61,7 @@ public class DetailViewController: UIViewController {
                 }
                 .create(with: "Section 1") { (section) in
                     section.create(with: "Item in Section 1") { (item: Item<DetailDescriptionCollectionViewCell>) in
-                        item.reuseIdentifier = "DetailDescriptionCollectionViewCell"
-                        item.configureCell { (cell, info) in
+                        item.configureCell(for: "DetailDescriptionCollectionViewCell") { (cell, info) in
                             cell.descriptionLabel.text = """
                             Hi, I'm bannzai.
                             bannzai means \\(^o^)/.

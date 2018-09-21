@@ -78,9 +78,8 @@ public class InteractionCollectionViewController: UIViewController {
             .conv()
             .create(for: SectionType.elements) { (sectionType, section) in
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
-                    header.reuseIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
-                    header.configureView { view, _ in
+                    header.configureView(for: "SectionHeaderReusableView") { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
                         view.backgroundColor = .black
@@ -99,9 +98,8 @@ public class InteractionCollectionViewController: UIViewController {
                 
                 let emoticons = emoticonsForEachSection[sectionType.rawValue]
                 section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
-                    item.reuseIdentifier = "EmoticoinCollectionViewCell"
                     item.size = CGSize(width: cellWidth, height: cellWidth)
-                    item.configureCell({ (cell, info) in
+                    item.configureCell(for: "EmoticoinCollectionViewCell", { (cell, info) in
                         cell.configure(text: emoticon)
                     })
                     item.willDisplay({ (cell, info) in
