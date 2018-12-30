@@ -79,34 +79,31 @@ public class ProfileViewController: UIViewController {
             .conv()
             .create { (section) in
                 section.create{ (item: Item<ProfileCell>) in
-                    item.reusableIdentifier = ProfileCell.identifier
                     item.sizeFor { (item, collectionView, indexPath) in
                         return ProfileCell.size(with: collectionView.bounds.width, user: me)
                     }
-                    item.configureCell { (cell, itemInfo) in
+                    item.configureCell(for: ProfileCell.identifier) { (cell, itemInfo) in
                         cell.configure(user: me)
                     }
                 }
             }
             .create { (section) in
                 section.create(.header) { (header: SectionHeaderFooter<SectionHeader>) in
-                    header.reusableIdentifier = SectionHeader.identifier
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)
                     }
-                    header.configureView({ (header, headerInfo) in
+                    header.configureView(for: SectionHeader.identifier, { (header, headerInfo) in
                         header.titleLabel.text = "My Photos"
                     })
                 }
                 section.create(for: images) { (viewModel, item: Item<ImageCell>) in
-                    item.reusableIdentifier = ImageCell.identifier
                     item.sizeFor({ _ -> CGSize in
                         let gridCount: CGFloat = 3
                         let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)
                         let size = CGSize(width: edge, height: edge)
                         return size
                     })
-                    item.configureCell { (cell, info) in
+                    item.configureCell(for: ImageCell.identifier) { (cell, info) in
                         cell.setup(with: viewModel)
                     }
                     item.didSelect { [weak self] (item) in

@@ -27,7 +27,7 @@ class ItemTests: XCTestCase {
         let item = Item<TestCollectionViewCell>()
         var called = false
 
-        item.configureCell { (cell, info) in
+        item.configureCell(for: "ReuseIdentifier") { (cell, info) in
             called = true
         }
         

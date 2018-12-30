@@ -68,8 +68,7 @@ public class MenuViewController: UIViewController {
             .create(with: "Section 0") { (section) in
                 section
                     .create(for: MenuType.elements, items: { (menuType, item: Item<MenuCollectionViewCell>) in
-                        item.reusableIdentifier = "MenuCollectionViewCell"
-                        item.configureCell({ (cell, info) in
+                        item.configureCell(for: "MenuCollectionViewCell", { (cell, info) in
                             cell.setup(title: menuType.title)
                         })
                         item.size = CGSize(width: UIScreen.main.bounds.width, height: 44)

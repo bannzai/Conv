@@ -84,9 +84,8 @@ class ShuffleViewController: UIViewController {
                 let sectionType = sectionModel.sectionType
                 
                 section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
-                    header.reusableIdentifier = "SectionHeaderReusableView"
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
-                    header.configureView { view, _ in
+                    header.configureView(for: "SectionHeaderReusableView") { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
                         view.nameLabel.textColor = .white
                         view.backgroundColor = UIColor.black.withAlphaComponent(0.1)
@@ -95,9 +94,8 @@ class ShuffleViewController: UIViewController {
                 
                 let emoticons = sectionModel.emoticons
                 section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
-                    item.reusableIdentifier = "EmoticoinCollectionViewCell"
                     item.size = CGSize(width: cellWidth, height: cellWidth)
-                    item.configureCell({ (cell, info) in
+                    item.configureCell(for: "EmoticoinCollectionViewCell", { (cell, info) in
                         cell.configure(text: emoticon)
                     })
                     item.willDisplay({ (cell, info) in
