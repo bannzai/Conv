@@ -25,7 +25,7 @@ open class SectionHeaderFooter<View: UICollectionReusableView>: Reusable {
     open private(set) var reuseIdentifier: String?
 
     open var size: CGSize?
-    open let kind: SectionHeaderFooterKind
+    public let kind: SectionHeaderFooterKind
     
     internal var configureView: ((View, SectionHeaderFooterInformation) -> Void)?
     internal var createView: ((View, SectionHeaderFooterInformation) -> Void)?
