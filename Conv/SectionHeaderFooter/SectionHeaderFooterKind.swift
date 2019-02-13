@@ -19,9 +19,9 @@ public enum SectionHeaderFooterKind {
     
     init?(kind: String) {
         switch kind {
-        case UICollectionElementKindSectionHeader:
+        case UICollectionView.elementKindSectionHeader:
             self = .header
-        case UICollectionElementKindSectionFooter:
+        case UICollectionView.elementKindSectionFooter:
             self = .footer
         case _:
             self = .custom(kind)
@@ -31,9 +31,9 @@ public enum SectionHeaderFooterKind {
     var kind: String {
         switch self {
         case .header:
-            return UICollectionElementKindSectionHeader
+            return UICollectionView.elementKindSectionHeader
         case .footer:
-            return UICollectionElementKindSectionFooter
+            return UICollectionView.elementKindSectionFooter
         case .custom(let kind):
             return kind
         }
