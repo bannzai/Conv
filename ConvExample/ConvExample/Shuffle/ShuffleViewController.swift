@@ -107,7 +107,7 @@ class ShuffleViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
     }
     
     func shuffleAllEmoticions() {

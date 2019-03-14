@@ -102,7 +102,7 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
 
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
@@ -144,7 +144,7 @@ class ListViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
     }
     
     deinit {
