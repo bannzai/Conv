@@ -17,7 +17,21 @@ public extension UICollectionView {
             mainConv?.sections = convForOverwrite.sections
         }
     }
-    
+}
+
+extension UICollectionView: _CollectionViewReloadable {
+    func reload() {
+        if convForOverwrite == nil {
+            reloadData()
+            return
+        }
+        
+        shiftConv()
+        reloadData()
+    }
+}
+
+extension UICollectionView: _CollectionViewDiffingRelodable {
     func update() {
         guard let convForOverwrite = convForOverwrite else {
             reloadData()
@@ -73,18 +87,6 @@ public extension UICollectionView {
                 reloadItems(at: itemUpdate)
             }
         })
-    }
-}
-
-extension UICollectionView: _CollectionViewReloadable {
-    func reload() {
-        if convForOverwrite == nil {
-            reloadData()
-            return
-        }
-        
-        shiftConv()
-        reloadData()
     }
 }
 
