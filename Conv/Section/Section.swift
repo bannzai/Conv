@@ -122,7 +122,7 @@ extension Section {
         return self
     }
 
-    @discardableResult public func insert<E: Differenciable, T: UICollectionViewCell>(with element: E, at index: Int, item closure: (Item<T>) -> Void) -> Section {
+    @discardableResult public func insert<E: Differenciable, T: UICollectionViewCell>(for element: E, at index: Int, item closure: (Item<T>) -> Void) -> Section {
         insert(for: [element], at: index) { (_, item) in
             closure(item)
         }
@@ -156,7 +156,7 @@ extension Section {
             functionName: functionName,
             line: line
         ))
-        append(with: fake) { (item) in
+        append(for: fake) { (_, item) in
             closure(item)
         }
         return self
@@ -205,9 +205,9 @@ extension Section {
         return self
     }
 
-    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(with element: E, item closure: (Item<T>) -> Void) -> Section {
-        append(for: [element]) { (_, item) in
-            closure(item)
+    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(for element: E, item closure: (E, Item<T>) -> Void) -> Section {
+        append(for: [element]) { (element, item) in
+            closure(element, item)
         }
         return self
     }
