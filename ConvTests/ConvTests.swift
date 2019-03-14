@@ -19,7 +19,22 @@ class ConvTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateSection() {
+    func testInsertSection() {
+        XCTContext.runActivity(named: "create section") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(with: "Section", at: 0) { (section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "create two sections") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+    }
+    
+    func testAppendSection() {
         XCTContext.runActivity(named: "create section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)

@@ -19,7 +19,22 @@ class SectionTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateItem() {
+    func testInsertItem() {
+        XCTContext.runActivity(named: "create item") { (activity) in
+            let section = Section()
+            XCTAssert(section.items.count == 0)
+            section.insert(with: "Item", at: 0) { (_) in return }
+            XCTAssert(section.items.count == 1)
+        }
+        XCTContext.runActivity(named: "create two items") { (activity) in
+            let section = Section()
+            XCTAssert(section.items.count == 0)
+            section.insert(for: [make(0), make(1)], at: 0, items: { (_, _) in return })
+            XCTAssert(section.items.count == 2)
+        }
+    }
+
+    func testAppendItem() {
         XCTContext.runActivity(named: "create item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
