@@ -50,14 +50,14 @@ class ItemTests: XCTestCase {
             }
 
             XCTContext.runActivity(named: "and setting propertySize to item.size then return closureSize") { _ in
-                let item = append()
+                let item = create()
                 item.size = propertySize
                 let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
                 XCTAssertEqual(size, closureSize)
             }
             
             XCTContext.runActivity(named: "and not setting size property then return closureSize") { _ in
-                let item = append()
+                let item = create()
                 let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
                 XCTAssertEqual(size, closureSize)
             }
@@ -73,14 +73,14 @@ class ItemTests: XCTestCase {
             }
 
             XCTContext.runActivity(named: "and setting propertySize to item.size then return propertySize") { _ in
-                let item = append()
+                let item = create()
                 item.size = propertySize
                 let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
                 XCTAssertEqual(size, propertySize)
             }
             
             XCTContext.runActivity(named: "and not setting size property then return nil") { _ in
-                let item = append()
+                let item = create()
                 let size = item.sizeFor(collectionView: collectionView(), indexPath: indexPath())
                 XCTAssertNil(size)
             }
