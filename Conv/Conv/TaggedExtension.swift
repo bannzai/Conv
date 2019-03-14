@@ -36,11 +36,12 @@ extension ConvTaggedExtension: DefinitionStartable, CollectionViewDiffingRelodab
     var collectionView: UICollectionView {
         return base
     }
+    
     public func start() -> Conv {
-        return startWith(conv: Conv())
+        return start(with: Conv())
     }
     
-    public func startWith(conv: Conv) -> Conv {
+    public func start(with conv: Conv) -> Conv {
         collectionView.mainConv = conv
         return conv
     }
