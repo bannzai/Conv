@@ -10,7 +10,7 @@ import Foundation
 
 public struct ConvTaggedExtension<Base> {
     let base: Base
-    init (_ base: Base) {
+    public init (_ base: Base) {
         self.base = base
     }
 }
