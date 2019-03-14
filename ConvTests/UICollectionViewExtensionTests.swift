@@ -15,7 +15,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         super.setUp()
     }
     
-    func testUsingOtherconv.start() {
+    func testUsingOtherConv() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let closure: (Differenciable, Section) -> Void = { _, _ in }
         
@@ -48,7 +48,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
     }
     
-    func testNoOverwirteconv.start() {
+    func testNoOverwirteConv() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let closure: (Differenciable, Section) -> Void = { _, _ in }
         
@@ -71,7 +71,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
     }
     
-    func testDiffingconv.start() {
+    func testDiffingConv() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let closure: (Differenciable, Section) -> Void = { _, _ in }
         
@@ -110,7 +110,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         shiftConv: do {
-            collectionView.shiftconv.start()
+            collectionView.shiftConv()
             
             XCTAssertNil(collectionView.convForOverwrite)
             

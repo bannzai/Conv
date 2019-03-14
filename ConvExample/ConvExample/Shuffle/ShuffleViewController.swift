@@ -79,7 +79,7 @@ class ShuffleViewController: UIViewController {
         let columns: CGFloat = 4
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
-            .conv.start()
+            .conv()
             .append(for: sectionModels) { (sectionModel, section) in
                 let sectionType = sectionModel.sectionType
                 

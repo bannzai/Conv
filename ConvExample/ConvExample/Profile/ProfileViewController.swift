@@ -71,14 +71,14 @@ public class ProfileViewController: UIViewController {
                 .enumerated()
                 .map { ImageModel(index: $0.0, imageName: $0.1) }
         )
-        collectionView.conv.reload()
+        collectionView.reload()
     }
     
     func setup(me: User, images: [ImageModel]) {
         collectionView
-            .conv.start()
-            .append { (section) in
-                section.append{ (item: Item<ProfileCell>) in
+            .conv()
+            .create { (section) in
+                section.create{ (item: Item<ProfileCell>) in
                     item.sizeFor { (item, collectionView, indexPath) in
                         return ProfileCell.size(with: collectionView.bounds.width, user: me)
                     }
@@ -87,7 +87,7 @@ public class ProfileViewController: UIViewController {
                     }
                 }
             }
-            .append { (section) in
+            .create { (section) in
                 section.append(.header) { (header: SectionHeaderFooter<SectionHeader>) in
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)

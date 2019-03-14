@@ -75,7 +75,6 @@ public class InteractionCollectionViewController: UIViewController {
         let columns: CGFloat = 4
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
-            .conv.start()
             .append(for: SectionType.elements) { (sectionType, section) in
                 section.append(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)

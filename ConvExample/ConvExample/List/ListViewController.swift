@@ -49,9 +49,7 @@ class ListViewController: UIViewController {
     
     func setupConv() {
         collectionView
-            .conv
-            .diffing()
-            .start()
+            .conv()
             .append(for: sectionTypes) { (sectionType, section) in
                 // In closure passed each element from variable for sectionTypes and configuration for section.
                 
@@ -104,7 +102,7 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupConv()
-        collectionView.conv.update()
+        collectionView.update()
 
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
@@ -146,7 +144,7 @@ class ListViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.conv.update()
+        collectionView.update()
     }
     
     deinit {
