@@ -9,6 +9,6 @@
 import Foundation
 
 public protocol DefinitionStartable {
-    func start<C: C>() -> C
-    func start<C: C>(with conv: C) -> C
+    func start() -> Conv
+    func start(with conv: Conv) -> Conv
 }
