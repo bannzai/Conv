@@ -100,6 +100,36 @@ extension Conv: ConvInterface {
     }
 }
 
+public protocol C {
+    
+}
+
+public protocol Diff: C {
+    func diff()
+}
+public protocol NoDiff: C {
+    func noDiff()
+}
+
+internal protocol _Diff: Diff {
+    func diff()
+}
+internal protocol _NoDiff: NoDiff {
+    func noDiff()
+}
+
+extension Conv: _Diff, Diff {
+    public func diff() {
+        
+    }
+}
+
+extension Conv: _NoDiff, NoDiff {
+    public func noDiff() {
+        
+    }
+}
+
 extension Conv {
     @discardableResult public func append(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
         append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in

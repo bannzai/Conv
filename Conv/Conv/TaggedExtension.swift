@@ -37,7 +37,7 @@ extension ConvTaggedExtension: DefinitionStartable, CollectionViewDiffingRelodab
         return base
     }
     
-    public func start() -> Conv {
+    public func start() -> Conv & Diff {
         return start(with: Conv())
     }
     
