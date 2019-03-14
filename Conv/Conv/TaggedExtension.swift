@@ -30,3 +30,12 @@ public extension ConvTaggedExtensionCompatible {
         return ConvTaggedExtension(self)
     }
 }
+
+extension UICollectionView: ConvTaggedExtensionCompatible {}
+extension ConvTaggedExtension where Base: UICollectionView {
+    public var conv: Conv {
+        let conv = Conv()
+        base.mainConv = conv
+        return conv
+    }
+}
