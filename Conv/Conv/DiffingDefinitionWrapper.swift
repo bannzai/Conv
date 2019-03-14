@@ -33,9 +33,3 @@ extension DiffingDefinitionWrapper: DefinitionStartable {
         }
     }
 }
-
-extension DiffingDefinitionWrapper: CollectionViewDiffingRelodable {
-    public func update() {
-        collectionView.update()
-    }
-}
