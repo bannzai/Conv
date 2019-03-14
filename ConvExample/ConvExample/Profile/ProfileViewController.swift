@@ -76,7 +76,7 @@ public class ProfileViewController: UIViewController {
     
     func setup(me: User, images: [ImageModel]) {
         collectionView
-            .conv()
+            .conv.start()
             .create { (section) in
                 section.create{ (item: Item<ProfileCell>) in
                     item.sizeFor { (item, collectionView, indexPath) in
