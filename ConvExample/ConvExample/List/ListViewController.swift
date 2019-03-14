@@ -49,7 +49,7 @@ class ListViewController: UIViewController {
     
     func setupConv() {
         collectionView
-            .conv()
+            .conv.start()
             .append(for: sectionTypes) { (sectionType, section) in
                 // In closure passed each element from variable for sectionTypes and configuration for section.
                 
