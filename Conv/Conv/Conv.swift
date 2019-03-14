@@ -32,8 +32,9 @@ public final class Conv: NSObject {
 
 // MARK: - Settter of UIScrollViewDelegate
 extension Conv {
-    public func set(scrollViewDelegate: UIScrollViewDelegate) {
+    public func set(scrollViewDelegate: UIScrollViewDelegate) -> Self {
         self.scrollViewDelegate = scrollViewDelegate
+        return self
     }
 }
 
