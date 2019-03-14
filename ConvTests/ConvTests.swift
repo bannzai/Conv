@@ -31,7 +31,7 @@ class ConvTests: XCTestCase {
         XCTContext.runActivity(named: "delete with identifier") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.insert(with: make(0), at: 0, section: { section in return })
+            conv.insert(for: make(0), at: 0, section: { (_, _) in return })
             XCTAssert(conv.sections.count == 1)
             conv.delete(for: make(0))
             XCTAssert(conv.sections.count == 0)
@@ -62,7 +62,7 @@ class ConvTests: XCTestCase {
         XCTContext.runActivity(named: "insert Differenciable section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.insert(with: make(0), at: 0) { (section) in return }
+            conv.insert(for: make(0), at: 0) { (_, _) in return }
             XCTAssert(conv.sections.count == 1)
         }
         XCTContext.runActivity(named: "insert Differenciable two sections") { (activity) in
