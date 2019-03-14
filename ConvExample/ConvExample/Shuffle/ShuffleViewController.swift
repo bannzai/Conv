@@ -80,10 +80,10 @@ class ShuffleViewController: UIViewController {
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
             .conv()
-            .create(for: sectionModels) { (sectionModel, section) in
+            .append(for: sectionModels) { (sectionModel, section) in
                 let sectionType = sectionModel.sectionType
                 
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
+                section.append(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView(for: "SectionHeaderReusableView") { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
@@ -93,7 +93,7 @@ class ShuffleViewController: UIViewController {
                 })
                 
                 let emoticons = sectionModel.emoticons
-                section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
+                section.append(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
                     item.size = CGSize(width: cellWidth, height: cellWidth)
                     item.configureCell(for: "EmoticoinCollectionViewCell", { (cell, info) in
                         cell.configure(text: emoticon)

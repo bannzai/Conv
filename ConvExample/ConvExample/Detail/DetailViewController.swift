@@ -45,9 +45,9 @@ public class DetailViewController: UIViewController {
             let imageName = self.imageName
             collectionView
                 .conv(scrollViewDelegate: self)
-                .create(with: "Section 0") { (section) in
+                .append(with: "Section 0") { (section) in
                     section
-                        .create(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in
+                        .append(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in
                             let image = UIImage(named: imageName)!
                             item.configureCell(for: "DetailImageCollectionViewCell") { (cell, info) in
                                 cell.contentImageView.image = image
@@ -59,8 +59,8 @@ public class DetailViewController: UIViewController {
                             }
                         })
                 }
-                .create(with: "Section 1") { (section) in
-                    section.create(with: "Item in Section 1") { (item: Item<DetailDescriptionCollectionViewCell>) in
+                .append(with: "Section 1") { (section) in
+                    section.append(with: "Item in Section 1") { (item: Item<DetailDescriptionCollectionViewCell>) in
                         item.configureCell(for: "DetailDescriptionCollectionViewCell") { (cell, info) in
                             cell.descriptionLabel.text = """
                             Hi, I'm bannzai.

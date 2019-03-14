@@ -88,7 +88,7 @@ public class ProfileViewController: UIViewController {
                 }
             }
             .create { (section) in
-                section.create(.header) { (header: SectionHeaderFooter<SectionHeader>) in
+                section.append(.header) { (header: SectionHeaderFooter<SectionHeader>) in
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)
                     }
@@ -96,7 +96,7 @@ public class ProfileViewController: UIViewController {
                         header.titleLabel.text = "My Photos"
                     })
                 }
-                section.create(for: images) { (viewModel, item: Item<ImageCell>) in
+                section.append(for: images) { (viewModel, item: Item<ImageCell>) in
                     item.sizeFor({ _ -> CGSize in
                         let gridCount: CGFloat = 3
                         let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)

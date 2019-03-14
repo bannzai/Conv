@@ -65,9 +65,9 @@ public class MenuViewController: UIViewController {
     func setupConv() {
         collectionView
             .conv()
-            .create(with: "Section 0") { (section) in
+            .append(with: "Section 0") { (section) in
                 section
-                    .create(for: MenuType.elements, items: { (menuType, item: Item<MenuCollectionViewCell>) in
+                    .append(for: MenuType.elements, items: { (menuType, item: Item<MenuCollectionViewCell>) in
                         item.configureCell(for: "MenuCollectionViewCell", { (cell, info) in
                             cell.setup(title: menuType.title)
                         })
