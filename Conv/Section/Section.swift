@@ -78,8 +78,8 @@ extension Section {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
+        for element: E,
         at index: Int,
-        element: E,
         item closure: (E, Item<T>) -> Void
         ) -> Section {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
@@ -101,9 +101,9 @@ extension Section {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
+        for elements: [E],
         at index: Int,
-        elements: [E],
-        item closure: (E, Item<T>) -> Void
+        items closure: (E, Item<T>) -> Void
         ) -> Section {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
             position: index,

@@ -65,7 +65,7 @@ class ConvTests: XCTestCase {
         XCTContext.runActivity(named: "append section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.append(with: "Section") { (section) in return }
+            conv.append(element: ()) { (e, section) in return }
             XCTAssert(conv.sections.count == 1)
         }
         XCTContext.runActivity(named: "append two sections") { (activity) in

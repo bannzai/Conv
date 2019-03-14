@@ -47,16 +47,28 @@ class SectionTests: XCTestCase {
     }
     
     func testInsertItem() {
-        XCTContext.runActivity(named: "create item") { (activity) in
+        XCTContext.runActivity(named: "insert item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
             section.insert(with: make(0), at: 0) { (_) in return }
             XCTAssert(section.items.count == 1)
         }
-        XCTContext.runActivity(named: "create two items") { (activity) in
+        XCTContext.runActivity(named: "insert two items") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
             section.insert(for: [make(0), make(1)], at: 0, items: { (_, _) in return })
+            XCTAssert(section.items.count == 2)
+        }
+        XCTContext.runActivity(named: "insert no Differenciable item") { (activity) in
+            let section = Section()
+            XCTAssert(section.items.count == 0)
+            section.insert(for: (), at: 0, item: { (_, _) in return })
+            XCTAssert(section.items.count == 1)
+        }
+        XCTContext.runActivity(named: "insert no Differenciable items ") { (activity) in
+            let section = Section()
+            XCTAssert(section.items.count == 0)
+            section.insert(for: [(), ()], at: 0, items: { (_, _) in return })
             XCTAssert(section.items.count == 2)
         }
     }
@@ -65,7 +77,7 @@ class SectionTests: XCTestCase {
         XCTContext.runActivity(named: "create item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.append(with: "Item") { (_) in return }
+            section.append(element: ()) { (_, _) in return }
             XCTAssert(section.items.count == 1)
         }
         XCTContext.runActivity(named: "create two items") { (activity) in
