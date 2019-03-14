@@ -133,5 +133,5 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target     = '10.0'
   s.social_media_url   = "https://twitter.com/_bannzai_"
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
 end
