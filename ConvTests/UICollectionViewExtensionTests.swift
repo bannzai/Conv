@@ -29,10 +29,20 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         using: do {
-            let conv = collectionView.conv.start(with: otherConv).append(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
+            let conv = collectionView.conv.start(with: otherConv).append(for: [4, 5, 6, 7, 8].map { make($0) }, sections: closure)
             
             XCTAssert(conv.sections.count == 8)
             XCTAssert(collectionView.mainConv?.sections.count == 8)
+            XCTAssert(otherConv === collectionView.mainConv)
+            XCTAssert(conv === otherConv)
+        }
+        
+        delete: do {
+            let conv = collectionView.conv.start(with: otherConv).delete(for: [1].map { make($0) })
+
+            XCTAssert(conv.sections.count == 7)
+            XCTAssert(collectionView.mainConv?.sections.count == 7)
+            XCTAssert(collectionView.mainConv?.sections.first?.differenceIdentifier == "2")
             XCTAssert(otherConv === collectionView.mainConv)
             XCTAssert(conv === otherConv)
         }
