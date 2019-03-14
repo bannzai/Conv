@@ -15,27 +15,27 @@ public class DiffingDefinitionWrapper {
     }
 }
 
-extension DiffingDefinitionWrapper: DefinitionStartable {
-    public func start() -> Conv {
-        return start(with: Conv())
-    }
-    
-    public func start(with conv: Conv) -> Conv {
-        let mainConv = collectionView.mainConv
-        let convForOverwrite = collectionView.convForOverwrite
-        switch (mainConv, convForOverwrite) {
-        case (nil, nil):
-            collectionView.mainConv = conv
-            return conv
-        case _:
-            collectionView.convForOverwrite = conv
-            return conv
-        }
-    }
-}
-
-extension DiffingDefinitionWrapper: CollectionViewDiffingRelodable {
-    public func update() {
-        collectionView.update()
-    }
-}
+//extension DiffingDefinitionWrapper: DefinitionStartable {
+//    public func start() -> Conv {
+//        return start(with: Conv())
+//    }
+//    
+//    public func start(with conv: Conv) -> Conv {
+//        let mainConv = collectionView.mainConv
+//        let convForOverwrite = collectionView.convForOverwrite
+//        switch (mainConv, convForOverwrite) {
+//        case (nil, nil):
+//            collectionView.mainConv = conv
+//            return conv
+//        case _:
+//            collectionView.convForOverwrite = conv
+//            return conv
+//        }
+//    }
+//}
+//
+//extension DiffingDefinitionWrapper: CollectionViewDiffingRelodable {
+//    public func update() {
+//        collectionView.update()
+//    }
+//}

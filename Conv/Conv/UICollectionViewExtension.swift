@@ -11,17 +11,17 @@ import ObjectiveC
 
 public extension UICollectionView {
     func shiftConv() {
-        if let convForOverwrite = self.convForOverwrite {
-            self.convForOverwrite = nil
-            mainConv?.sections.removeAll()
-            mainConv?.sections = convForOverwrite.sections
+        if let diffingConv = self.diffingConv {
+            self.diffingConv = nil
+            simpleConv?.sections.removeAll()
+            simpleConv?.sections = diffingConv.sections
         }
     }
 }
 
 extension UICollectionView: _CollectionViewReloadable {
     func reload() {
-        if convForOverwrite == nil {
+        if diffingConv == nil {
             reloadData()
             return
         }
@@ -33,13 +33,13 @@ extension UICollectionView: _CollectionViewReloadable {
 
 extension UICollectionView: _CollectionViewDiffingRelodable {
     func update() {
-        guard let convForOverwrite = convForOverwrite else {
+        guard let diffingConv = diffingConv else {
             reloadData()
             return
         }
         
-        let oldSections: [Section] = mainConv?.sections ?? []
-        let newSections: [Section] = convForOverwrite.sections
+        let oldSections: [DiffSection] = diffingConv?.sections ?? []
+        let newSections: [DiffSection] = diffingConv?.sections
         
         let operationSet = diffSection(from: oldSections, new: newSections)
         
@@ -91,32 +91,32 @@ extension UICollectionView: _CollectionViewDiffingRelodable {
 }
 
 fileprivate struct UICollectionViewAssociatedObjectHandle {
-    static var oldConvKey: UInt8 = 0
-    static var newConvKey: UInt8 = 0
+    static var simpleConvKey: UInt8 = 0
+    static var diffingConvKey: UInt8 = 0
 }
 
 extension UICollectionView {
-    var mainConv: Conv? {
+    var simpleConv: SimpleConv? {
         set {
             dataSource = newValue
             delegate = newValue
             newValue?.collectionView = self
             
-            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.oldConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.simpleConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.oldConvKey) as? Conv
+            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.simpleConvKey) as? SimpleConv
         }
     }
     
-    var convForOverwrite: Conv? {
+    var diffingConv: DiffingConv? {
         set {
             newValue?.collectionView = self
             
-            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.newConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.diffingConvKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.newConvKey) as? Conv
+            return objc_getAssociatedObject(self, &UICollectionViewAssociatedObjectHandle.diffingConvKey) as? DiffingConv
         }
     }
 }

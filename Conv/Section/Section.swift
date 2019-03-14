@@ -8,11 +8,10 @@
 
 import UIKit
 
-public class Section {
-    public typealias SectionArgument = (Section: Section, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
+public class AbstractSection {
+    public typealias SectionArgument = (Section: AbstractSection, collectionView: UICollectionView, collectionViewLayout: UICollectionViewLayout, section: Int)
     public var items: [ItemDelegate] = []
-    public var diffElement: Differenciable!
-    
+
     public var header: SectionHeaderFooterDelegate?
     public var footer: SectionHeaderFooterDelegate?
     public var custom: SectionHeaderFooterDelegate?
@@ -25,11 +24,6 @@ public class Section {
         
     }
 
-    public init(diffElement: Differenciable, closure: (Section) -> Void) {
-        self.diffElement = diffElement
-        closure(self)
-    }
-    
     @discardableResult public func remove(at item: Int) -> ItemDelegate {
         return items.remove(at: item)
     }
@@ -51,35 +45,7 @@ extension Section {
     }
 }
 
-extension Section {
-    @discardableResult public func append<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
-        append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, item) in
-            closure(item)
-        }
-        
-        return self
-    }
-    
-    @discardableResult public func append<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, item closure: (Item<T>) -> Void) -> Section {
-        append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, item) in
-            closure(item)
-        }
-        return self
-    }
-    
-    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
-        let items = elements.map { element in
-            Item<T>(diffElement: element) { item in
-                closure(element, item)
-            }
-        }
-        
-        self.items.append(contentsOf: items)
-        return self
-    }
-}
-
-extension Section {
+extension AbstractSection {
     @discardableResult public func append<HeaderOrFooter: UICollectionReusableView>(
         _ kind: SectionHeaderFooterKind,
         headerOrFooter closure: (SectionHeaderFooter<HeaderOrFooter>) -> Void
@@ -96,6 +62,63 @@ extension Section {
         case .custom:
             custom = headerFooter
         }
+        return self
+    }
+}
+
+public final class Section: AbstractSection {
+    public init(closure: (Section) -> Void) {
+        super.init()
+        closure(self)
+    }
+}
+
+extension Section {
+    @discardableResult public func append<T: UICollectionViewCell>(item closure: (Item<T>) -> Void) -> Section {
+        append(for: [FakeDifference()]) { (_, item) in
+            closure(item)
+        }
+        
+        return self
+    }
+    
+    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> Section {
+        let items = elements.map { element in
+            Item<T>(diffElement: element) { item in
+                closure(element, item)
+            }
+        }
+        
+        self.items.append(contentsOf: items)
+        return self
+    }
+}
+
+public final class DiffSection: AbstractSection {
+    public let diffElement: Differenciable
+    public init(diffElement: Differenciable, closure: (DiffSection) -> Void) {
+        self.diffElement = diffElement
+        super.init()
+        closure(self)
+    }
+}
+
+extension DiffSection {
+    @discardableResult public func append<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, item closure: (Item<T>) -> Void) -> DiffSection {
+        append(for: [FakeDifference()]) { (_, item) in
+            closure(item)
+        }
+        return self
+    }
+    
+    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(for elements: [E], items closure: (E, Item<T>) -> Void) -> DiffSection {
+        let items = elements.map { element in
+            Item<T>(diffElement: element) { item in
+                closure(element, item)
+            }
+        }
+        
+        self.items.append(contentsOf: items)
         return self
     }
 }
