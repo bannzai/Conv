@@ -19,14 +19,41 @@ class ConvTests: XCTestCase {
         super.tearDown()
     }
     
-    func testInsertSection() {
-        XCTContext.runActivity(named: "create section") { (activity) in
+    func testDeleteSection() {
+        XCTContext.runActivity(named: "delete at index") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.insert(with: "Section", at: 0) { (section) in return }
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+            conv.delete(at: 0)
             XCTAssert(conv.sections.count == 1)
         }
-        XCTContext.runActivity(named: "create two sections") { (activity) in
+        XCTContext.runActivity(named: "delete with identifier") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(with: make(0), at: 0, section: { section in return })
+            XCTAssert(conv.sections.count == 1)
+            conv.delete(for: make(0))
+            XCTAssert(conv.sections.count == 0)
+        }
+        XCTContext.runActivity(named: "delete elements") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+            conv.delete(for: [make(0), make(1)])
+            XCTAssert(conv.sections.count == 0)
+        }
+    }
+    
+    func testInsertSection() {
+        XCTContext.runActivity(named: "insert section") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(with: make(0), at: 0) { (section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "insert two sections") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
@@ -35,13 +62,13 @@ class ConvTests: XCTestCase {
     }
     
     func testAppendSection() {
-        XCTContext.runActivity(named: "create section") { (activity) in
+        XCTContext.runActivity(named: "append section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.append(with: "Section") { (section) in return }
             XCTAssert(conv.sections.count == 1)
         }
-        XCTContext.runActivity(named: "create two sections") { (activity) in
+        XCTContext.runActivity(named: "append two sections") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.append(for: [make(0), make(1)], sections: { (element, section) in return })

@@ -85,18 +85,19 @@ extension Conv {
         return self
     }
     
-    @discardableResult public func delete(for differenceIdentifier: DifferenceIdentifier) -> Self {
+    @discardableResult public func delete<E: Differenciable>(for element: E) -> Self {
         sections.removeAll { (section) -> Bool in
-            section.differenceIdentifier == differenceIdentifier
+            section.differenceIdentifier == element.differenceIdentifier
         }
         return self
     }
     
     @discardableResult public func delete<E: Differenciable>(for elements: [E]) -> Self {
-        elements.forEach { delete(for: $0.differenceIdentifier) }
+        elements.forEach { delete(for: $0) }
         return self
     }
 }
+
 
 // MARK: - Insert
 extension Conv {
@@ -108,8 +109,8 @@ extension Conv {
         return self
     }
     
-    @discardableResult public func insert(with differenceIdentifier: DifferenceIdentifier, at index: Int, section closure: (Section) -> Void) -> Self {
-        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)], at: index) { (_, section) in
+    @discardableResult public func insert<E: Differenciable>(with element: E, at index: Int, section closure: (Section) -> Void) -> Self {
+        insert(for: [element], at: index) { (_, section) in
             closure(section)
         }
         
