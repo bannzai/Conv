@@ -110,7 +110,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         shiftConv: do {
-            collectionView.shiftconv.start()
+            collectionView.shiftConv()
             
             XCTAssertNil(collectionView.convForOverwrite)
             
