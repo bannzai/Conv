@@ -18,7 +18,7 @@ public extension UICollectionView {
         }
     }
     
-    public func update() {
+    func update() {
         guard let convForOverwrite = convForOverwrite else {
             reloadData()
             return
@@ -75,7 +75,7 @@ public extension UICollectionView {
         })
     }
     
-    public func reload() {
+    func reload() {
         if convForOverwrite == nil {
             reloadData()
             return
