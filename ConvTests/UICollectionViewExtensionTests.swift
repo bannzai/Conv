@@ -31,8 +31,8 @@ class UICollectionViewExtensionTests: XCTestCase {
         using: do {
             let conv = collectionView.conv.start(with: otherConv).append(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
             
-            XCTAssert(conv.sections.count == 5)
-            XCTAssert(collectionView.mainConv?.sections.count == 5)
+            XCTAssert(conv.sections.count == 8)
+            XCTAssert(collectionView.mainConv?.sections.count == 8)
             XCTAssert(otherConv === collectionView.mainConv)
             XCTAssert(conv === otherConv)
         }
