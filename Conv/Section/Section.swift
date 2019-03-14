@@ -39,6 +39,7 @@ public class Section {
     }
 }
 
+// MARK: - Function for Section
 extension Section {
     public func inset(_ closure: @escaping ((SectionArgument) -> UIEdgeInsets)) {
         self.inset = closure
@@ -51,6 +52,7 @@ extension Section {
     }
 }
 
+// MARK: - Insert
 extension Section {
     @discardableResult public func insert<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, item closure: (Item<T>) -> Void) -> Section {
         insert(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, item) in
@@ -80,6 +82,7 @@ extension Section {
 }
 
 
+// MARK: - Append
 extension Section {
     @discardableResult public func append<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
         append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, item) in

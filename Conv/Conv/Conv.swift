@@ -30,12 +30,14 @@ public final class Conv: NSObject {
     
 }
 
+// MARK: - Settter of UIScrollViewDelegate
 extension Conv {
     public func set(scrollViewDelegate: UIScrollViewDelegate) {
         self.scrollViewDelegate = scrollViewDelegate
     }
 }
 
+// MARK: - Function for CollectionView
 extension Conv {
     @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
@@ -76,6 +78,7 @@ extension Conv {
     }
 }
 
+// MARK: - Insert
 extension Conv {
     @discardableResult public func insert(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, section closure: (Section) -> Void) -> Self {
         insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, section) in
@@ -105,6 +108,7 @@ extension Conv {
     }
 }
 
+// MARK: - Append
 extension Conv {
     @discardableResult public func append(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
         append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
