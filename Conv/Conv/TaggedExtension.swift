@@ -51,10 +51,10 @@ extension ConvTaggedExtension: DefinitionStartable, CollectionViewDiffingRelodab
     }
     
     public func reload() {
-        collectionView.conv.reload()
+        collectionView.reload()
     }
     
     public func update() {
-        collectionView.conv.update()
+        collectionView.update()
     }
 }
