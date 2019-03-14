@@ -31,6 +31,12 @@ public final class Conv: NSObject {
 }
 
 extension Conv {
+    public func set(scrollViewDelegate: UIScrollViewDelegate) {
+        self.scrollViewDelegate = scrollViewDelegate
+    }
+}
+
+extension Conv {
     @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
         return self
