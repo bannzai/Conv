@@ -105,8 +105,8 @@ extension Conv {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
+        for element: E,
         at index: Int,
-        element: E,
         section closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
@@ -128,8 +128,8 @@ extension Conv {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
+        for elements: [E],
         at index: Int,
-        elements: [E],
         section closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
@@ -194,7 +194,7 @@ extension Conv {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
-        element: E,
+        for element: E,
         section closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
@@ -215,7 +215,7 @@ extension Conv {
         fileName: String = #file,
         functionName: String = #function,
         line: Int = #line,
-        elements: [E],
+        for elements: [E],
         section closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
