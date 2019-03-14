@@ -23,13 +23,13 @@ class SectionTests: XCTestCase {
         XCTContext.runActivity(named: "create item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.create(with: "Item") { (_) in return }
+            section.append(with: "Item") { (_) in return }
             XCTAssert(section.items.count == 1)
         }
         XCTContext.runActivity(named: "create two items") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.create(for: [make(0), make(1)], items: { (_, _) in return })
+            section.append(for: [make(0), make(1)], items: { (_, _) in return })
             XCTAssert(section.items.count == 2)
         }
     }

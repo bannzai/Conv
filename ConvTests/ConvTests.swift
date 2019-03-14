@@ -23,13 +23,13 @@ class ConvTests: XCTestCase {
         XCTContext.runActivity(named: "create section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.create(with: "Section") { (section) in return }
+            conv.append(with: "Section") { (section) in return }
             XCTAssert(conv.sections.count == 1)
         }
         XCTContext.runActivity(named: "create two sections") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.create(for: [make(0), make(1)], sections: { (element, section) in return })
+            conv.append(for: [make(0), make(1)], sections: { (element, section) in return })
             XCTAssert(conv.sections.count == 2)
         }
     }

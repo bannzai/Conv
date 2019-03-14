@@ -77,23 +77,23 @@ extension Conv {
 }
 
 extension Conv {
-    @discardableResult public func create(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
-        create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
+    @discardableResult public func append(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
+        append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
             closure(section)
         }
         
         return self
     }
     
-    @discardableResult public func create(with differenceIdentifier: DifferenceIdentifier, section closure: (Section) -> Void) -> Self {
-        create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, section) in
+    @discardableResult public func append(with differenceIdentifier: DifferenceIdentifier, section closure: (Section) -> Void) -> Self {
+        append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, section) in
             closure(section)
         }
         
         return self
     }
     
-    @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    @discardableResult public func append<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
             Section(diffElement: element) { section in
                 closure(element, section)
