@@ -31,7 +31,7 @@ class SectionTests: XCTestCase {
         XCTContext.runActivity(named: "delete with identifier") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.insert(with: make(0), at: 0, item: { section in return })
+            section.insert(for: make(0), at: 0, item: { (_, _) in return })
             XCTAssert(section.items.count == 1)
             section.delete(for: make(0))
             XCTAssert(section.items.count == 0)
@@ -50,7 +50,7 @@ class SectionTests: XCTestCase {
         XCTContext.runActivity(named: "insert item") { (activity) in
             let section = Section()
             XCTAssert(section.items.count == 0)
-            section.insert(with: make(0), at: 0) { (_) in return }
+            section.insert(for: make(0), at: 0) { (_, _) in return }
             XCTAssert(section.items.count == 1)
         }
         XCTContext.runActivity(named: "insert two items") { (activity) in
