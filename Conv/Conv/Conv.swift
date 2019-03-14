@@ -8,6 +8,18 @@
 
 import UIKit
 
+public protocol Convable: class {
+    @discardableResult func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self
+    @discardableResult func indexTitles(_ closure: @escaping ((_ collectionView: UICollectionView) -> [String])) -> Self
+    @discardableResult func indexTitle(_ closure: @escaping ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)) -> Self
+    @discardableResult func transitionLayout(_ closure: @escaping ((_ collectionView: UICollectionView, _ fromLayout: UICollectionViewLayout, _ toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout)) -> Self
+    @discardableResult func shouldUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)) -> Self
+    @discardableResult func didUpdateFocus(_ closure: @escaping ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)) -> Self
+    @discardableResult func indexPathForPreferredFocusedView(_ closure: @escaping ((_ collectionView: UICollectionView) -> IndexPath?)) -> Self
+    @discardableResult func targetIndexPathForMoveFromItem(_ closure: @escaping ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ toProposedIndexPath: IndexPath) -> IndexPath)) -> Self
+    @discardableResult func targetContentOffset(_ closure: @escaping ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)) -> Self
+}
+
 public final class Conv: NSObject {
     public weak var collectionView: UICollectionView?
     
@@ -36,7 +48,7 @@ extension Conv {
     }
 }
 
-extension Conv {
+extension Conv: Convable {
     @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
         return self
