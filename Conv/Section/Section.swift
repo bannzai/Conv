@@ -74,14 +74,54 @@ extension Section {
 
 // MARK: - Insert
 extension Section {
-    @discardableResult public func insert<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, item closure: (Item<T>) -> Void) -> Section {
-        insert(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, item) in
-            closure(item)
+    @discardableResult public func insert<E, T: UICollectionViewCell>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        at index: Int,
+        element: E,
+        item closure: (E, Item<T>) -> Void
+        ) -> Section {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        
+        let item = Item<T>(diffElement: fake) { (item) in
+            closure(element, item)
         }
         
+        self.items.insert(item, at: index)
         return self
     }
     
+    @discardableResult public func insert<E, T: UICollectionViewCell>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        at index: Int,
+        elements: [E],
+        item closure: (E, Item<T>) -> Void
+        ) -> Section {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        
+        let items = elements.map { (element) in
+            Item<T>(diffElement: fake) { item in
+                closure(element, item)
+            }
+        }
+        
+        self.items.insert(contentsOf: items, at: index)
+        return self
+    }
+
     @discardableResult public func insert<E: Differenciable, T: UICollectionViewCell>(with element: E, at index: Int, item closure: (Item<T>) -> Void) -> Section {
         insert(for: [element], at: index) { (_, item) in
             closure(item)
@@ -104,16 +144,69 @@ extension Section {
 
 // MARK: - Append
 extension Section {
-    @discardableResult public func append<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
-        append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, item) in
+    @discardableResult public func append<T: UICollectionViewCell>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        item closure: (Item<T>) -> Void
+        ) -> Section {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: items.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        append(with: fake) { (item) in
             closure(item)
         }
-        
         return self
     }
     
-    @discardableResult public func append<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, item closure: (Item<T>) -> Void) -> Section {
-        append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, item) in
+    @discardableResult public func append<E, T: UICollectionViewCell>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        element: E,
+        item closure: (E, Item<T>) -> Void
+        ) -> Section {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: items.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let item = Item<T>(diffElement: fake) { (item) in
+            closure(element, item)
+        }
+        self.items.append(item)
+        return self
+    }
+    
+    @discardableResult public func append<E, T: UICollectionViewCell>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        elements: [E],
+        item closure: (E, Item<T>) -> Void
+        ) -> Section {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: self.items.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let items = elements.map { element in
+            Item<T>(diffElement: fake) { item in
+                closure(element, item)
+            }
+        }
+        
+        self.items.append(contentsOf: items)
+        return self
+    }
+
+    @discardableResult public func append<E: Differenciable, T: UICollectionViewCell>(with element: E, item closure: (Item<T>) -> Void) -> Section {
+        append(for: [element]) { (_, item) in
             closure(item)
         }
         return self

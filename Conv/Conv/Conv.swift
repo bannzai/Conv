@@ -101,11 +101,50 @@ extension Conv {
 
 // MARK: - Insert
 extension Conv {
-    @discardableResult public func insert(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, section closure: (Section) -> Void) -> Self {
-        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, section) in
-            closure(section)
+    @discardableResult public func insert<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        at index: Int,
+        element: E,
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        
+        let section = Section(diffElement: fake) { (section) in
+            closure(element, section)
         }
         
+        self.sections.insert(section, at: index)
+        return self
+    }
+    
+    @discardableResult public func insert<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        at index: Int,
+        elements: [E],
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let sections = elements.map { (element) in
+            Section(diffElement: fake) { section in
+                closure(element, section)
+            }
+        }
+        
+        self.sections.insert(contentsOf: sections, at: index)
         return self
     }
     
@@ -124,7 +163,7 @@ extension Conv {
             }
         }
         
-        self.sections.insert(contentsOf: sections, at: Int(index))
+        self.sections.insert(contentsOf: sections, at: index)
         return self
     }
 }
@@ -132,19 +171,73 @@ extension Conv {
 
 // MARK: - Append
 extension Conv {
-    @discardableResult public func append(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
-        append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
+    @discardableResult public func append(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        section closure: (Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        append(with: fake) { (section) in
             closure(section)
         }
         
         return self
     }
     
-    @discardableResult public func append(with differenceIdentifier: DifferenceIdentifier, section closure: (Section) -> Void) -> Self {
-        append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, section) in
-            closure(section)
+    @discardableResult public func append<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        element: E,
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let section = Section(diffElement: fake) { (section) in
+            closure(element, section)
         }
-        
+        self.sections.append(section)
+        return self
+    }
+    
+    
+    @discardableResult public func append<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        elements: [E],
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: self.sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let sections = elements.map { (element) in
+            Section(diffElement: fake) { section in
+                closure(element, section)
+            }
+        }
+        self.sections.append(contentsOf: sections)
+        return self
+    }
+
+
+    @discardableResult public func append<E: Differenciable>(with element: E, section closure: (Section) -> Void) -> Self {
+        append(for: [element]) { (_, item) in
+            closure(item)
+        }
         return self
     }
     
