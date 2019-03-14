@@ -77,6 +77,35 @@ extension Conv {
 }
 
 extension Conv {
+    @discardableResult public func insert(fileName: String = #file, functionName: String = #function, line: Int = #line, to index: UInt, section closure: (Section) -> Void) -> Self {
+        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], to: index) { (_, section) in
+            closure(section)
+        }
+        
+        return self
+    }
+    
+    @discardableResult public func insert(with differenceIdentifier: DifferenceIdentifier, to index: UInt, section closure: (Section) -> Void) -> Self {
+        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)], to: index) { (_, section) in
+            closure(section)
+        }
+        
+        return self
+    }
+    
+    @discardableResult public func insert<E: Differenciable>(for elements: [E], to index: UInt, sections closure: (E, Section) -> Void) -> Self {
+        let sections = elements.map { (element) in
+            Section(diffElement: element) { section in
+                closure(element, section)
+            }
+        }
+        
+        self.sections.insert(contentsOf: sections, at: Int(index))
+        return self
+    }
+}
+
+extension Conv {
     @discardableResult public func append(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
         append(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
             closure(section)
