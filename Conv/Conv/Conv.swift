@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol Convable: class {
+public protocol ConvInterface: class {
     @discardableResult func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self
     @discardableResult func indexTitles(_ closure: @escaping ((_ collectionView: UICollectionView) -> [String])) -> Self
     @discardableResult func indexTitle(_ closure: @escaping ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)) -> Self
@@ -20,7 +20,19 @@ public protocol Convable: class {
     @discardableResult func targetContentOffset(_ closure: @escaping ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)) -> Self
 }
 
-public final class Conv: NSObject {
+internal protocol ConvProperty: class {
+    var didMoveItem: ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)? { get set }
+    var indexTitles: ((_ collectionView: UICollectionView) -> [String])? { get set }
+    var indexTitle: ((_ collectionView: UICollectionView, _ title: String, _ index: Int) -> IndexPath)? { get set }
+    var transitionLayout: ((_ collectionView: UICollectionView, _ fromLayout: UICollectionViewLayout, _ toLayout: UICollectionViewLayout) -> UICollectionViewTransitionLayout)? { get set }
+    var shouldUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext) -> Bool)? { get set }
+    var didUpdateFocus: ((_ collectionView: UICollectionView, _ context: UICollectionViewFocusUpdateContext, _ coordinator: UIFocusAnimationCoordinator) -> Void)? { get set }
+    var indexPathForPreferredFocusedView: ((_ collectionView: UICollectionView) -> IndexPath?)? { get set }
+    var targetIndexPathForMoveFromItem: ((_ collectionView: UICollectionView, _ originalIndexPath: IndexPath, _ proposedIndexPath: IndexPath) -> IndexPath)? { get set }
+    var targetContentOffset: ((_ collectionView: UICollectionView, _ proposedContentOffset: CGPoint) -> CGPoint)? { get set }
+}
+
+public final class Conv: NSObject, ConvProperty {
     public weak var collectionView: UICollectionView?
     
     public var sections: [Section] = []
@@ -48,7 +60,7 @@ extension Conv {
     }
 }
 
-extension Conv: Convable {
+extension Conv: ConvInterface {
     @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
         return self
