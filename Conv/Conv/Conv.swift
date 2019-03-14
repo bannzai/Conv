@@ -149,7 +149,7 @@ extension Conv {
         return self
     }
     
-    @discardableResult public func insert<E: Differenciable>(for element: E, at index: Int, section closure: (Section) -> Void) -> Self {
+    @discardableResult public func insert<E: Differenciable>(with element: E, at index: Int, section closure: (Section) -> Void) -> Self {
         insert(for: [element], at: index) { (_, section) in
             closure(section)
         }
@@ -184,7 +184,7 @@ extension Conv {
             functionName: functionName,
             line: line
         ))
-        append(for: fake) { (_, section) in
+        append(with: fake) { (section) in
             closure(section)
         }
         
@@ -235,9 +235,9 @@ extension Conv {
     }
 
 
-    @discardableResult public func append<E: Differenciable>(for element: E, section closure: (E, Section) -> Void) -> Self {
-        append(for: [element]) { (element, item) in
-            closure(element, item)
+    @discardableResult public func append<E: Differenciable>(with element: E, section closure: (Section) -> Void) -> Self {
+        append(for: [element]) { (_, item) in
+            closure(item)
         }
         return self
     }
