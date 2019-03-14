@@ -74,13 +74,15 @@ public extension UICollectionView {
             }
         })
     }
-    
+}
+
+extension UICollectionView: _CollectionViewReloadable {
     func reload() {
         if convForOverwrite == nil {
             reloadData()
             return
         }
-
+        
         shiftConv()
         reloadData()
     }

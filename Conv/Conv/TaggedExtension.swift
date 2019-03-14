@@ -45,6 +45,4 @@ extension ConvTaggedExtension: DefinitionStartable where Base: UICollectionView 
     public func diffing() -> DefinitionStartable {
         return DiffingDefinitionWrapper(collectionView: base)
     }
-    
-    
 }

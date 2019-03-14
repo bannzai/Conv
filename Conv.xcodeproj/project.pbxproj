@@ -20,6 +20,7 @@
 		BA20C6EA223A1F7C0056FFF7 /* TaggedExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C6E9223A1F7C0056FFF7 /* TaggedExtension.swift */; };
 		BA20C6EC223A27AB0056FFF7 /* DefinitionStartable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C6EB223A27AB0056FFF7 /* DefinitionStartable.swift */; };
 		BA20C6EE223A27CE0056FFF7 /* DiffingDefinitionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C6ED223A27CE0056FFF7 /* DiffingDefinitionWrapper.swift */; };
+		BA20C6F0223A29260056FFF7 /* CollectionViewReloadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20C6EF223A29260056FFF7 /* CollectionViewReloadable.swift */; };
 		BA25977721247F770016ACB7 /* AlgorithmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA25977621247F770016ACB7 /* AlgorithmTests.swift */; };
 		BA2F7E76211484830085EE41 /* SectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E75211484830085EE41 /* SectionTests.swift */; };
 		BA2F7E78211485B20085EE41 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2F7E77211485B20085EE41 /* Helper.swift */; };
@@ -76,6 +77,7 @@
 		BA20C6E9223A1F7C0056FFF7 /* TaggedExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaggedExtension.swift; sourceTree = "<group>"; };
 		BA20C6EB223A27AB0056FFF7 /* DefinitionStartable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinitionStartable.swift; sourceTree = "<group>"; };
 		BA20C6ED223A27CE0056FFF7 /* DiffingDefinitionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffingDefinitionWrapper.swift; sourceTree = "<group>"; };
+		BA20C6EF223A29260056FFF7 /* CollectionViewReloadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewReloadable.swift; sourceTree = "<group>"; };
 		BA25977621247F770016ACB7 /* AlgorithmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTests.swift; sourceTree = "<group>"; };
 		BA2F7E75211484830085EE41 /* SectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTests.swift; sourceTree = "<group>"; };
 		BA2F7E77211485B20085EE41 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				BA20C6E9223A1F7C0056FFF7 /* TaggedExtension.swift */,
 				BA20C6ED223A27CE0056FFF7 /* DiffingDefinitionWrapper.swift */,
 				BA20C6EB223A27AB0056FFF7 /* DefinitionStartable.swift */,
+				BA20C6EF223A29260056FFF7 /* CollectionViewReloadable.swift */,
 			);
 			path = Conv;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				BA7C1F992100EF10005CDE74 /* Conv.swift in Sources */,
 				BA30EBE1210839250054BFE8 /* SectionHeaderFooterDelegate.swift in Sources */,
 				BA17590F2127BCEC003EB4F0 /* SectionResult.swift in Sources */,
+				BA20C6F0223A29260056FFF7 /* CollectionViewReloadable.swift in Sources */,
 				BA7C1F972100EF10005CDE74 /* Section.swift in Sources */,
 				BAA559B72118A6B3001A31C6 /* Item+Diffrenciable.swift in Sources */,
 				BA1759142127BDDA003EB4F0 /* DiffSection.swift in Sources */,
