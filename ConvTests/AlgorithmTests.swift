@@ -19,12 +19,12 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When no change") { (activity) in
             let sections = [make(0), make(1)]
             let items = [make(0), make(1)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -44,13 +44,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When insert only section") { (activity) in
             let sections = [make(0)]
             let items = [make(0)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let insertedSections = sections + [make(1)]
-            let newConv = Conv().create(for: insertedSections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: insertedSections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -70,13 +70,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When insert only item") { (activity) in
             let sections = [make(0)]
             let items = [make(0)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let insertedItems = items + [make(1)]
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -96,14 +96,14 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When insert section and item") { (activity) in
             let sections = [make(0)]
             let items = [make(0)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let insertedItems = items + [make(1)]
             let insertedSections = sections + [make(1)]
-            let newConv = Conv().create(for: insertedSections) { (model, section) in
-                section.create(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: insertedSections) { (model, section) in
+                section.append(for: insertedItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -126,13 +126,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When delete only section") { (activity) in
             var sections = [make(0), make(1)]
             let items = [make(0)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             sections.remove(at: 1)
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -152,13 +152,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When delete only item") { (activity) in
             let sections = [make(0)]
             var items = [make(0), make(1)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             items.remove(at: 1)
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -178,14 +178,14 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When delete section and item") { (activity) in
             var sections = [make(0), make(1)]
             var items = [make(0), make(1)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             sections.remove(at: 1)
             items.remove(at: 1)
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -209,13 +209,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When update only section") { (activity) in
             let sections = [makeForUpdate(0, false), makeForUpdate(1, false)]
             let items = [makeForUpdate(0, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newSections = [makeForUpdate(0, true), makeForUpdate(1, false)]
-            let newConv = Conv().create(for: newSections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: newSections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -235,13 +235,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When update only item") { (activity) in
             let sections = [makeForUpdate(0, false)]
             let items = [makeForUpdate(0, false), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newItems = [makeForUpdate(0, true), makeForUpdate(1, false)]
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -261,14 +261,14 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When update section and item") { (activity) in
             let sections = [makeForUpdate(0, false), makeForUpdate(1, false)]
             let items = [makeForUpdate(0, false), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newSections = [makeForUpdate(0, true), makeForUpdate(1, false)]
             let newItems = [makeForUpdate(0, true), makeForUpdate(1, false)]
-            let newConv = Conv().create(for: newSections) { (model, section) in
-                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: newSections) { (model, section) in
+                section.append(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -289,11 +289,11 @@ class AlgorithmTests: XCTestCase {
 
     func testMove() {
         XCTContext.runActivity(named: "When move only section") { (activity) in
-            let oldConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
-            let newConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: [2, 1, 0].map { make($0) }) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -317,11 +317,11 @@ class AlgorithmTests: XCTestCase {
         }
         
         XCTContext.runActivity(named: "When only move item") { (activity) in
-            let oldConv = Conv().create(for: [0].map { make($0) }) { (model, section) in
-                section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: [0].map { make($0) }) { (model, section) in
+                section.append(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
-            let newConv = Conv().create(for: [0].map { make($0) }) { (model, section) in
-                section.create(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: [0].map { make($0) }) { (model, section) in
+                section.append(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -339,11 +339,11 @@ class AlgorithmTests: XCTestCase {
         }
         
         XCTContext.runActivity(named: "When move section and item") { (activity) in
-            let oldConv = Conv().create(for: [0, 1, 2].map { make($0) }) { (model, section) in
-                section.create(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: [0, 1, 2].map { make($0) }) { (model, section) in
+                section.append(for: [0, 1, 2].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
-            let newConv = Conv().create(for: [2, 1, 0].map { make($0) }) { (model, section) in
-                section.create(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: [2, 1, 0].map { make($0) }) { (model, section) in
+                section.append(for: [2, 1 ,0].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -365,13 +365,13 @@ class AlgorithmTests: XCTestCase {
     func testMixedForSection() {
         XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to top, inserted 2 to last") { (activity) in
             let sections = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newSections = [makeForUpdate(1, true), make(2)]
-            let newConv = Conv().create(for: newSections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: newSections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -399,13 +399,13 @@ class AlgorithmTests: XCTestCase {
         
         XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
             let sections = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newSections = [make(2), make(3), makeForUpdate(1, true)]
-            let newConv = Conv().create(for: newSections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: newSections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -433,13 +433,13 @@ class AlgorithmTests: XCTestCase {
 
         XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
             let sections = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newSections = [make(2), make(3), makeForUpdate(1, true)]
-            let newConv = Conv().create(for: newSections) { (model, section) in
-                section.create(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: newSections) { (model, section) in
+                section.append(for: [model.id].map { make($0) }, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -470,13 +470,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When change item about delete 0, update 1, move 1 to top, inserted 2 to last") { (activity) in
             let sections = [make(0)]
             let items = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newItems = [makeForUpdate(1, true), make(2)]
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -501,13 +501,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
             let sections = [make(0)]
             let items = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newItems = [make(2), make(3), makeForUpdate(1, true)]
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)
@@ -532,13 +532,13 @@ class AlgorithmTests: XCTestCase {
         XCTContext.runActivity(named: "When change section about delete 0, update 1, move 1 to last, inserted 2,3 to top") { (activity) in
             let sections = [make(0)]
             let items = [make(0), makeForUpdate(1, false)]
-            let oldConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let oldConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: items, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let newItems = [make(2), make(3), makeForUpdate(1, true)]
-            let newConv = Conv().create(for: sections) { (model, section) in
-                section.create(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
+            let newConv = conv.start().append(for: sections) { (model, section) in
+                section.append(for: newItems, items: { (model, item: Item<TestCollectionViewCell>) in })
             }
             
             let result = diffSection(from: oldConv.sections, new: newConv.sections)

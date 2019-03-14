@@ -9,20 +9,28 @@
 import Foundation
 
 internal struct FakeDifference: Differenciable {
-    private let position: Int
-    private let _differenceIdentifier: DifferenceIdentifier
-    init(position: Int, differenceIdentifier: DifferenceIdentifier) {
-        self.position = position
-        self._differenceIdentifier = differenceIdentifier
+    struct Argument {
+        let position: Int
+        let fileName: String
+        let functionName: String
+        let line: Int
+    }
+    static func create(argument: Argument) -> FakeDifference {
+        let (position, fileName, functionName, line) = (argument.position, argument.fileName, argument.functionName, argument.line)
+        let identifier = """
+        position: \(position),
+        fileName: \(fileName),
+        functionName: \(functionName),
+        line: \(line)
+        """
+        return FakeDifference(differenceIdentifier: identifier)
+    }
+    let differenceIdentifier: String
+    init(differenceIdentifier: DifferenceIdentifier) {
+        self.differenceIdentifier = differenceIdentifier
     }
     
-    var differenceIdentifier: String {
-        return description
-    }
-}
-
-extension FakeDifference: CustomStringConvertible {
-    var description: String {
-        return "FakeDifference position: \(position) + _differenceIdentifier: \(_differenceIdentifier)"
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return false
     }
 }

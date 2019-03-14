@@ -49,13 +49,15 @@ class ListViewController: UIViewController {
     
     func setupConv() {
         collectionView
-            .conv()
-            .create(for: sectionTypes) { (sectionType, section) in
+            .conv
+            .diffing()
+            .start()
+            .append(for: sectionTypes) { (sectionType, section) in
                 // In closure passed each element from variable for sectionTypes and configuration for section.
                 
                 // Section has creating section header or footer method.
                 // `create header or footer` method to use generics and convert automaticary each datasource and delegate method.(e.g SectionHeaderFooter<ListCollectionReusableView>)
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
+                section.append(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     
                     // Setting each property and wrapped datasource or delegate method
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
@@ -74,7 +76,7 @@ class ListViewController: UIViewController {
                     .enumerated()
                     .map { ImageModel(index: $0.0, imageName: $0.1) }
                 
-                section.create(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
+                section.append(for: itemModels, items: { (viewModel, item: Item<ListCollectionViewCell>) in
                     // In closure passed each element from variable of itemModels and configuration for item.
                     
                     // Setting each property and wrapped datasource or delegate method
@@ -102,7 +104,7 @@ class ListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
 
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         navigationController?.navigationBar.tintColor = .white
@@ -144,7 +146,7 @@ class ListViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
     }
     
     deinit {

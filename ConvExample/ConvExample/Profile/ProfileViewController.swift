@@ -71,14 +71,14 @@ public class ProfileViewController: UIViewController {
                 .enumerated()
                 .map { ImageModel(index: $0.0, imageName: $0.1) }
         )
-        collectionView.reload()
+        collectionView.conv.reload()
     }
     
     func setup(me: User, images: [ImageModel]) {
         collectionView
-            .conv()
-            .create { (section) in
-                section.create{ (item: Item<ProfileCell>) in
+            .conv.start()
+            .append { (section) in
+                section.append{ (item: Item<ProfileCell>) in
                     item.sizeFor { (item, collectionView, indexPath) in
                         return ProfileCell.size(with: collectionView.bounds.width, user: me)
                     }
@@ -87,8 +87,8 @@ public class ProfileViewController: UIViewController {
                     }
                 }
             }
-            .create { (section) in
-                section.create(.header) { (header: SectionHeaderFooter<SectionHeader>) in
+            .append { (section) in
+                section.append(.header) { (header: SectionHeaderFooter<SectionHeader>) in
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)
                     }
@@ -96,7 +96,7 @@ public class ProfileViewController: UIViewController {
                         header.titleLabel.text = "My Photos"
                     })
                 }
-                section.create(for: images) { (viewModel, item: Item<ImageCell>) in
+                section.append(for: images) { (viewModel, item: Item<ImageCell>) in
                     item.sizeFor({ _ -> CGSize in
                         let gridCount: CGFloat = 3
                         let edge = floor((UIScreen.main.bounds.width - (gridCount - 1)) / gridCount)

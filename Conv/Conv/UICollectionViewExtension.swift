@@ -10,25 +10,6 @@ import UIKit
 import ObjectiveC
 
 public extension UICollectionView {
-    public func conv() -> Conv {
-        switch (mainConv, convForOverwrite) {
-        case (nil, nil):
-            let conv = Conv()
-            self.mainConv = conv
-            return conv
-        case _:
-            let conv = Conv()
-            self.convForOverwrite = conv
-            return conv
-        }
-    }
-    
-    public func conv(scrollViewDelegate: UIScrollViewDelegate?) -> Conv {
-        let conv = self.conv()
-        conv.scrollViewDelegate = scrollViewDelegate
-        return conv
-    }
-    
     func shiftConv() {
         if let convForOverwrite = self.convForOverwrite {
             self.convForOverwrite = nil
@@ -36,8 +17,22 @@ public extension UICollectionView {
             mainConv?.sections = convForOverwrite.sections
         }
     }
-    
-    public func update() {
+}
+
+extension UICollectionView: _CollectionViewReloadable {
+    func reload() {
+        if convForOverwrite == nil {
+            reloadData()
+            return
+        }
+        
+        shiftConv()
+        reloadData()
+    }
+}
+
+extension UICollectionView: _CollectionViewDiffingRelodable {
+    func update() {
         guard let convForOverwrite = convForOverwrite else {
             reloadData()
             return
@@ -92,16 +87,6 @@ public extension UICollectionView {
                 reloadItems(at: itemUpdate)
             }
         })
-    }
-    
-    public func reload() {
-        if convForOverwrite == nil {
-            reloadData()
-            return
-        }
-
-        shiftConv()
-        reloadData()
     }
 }
 

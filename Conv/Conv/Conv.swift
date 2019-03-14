@@ -11,7 +11,7 @@ import UIKit
 public final class Conv: NSObject {
     public weak var collectionView: UICollectionView?
     
-    public var sections: [Section] = []
+    public internal(set) var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
     public override init() {
@@ -30,6 +30,15 @@ public final class Conv: NSObject {
     
 }
 
+// MARK: - Settter of UIScrollViewDelegate
+extension Conv {
+    public func set(scrollViewDelegate: UIScrollViewDelegate) -> Self {
+        self.scrollViewDelegate = scrollViewDelegate
+        return self
+    }
+}
+
+// MARK: - Function for CollectionView
 extension Conv {
     @discardableResult public func didMoveItem(_ closure: @escaping ((_ sourceIndexPath: IndexPath, _ destinationIndexPath: IndexPath) -> Void)) -> Self {
         self.didMoveItem = closure
@@ -70,24 +79,170 @@ extension Conv {
     }
 }
 
+// MARK: - Delete
 extension Conv {
-    @discardableResult public func create(fileName: String = #file, functionName: String = #function, line: Int = #line, section closure: (Section) -> Void) -> Self {
-        create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, section) in
+    @discardableResult public func delete(at index: Int) -> Self {
+        sections.remove(at: index)
+        return self
+    }
+    
+    @discardableResult public func delete<E: Differenciable>(for element: E) -> Self {
+        sections.removeAll { (section) -> Bool in
+            section.differenceIdentifier == element.differenceIdentifier
+        }
+        return self
+    }
+    
+    @discardableResult public func delete<E: Differenciable>(for elements: [E]) -> Self {
+        elements.forEach { delete(for: $0) }
+        return self
+    }
+}
+
+
+// MARK: - Insert
+extension Conv {
+    @discardableResult public func insert<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        for element: E,
+        at index: Int,
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        
+        let section = Section(diffElement: fake) { (section) in
+            closure(element, section)
+        }
+        
+        self.sections.insert(section, at: index)
+        return self
+    }
+    
+    @discardableResult public func insert<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        for elements: [E],
+        at index: Int,
+        sections closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: index,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let sections = elements.map { (element) in
+            Section(diffElement: fake) { section in
+                closure(element, section)
+            }
+        }
+        
+        self.sections.insert(contentsOf: sections, at: index)
+        return self
+    }
+    
+    @discardableResult public func insert<E: Differenciable>(with element: E, at index: Int, section closure: (Section) -> Void) -> Self {
+        insert(for: [element], at: index) { (_, section) in
             closure(section)
         }
         
         return self
     }
     
-    @discardableResult public func create(with differenceIdentifier: DifferenceIdentifier, section closure: (Section) -> Void) -> Self {
-        create(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)]) { (_, section) in
+    @discardableResult public func insert<E: Differenciable>(for elements: [E], at index: Int, sections closure: (E, Section) -> Void) -> Self {
+        let sections = elements.map { (element) in
+            Section(diffElement: element) { section in
+                closure(element, section)
+            }
+        }
+        
+        self.sections.insert(contentsOf: sections, at: index)
+        return self
+    }
+}
+
+
+// MARK: - Append
+extension Conv {
+    @discardableResult public func append(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        section closure: (Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        append(with: fake) { (section) in
             closure(section)
         }
         
         return self
     }
     
-    @discardableResult public func create<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
+    @discardableResult public func append<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        for element: E,
+        section closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let section = Section(diffElement: fake) { (section) in
+            closure(element, section)
+        }
+        self.sections.append(section)
+        return self
+    }
+    
+    
+    @discardableResult public func append<E>(
+        fileName: String = #file,
+        functionName: String = #function,
+        line: Int = #line,
+        for elements: [E],
+        sections closure: (E, Section) -> Void
+        ) -> Self {
+        let fake = FakeDifference.create(argument: FakeDifference.Argument(
+            position: self.sections.count,
+            fileName: fileName,
+            functionName: functionName,
+            line: line
+        ))
+        let sections = elements.map { (element) in
+            Section(diffElement: fake) { section in
+                closure(element, section)
+            }
+        }
+        self.sections.append(contentsOf: sections)
+        return self
+    }
+
+
+    @discardableResult public func append<E: Differenciable>(with element: E, section closure: (Section) -> Void) -> Self {
+        append(for: [element]) { (_, item) in
+            closure(item)
+        }
+        return self
+    }
+    
+    @discardableResult public func append<E: Differenciable>(for elements: [E], sections closure: (E, Section) -> Void) -> Self {
         let sections = elements.map { (element) in
             Section(diffElement: element) { section in
                 closure(element, section)

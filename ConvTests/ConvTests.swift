@@ -19,23 +19,89 @@ class ConvTests: XCTestCase {
         super.tearDown()
     }
     
-    func testCreateSection() {
-        XCTContext.runActivity(named: "create section") { (activity) in
-            let conv = Conv()
+    func testDeleteSection() {
+        XCTContext.runActivity(named: "delete at index") { (activity) in
+            let conv = conv.start()
             XCTAssert(conv.sections.count == 0)
-            conv.create(with: "Section") { (section) in return }
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+            conv.delete(at: 0)
             XCTAssert(conv.sections.count == 1)
         }
-        XCTContext.runActivity(named: "create two sections") { (activity) in
-            let conv = Conv()
+        XCTContext.runActivity(named: "delete with identifier") { (activity) in
+            let conv = conv.start()
             XCTAssert(conv.sections.count == 0)
-            conv.create(for: [make(0), make(1)], sections: { (element, section) in return })
+            conv.insert(with: make(0), at: 0, section: { section in return })
+            XCTAssert(conv.sections.count == 1)
+            conv.delete(for: make(0))
+            XCTAssert(conv.sections.count == 0)
+        }
+        XCTContext.runActivity(named: "delete elements") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+            conv.delete(for: [make(0), make(1)])
+            XCTAssert(conv.sections.count == 0)
+        }
+    }
+    
+    func testInsertSection() {
+        XCTContext.runActivity(named: "insert no Differenciable section") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: (), at: 0) { (e, section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "insert no Differenciable  sections") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [(), ()], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+        XCTContext.runActivity(named: "insert Differenciable section") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(with: make(0), at: 0) { (section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "insert Differenciable two sections") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+    }
+    
+    func testAppendSection() {
+        XCTContext.runActivity(named: "append no Differenciable section") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: ()) { (e, section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "append no Differenciable two sections") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: [(), ()], sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+        XCTContext.runActivity(named: "append Differenciable section") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: make(0)) { (e, section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "append Differenciable two sections") { (activity) in
+            let conv = conv.start()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: [make(0), make(1)], sections: { (element, section) in return })
             XCTAssert(conv.sections.count == 2)
         }
     }
     
     func testDidMoveItem() {
-        let conv = Conv()
+        let conv = conv.start()
         
         var called = false
         
@@ -49,7 +115,7 @@ class ConvTests: XCTestCase {
     }
     
     func testIndexTitles() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let titles: [String] = ["1", "2"]
 
@@ -63,7 +129,7 @@ class ConvTests: XCTestCase {
     }
     
     func testIndexTitle() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let titles: [String] = ["1", "2"]
         let indexPathOfTitle = IndexPath(item: 1, section: 0)
@@ -83,7 +149,7 @@ class ConvTests: XCTestCase {
     }
     
     func testTransitionLayout() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let currentLayout = UICollectionViewLayout()
         let nextLayout = UICollectionViewLayout()
@@ -99,7 +165,7 @@ class ConvTests: XCTestCase {
     }
     
 //    func testShouldUpdateFocus() {
-//        let conv = Conv()
+//        let conv = conv.start()
 //
 //        conv.shouldUpdateFocus { (collectionView, context) -> Bool in
 //            return true
@@ -112,7 +178,7 @@ class ConvTests: XCTestCase {
 //    }
     
     func testIndexPathForPreferredFocusedView() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let indexPath = self.indexPath()
 
@@ -126,7 +192,7 @@ class ConvTests: XCTestCase {
     }
     
     func testTargetIndexPathForMoveFromItem() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let indexPath = self.indexPath()
         
@@ -140,7 +206,7 @@ class ConvTests: XCTestCase {
     }
     
     func testTargetContentOffset() {
-        let conv = Conv()
+        let conv = conv.start()
         
         let offset = CGPoint(x: 1, y: 1)
         conv.targetContentOffset { (collectionView, propsosedContentOffset) -> CGPoint in

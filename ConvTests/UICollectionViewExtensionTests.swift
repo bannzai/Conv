@@ -15,12 +15,68 @@ class UICollectionViewExtensionTests: XCTestCase {
         super.setUp()
     }
     
-    func testConv() {
+    func testUsingOtherconv.start() {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let closure: (Differenciable, Section) -> Void = { _, _ in }
+        
+        let otherConv = collectionView.conv.start().append(for: [1, 2, 3].map { make($0) }, sections: closure)
+        statusCheck: do {
+            XCTAssert(otherConv.sections.count == 3)
+            XCTAssert(collectionView.mainConv?.sections.count == 3)
+            XCTAssert(otherConv === collectionView.mainConv)
+            
+            XCTAssert(collectionView.dataSource?.numberOfSections?(in: collectionView) == 3)
+        }
+        
+        using: do {
+            let conv = collectionView.conv.start(with: otherConv).append(for: [4, 5, 6, 7, 8].map { make($0) }, sections: closure)
+            
+            XCTAssert(conv.sections.count == 8)
+            XCTAssert(collectionView.mainConv?.sections.count == 8)
+            XCTAssert(otherConv === collectionView.mainConv)
+            XCTAssert(conv === otherConv)
+        }
+        
+        delete: do {
+            let conv = collectionView.conv.start(with: otherConv).delete(for: [1].map { make($0) })
+
+            XCTAssert(conv.sections.count == 7)
+            XCTAssert(collectionView.mainConv?.sections.count == 7)
+            XCTAssert(collectionView.mainConv?.sections.first?.differenceIdentifier == "2")
+            XCTAssert(otherConv === collectionView.mainConv)
+            XCTAssert(conv === otherConv)
+        }
+    }
+    
+    func testNoOverwirteconv.start() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let closure: (Differenciable, Section) -> Void = { _, _ in }
         
         first: do {
-            let conv = collectionView.conv().create(for: [1, 2, 3].map { make($0) }, sections: closure)
+            let conv = collectionView.conv.start().append(for: [1, 2, 3].map { make($0) }, sections: closure)
+            
+            XCTAssert(conv.sections.count == 3)
+            XCTAssert(collectionView.mainConv?.sections.count == 3)
+            XCTAssert(conv === collectionView.mainConv)
+            
+            XCTAssert(collectionView.dataSource?.numberOfSections?(in: collectionView) == 3)
+        }
+        
+        second: do {
+            let conv = collectionView.conv.start().append(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
+            
+            XCTAssert(conv.sections.count == 5)
+            XCTAssert(collectionView.mainConv?.sections.count == 5)
+            XCTAssert(conv === collectionView.mainConv)
+        }
+    }
+    
+    func testDiffingconv.start() {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let closure: (Differenciable, Section) -> Void = { _, _ in }
+        
+        first: do {
+            let conv = collectionView.conv.diffing().start().append(for: [1, 2, 3].map { make($0) }, sections: closure)
             
             XCTAssert(conv.sections.count == 3)
             XCTAssert(collectionView.mainConv?.sections.count == 3)
@@ -30,7 +86,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         second: do {
-            let conv = collectionView.conv().create(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
+            let conv = collectionView.conv.diffing().start().append(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
             
             XCTAssert(conv.sections.count == 5)
             XCTAssert(collectionView.convForOverwrite?.sections.count == 5)
@@ -42,7 +98,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         third: do {
-            let conv = collectionView.conv().create(for: [1, 2, 3, 4, 5, 6, 7, 8].map { make($0) }, sections: closure)
+            let conv = collectionView.conv.diffing().start().append(for: [1, 2, 3, 4, 5, 6, 7, 8].map { make($0) }, sections: closure)
             
             XCTAssert(conv.sections.count == 8)
             XCTAssert(collectionView.convForOverwrite?.sections.count == 8)
@@ -54,7 +110,7 @@ class UICollectionViewExtensionTests: XCTestCase {
         }
         
         shiftConv: do {
-            collectionView.shiftConv()
+            collectionView.shiftconv.start()
             
             XCTAssertNil(collectionView.convForOverwrite)
             

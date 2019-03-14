@@ -75,9 +75,9 @@ public class InteractionCollectionViewController: UIViewController {
         let columns: CGFloat = 4
         let cellWidth = floor((UIScreen.main.bounds.width - (columns - 1)) / columns)
         collectionView
-            .conv()
-            .create(for: SectionType.elements) { (sectionType, section) in
-                section.create(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
+            .conv.start()
+            .append(for: SectionType.elements) { (sectionType, section) in
+                section.append(.header, headerOrFooter: { (header: SectionHeaderFooter<SectionHeaderReusableView>) in
                     header.size = CGSize(width: UIScreen.main.bounds.width, height: 50)
                     header.configureView(for: "SectionHeaderReusableView") { view, _ in
                         view.nameLabel.text = "\(sectionType)".uppercased()
@@ -97,7 +97,7 @@ public class InteractionCollectionViewController: UIViewController {
                 }
                 
                 let emoticons = emoticonsForEachSection[sectionType.rawValue]
-                section.create(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
+                section.append(for: emoticons, items: { (emoticon, item: Item<EmoticoinCollectionViewCell>) in
                     item.size = CGSize(width: cellWidth, height: cellWidth)
                     item.configureCell(for: "EmoticoinCollectionViewCell", { (cell, info) in
                         cell.configure(text: emoticon)
@@ -129,6 +129,6 @@ public class InteractionCollectionViewController: UIViewController {
     
     func reload() {
         setupConv()
-        collectionView.update()
+        collectionView.conv.update()
     }
 }
