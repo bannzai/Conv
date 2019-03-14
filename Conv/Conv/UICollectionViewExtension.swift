@@ -10,25 +10,6 @@ import UIKit
 import ObjectiveC
 
 public extension UICollectionView {
-    public func conv() -> Conv {
-        switch (mainConv, convForOverwrite) {
-        case (nil, nil):
-            let conv = Conv()
-            self.mainConv = conv
-            return conv
-        case _:
-            let conv = Conv()
-            self.convForOverwrite = conv
-            return conv
-        }
-    }
-    
-    public func conv(scrollViewDelegate: UIScrollViewDelegate?) -> Conv {
-        let conv = self.conv()
-        conv.scrollViewDelegate = scrollViewDelegate
-        return conv
-    }
-    
     func shiftConv() {
         if let convForOverwrite = self.convForOverwrite {
             self.convForOverwrite = nil
