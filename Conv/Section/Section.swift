@@ -59,15 +59,15 @@ extension Section {
         return self
     }
     
-    @discardableResult public func delete(for differenceIdentifier: DifferenceIdentifier) -> Self {
+    @discardableResult public func delete<E: Differenciable>(for element: E) -> Self {
         items.removeAll { (item) -> Bool in
-            item.differenceIdentifier == differenceIdentifier
+            item.differenceIdentifier == element.differenceIdentifier
         }
         return self
     }
     
     @discardableResult public func delete<E: Differenciable>(for elements: [E]) -> Self {
-        elements.forEach { delete(for: $0.differenceIdentifier) }
+        elements.forEach { delete(for: $0) }
         return self
     }
 }
@@ -82,8 +82,8 @@ extension Section {
         return self
     }
     
-    @discardableResult public func insert<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, at index: Int, item closure: (Item<T>) -> Void) -> Section {
-        insert(for: [FakeDifference(position: items.count + 1, differenceIdentifier: differenceIdentifier)], at: index) { (_, item) in
+    @discardableResult public func insert<E: Differenciable, T: UICollectionViewCell>(with element: E, at index: Int, item closure: (Item<T>) -> Void) -> Section {
+        insert(for: [element], at: index) { (_, item) in
             closure(item)
         }
         return self
