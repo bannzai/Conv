@@ -130,7 +130,7 @@ extension Conv {
         line: Int = #line,
         for elements: [E],
         at index: Int,
-        section closure: (E, Section) -> Void
+        sections closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
             position: index,
@@ -216,7 +216,7 @@ extension Conv {
         functionName: String = #function,
         line: Int = #line,
         for elements: [E],
-        section closure: (E, Section) -> Void
+        sections closure: (E, Section) -> Void
         ) -> Self {
         let fake = FakeDifference.create(argument: FakeDifference.Argument(
             position: self.sections.count,

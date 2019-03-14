@@ -47,13 +47,25 @@ class ConvTests: XCTestCase {
     }
     
     func testInsertSection() {
-        XCTContext.runActivity(named: "insert section") { (activity) in
+        XCTContext.runActivity(named: "insert no Differenciable section") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: (), at: 0) { (e, section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "insert no Differenciable  sections") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.insert(for: [(), ()], at: 0, sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+        XCTContext.runActivity(named: "insert Differenciable section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.insert(with: make(0), at: 0) { (section) in return }
             XCTAssert(conv.sections.count == 1)
         }
-        XCTContext.runActivity(named: "insert two sections") { (activity) in
+        XCTContext.runActivity(named: "insert Differenciable two sections") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.insert(for: [make(0), make(1)], at: 0, sections: { (element, section) in return })
@@ -62,13 +74,25 @@ class ConvTests: XCTestCase {
     }
     
     func testAppendSection() {
-        XCTContext.runActivity(named: "append section") { (activity) in
+        XCTContext.runActivity(named: "append no Differenciable section") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
-            conv.append(element: ()) { (e, section) in return }
+            conv.append(for: ()) { (e, section) in return }
             XCTAssert(conv.sections.count == 1)
         }
-        XCTContext.runActivity(named: "append two sections") { (activity) in
+        XCTContext.runActivity(named: "append no Differenciable two sections") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: [(), ()], sections: { (element, section) in return })
+            XCTAssert(conv.sections.count == 2)
+        }
+        XCTContext.runActivity(named: "append Differenciable section") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(for: make(0)) { (e, section) in return }
+            XCTAssert(conv.sections.count == 1)
+        }
+        XCTContext.runActivity(named: "append Differenciable two sections") { (activity) in
             let conv = Conv()
             XCTAssert(conv.sections.count == 0)
             conv.append(for: [make(0), make(1)], sections: { (element, section) in return })
