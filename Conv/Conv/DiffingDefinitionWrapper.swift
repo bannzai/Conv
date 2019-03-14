@@ -8,12 +8,14 @@
 
 import Foundation
 
-public class DiffingDefinitionWrapper: DefinitionStartable {
+public class DiffingDefinitionWrapper {
     let collectionView: UICollectionView
     init(collectionView: UICollectionView) {
         self.collectionView = collectionView
     }
-    
+}
+
+extension DiffingDefinitionWrapper: DefinitionStartable {
     public func start() -> Conv {
         return startWith(conv: Conv())
     }
@@ -29,5 +31,11 @@ public class DiffingDefinitionWrapper: DefinitionStartable {
             collectionView.convForOverwrite = conv
             return conv
         }
+    }
+}
+
+extension DiffingDefinitionWrapper: CollectionViewDiffingRelodable {
+    public func update() {
+        collectionView.update()
     }
 }

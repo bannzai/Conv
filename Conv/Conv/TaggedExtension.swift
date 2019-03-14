@@ -32,17 +32,28 @@ public extension ConvTaggedExtensionCompatible {
 }
 
 extension UICollectionView: ConvTaggedExtensionCompatible {}
-extension ConvTaggedExtension: DefinitionStartable where Base: UICollectionView {
+extension ConvTaggedExtension: DefinitionStartable, CollectionViewDiffingRelodable, CollectionViewReloadable where Base: UICollectionView {
+    var collectionView: UICollectionView {
+        return base
+    }
     public func start() -> Conv {
         return startWith(conv: Conv())
     }
     
     public func startWith(conv: Conv) -> Conv {
-        base.mainConv = conv
+        collectionView.mainConv = conv
         return conv
     }
 
     public func diffing() -> DefinitionStartable {
-        return DiffingDefinitionWrapper(collectionView: base)
+        return DiffingDefinitionWrapper(collectionView: collectionView)
+    }
+    
+    public func reload() {
+        collectionView.reload()
+    }
+    
+    public func update() {
+        collectionView.update()
     }
 }
