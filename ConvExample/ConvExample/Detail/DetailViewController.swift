@@ -44,7 +44,9 @@ public class DetailViewController: UIViewController {
         createConv: do {
             let imageName = self.imageName
             collectionView
-                .conv(scrollViewDelegate: self)
+                .conv
+                .start()
+                .set(scrollViewDelegate: self)
                 .append(with: "Section 0") { (section) in
                     section
                         .append(with: "Item in Section 0", item: { (item: Item<DetailImageCollectionViewCell>) in

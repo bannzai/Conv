@@ -77,8 +77,8 @@ public class ProfileViewController: UIViewController {
     func setup(me: User, images: [ImageModel]) {
         collectionView
             .conv.start()
-            .create { (section) in
-                section.create{ (item: Item<ProfileCell>) in
+            .append { (section) in
+                section.append{ (item: Item<ProfileCell>) in
                     item.sizeFor { (item, collectionView, indexPath) in
                         return ProfileCell.size(with: collectionView.bounds.width, user: me)
                     }
@@ -87,7 +87,7 @@ public class ProfileViewController: UIViewController {
                     }
                 }
             }
-            .create { (section) in
+            .append { (section) in
                 section.append(.header) { (header: SectionHeaderFooter<SectionHeader>) in
                     header.sizeFor { (item, collectionView, indexPath) in
                         return CGSize(width: collectionView.bounds.width, height: 44)
