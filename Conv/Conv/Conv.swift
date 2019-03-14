@@ -11,7 +11,7 @@ import UIKit
 public final class Conv: NSObject {
     public weak var collectionView: UICollectionView?
     
-    public var sections: [Section] = []
+    public internal(set) var sections: [Section] = []
     public weak var scrollViewDelegate: UIScrollViewDelegate?
     
     public override init() {
@@ -78,32 +78,22 @@ extension Conv {
     }
 }
 
-// MARK: - Insert
+// MARK: - Delete
 extension Conv {
-    @discardableResult public func insert(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, section closure: (Section) -> Void) -> Self {
-        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, section) in
-            closure(section)
-        }
-        
+    @discardableResult public func delete(at index: Int) -> Self {
+        sections.remove(at: index)
         return self
     }
     
-    @discardableResult public func insert(with differenceIdentifier: DifferenceIdentifier, at index: Int, section closure: (Section) -> Void) -> Self {
-        insert(for: [FakeDifference(position: sections.count + 1, differenceIdentifier: differenceIdentifier)], at: index) { (_, section) in
-            closure(section)
+    @discardableResult public func delete(for differenceIdentifier: DifferenceIdentifier) -> Self {
+        sections.removeAll { (section) -> Bool in
+            section.differenceIdentifier == differenceIdentifier
         }
-        
         return self
     }
     
-    @discardableResult public func insert<E: Differenciable>(for elements: [E], at index: Int, sections closure: (E, Section) -> Void) -> Self {
-        let sections = elements.map { (element) in
-            Section(diffElement: element) { section in
-                closure(element, section)
-            }
-        }
-        
-        self.sections.insert(contentsOf: sections, at: Int(index))
+    @discardableResult public func delete<E: Differenciable>(for elements: [E]) -> Self {
+        elements.forEach { delete(for: $0.differenceIdentifier) }
         return self
     }
 }

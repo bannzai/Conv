@@ -52,6 +52,26 @@ extension Section {
     }
 }
 
+// MARK: - Delete
+extension Section {
+    @discardableResult public func delete(at index: Int) -> Self {
+        items.remove(at: index)
+        return self
+    }
+    
+    @discardableResult public func delete(for differenceIdentifier: DifferenceIdentifier) -> Self {
+        items.removeAll { (item) -> Bool in
+            item.differenceIdentifier == differenceIdentifier
+        }
+        return self
+    }
+    
+    @discardableResult public func delete<E: Differenciable>(for elements: [E]) -> Self {
+        elements.forEach { delete(for: $0.differenceIdentifier) }
+        return self
+    }
+}
+
 // MARK: - Insert
 extension Section {
     @discardableResult public func insert<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, item closure: (Item<T>) -> Void) -> Section {
