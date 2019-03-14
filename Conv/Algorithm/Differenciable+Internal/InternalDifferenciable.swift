@@ -9,10 +9,20 @@
 import Foundation
 
 internal struct FakeDifference: Differenciable {
-    private let _differenceIdentifier: DifferenceIdentifier = ""
-    internal init() { }
+    private let position: Int
+    private let _differenceIdentifier: DifferenceIdentifier
+    init(position: Int, differenceIdentifier: DifferenceIdentifier) {
+        self.position = position
+        self._differenceIdentifier = differenceIdentifier
+    }
     
     var differenceIdentifier: String {
-        return _differenceIdentifier
+        return description
+    }
+}
+
+extension FakeDifference: CustomStringConvertible {
+    var description: String {
+        return "FakeDifference position: \(position) + _differenceIdentifier: \(_differenceIdentifier)"
     }
 }

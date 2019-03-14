@@ -9,7 +9,7 @@
 import Foundation
 
 struct DifferenciableIndexPath: Differenciable {
-    let section: DiffSection
+    let section: Section
     let item: ItemDelegate
     
     let sectionIndex: Int

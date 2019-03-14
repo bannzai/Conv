@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension DiffSection: Differenciable {
+extension Section: Differenciable {
     public func shouldUpdate(to compare: Differenciable) -> Bool {
         return diffElement.shouldUpdate(to: compare)
     }
