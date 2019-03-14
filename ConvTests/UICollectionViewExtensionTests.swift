@@ -15,6 +15,29 @@ class UICollectionViewExtensionTests: XCTestCase {
         super.setUp()
     }
     
+    func testUsingOtherConv() {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let closure: (Differenciable, Section) -> Void = { _, _ in }
+        
+        let otherConv = collectionView.conv.start().create(for: [1, 2, 3].map { make($0) }, sections: closure)
+        statusCheck: do {
+            XCTAssert(otherConv.sections.count == 3)
+            XCTAssert(collectionView.mainConv?.sections.count == 3)
+            XCTAssert(otherConv === collectionView.mainConv)
+            
+            XCTAssert(collectionView.dataSource?.numberOfSections?(in: collectionView) == 3)
+        }
+        
+        using: do {
+            let conv = collectionView.conv.startWith(conv: otherConv).create(for: [1, 2, 3, 4, 5].map { make($0) }, sections: closure)
+            
+            XCTAssert(conv.sections.count == 5)
+            XCTAssert(collectionView.mainConv?.sections.count == 5)
+            XCTAssert(otherConv === collectionView.mainConv)
+            XCTAssert(conv === otherConv)
+        }
+    }
+    
     func testNoOverwirteConv() {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         let closure: (Differenciable, Section) -> Void = { _, _ in }
