@@ -52,6 +52,35 @@ extension Section {
 }
 
 extension Section {
+    @discardableResult public func insert<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, at index: Int, item closure: (Item<T>) -> Void) -> Section {
+        insert(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")], at: index) { (_, item) in
+            closure(item)
+        }
+        
+        return self
+    }
+    
+    @discardableResult public func insert<T: UICollectionViewCell>(with differenceIdentifier: DifferenceIdentifier, at index: Int, item closure: (Item<T>) -> Void) -> Section {
+        insert(for: [FakeDifference(position: items.count + 1, differenceIdentifier: differenceIdentifier)], at: index) { (_, item) in
+            closure(item)
+        }
+        return self
+    }
+    
+    @discardableResult public func insert<E: Differenciable, T: UICollectionViewCell>(for elements: [E], at index: Int, items closure: (E, Item<T>) -> Void) -> Section {
+        let items = elements.map { element in
+            Item<T>(diffElement: element) { item in
+                closure(element, item)
+            }
+        }
+        
+        self.items.insert(contentsOf: items, at: index)
+        return self
+    }
+}
+
+
+extension Section {
     @discardableResult public func append<T: UICollectionViewCell>(fileName: String = #file, functionName: String = #function, line: Int = #line, item closure: (Item<T>) -> Void) -> Section {
         append(for: [FakeDifference(position: items.count + 1, differenceIdentifier: "fileName: \(fileName), functionName: \(functionName), line: \(line)")]) { (_, item) in
             closure(item)
