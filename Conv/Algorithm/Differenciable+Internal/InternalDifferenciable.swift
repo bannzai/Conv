@@ -16,6 +16,10 @@ internal struct FakeDifference: Differenciable {
         self._differenceIdentifier = differenceIdentifier
     }
     
+    func shouldUpdate(to compare: Differenciable) -> Bool {
+        return false
+    }
+    
     var differenceIdentifier: String {
         return description
     }
