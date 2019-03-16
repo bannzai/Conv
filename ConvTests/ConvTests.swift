@@ -19,6 +19,17 @@ class ConvTests: XCTestCase {
         super.tearDown()
     }
     
+    func testMutateSections() {
+        XCTContext.runActivity(named: "append(sections:)") { (activity) in
+            let conv = Conv()
+            XCTAssert(conv.sections.count == 0)
+            conv.append(sections: [Section()])
+            XCTAssert(conv.sections.count == 1)
+            conv.append(sections: [Section(), Section()])
+            XCTAssert(conv.sections.count == 3)
+        }
+    }
+    
     func testDeleteSection() {
         XCTContext.runActivity(named: "delete at index") { (activity) in
             let conv = Conv()
