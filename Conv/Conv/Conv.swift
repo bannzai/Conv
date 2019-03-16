@@ -30,6 +30,16 @@ public final class Conv: NSObject {
     
 }
 
+// MARK: - Interface for mutating sections
+extension Conv {
+    @discardableResult public func append(sections: [Section]) -> Conv {
+        self.sections.append(contentsOf: sections)
+        return self
+    }
+}
+
+
+
 // MARK: - Settter of UIScrollViewDelegate
 extension Conv {
     public func set(scrollViewDelegate: UIScrollViewDelegate) -> Self {
