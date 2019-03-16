@@ -41,7 +41,7 @@ extension ConvTaggedExtension: DefinitionStartable, CollectionViewDiffingRelodab
         return start(with: Conv())
     }
     
-    public func start(with conv: Conv) -> Conv {
+    @discardableResult public func start(with conv: Conv) -> Conv {
         collectionView.mainConv = conv
         return conv
     }

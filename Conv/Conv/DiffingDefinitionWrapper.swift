@@ -20,7 +20,7 @@ extension DiffingDefinitionWrapper: DefinitionStartable {
         return start(with: Conv())
     }
     
-    public func start(with conv: Conv) -> Conv {
+    @discardableResult public func start(with conv: Conv) -> Conv {
         let mainConv = collectionView.mainConv
         let convForOverwrite = collectionView.convForOverwrite
         switch (mainConv, convForOverwrite) {
