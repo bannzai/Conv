@@ -22,11 +22,11 @@ public protocol ConvTaggedExtensionCompatible {
 }
 
 public extension ConvTaggedExtensionCompatible {
-    public static var conv: ConvTaggedExtension<Self>.Type {
+    static var conv: ConvTaggedExtension<Self>.Type {
         return ConvTaggedExtension<Self>.self
     }
     
-    public var conv: ConvTaggedExtension<Self> {
+    var conv: ConvTaggedExtension<Self> {
         return ConvTaggedExtension(self)
     }
 }
